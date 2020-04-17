@@ -287,9 +287,10 @@ public class DAOPacientes extends AbstractDAO {
     }
     
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente,  String TipoCita, java.sql.Date fechaInicio, java.sql.Date fechaFin){
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente,  String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin){
     //Declaramos variables
         java.util.List<Cita> resultado = new java.util.ArrayList<Cita>();
+        Cita citaActual;
         Connection con;
         PreparedStatement stmHistorial = null;
         ResultSet rsHistorial;
@@ -308,81 +309,29 @@ public class DAOPacientes extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad," 
-                    + "sexo, grupoSanguineo "
-                    + "from paciente "
-                    + "where cip like ? "
-                    + "and dni like ?"
-                    + "and nombre like ?"
-                    + "and EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) = ?"
-                    + "and sexo like ?"
-                    + "and NSS like ?"
-                    + "and grupoSanguineo like ?";
+            String consulta = "select fechaHoraInicio, fechaHoraFin, paciente, consulta, ambulatorio, tipo, especialidad " 
+                    + "from cita where paciente = ? and tipo = ? and especialidad = ? and fechaHoraFin-fechaHoraInicio>=0 "
+                    + "and fechaHoraFin = ? and fechaHoraInicio = ?;";
 
             //Preparamos la consulta
-            stmPacientes = con.prepareStatement(consulta);
+            stmHistorial = con.prepareStatement(consulta);
             //Sustituimos
-            stmPacientes.setString(1, "%" + CIP + "%");
-            stmPacientes.setString(2, "%" + DNI + "%");
-            stmPacientes.setString(3, "%" + nombre + "%"); 
-            stmPacientes.setInt(4, edad); 
-            stmPacientes.setString(5, "%" + sexo + "%"); 
-            stmPacientes.setString(6, "%" + NSS + "%"); 
-            stmPacientes.setString(7, "%" + nombre + "%"); 
-            stmPacientes.setString(8, "%" + grupo + "%"); 
+            stmHistorial.setString(1, paciente.getCIP());
+            stmHistorial.setString(2, tipo);
+            stmHistorial.setString(3, especialidad); 
+            stmHistorial.setTimestamp(5, fechaFin); 
+            stmHistorial.setTimestamp(6, fechaInicio); 
  
             //Ejecutamos
-            rsPacientes = stmPacientes.executeQuery();
+            rsHistorial = stmHistorial.executeQuery();
             //Mientras haya coincidencias
-            while (rsPacientes.next()) {
-                //Se crea una instancia de paciente con los datos recuperados de la base de datos
-                pacienteActual = new Paciente(rsPacientes.getString("cip"), rsPacientes.getString("dni"),
-                        rsPacientes.getInt("numSeguridadSocial"), rsPacientes.getString("nombre"), rsPacientes.getDate("fechaNacimiento"),
-                        rsPacientes.getString("sexo"), GrupoSanguineo.getTipo(rsPacientes.getString("grupoSanguineo")), 
-                        rsPacientes.getString("nacionalidad"), rsPacientes.getString("direccion"), rsPacientes.getString("telefono"),
-                        rsPacientes.getInt("edad"), Rango.getTipo(rsPacientes.getString("rango")));
-               
-                //Intentamos la otra consulta para recuperar los datos del autor
-                try {
-                    //Recuperamos el nombre del autor de la tabla de autores donde el libro sea el que pedimos y ordenamos
-                    subconsulta = "select " 
-                        + "CASE " 
-                        + "WHEN SUM(distinct soborno)>500 THEN 'deluxe " 
-                        + "WHEN COUNT(distinct paciente)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
-                        + "ELSE 'base' "
-                        + "END  as rango "
-                        + "from urgencia where paciente = ?"
-                        + "group by paciente, soborno;";
-                    stmRango = con.prepareStatement(subconsulta);
-                    
-                    //Sustituimos con los datos propordionados
-                    stmRango.setString(1, pacienteActual.getCIP()); //Id del libro
-                    //Ejecutamos la consulta
-                    rsRango = stmRango.executeQuery();
-                    //Mientras haya coincidencias
-                    if (rsRango.next()) {
-                        //Añadimos al autor a la lista de autores del libro
-                        pacienteActual.setRango(Rango.getTipo(rsRango.getString("rango")));
-                    }
-                    //En caso de fallar capturamos  la excepción
-                } catch (SQLException e) {
-                    //Imprimimos y generamos ventana
-                    System.out.println(e.getMessage());
-                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-                    //Como ha fallado deshacemos
-                    con.rollback();
-                } finally {
-                    //Finalmente cerramos la conexión de AUTORES
-                    //La de libros sigue abierta
-                    try {
-                        stmRango.close();
-                    } catch (SQLException e) {
-                        //De no poder notificamos al usuario
-                        System.out.println("Imposible cerrar cursores");
-                    }
-                }
-                //Y se añade la instancia a la lista de pacientes
-                resultado.add(pacienteActual);
+            while (rsHistorial.next()) {
+                //Se crea una instancia de cita con los datos recuperados de la base de datos
+                citaActual = new Cita(rsHistorial.getTimestamp("fechaHoraInicio"), rsHistorial.getTimestamp("fechaHoraFin"),
+                        rsHistorial.getString("paciente"), rsHistorial.getInt("consulta"), rsHistorial.getInt("ambulatorio"),
+                        rsHistorial.getString("tipo"), rsHistorial.getString("especialidad"));
+               //Y se añade la instancia a la lista de pacientes
+                resultado.add(citaActual);
             }
         }
         //En caso de error se captura la excepción
@@ -400,7 +349,7 @@ public class DAOPacientes extends AbstractDAO {
         } finally {
             //Finalmente se intentan cerrar cursores
             try {
-                stmPacientes.close();
+                stmHistorial.close();
             } catch (SQLException e) {
                 //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
