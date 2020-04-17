@@ -12,9 +12,10 @@ public class Receta {
     private String descripcion;
     private Date fechaInicio;
     private Date fechaFin;
-    
-    //Constructor
-    public Receta(Timestamp cita, String paciente, Integer consulta, Integer ambulatorio, Integer codigo, String descripcion, Date fechaInicio, Date fechaFin) {
+    private String medicamento;
+    private Integer cantidad;
+
+    public Receta(Timestamp cita, String paciente, Integer consulta, Integer ambulatorio, Integer codigo, String descripcion, Date fechaInicio, Date fechaFin, String medicamento, Integer cantidad) {
         this.cita = cita;
         this.paciente = paciente;
         this.consulta = consulta;
@@ -23,9 +24,20 @@ public class Receta {
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.medicamento = medicamento;
+        this.cantidad = cantidad;
     }
-        
-    //Getters y Setters
+
+    public Receta(Timestamp cita, String paciente, Integer codigo, Date fechaInicio, Date fechaFin, String medicamento, Integer cantidad) {
+        this.cita = cita;
+        this.paciente = paciente;
+        this.codigo = codigo;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.medicamento = medicamento;
+        this.cantidad = cantidad;
+    }
+   
     public Timestamp getCita() {
         return cita;
     }
@@ -90,6 +102,24 @@ public class Receta {
         this.fechaFin = fechaFin;
     }
 
+    public String getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(String medicamento) {
+        this.medicamento = medicamento;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+
+ 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Receta) {

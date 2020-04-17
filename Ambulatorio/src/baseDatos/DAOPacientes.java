@@ -9,6 +9,9 @@ import aplicacion.GrupoSanguineo;
 import aplicacion.Rango;
 import aplicacion.Cita;
 
+/* 
+ * @author Ainhoa Vivel Couso
+ */
 public class DAOPacientes extends AbstractDAO {
     
     //Contructor
@@ -32,7 +35,7 @@ public class DAOPacientes extends AbstractDAO {
             //clave, dirección, email y tipo de paciente especificados
             stmPaciente = con.prepareStatement("insert into paciente (cip, dni, numSeguridadSocial, nombre, fechaNacimiento, "
                     + "sexo, grupoSanguineo, nacionalidad, direccion, telefono) "
-                    + "values (?,?,?,?,?,?,?)");
+                    + "values (?,?,?,?,?,?,?,?,?,?)");
             //Sustituimos
             stmPaciente.setString(1, paciente.getCIP());        
             stmPaciente.setString(2, paciente.getDNI());       
@@ -205,11 +208,18 @@ public class DAOPacientes extends AbstractDAO {
             //Mientras haya coincidencias
             while (rsPacientes.next()) {
                 //Se crea una instancia de paciente con los datos recuperados de la base de datos
-                pacienteActual = new Paciente(rsPacientes.getString("cip"), rsPacientes.getString("dni"),
-                        rsPacientes.getInt("numSeguridadSocial"), rsPacientes.getString("nombre"), rsPacientes.getDate("fechaNacimiento"),
-                        rsPacientes.getString("sexo"), GrupoSanguineo.getTipo(rsPacientes.getString("grupoSanguineo")), 
-                        rsPacientes.getString("nacionalidad"), rsPacientes.getString("direccion"), rsPacientes.getString("telefono"),
-                        rsPacientes.getInt("edad"), Rango.getTipo(rsPacientes.getString("rango")));
+                pacienteActual = new Paciente(rsPacientes.getString("cip"), 
+                        rsPacientes.getString("dni"),
+                        rsPacientes.getInt("numSeguridadSocial"), 
+                        rsPacientes.getString("nombre"), 
+                        rsPacientes.getDate("fechaNacimiento"),
+                        rsPacientes.getString("sexo"), 
+                        GrupoSanguineo.getTipo(rsPacientes.getString("grupoSanguineo")), 
+                        rsPacientes.getString("nacionalidad"),
+                        rsPacientes.getString("direccion"), 
+                        rsPacientes.getString("telefono"),
+                        rsPacientes.getInt("edad"), 
+                        Rango.getTipo(rsPacientes.getString("rango")));
                
                 //Intentamos la otra consulta para recuperar los datos del autor
                 try {
@@ -226,6 +236,8 @@ public class DAOPacientes extends AbstractDAO {
                     
                     //Sustituimos con los datos propordionados
                     stmRango.setString(1, pacienteActual.getCIP()); //Id del libro
+                    
+
                     //Ejecutamos la consulta
                     rsRango = stmRango.executeQuery();
                     //Mientras haya coincidencias
@@ -294,8 +306,6 @@ public class DAOPacientes extends AbstractDAO {
         Connection con;
         PreparedStatement stmHistorial = null;
         ResultSet rsHistorial;
-
-        String subconsulta;        
         //Establecemos conexión
         con = this.getConexion();
         //Impedimos que se la confirmación sea automática
@@ -311,7 +321,7 @@ public class DAOPacientes extends AbstractDAO {
             //Construimos la consulta
             String consulta = "select fechaHoraInicio, fechaHoraFin, paciente, consulta, ambulatorio, tipo, especialidad " 
                     + "from cita where paciente = ? and tipo = ? and especialidad = ? and fechaHoraFin-fechaHoraInicio>=0 "
-                    + "and fechaHoraFin = ? and fechaHoraInicio = ?;";
+                    + "and fechaHoraFin <= ? and fechaHoraInicio >= ?;";
 
             //Preparamos la consulta
             stmHistorial = con.prepareStatement(consulta);
@@ -319,17 +329,21 @@ public class DAOPacientes extends AbstractDAO {
             stmHistorial.setString(1, paciente.getCIP());
             stmHistorial.setString(2, tipo);
             stmHistorial.setString(3, especialidad); 
-            stmHistorial.setTimestamp(5, fechaFin); 
-            stmHistorial.setTimestamp(6, fechaInicio); 
+            stmHistorial.setTimestamp(4, fechaFin); 
+            stmHistorial.setTimestamp(5, fechaInicio); 
  
             //Ejecutamos
             rsHistorial = stmHistorial.executeQuery();
             //Mientras haya coincidencias
             while (rsHistorial.next()) {
                 //Se crea una instancia de cita con los datos recuperados de la base de datos
-                citaActual = new Cita(rsHistorial.getTimestamp("fechaHoraInicio"), rsHistorial.getTimestamp("fechaHoraFin"),
-                        rsHistorial.getString("paciente"), rsHistorial.getInt("consulta"), rsHistorial.getInt("ambulatorio"),
-                        rsHistorial.getString("tipo"), rsHistorial.getString("especialidad"));
+                citaActual = new Cita(rsHistorial.getTimestamp("fechaHoraInicio"), 
+                        rsHistorial.getTimestamp("fechaHoraFin"),
+                        rsHistorial.getString("paciente"), 
+                        rsHistorial.getInt("consulta"), 
+                        rsHistorial.getInt("ambulatorio"),
+                        rsHistorial.getString("tipo"),
+                        rsHistorial.getString("especialidad"));
                //Y se añade la instancia a la lista de pacientes
                 resultado.add(citaActual);
             }
