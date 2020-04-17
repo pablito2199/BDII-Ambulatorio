@@ -9,14 +9,14 @@ public class Paciente {
     private String nombre;
     private java.sql.Date fechaNacimiento;
     private String sexo;
-    private GrupoSangre grupo;
+    private GrupoSanguineo grupo;
     private String nacionalidad;
     private String direccion;
     private String telefono;
     private Integer edad;
 
     //Constructor
-    public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSangre grupo, String nacionalidad, String direccion, String telefono) {
+    public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono) {
         this.CIP = CIP;
         this.DNI = DNI;
         this.NSS = NSS;
@@ -27,6 +27,21 @@ public class Paciente {
         this.nacionalidad = nacionalidad;
         this.direccion = direccion;
         this.telefono = telefono;
+    }
+    
+      //Constructor
+    public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad) {
+        this.CIP = CIP;
+        this.DNI = DNI;
+        this.NSS = NSS;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.sexo = sexo;
+        this.grupo = grupo;
+        this.nacionalidad = nacionalidad;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.edad = edad;
     }
 
     //Getters y Setters
@@ -78,11 +93,11 @@ public class Paciente {
         this.sexo = sexo;
     }
 
-    public GrupoSangre getGrupo() {
+    public GrupoSanguineo getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(GrupoSangre grupo) {
+    public void setGrupo(GrupoSanguineo grupo) {
         this.grupo = grupo;
     }
 
