@@ -148,6 +148,16 @@ public class FachadaGui {
 //////////////////////
 //OTRAS VENTANAS
 //////////////////////
+    //Abre la ventana de VAutentificación
+    public void iniciaVista() {
+        VAutentificacion va;
+
+        va  = new VAutentificacion(vp, true, fa);
+        //abre la ventana
+        vp.setVisible(true);
+        va.setVisible(true);
+    }
+
     //Permite iniciar la vista de la aplicación
     public void nuevaVAutentificacion() {
         //Generamos una ventana de autentificación que permite ingresarse en la base de datos
@@ -159,6 +169,14 @@ public class FachadaGui {
         va.setVisible(true);
     }
 
+    //abre una ventana que muestra una excepción en pantalla
+    public void muestraExcepcion(String txtExcepcion) {
+        VAviso va;
+
+        va  = new VAviso(vp, true, txtExcepcion);
+        va.setVisible(true);
+    }
+    
     //Permite generar una ventana que muestre excepciones
     public void nuevaVError(String mensajeError) {
         //Declaramos la ventana
