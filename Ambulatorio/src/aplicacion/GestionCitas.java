@@ -24,9 +24,14 @@ public class GestionCitas {
         fbd.insertarUrgencia(urgencia);
     }
     
-    //Atiende una cita o urgencia
+    //Atiende una cita
     public void atenderCita(Cita cita) {
         fbd.atenderCita(cita);
+    }
+    
+    //Atiende una urgencia
+    public void atenderUrgencia(Urgencia urgencia) {
+        fbd.atenderUrgencia(urgencia);
     }
     
     //Deriva una cita o urgencia a un hospital
