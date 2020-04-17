@@ -1,11 +1,13 @@
 package aplicacion;
 
+import java.sql.Date;
+
 public class Paciente {
     private String CIP;
     private String DNI;
     private Integer NSS;    //NSS
     private String nombre;
-    private java.sql.Date fechaNacimiento;
+    private Date fechaNacimiento;
     private String sexo;
     private GrupoSanguineo grupo;
     private String nacionalidad;
@@ -15,7 +17,7 @@ public class Paciente {
     private Rango rango;
 
     //Constructor
-    public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono) {
+    public Paciente(String CIP, String DNI, int NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono) {
         this.CIP = CIP;
         this.DNI = DNI;
         this.NSS = NSS;
@@ -29,7 +31,7 @@ public class Paciente {
     }
     
     //Constructor por si le quieres meter la edad
-    public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad, Rango rango) {
+    public Paciente(String CIP, String DNI, int NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad, Rango rango) {
         this.CIP = CIP;
         this.DNI = DNI;
         this.NSS = NSS;
@@ -86,7 +88,7 @@ public class Paciente {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(java.sql.Date fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

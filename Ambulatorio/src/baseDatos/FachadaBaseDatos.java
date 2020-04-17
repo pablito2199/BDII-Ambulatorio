@@ -108,14 +108,9 @@ public class FachadaBaseDatos {
         daoCitas.insertarUrgencia(urgencia);
     }
 
-    //Atiende una cita
+    //Atiende una cita o una urgencia
     public void atenderCita(Cita cita) {
         daoCitas.atenderCita(cita);
-    }
-
-    //Atiende una urgencia
-    public void atenderUrgencia(Urgencia urgencia) {
-        daoCitas.atenderUrgencia(urgencia);
     }
 
     //Deriva una cita o urgencia a un hospital

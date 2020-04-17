@@ -6,7 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import aplicacion.Cita;
 import aplicacion.Urgencia;
+import aplicacion.Paciente;
+import aplicacion.Rango;
 
+/**
+ *
+ * @author Martín Suárez García
+ */
 public class DAOCitas extends AbstractDAO {
 
     //Contructor
@@ -16,19 +22,20 @@ public class DAOCitas extends AbstractDAO {
     }
 
     //Permite insertar una nueva cita en la base de datos
-    public void insertarCita(Cita cita) {
+    public void insertarCita(Cita cita, Paciente paciente) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmCita = null;
 
         //Establecemos conexión
         con = super.getConexion();
-        
-        //Quitamos autocommit
-        con.set
 
         //Intentamos la consulta SQL
         try {
+
+            //Quitamos autocommit
+            con.setAutoCommit(false);
+
             //Preparamos la consulta SQL para insertar una nueva cita
             stmCita = con.prepareStatement(
                     "insert into cita "
@@ -53,18 +60,61 @@ public class DAOCitas extends AbstractDAO {
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
-            
-            if(e.getErrorCode() == 2601 && ){
-                
-            }
-            
-            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        
-        } finally {
-            //Finalmente intentamos cerrar los cursores
+
             try {
+                //Si unique no se cumple entonces la hora esta ocupada
+                if (e.getSQLState().equals("unique_violation") && paciente.getRango() == Rango.DELUXE) {
+
+                    //Preparamos la consulta SQL para actualizar la cita
+                    stmCita = con.prepareStatement(
+                            "update from cita "
+                            + "set paciente = ?,"
+                            + "tipo = ?,"
+                            + "especialidad = ? "
+                            + "where consulta = ? "
+                            + "and ambulatorio = ? "
+                            + "and fechaHoraInicio = ?"
+                    );
+
+                    //Sustituimos
+                    stmCita.setString(1, cita.getPaciente());
+                    stmCita.setString(2, cita.getTipo());
+                    stmCita.setString(3, cita.getEspecialidad());
+                    stmCita.setInt(4, cita.getConsulta());
+                    stmCita.setInt(5, cita.getAmbulatorio());
+                    stmCita.setTimestamp(6, cita.getFechaHoraInicio());
+
+                    //Actualizamos
+                    stmCita.executeUpdate();
+
+                    //Hacemos commit
+                    con.commit();
+
+                } else {
+
+                    //Hacemos rollback
+                    con.rollback();
+
+                    //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+                    System.out.println(e.getMessage());
+                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                }
+            } catch (SQLException e2) {
+
+                //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+                System.out.println(e2.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e2.getMessage());
+            }
+
+        } finally {
+
+            //Finalmente intentamos cerrar los cursores y hacer commit si no se hizo ya
+            try {
+                //Hacemos commit en caso de que el paciente no sea deluxe
+                if (paciente.getRango() != Rango.DELUXE) {
+                    con.commit();
+                }
+
                 stmCita.close();
             } catch (SQLException e) {
                 //De no poder se notifica de ello
@@ -88,9 +138,9 @@ public class DAOCitas extends AbstractDAO {
             stmPaciente = con.prepareStatement(
                     "update from cita "
                     + "set fechaHoraFin = CURRENT_TIMESTAMP"
-                    + "where fechaHoraInicio = ?"
-                    + "and consulta = ?"
-                    + "and ambulatorio = ?"
+                    + "where fechaHoraInicio = ? "
+                    + "and consulta = ? "
+                    + "and ambulatorio = ? "
                     + "and paciente = ?"
             );
 
@@ -99,7 +149,7 @@ public class DAOCitas extends AbstractDAO {
             stmPaciente.setInt(2, cita.getConsulta());
             stmPaciente.setInt(3, cita.getAmbulatorio());
             stmPaciente.setString(4, cita.getPaciente());
-            
+
             //Actualizamos
             stmPaciente.executeUpdate();
 
