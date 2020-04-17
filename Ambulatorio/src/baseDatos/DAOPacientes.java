@@ -65,7 +65,7 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     //Permite eliminar un paciente de la base de datos
-    public void eliminarPaciente(Paciente paciente) {
+    public void borrarPaciente(Paciente paciente) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmPaciente = null;
