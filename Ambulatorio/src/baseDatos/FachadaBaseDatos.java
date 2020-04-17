@@ -106,13 +106,13 @@ public class FachadaBaseDatos {
         daoCitas.borrarCita(cita);
     }
 
-    //Permite insertar una nueva cita en la base de datos
+    //Permite insertar una nueva urgencia en la base de datos
     public void insertarUrgencia(Urgencia urgencia) {
         daoCitas.insertarUrgencia(urgencia);
     }
 
-    //Permite borrar una cita de la base de datos
-    public void borrarUrgencia(Urgencia cita) {
+    //Permite borrar una urgencia de la base de datos
+    public void borrarUrgencia(Urgencia urgencia) {
         daoCitas.borrarUrgencia(urgencia);
     }
 
