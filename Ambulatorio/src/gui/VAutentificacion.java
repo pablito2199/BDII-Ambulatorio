@@ -48,7 +48,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         etiquetaFallo = new javax.swing.JLabel();
-        textoClave = new javax.swing.JPasswordField();
+        textoContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Autentificación de usuarios");
@@ -92,7 +92,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                             .addComponent(etiquetaFallo)
-                            .addComponent(textoClave, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
+                            .addComponent(textoContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -109,7 +109,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(textoClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(etiquetaFallo)
                 .addGap(18, 18, 18)
@@ -126,7 +126,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         //La etiqueta de fallo se hace invisible
         etiquetaFallo.setVisible(false);
         //Se intenta comprobar si el usuario puede o no acceder a la base de datos
-        if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()))
+        if (fa.comprobarAutentificacion(textoUsuario.getText(), textoContrasena.getText()))
            //En caso de tener acceso a la misma (ser administrador) borramos la ventana JFrame
            this.dispose();
         //De no tener los credenciales necesarios hacemos visible la etiqueta de fallo y negamos el 
@@ -149,7 +149,7 @@ public class VAutentificacion extends javax.swing.JDialog {
     private javax.swing.JLabel etiquetaFallo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField textoClave;
+    private javax.swing.JPasswordField textoContrasena;
     private javax.swing.JTextField textoUsuario;
     // End of variables declaration//GEN-END:variables
 

@@ -1,5 +1,6 @@
 package baseDatos;
 
+import aplicacion.Administrador;
 import aplicacion.Ambulatorio;
 import aplicacion.Cita;
 import aplicacion.Paciente;
@@ -9,6 +10,7 @@ import aplicacion.Receta;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.Properties;
 
 /**
@@ -190,7 +192,7 @@ public class FachadaBaseDatos {
 //DAOPERSONAL
 ////////////////////
     //Permite recuperar un administrador de la base de datos a partir de su id y contraseña
-    public Administrador validarAdministrador(String idAdministrador, String clave) {
-        return daoPersonal.validarUsuario(idAdministrador, clave);
+    public Boolean validarAdministrador(String dni, String contrasena) {
+        return daoPersonal.validarAdministrador(dni, contrasena);
     }
 }

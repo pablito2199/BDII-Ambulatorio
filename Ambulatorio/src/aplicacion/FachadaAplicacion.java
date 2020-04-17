@@ -10,6 +10,7 @@ public class FachadaAplicacion {
     GestionEnfermedades genf;               // Enlace a la clase gestión de enfermedades
     GestionConsultas gcon;                  // Enlace a la clase gestión de consultas
     GestionRecetas grec;                    // Enlace a la clase gestión de recetas
+    GestionAdministradores cadm;            // Enlace a la clase gestión de administradores
 
     //Constructor
     public FachadaAplicacion() {
@@ -21,13 +22,19 @@ public class FachadaAplicacion {
         cenf = new GestionEnfermedades(fgui, fbd);
         cpac = new GestionConsultas(fgui, fbd);
         crec = new GestionRecetas(fgui, fbd);
+        cadm = new GestionAdministradores(fgui, fbd);
     }
 
     //Main
     public static void main(String args[]) {
         FachadaAplicacion fa;                   //Declaramos la variable fachada
         fa = new FachadaAplicacion();       //La inicializamos
-        fa.iniciaInterfazUsuario();              //LLamamos a la interfaz de usuario
+        fa.iniciaInterfazAdministrador();              //LLamamos a la interfaz de usuario
+    }
+
+    //Comprueba si la autentificación es correcta
+    public Boolean comprobarAutentificacion(String dni, String constrasena) {
+        return cadm.comprobarAutentificacion(dni, constrasena);
     }
 
     //Llamada para mostrar una excepción
