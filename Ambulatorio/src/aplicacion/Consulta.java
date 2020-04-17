@@ -45,7 +45,7 @@ public class Consulta {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Consulta) {
-            return ((Consulta) obj).getIdentificador().equals(this.identificador);
+            return ((Consulta) obj).getIdentificador().equals(this.identificador) && ((Material) obj).getAmbulatorio().equals(this.ambulatorio);
         }
         return false;
     }
