@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import aplicacion.Paciente;
 import aplicacion.GrupoSanguineo;
+import aplicacion.Rango;
+import aplicacion.Cita;
 
 public class DAOPacientes extends AbstractDAO {
     
@@ -63,7 +65,7 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     //Permite eliminar un paciente de la base de datos
-    public void borrarPaciente(Paciente paciente) {
+    public void eliminarPaciente(Paciente paciente) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmPaciente = null;
@@ -158,15 +160,25 @@ public class DAOPacientes extends AbstractDAO {
         Connection con;
         PreparedStatement stmPacientes = null;
         ResultSet rsPacientes;
+        PreparedStatement stmRango = null;
+        ResultSet rsRango;
 
+        String subconsulta;        
         //Establecemos conexión
         con = this.getConexion();
+        //Impedimos que se la confirmación sea automática
+        try {
+            con.setAutoCommit(false);            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
 
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad," +
-                    "sexo, grupoSanguineo "
+            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad," 
+                    + "sexo, grupoSanguineo "
                     + "from paciente "
                     + "where cip like ? "
                     + "and dni like ?"
@@ -197,16 +209,63 @@ public class DAOPacientes extends AbstractDAO {
                         rsPacientes.getInt("numSeguridadSocial"), rsPacientes.getString("nombre"), rsPacientes.getDate("fechaNacimiento"),
                         rsPacientes.getString("sexo"), GrupoSanguineo.getTipo(rsPacientes.getString("grupoSanguineo")), 
                         rsPacientes.getString("nacionalidad"), rsPacientes.getString("direccion"), rsPacientes.getString("telefono"),
-                        rsPacientes.getInt("edad"));
+                        rsPacientes.getInt("edad"), Rango.getTipo(rsPacientes.getString("rango")));
+               
+                //Intentamos la otra consulta para recuperar los datos del autor
+                try {
+                    //Recuperamos el nombre del autor de la tabla de autores donde el libro sea el que pedimos y ordenamos
+                    subconsulta = "select " 
+                        + "CASE " 
+                        + "WHEN SUM(distinct soborno)>500 THEN 'deluxe " 
+                        + "WHEN COUNT(distinct paciente)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
+                        + "ELSE 'base' "
+                        + "END  as rango "
+                        + "from urgencia where paciente = ?"
+                        + "group by paciente, soborno;";
+                    stmRango = con.prepareStatement(subconsulta);
+                    
+                    //Sustituimos con los datos propordionados
+                    stmRango.setString(1, pacienteActual.getCIP()); //Id del libro
+                    //Ejecutamos la consulta
+                    rsRango = stmRango.executeQuery();
+                    //Mientras haya coincidencias
+                    if (rsRango.next()) {
+                        //Añadimos al autor a la lista de autores del libro
+                        pacienteActual.setRango(Rango.getTipo(rsRango.getString("rango")));
+                    }
+                    //En caso de fallar capturamos  la excepción
+                } catch (SQLException e) {
+                    //Imprimimos y generamos ventana
+                    System.out.println(e.getMessage());
+                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                    //Como ha fallado deshacemos
+                    con.rollback();
+                } finally {
+                    //Finalmente cerramos la conexión de AUTORES
+                    //La de libros sigue abierta
+                    try {
+                        stmRango.close();
+                    } catch (SQLException e) {
+                        //De no poder notificamos al usuario
+                        System.out.println("Imposible cerrar cursores");
+                    }
+                }
                 //Y se añade la instancia a la lista de pacientes
                 resultado.add(pacienteActual);
             }
-
-            //En caso de error se captura la excepción
-        } catch (SQLException e) {
+        }
+        //En caso de error se captura la excepción
+        catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            try {
+                //Como ha fallado deshacemos
+                con.rollback();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+            }
         } finally {
             //Finalmente se intentan cerrar cursores
             try {
@@ -216,112 +275,145 @@ public class DAOPacientes extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        try {
+            //Confirmamos
+            con.commit();
+        } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage()); 
+        }
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
     }
-
-    //Permite consultar la información de los pacientes buscados por su id y/o nombre 
-    //Incluye además infrormación sobre sus préstamos vencidos
-    public java.util.List<Paciente> consultarPPacientes(String id, String nombre) {
-        //Declaramos variables
-        java.util.List<Paciente> resultado = new java.util.ArrayList<Paciente>();
-        Paciente pacienteActual;
+    
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente,  String TipoCita, java.sql.Date fechaInicio, java.sql.Date fechaFin){
+    //Declaramos variables
+        java.util.List<Cita> resultado = new java.util.ArrayList<Cita>();
         Connection con;
-        PreparedStatement stmPacientes = null;
-        PreparedStatement stmPrestamos = null;
-        ResultSet rsPacientes;
-        ResultSet rsPrestamos;
+        PreparedStatement stmHistorial = null;
+        ResultSet rsHistorial;
 
+        String subconsulta;        
         //Establecemos conexión
         con = this.getConexion();
+        //Impedimos que se la confirmación sea automática
+        try {
+            con.setAutoCommit(false);            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
 
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el id, clave, nombre, direccion, email y tipo de paciente de la tabla de pacientes
-            //que tengan el nombre dado
-            String consulta = "select id_paciente, clave, nombre, direccion, email, tipo_paciente, edad "
-                    + "from paciente as u "
-                    + "where nombre like ?";
-            if (id != null) {
-                consulta = consulta + " and id_paciente like ?";
-            }
-
-            //En caso de aportar el id
-            if (id != null) {
-                //También se busca por id y, por tanto, se especifica en la consulta
-                consulta = consulta + " and id_paciente like ?";
-            }
+            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad," 
+                    + "sexo, grupoSanguineo "
+                    + "from paciente "
+                    + "where cip like ? "
+                    + "and dni like ?"
+                    + "and nombre like ?"
+                    + "and EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) = ?"
+                    + "and sexo like ?"
+                    + "and NSS like ?"
+                    + "and grupoSanguineo like ?";
 
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
-            stmPacientes.setString(1, "%" + nombre + "%"); //Nombre
-            if (id != null) {
-                stmPacientes.setString(2, "%" + id + "%"); //ID, en caso de no ser nulo
-            }
+            stmPacientes.setString(1, "%" + CIP + "%");
+            stmPacientes.setString(2, "%" + DNI + "%");
+            stmPacientes.setString(3, "%" + nombre + "%"); 
+            stmPacientes.setInt(4, edad); 
+            stmPacientes.setString(5, "%" + sexo + "%"); 
+            stmPacientes.setString(6, "%" + NSS + "%"); 
+            stmPacientes.setString(7, "%" + nombre + "%"); 
+            stmPacientes.setString(8, "%" + grupo + "%"); 
+ 
             //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
             //Mientras haya coincidencias
             while (rsPacientes.next()) {
                 //Se crea una instancia de paciente con los datos recuperados de la base de datos
-                pacienteActual = new Paciente(rsPacientes.getString("id_paciente"), rsPacientes.getString("clave"),
-                        rsPacientes.getString("nombre"), rsPacientes.getString("direccion"),
-                        rsPacientes.getString("email"), TipoPaciente.CTU(rsPacientes.getString("tipo_paciente")), rsPacientes.getString("edad"));
-
-                //Se intenta consultar la tabla de préstamos
+                pacienteActual = new Paciente(rsPacientes.getString("cip"), rsPacientes.getString("dni"),
+                        rsPacientes.getInt("numSeguridadSocial"), rsPacientes.getString("nombre"), rsPacientes.getDate("fechaNacimiento"),
+                        rsPacientes.getString("sexo"), GrupoSanguineo.getTipo(rsPacientes.getString("grupoSanguineo")), 
+                        rsPacientes.getString("nacionalidad"), rsPacientes.getString("direccion"), rsPacientes.getString("telefono"),
+                        rsPacientes.getInt("edad"), Rango.getTipo(rsPacientes.getString("rango")));
+               
+                //Intentamos la otra consulta para recuperar los datos del autor
                 try {
-                    //Construimos una consulta que cuente el número de préstamos vencidos
-                    //Para elllo se comprueba que los ejemplares no estén devueltos y que la fecha 
-                    //actual (current_date) supere la de préstamo + 30 (fecha de devolución) para el paciente dado
-                    consulta = "select COUNT(distinct ejemplar) as vencidos from prestamo where "
-                            + "paciente like ? and fecha_devolucion is null and current_date > fecha_prestamo + 30";
-                    //Preparamos la consulta
-                    stmPrestamos = con.prepareStatement(consulta);
-                    //Sustituimos
-                    stmPrestamos.setString(1, pacienteActual.getIdPaciente());  //Id del paciente
-                    //Ejecutamos
-                    rsPrestamos = stmPrestamos.executeQuery();
-                    //Como solo devuelve un valor lo recuperamos
-                    rsPrestamos.next();
-                    //Y lo guardamos como el número de préstamos vencidos (que han superado la fecha límite 
-                    //para su devolución)
-                    pacienteActual.setNumPrestamosVencidos(rsPrestamos.getInt("vencidos"));
-
-                    //En caso de error se captura la excepción
+                    //Recuperamos el nombre del autor de la tabla de autores donde el libro sea el que pedimos y ordenamos
+                    subconsulta = "select " 
+                        + "CASE " 
+                        + "WHEN SUM(distinct soborno)>500 THEN 'deluxe " 
+                        + "WHEN COUNT(distinct paciente)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
+                        + "ELSE 'base' "
+                        + "END  as rango "
+                        + "from urgencia where paciente = ?"
+                        + "group by paciente, soborno;";
+                    stmRango = con.prepareStatement(subconsulta);
+                    
+                    //Sustituimos con los datos propordionados
+                    stmRango.setString(1, pacienteActual.getCIP()); //Id del libro
+                    //Ejecutamos la consulta
+                    rsRango = stmRango.executeQuery();
+                    //Mientras haya coincidencias
+                    if (rsRango.next()) {
+                        //Añadimos al autor a la lista de autores del libro
+                        pacienteActual.setRango(Rango.getTipo(rsRango.getString("rango")));
+                    }
+                    //En caso de fallar capturamos  la excepción
                 } catch (SQLException e) {
-                    //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+                    //Imprimimos y generamos ventana
                     System.out.println(e.getMessage());
                     this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                    //Como ha fallado deshacemos
+                    con.rollback();
                 } finally {
-                    //Finalmente intentamos cerrar el cursor de PRESTAMOS. El de pacientes sigue abierto.
+                    //Finalmente cerramos la conexión de AUTORES
+                    //La de libros sigue abierta
                     try {
-                        stmPrestamos.close();
+                        stmRango.close();
                     } catch (SQLException e) {
-                        //Si no se puede se imprime el error por pantalla
+                        //De no poder notificamos al usuario
                         System.out.println("Imposible cerrar cursores");
                     }
                 }
-                //Se añade el paciente a la lista de pacientes
+                //Y se añade la instancia a la lista de pacientes
                 resultado.add(pacienteActual);
             }
-
-            //En caso de error se captura la excepción
-        } catch (SQLException e) {
+        }
+        //En caso de error se captura la excepción
+        catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            try {
+                //Como ha fallado deshacemos
+                con.rollback();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+            }
         } finally {
-            //Finalmente intentamos cerrar el cursor de pacientes 
+            //Finalmente se intentan cerrar cursores
             try {
                 stmPacientes.close();
             } catch (SQLException e) {
-                //Si no se puede se imprime el error por pantalla
+                //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        //Devolvemos el resultado (lista de pacientes con información de préstamos vencidos)
+        try {
+            //Confirmamos
+            con.commit();
+        } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage()); 
+        }
+        //Se devuelve el resultado (lista de pacientes)
         return resultado;
-    }
-    
+    } 
 }

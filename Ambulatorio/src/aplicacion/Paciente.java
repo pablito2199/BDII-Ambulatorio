@@ -1,7 +1,5 @@
 package aplicacion;
 
-import java.sql.Date;
-
 public class Paciente {
     private String CIP;
     private String DNI;
@@ -14,6 +12,7 @@ public class Paciente {
     private String direccion;
     private String telefono;
     private Integer edad;
+    private Rango rango;
 
     //Constructor
     public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono) {
@@ -29,8 +28,8 @@ public class Paciente {
         this.telefono = telefono;
     }
     
-      //Constructor
-    public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad) {
+    //Constructor por si le quieres meter la edad
+    public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad, Rango rango) {
         this.CIP = CIP;
         this.DNI = DNI;
         this.NSS = NSS;
@@ -42,6 +41,12 @@ public class Paciente {
         this.direccion = direccion;
         this.telefono = telefono;
         this.edad = edad;
+        this.rango = rango;
+    }
+
+    //Constructor solo para borrado
+    public Paciente(String CIP){
+        this.CIP = CIP;
     }
 
     //Getters y Setters
@@ -61,11 +66,11 @@ public class Paciente {
         this.DNI = DNI;
     }
 
-    public int getNSS() {
+    public Integer getNSS() {
         return NSS;
     }
 
-    public void setNSS(int NSS) {
+    public void setNSS(Integer NSS) {
         this.NSS = NSS;
     }
 
@@ -131,6 +136,14 @@ public class Paciente {
 
     public void setEdad(Integer edad) {
         this.edad = edad;
+    }
+
+    public Rango getRango() {
+        return rango;
+    }
+
+    public void setRango(Rango rango) {
+        this.rango = rango;
     }
 
     
