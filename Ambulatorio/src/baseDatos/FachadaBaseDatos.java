@@ -99,8 +99,8 @@ public class FachadaBaseDatos {
 //DAOCITAS
 ///////////////
     //Permite insertar una nueva cita en la base de datos
-    public void insertarCita(Cita cita) {
-        daoCitas.insertarCita(cita);
+    public void insertarCita(Cita cita, Paciente paciente) {
+        daoCitas.insertarCita(cita, paciente);
     }
 
     //Permite insertar una nueva urgencia en la base de datos
@@ -108,14 +108,9 @@ public class FachadaBaseDatos {
         daoCitas.insertarUrgencia(urgencia);
     }
 
-    //Atiende una cita
+    //Atiende una cita o una urgencia
     public void atenderCita(Cita cita) {
         daoCitas.atenderCita(cita);
-    }
-
-    //Atiende una urgencia
-    public void atenderUrgencia(Urgencia urgencia) {
-        daoCitas.atenderUrgencia(urgencia);
     }
 
     //Deriva una cita o urgencia a un hospital

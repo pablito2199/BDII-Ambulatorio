@@ -15,8 +15,8 @@ public class GestionCitas {
     }
 
     //Agrega una nueva cita a la base de datos
-    public void insertarCita(Cita cita){
-        fbd.insertarCita(cita);
+    public void insertarCita(Cita cita, Paciente paciente){
+        fbd.insertarCita(cita, paciente);
     }
         
     //Agrega una nueva cita a la base de datos
