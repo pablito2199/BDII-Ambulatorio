@@ -2,28 +2,25 @@ package aplicacion;
 
 import java.sql.Date;
 
-/**
- *
- * @author Martín Suárez García
- */
-public class Paciente {
 
-    private String cip;
-    private String dni;
-    private Integer numSeguridadSocial;
+public class Paciente {
+    private String CIP;
+    private String DNI;
+    private Integer NSS;    //NSS
     private String nombre;
-    private Date fechaNacimiento;
+    private java.sql.Date fechaNacimiento;
     private String sexo;
     private GrupoSangre grupo;
     private String nacionalidad;
     private String direccion;
     private String telefono;
+    private Integer edad;
 
     //Constructor
-    public Paciente(String cip, String dni, int numSeguridadSocial, String nombre, Date fechaNacimiento, String sexo, GrupoSangre grupo, String nacionalidad, String direccion, String telefono) {
-        this.cip = cip;
-        this.dni = dni;
-        this.numSeguridadSocial = numSeguridadSocial;
+    public Paciente(String CIP, String DNI, int NSS, String nombre, java.sql.Date fechaNacimiento, String sexo, GrupoSangre grupo, String nacionalidad, String direccion, String telefono) {
+        this.CIP = CIP;
+        this.DNI = DNI;
+        this.NSS = NSS;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.sexo = sexo;
@@ -34,28 +31,28 @@ public class Paciente {
     }
 
     //Getters y Setters
-    public String getCip() {
-        return cip;
+    public String getCIP() {
+        return CIP;
     }
 
-    public void setCip(String cip) {
-        this.cip = cip;
+    public void setCIP(String CIP) {
+        this.CIP = CIP;
     }
 
-    public String getDni() {
-        return dni;
+    public String getDNI() {
+        return DNI;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
-    public int getNumSeguridadSocial() {
-        return numSeguridadSocial;
+    public int getNSS() {
+        return NSS;
     }
 
-    public void setNumSeguridadSocial(int numSeguridadSocial) {
-        this.numSeguridadSocial = numSeguridadSocial;
+    public void setNSS(int NSS) {
+        this.NSS = NSS;
     }
 
     public String getNombre() {
@@ -66,11 +63,11 @@ public class Paciente {
         this.nombre = nombre;
     }
 
-    public Date getFechaNacimiento() {
+    public java.sql.Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(java.sql.Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -114,10 +111,19 @@ public class Paciente {
         this.telefono = telefono;
     }
 
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
+
+    
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Paciente) {
-            return ((Paciente) obj).getCip().equals(this.cip);
+            return ((Paciente) obj).getCIP().equals(this.CIP);
         }
         return false;
     }
