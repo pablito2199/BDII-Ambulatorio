@@ -99,8 +99,8 @@ public class FachadaBaseDatos {
 //DAOCITAS
 ///////////////
     //Permite insertar una nueva cita en la base de datos
-    public void insertarCita(Cita cita) {
-        daoCitas.insertarCita(cita);
+    public void insertarCita(Cita cita, Paciente paciente) {
+        daoCitas.insertarCita(cita, paciente);
     }
 
     //Permite insertar una nueva urgencia en la base de datos
@@ -219,14 +219,9 @@ public class FachadaBaseDatos {
         daoRecetas.insertarReceta(receta);
     }
 
-    //Permite modificar los datos de una receta de la base de datos
-    public void modificarReceta(Receta receta) {
-        daoRecetas.modificarReceta(receta);
-    }
-
-    //Permite eliminar una receta de la base de datos
-    public void borrarReceta(Receta receta) {
-        daoRecetas.borrarReceta(receta);
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente,  java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento){
+        return daoRecetas.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
     }
 
 ////////////////////
