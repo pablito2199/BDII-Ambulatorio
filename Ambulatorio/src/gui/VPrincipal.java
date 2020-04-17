@@ -38,7 +38,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaLibros = new javax.swing.JTable();
+        tablaAmbulatorios = new javax.swing.JTable();
         etiquetaTitulo = new javax.swing.JLabel();
         textoDireccion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -98,11 +98,11 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
 
-        tablaLibros.setModel(new ModeloTablaLibros());
-        tablaLibros.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaLibros.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tablaLibros);
-        tablaLibros.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaAmbulatorios.setModel(new ModeloTablaLibros());
+        tablaAmbulatorios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaAmbulatorios.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaAmbulatorios);
+        tablaAmbulatorios.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         etiquetaTitulo.setText("Nombre:");
 
@@ -387,11 +387,11 @@ public class VPrincipal extends javax.swing.JFrame {
     //Permite editar un libro abriendo la ventana de libro correspondiente con su información
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         //Creamos el modelo de tabla de libros
-        ModeloTablaLibros mtl = (ModeloTablaLibros) tablaLibros.getModel();
+        ModeloTablaLibros mtl = (ModeloTablaLibros) tablaAmbulatorios.getModel();
         //Declaramos e inicializamos el id del libro
         int idLibro;
         //Que te toma de la tabla de libros (la fila seleccionada)
-        idLibro = mtl.obtenerLibro(tablaLibros.getSelectedRow()).getIdLibro();
+        idLibro = mtl.obtenerLibro(tablaAmbulatorios.getSelectedRow()).getIdLibro();
         //Visualizamos la información completa del libro (para editarla) generando así una nueva ventana
         fa.visualizarLibro(idLibro);
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -458,13 +458,13 @@ public class VPrincipal extends javax.swing.JFrame {
     public void buscarLibros() {
         //Creamos el modelo de tabla de libros
         ModeloTablaLibros m;
-        m = (ModeloTablaLibros) tablaLibros.getModel();
+        m = (ModeloTablaLibros) tablaAmbulatorios.getModel();
         //Tomamos las filas que regresa la función de búsqueda y por tanto cumplan el criterio
         m.setFilas(fa.obtenerLibros((textoDireccion.getText().isEmpty()) ? null : Integer.parseInt(textoDireccion.getText()), textoNombre.getText(), textoCodigo.getText(), buscaAutor.getText()));
         //Si hay algún resultado
         if (m.getRowCount() > 0) {
             //Se seleciona la primera fila
-            tablaLibros.setRowSelectionInterval(0, 0);
+            tablaAmbulatorios.setRowSelectionInterval(0, 0);
             //Se habilita el botón de editar el libro
             btnEliminar.setEnabled(true);
         } else {
@@ -502,7 +502,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaLibros;
+    private javax.swing.JTable tablaAmbulatorios;
     private javax.swing.JTextField textoAnoConstruccion;
     private javax.swing.JTextField textoAntiguedad;
     private javax.swing.JTextField textoCodigo;
