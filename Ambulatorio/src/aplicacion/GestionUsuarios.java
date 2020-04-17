@@ -7,7 +7,7 @@ import baseDatos.FachadaBaseDatos;
  *
  * @author basesdatos
  */
-public class GestionUsuarios {
+public class GestionPacientes {
 
     FachadaGui fgui;                //Enlace a la facha de la GUI
     FachadaBaseDatos fbd;       //Enlace a la facha de Base de datos
