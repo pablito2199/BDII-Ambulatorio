@@ -22,7 +22,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         ModeloListaEnfermedades mListaE = new ModeloListaEnfermedades();
         lstEnfermedades.setModel(mListaE);
         mListaE.setElementos(restoEnfermedades);
-        enfermedades = fa.consultarEnfermedades();
+        enfermedades = fa.consultarEnfermedades(textoNombre.getText());
         if (mListaE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstEnfermedades.setSelectedIndex(0);
@@ -248,7 +248,7 @@ public class VEnfermedades extends javax.swing.JDialog {
             Enfermedad e = new Enfermedad(textoNombre.getText(), textoDescripcion.getText());
             //si la fila está seleccionada, modifica, en caso contrario, añade la enfermedad
             if (lstEnfermedades.getSelectedIndex() >= 0) {
-                fa.modificarEnfermedad(e);//no se va poder modificar el ID del usuario
+                fa.modificarEnfermedad(e);//no se va poder modificar nombre de la enfermedad
             } else {
                 fa.anadirEnfermedad(e);
             }
@@ -262,7 +262,7 @@ public class VEnfermedades extends javax.swing.JDialog {
     private void btnEliminarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEnfermedadActionPerformed
         // TODO add your handling code here:
         ModeloListaEnfermedades mListaE = (ModeloListaEnfermedades) lstEnfermedades.getModel();
-        String nombre = mListaE.obtenerEnfermedad(lstEnfermedades.getSelectedIndex()).getNombre();
+        String nombre = mListaE.obtenerEnfermedad(lstEnfermedades.getSelectedIndex());
         fa.borrarEnfermedad(nombre);
         textoNombre.setText(null);
         textoDescripcion.setText(null);
@@ -294,12 +294,16 @@ public class VEnfermedades extends javax.swing.JDialog {
     public void buscarEnfermedades() {
         ModeloListaEnfermedades mListaE = new ModeloListaEnfermedades();
         lstEnfermedades.setModel(mListaE);
-        enfermedades = fa.consultarEnfermedades();
-        mListaE.setElementos(fa.nombreEnfermedades());
+        enfermedades = fa.consultarEnfermedades(textoNombre.getText());
+        java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
+        for (int i = 0; i < enfermedades.size(); i++) {
+            nombres.add(enfermedades.get(i).getNombre());
+        }
+        mListaE.setElementos(nombres);
         if (mListaE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstEnfermedades.setSelectedIndex(0);
-            //activa el botón de Borrar
+            //activa el botón de Eliminar
             btnEliminarEnfermedad.setEnabled(true);
         } else {
             btnEliminarEnfermedad.setEnabled(false);

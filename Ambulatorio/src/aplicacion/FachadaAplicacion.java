@@ -34,7 +34,7 @@ public class FachadaAplicacion {
 
     //Comprueba si la autentificación es correcta
     public Boolean comprobarAutentificacion(String dni, String constrasena) {
-        return gcadm.comprobarAutentificacion(dni, constrasena);
+        return gadm.comprobarAutentificacion(dni, constrasena);
     }
 
     //Llamada para mostrar una excepción
@@ -56,10 +56,22 @@ public class FachadaAplicacion {
 
 /////////////////////////
 //GESTIÓN DE ENFERMEDADES
-public java.util.List<Enfermedad> consultarEnfermedades() {
-        return cenf.consultarEnfermedades();
-    }
 /////////////////////////
+public void anadirEnfermedad(Enfermedad enfermedad) {
+    genf.anadirEnfermedad(enfermedad);
+}
+
+public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
+        return genf.consultarEnfermedades(nombre);
+    }
+
+public void modificarEnfermedad(Enfermedad enfermedad) {
+    genf.modificarEnfermedad(enfermedad);
+}
+
+public void borrarEnfermedad(String nombre) {
+    genf.borrarEnfermedad(nombre);
+}
 
 /////////////////////////
 //GESTIÓN DE CONSULTAS

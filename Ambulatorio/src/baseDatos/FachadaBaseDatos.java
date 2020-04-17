@@ -137,6 +137,10 @@ public class FachadaBaseDatos {
     public void insertarEnfermedad(Enfermedad enfermedad) {
         daoEnfermedades.insertarEnfermedad(enfermedad);
     }
+      
+    public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
+        return daoEnfermedades.consultarEnfermedades(nombre);
+    }
 
     //Permite modificar los datos de una enfermedad de la base de datos
     public void modificarEnfermedad(Enfermedad enfermedad) {
@@ -144,8 +148,8 @@ public class FachadaBaseDatos {
     }
 
     //Permite eliminar una enfermedad de la base de datos
-    public void borrarEnfermedad(Enfermedad enfermedad) {
-        daoEnfermedades.borrarEnfermedad(enfermedad);
+    public void borrarEnfermedad(String nombre) {
+        daoEnfermedades.borrarEnfermedad(nombre);
     }
 
 ////////////////////
