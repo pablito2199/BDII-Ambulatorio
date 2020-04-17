@@ -2,10 +2,6 @@ package aplicacion;
 
 import java.sql.Date;
 
-/**
- *
- * @author Martín Suárez García
- */
 public class Donativo {
 
     private Integer codigo;

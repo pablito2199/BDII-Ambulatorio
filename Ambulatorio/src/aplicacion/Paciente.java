@@ -2,7 +2,6 @@ package aplicacion;
 
 import java.sql.Date;
 
-
 public class Paciente {
     private String CIP;
     private String DNI;

@@ -3,10 +3,6 @@ package gui;
 import aplicacion.Libro;
 import javax.swing.table.*;
 
-/**
- *
- * @author basesdatos
- */
 public class ModeloTablaLibros extends AbstractTableModel {
 
     private java.util.List<Libro> libros;       //Listado de libros de la tabla

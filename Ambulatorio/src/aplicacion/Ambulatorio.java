@@ -7,10 +7,6 @@ package aplicacion;
 
 import java.time.Year;
 
-/**
- *
- * @author Martín Suárez García
- */
 public class Ambulatorio {
 
     private Integer codigo;

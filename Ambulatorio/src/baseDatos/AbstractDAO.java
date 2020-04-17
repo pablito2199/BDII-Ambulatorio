@@ -1,9 +1,5 @@
 package baseDatos;
 
-/**
- *
- * @author basesdatos
- */
 public abstract class AbstractDAO {
 
     private aplicacion.FachadaAplicacion fa;             // Enlace a la fachada de aplicación

@@ -3,10 +3,6 @@ package aplicacion;
 import java.sql.Timestamp;
 import java.sql.Date;
 
-/**
- *
- * @author Martín Suárez García
- */
 public class Receta {
     private Timestamp cita;
     private String paciente;

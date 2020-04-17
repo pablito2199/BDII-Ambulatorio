@@ -1,9 +1,5 @@
 package aplicacion;
 
-/**
- *
- * @author Martín Suárez García
- */
 public class Asociado {
 
     private Integer ambulatorio;

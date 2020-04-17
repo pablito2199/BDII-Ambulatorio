@@ -7,10 +7,6 @@ package aplicacion;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
-/**
- *
- * @author basesdatos
- */
 public class GestionLibros {
 
     FachadaGui fgui;

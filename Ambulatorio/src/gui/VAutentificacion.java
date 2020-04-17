@@ -6,10 +6,6 @@
 
 package gui;
 
-/**
- *
- * @author basesdatos
- */
 public class VAutentificacion extends javax.swing.JDialog {
 
     aplicacion.FachadaAplicacion fa;        //Enlace a la fachada de aplicación

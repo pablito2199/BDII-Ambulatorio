@@ -1,9 +1,5 @@
 package gui;
 
-/**
- *
- * @author alumno
- */
 public class VAviso extends javax.swing.JDialog {
 
     /**

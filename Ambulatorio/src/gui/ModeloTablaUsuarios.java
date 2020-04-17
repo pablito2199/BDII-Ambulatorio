@@ -3,10 +3,6 @@ package gui;
 import aplicacion.Usuario;
 import javax.swing.table.*;
 
-/**
- *
- * @author basesdatos
- */
 public class ModeloTablaUsuarios extends AbstractTableModel {
 
     private java.util.List<Usuario> usuarios;   //Listado de usuarios de la tabla

@@ -1,11 +1,11 @@
 package gui;
 
-public class ModeloListaStrings extends javax.swing.AbstractListModel {
+public class ModeloListaEnfermedades extends javax.swing.AbstractListModel {
     
     java.util.List<String> elementos;   //Listado de los elementos
 
     //Contructor
-    public ModeloListaStrings() {
+    public ModeloListaEnfermedades() {
         this.elementos = new java.util.ArrayList<String>();
     }
 

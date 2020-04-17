@@ -3,10 +3,6 @@ package gui;
 import aplicacion.Usuario;
 import aplicacion.TipoUsuario;
 
-/**
- *
- * @author alumno
- */
 public class VUsuario extends javax.swing.JDialog {
 
     private final VPrincipal padre;                           //Enlace a la ventana padre

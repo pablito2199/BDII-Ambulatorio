@@ -5,10 +5,6 @@ import aplicacion.Categoria;
 import aplicacion.Libro;
 import java.sql.*;
 
-/**
- *
- * @author basesdatos
- */
 public class DAOLibros extends AbstractDAO {
 
     //Constructor
