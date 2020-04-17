@@ -50,7 +50,7 @@ public class GestionCitas {
     }
     
     //Consulta las citas pendientes de un medico
-    public ArrayList<Urgencia> citasMedico(Personal medico){
+    public ArrayList<Urgencia> citasMedico(PersonalSanitario medico){
         return fbd.citasMedico(medico);
     }
 }

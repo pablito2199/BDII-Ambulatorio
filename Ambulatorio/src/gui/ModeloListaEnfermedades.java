@@ -49,4 +49,9 @@ public class ModeloListaEnfermedades extends javax.swing.AbstractListModel {
     public java.util.List<String> getElementos() {
         return this.elementos;
     }
+
+    //devuelve la enfermedad indicada
+    public String obtenerEnfermedad(int i) {
+        return this.elementos.get(i);
+    }
 }
