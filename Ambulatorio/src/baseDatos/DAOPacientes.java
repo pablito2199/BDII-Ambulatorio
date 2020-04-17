@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import aplicacion.Paciente;
-import aplicacion.GrupoSangre;
+import aplicacion.GrupoSanguineo;
 
 public class DAOPacientes extends AbstractDAO {
     
@@ -63,7 +63,7 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     //Permite eliminar un paciente de la base de datos
-    public void borrarPaciente(String CIP) {
+    public void borrarPaciente(Paciente paciente) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmPaciente = null;
@@ -76,7 +76,7 @@ public class DAOPacientes extends AbstractDAO {
             //Preparamos la sentencia para borrar de la tabla de pacientes aquel con la id especificada por argumentos
             stmPaciente = con.prepareStatement("delete from paciente where cip = ?");
             //Sustituimos
-            stmPaciente.setString(1, CIP);  //CIP del paciente
+            stmPaciente.setString(1, paciente.getCIP());  //CIP del paciente
             //Actualizamos
             stmPaciente.executeUpdate();
 
@@ -165,7 +165,7 @@ public class DAOPacientes extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select dni, nombre, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad," +
+            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad," +
                     "sexo, grupoSanguineo "
                     + "from paciente "
                     + "where cip like ? "
@@ -181,21 +181,23 @@ public class DAOPacientes extends AbstractDAO {
             //Sustituimos
             stmPacientes.setString(1, "%" + CIP + "%");
             stmPacientes.setString(2, "%" + DNI + "%");
-            stmPacientes.setString(1, "%" + nombre + "%"); 
-            stmPacientes.setInt(2, edad); 
-            stmPacientes.setString(1, "%" + sexo + "%"); 
-            stmPacientes.setString(2, "%" + NSS + "%"); 
-            stmPacientes.setString(1, "%" + nombre + "%"); 
-            stmPacientes.setString(2, "%" + GrupoSangre.getvalueof(grupo) + "%"); 
+            stmPacientes.setString(3, "%" + nombre + "%"); 
+            stmPacientes.setInt(4, edad); 
+            stmPacientes.setString(5, "%" + sexo + "%"); 
+            stmPacientes.setString(6, "%" + NSS + "%"); 
+            stmPacientes.setString(7, "%" + nombre + "%"); 
+            stmPacientes.setString(8, "%" + grupo + "%"); 
  
             //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
             //Mientras haya coincidencias
             while (rsPacientes.next()) {
                 //Se crea una instancia de paciente con los datos recuperados de la base de datos
-                pacienteActual = new Paciente(rsPacientes.getString("id_paciente"), rsPacientes.getString("clave"),
-                        rsPacientes.getString("nombre"), rsPacientes.getString("direccion"),
-                        rsPacientes.getString("email"), TipoPaciente.CTU(rsPacientes.getString("tipo_paciente")), rsPacientes.getString("edad"));
+                pacienteActual = new Paciente(rsPacientes.getString("cip"), rsPacientes.getString("dni"),
+                        rsPacientes.getInt("numSeguridadSocial"), rsPacientes.getString("nombre"), rsPacientes.getDate("fechaNacimiento"),
+                        rsPacientes.getString("sexo"), GrupoSanguineo.getTipo(rsPacientes.getString("grupoSanguineo")), 
+                        rsPacientes.getString("nacionalidad"), rsPacientes.getString("direccion"), rsPacientes.getString("telefono"),
+                        rsPacientes.getInt("edad"));
                 //Y se añade la instancia a la lista de pacientes
                 resultado.add(pacienteActual);
             }

@@ -1,12 +1,12 @@
 package aplicacion;
 
-public enum GrupoSangre {
+public enum GrupoSanguineo {
 
     NZERO("0-"), PZERO("0+"), NA("A-"), PA("A+"), NB("B-"), PB("B+"), NAB("AB-"), PAB("AB+");
 
     private String tipo;
 
-    private GrupoSangre(String tipo) {
+    private GrupoSanguineo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -14,9 +14,11 @@ public enum GrupoSangre {
         return tipo;
     }
 
-    public GrupoSangre getTipo(String tipo) {
+    //Permite obtener un GrupoSangre a partir de un String
+    //En caso de no ser válido devuelve un nulo.
+    public static GrupoSanguineo getTipo(String tipo) {
 
-        GrupoSangre temp = null;
+        GrupoSanguineo temp = null;
 
         switch (tipo) {
 
