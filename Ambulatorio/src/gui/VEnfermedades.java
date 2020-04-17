@@ -10,11 +10,8 @@ public class VEnfermedades extends javax.swing.JDialog {
 
     private VPrincipal padre;
     private aplicacion.FachadaAplicacion fa;
-    java.util.List<Categoria> categorias;
+    private java.util.List<Enfermedad> enfermedades;
 
-    /**
-     * Creates new form VLibro
-     */
     public VEnfermedades(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
         this.fa = fa;
@@ -22,17 +19,17 @@ public class VEnfermedades extends javax.swing.JDialog {
         padre = (VPrincipal) parent;
 
         //obtiene la lista de categorías para mostrarlas por pantalla
-        ModeloListaStrings mListaRC = new ModeloListaStrings();
-        lstCategorias.setModel(mListaRC);
-        mListaRC.setElementos(restoCategorias);
-        categorias = fa.consultarCategorias();
-        if (mListaRC.getSize() > 0) {
+        ModeloListaEnfermedades mListaE = new ModeloListaEnfermedades();
+        lstEnfermedades.setModel(mListaE);
+        mListaE.setElementos(listaenfermedades);
+        enfermedades = fa.consultarEnfermedades();
+        if (mListaE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
-            lstCategorias.setSelectedIndex(0);
+            lstEnfermedades.setSelectedIndex(0);
             //activa el botón de Borrar
-            btnBorrarCategoria.setEnabled(true);
+            btnEliminarEnfermedad.setEnabled(true);
         } else {
-            btnBorrarCategoria.setEnabled(false);
+            btnEliminarEnfermedad.setEnabled(false);
         }
     }
 
@@ -50,15 +47,15 @@ public class VEnfermedades extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         textoNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        btnAnadirCategoria = new javax.swing.JButton();
-        btnSalir1 = new javax.swing.JButton();
+        btnBuscarEnfermedad = new javax.swing.JButton();
+        btnLimpiarEnfermedad = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lstCategorias = new javax.swing.JList();
+        lstEnfermedades = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
         textoDescripcion = new javax.swing.JTextArea();
-        btnSalir2 = new javax.swing.JButton();
-        btnSalir3 = new javax.swing.JButton();
-        btnSalir4 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        btnAnadirEnfermedad = new javax.swing.JButton();
+        btnEliminarEnfermedad = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -71,53 +68,53 @@ public class VEnfermedades extends javax.swing.JDialog {
 
         jLabel3.setText("Descripción:");
 
-        btnAnadirCategoria.setText("Buscar");
-        btnAnadirCategoria.setToolTipText("");
-        btnAnadirCategoria.setActionCommand("Actualizar");
-        btnAnadirCategoria.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarEnfermedad.setText("Buscar");
+        btnBuscarEnfermedad.setToolTipText("");
+        btnBuscarEnfermedad.setActionCommand("Actualizar");
+        btnBuscarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnadirCategoriaActionPerformed(evt);
+                btnBuscarEnfermedadActionPerformed(evt);
             }
         });
 
-        btnSalir1.setText("Limpiar");
-        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiarEnfermedad.setText("Limpiar");
+        btnLimpiarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir1ActionPerformed(evt);
+                btnLimpiarEnfermedadActionPerformed(evt);
             }
         });
 
-        lstCategorias.setModel(new ModeloListaStrings());
-        lstCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+        lstEnfermedades.setModel(new ModeloListaStrings());
+        lstEnfermedades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lstCategoriasMouseClicked(evt);
+                lstEnfermedadesMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(lstCategorias);
+        jScrollPane2.setViewportView(lstEnfermedades);
 
         textoDescripcion.setColumns(20);
         textoDescripcion.setLineWrap(true);
         textoDescripcion.setRows(5);
         jScrollPane1.setViewportView(textoDescripcion);
 
-        btnSalir2.setText("Regresar");
-        btnSalir2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir2ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
-        btnSalir3.setText("Añadir");
-        btnSalir3.addActionListener(new java.awt.event.ActionListener() {
+        btnAnadirEnfermedad.setText("Añadir");
+        btnAnadirEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir3ActionPerformed(evt);
+                btnAnadirEnfermedadActionPerformed(evt);
             }
         });
 
-        btnSalir4.setText("Eliminar");
-        btnSalir4.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarEnfermedad.setText("Eliminar");
+        btnEliminarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir4ActionPerformed(evt);
+                btnEliminarEnfermedadActionPerformed(evt);
             }
         });
 
@@ -129,13 +126,13 @@ public class VEnfermedades extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(btnSalir1)
+                        .addComponent(btnLimpiarEnfermedad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalir3)
+                        .addComponent(btnAnadirEnfermedad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalir4)
+                        .addComponent(btnEliminarEnfermedad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir2)
+                        .addComponent(btnRegresar)
                         .addContainerGap())
                     .addGroup(panelGeneralLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,7 +149,7 @@ public class VEnfermedades extends javax.swing.JDialog {
                                     .addComponent(textoNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(panelGeneralLayout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(btnAnadirCategoria))
+                                        .addComponent(btnBuscarEnfermedad))
                                     .addComponent(jScrollPane1))
                                 .addContainerGap())))))
             .addGroup(panelGeneralLayout.createSequentialGroup()
@@ -173,16 +170,16 @@ public class VEnfermedades extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAnadirCategoria))
+                        .addComponent(btnBuscarEnfermedad))
                     .addComponent(jScrollPane2))
                 .addGap(8, 8, 8)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir1)
-                    .addComponent(btnSalir2)
-                    .addComponent(btnSalir3)
-                    .addComponent(btnSalir4))
+                    .addComponent(btnLimpiarEnfermedad)
+                    .addComponent(btnRegresar)
+                    .addComponent(btnAnadirEnfermedad)
+                    .addComponent(btnEliminarEnfermedad))
                 .addContainerGap())
         );
 
@@ -208,79 +205,85 @@ public class VEnfermedades extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //botón de Salir, vuelve a la ventana principal
-    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
+    //botón de Limpiar, pone en blanco cada uno de los huecos para poder añadir nuevas enfermedades, y actualiza la lista
+    private void btnLimpiarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarEnfermedadActionPerformed
         // TODO add your handling code here:
-        padre.buscarLibros();
-        this.dispose();
-    }//GEN-LAST:event_btnSalir1ActionPerformed
-
-    //botón de Añadir, añade una categoría nueva
-    private void btnAnadirCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirCategoriaActionPerformed
-        // TODO add your handling code here:
-        Categoria c;
-        //si el campo de texto de nombre no es nulo permite añadir la categoría
-        if (!textoNombre.getText().isEmpty()) {
-            c = new Categoria(textoNombre.getText(), textoDescripcion.getText());
-            fa.anadirCategoria(c);
-        }
-        ModeloListaStrings mListaRC = new ModeloListaStrings();
-        lstCategorias.setModel(mListaRC);
-        mListaRC.setElementos(fa.nombreCategorias());
-        if (mListaRC.getSize() > 0) {
-            //selecciona el primer elemento de la lista automáticamente
-            lstCategorias.setSelectedIndex(0);
-            //activa el botón de Borrar
-            btnBorrarCategoria.setEnabled(true);
-        } else {
-            btnBorrarCategoria.setEnabled(false);
-        }
-        categorias = fa.consultarCategorias();
         textoNombre.setText(null);
         textoDescripcion.setText(null);
-    }//GEN-LAST:event_btnAnadirCategoriaActionPerformed
+        //quita la selección actual de la lista
+        lstEnfermedades.clearSelection();
+        buscarEnfermedades();
+    }//GEN-LAST:event_btnLimpiarEnfermedadActionPerformed
 
-    //botón de Borrar, elimina una categoría (solo si no está siendo categoría de un libro)
-    //cuando seleccionas un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
-    private void lstCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCategoriasMouseClicked
+    //botón de Buscar, busca las enfermedades y las muestra en la lista
+    private void btnBuscarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEnfermedadActionPerformed
         // TODO add your handling code here:
-        ModeloListaStrings mListaRC = (ModeloListaStrings) lstCategorias.getModel();
-        textoNombre.setText(mListaRC.getElementAt(lstCategorias.getSelectedIndex()));
-        for (Categoria c : categorias) {
-            if (c.getNombre().equals(mListaRC.getElementAt(lstCategorias.getSelectedIndex()))) {
-                textoDescripcion.setText(c.getDescripcion());
+        buscarEnfermedades();
+    }//GEN-LAST:event_btnBuscarEnfermedadActionPerformed
+
+    //cuando se selecciona un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
+    private void lstEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstEnfermedadesMouseClicked
+        // TODO add your handling code here:
+        ModeloListaEnfermedades mListaE = (ModeloListaEnfermedades) lstEnfermedades.getModel();
+        textoNombre.setText(mListaE.getElementAt(lstEnfermedades.getSelectedIndex()));
+        for (Enfermedad e : enfermedades) {
+            if (e.getNombre().equals(mListaE.getElementAt(lstEnfermedades.getSelectedIndex()))) {
+                textoDescripcion.setText(e.getDescripcion());
                 break;
             }
         }
-    }//GEN-LAST:event_lstCategoriasMouseClicked
+    }//GEN-LAST:event_lstEnfermedadesMouseClicked
 
-    private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
+    //botón de Regresar, vuelve a la ventana anterior
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir2ActionPerformed
+        padre.buscarAmbulatorios();
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void btnSalir3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir3ActionPerformed
+    //botón de Añadir, añade una enfermedad a la base de datos
+    private void btnAnadirEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirEnfermedadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir3ActionPerformed
+        if (!textoNombre.getText().isEmpty()) {
+            Enfermedad e = new Enfermedad(textoNombre.getText(), textoDescripcion.getText());
+            //si la fila está seleccionada, modifica, en caso contrario, añade la enfermedad
+            if (lstEnfermedades.getSelectedIndex() >= 0) {
+                fa.modificarEnfermedad(e);//no se va poder modificar el ID del usuario
+            } else {
+                fa.anadirEnfermedad(e);
+            }
+        } else {
+            fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
+        }
+        buscarEnfermedades();
+    }//GEN-LAST:event_btnAnadirEnfermedadActionPerformed
 
-    private void btnSalir4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir4ActionPerformed
+    //botón de Eliminar, elimina una enfermedad de la base de datos
+    private void btnEliminarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEnfermedadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir4ActionPerformed
+        ModeloListaEnfermedades mListaE = (ModeloListaEnfermedades) lstEnfermedades.getModel();
+        String nombre = mListaE.obtenerEnfermedad(lstEnfermedades.getSelectedIndex()).getNombre();
+        fa.borrarUsuarioID(nombre);
+        textoNombre.setText(null);
+        textoDescripcion.setText(null);
+        buscarEnfermedades();
+    }//GEN-LAST:event_btnEliminarEnfermedadActionPerformed
 
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnadirCategoria;
-    private javax.swing.JButton btnSalir1;
-    private javax.swing.JButton btnSalir2;
-    private javax.swing.JButton btnSalir3;
-    private javax.swing.JButton btnSalir4;
+    private javax.swing.JButton btnAnadirEnfermedad;
+    private javax.swing.JButton btnBuscarEnfermedad;
+    private javax.swing.JButton btnEliminarEnfermedad;
+    private javax.swing.JButton btnLimpiarEnfermedad;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JList lstCategorias;
+    private javax.swing.JList lstEnfermedades;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JTabbedPane panelUsuario;
     private javax.swing.JTextArea textoDescripcion;

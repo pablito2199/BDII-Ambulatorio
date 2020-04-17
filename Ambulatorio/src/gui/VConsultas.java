@@ -23,12 +23,12 @@ public class VConsultas extends javax.swing.JDialog {
 
         //obtiene la lista de categorías para mostrarlas por pantalla
         ModeloListaStrings mListaRC = new ModeloListaStrings();
-        lstCategorias.setModel(mListaRC);
+        lstConsultas.setModel(mListaRC);
         mListaRC.setElementos(restoCategorias);
         categorias = fa.consultarCategorias();
         if (mListaRC.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
-            lstCategorias.setSelectedIndex(0);
+            lstConsultas.setSelectedIndex(0);
             //activa el botón de Borrar
             btnBorrarCategoria.setEnabled(true);
         } else {
@@ -48,19 +48,19 @@ public class VConsultas extends javax.swing.JDialog {
         panelUsuario = new javax.swing.JTabbedPane();
         panelGeneral = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        textoNombre = new javax.swing.JTextField();
-        btnAnadirCategoria = new javax.swing.JButton();
-        btnSalir1 = new javax.swing.JButton();
+        textoNumeroConsulta = new javax.swing.JTextField();
+        btnBuscarConsultas = new javax.swing.JButton();
+        btnLimpiarConsultas = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lstCategorias = new javax.swing.JList();
-        btnSalir2 = new javax.swing.JButton();
-        btnSalir3 = new javax.swing.JButton();
-        btnSalir4 = new javax.swing.JButton();
+        lstConsultas = new javax.swing.JList();
+        btnRegresar = new javax.swing.JButton();
+        btnAnadirConsultas = new javax.swing.JButton();
+        btnEliminarConsultas = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        textoNombre1 = new javax.swing.JTextField();
-        btnAnadirCategoria1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        textoTotalConsultas = new javax.swing.JTextField();
+        btnGestionarMedicos = new javax.swing.JButton();
+        seleccionEspecialidades = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -71,65 +71,65 @@ public class VConsultas extends javax.swing.JDialog {
 
         jLabel2.setText("Número Consulta:");
 
-        btnAnadirCategoria.setText("Buscar");
-        btnAnadirCategoria.setToolTipText("");
-        btnAnadirCategoria.setActionCommand("Actualizar");
-        btnAnadirCategoria.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarConsultas.setText("Buscar");
+        btnBuscarConsultas.setToolTipText("");
+        btnBuscarConsultas.setActionCommand("Actualizar");
+        btnBuscarConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnadirCategoriaActionPerformed(evt);
+                btnBuscarConsultasActionPerformed(evt);
             }
         });
 
-        btnSalir1.setText("Limpiar");
-        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiarConsultas.setText("Limpiar");
+        btnLimpiarConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir1ActionPerformed(evt);
+                btnLimpiarConsultasActionPerformed(evt);
             }
         });
 
-        lstCategorias.setModel(new ModeloListaStrings());
-        lstCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+        lstConsultas.setModel(new ModeloListaStrings());
+        lstConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lstCategoriasMouseClicked(evt);
+                lstConsultasMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(lstCategorias);
+        jScrollPane2.setViewportView(lstConsultas);
 
-        btnSalir2.setText("Regresar");
-        btnSalir2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir2ActionPerformed(evt);
-            }
-        });
-
-        btnSalir3.setText("Añadir");
-        btnSalir3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir3ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
-        btnSalir4.setText("Eliminar");
-        btnSalir4.addActionListener(new java.awt.event.ActionListener() {
+        btnAnadirConsultas.setText("Añadir");
+        btnAnadirConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir4ActionPerformed(evt);
+                btnAnadirConsultasActionPerformed(evt);
+            }
+        });
+
+        btnEliminarConsultas.setText("Eliminar");
+        btnEliminarConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarConsultasActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Total:");
 
-        textoNombre1.setEditable(false);
+        textoTotalConsultas.setEditable(false);
 
-        btnAnadirCategoria1.setText("Gestionar Médicos");
-        btnAnadirCategoria1.setToolTipText("");
-        btnAnadirCategoria1.setActionCommand("Actualizar");
-        btnAnadirCategoria1.addActionListener(new java.awt.event.ActionListener() {
+        btnGestionarMedicos.setText("Gestionar Médicos");
+        btnGestionarMedicos.setToolTipText("");
+        btnGestionarMedicos.setActionCommand("Actualizar");
+        btnGestionarMedicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnadirCategoria1ActionPerformed(evt);
+                btnGestionarMedicosActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        seleccionEspecialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel5.setText("Especialidad");
 
@@ -141,13 +141,13 @@ public class VConsultas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(btnSalir1)
+                        .addComponent(btnLimpiarConsultas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalir3)
+                        .addComponent(btnAnadirConsultas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalir4)
+                        .addComponent(btnEliminarConsultas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir2)
+                        .addComponent(btnRegresar)
                         .addContainerGap())
                     .addGroup(panelGeneralLayout.createSequentialGroup()
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +156,7 @@ public class VConsultas extends javax.swing.JDialog {
                                 .addGap(13, 13, 13)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textoNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -166,14 +166,14 @@ public class VConsultas extends javax.swing.JDialog {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(panelGeneralLayout.createSequentialGroup()
                                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textoNombre)
+                                            .addComponent(textoNumeroConsulta)
                                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                                 .addGap(51, 51, 51)
-                                                .addComponent(btnAnadirCategoria)
+                                                .addComponent(btnBuscarConsultas)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnAnadirCategoria1)
+                                                .addComponent(btnGestionarMedicos)
                                                 .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(seleccionEspecialidades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addContainerGap())))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -191,29 +191,29 @@ public class VConsultas extends javax.swing.JDialog {
                     .addGroup(panelGeneralLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textoNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAnadirCategoria)
-                            .addComponent(btnAnadirCategoria1))
+                            .addComponent(btnBuscarConsultas)
+                            .addComponent(btnGestionarMedicos))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addGap(5, 5, 5)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(seleccionEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 78, Short.MAX_VALUE))
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(textoNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir1)
-                    .addComponent(btnSalir2)
-                    .addComponent(btnSalir3)
-                    .addComponent(btnSalir4))
+                    .addComponent(btnLimpiarConsultas)
+                    .addComponent(btnRegresar)
+                    .addComponent(btnAnadirConsultas)
+                    .addComponent(btnEliminarConsultas))
                 .addContainerGap())
         );
 
@@ -240,88 +240,88 @@ public class VConsultas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     //botón de Salir, vuelve a la ventana principal
-    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
+    private void btnLimpiarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarConsultasActionPerformed
         // TODO add your handling code here:
         padre.buscarLibros();
         this.dispose();
-    }//GEN-LAST:event_btnSalir1ActionPerformed
+    }//GEN-LAST:event_btnLimpiarConsultasActionPerformed
 
     //botón de Añadir, añade una categoría nueva
-    private void btnAnadirCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirCategoriaActionPerformed
+    private void btnBuscarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConsultasActionPerformed
         // TODO add your handling code here:
         Categoria c;
         //si el campo de texto de nombre no es nulo permite añadir la categoría
-        if (!textoNombre.getText().isEmpty()) {
-            c = new Categoria(textoNombre.getText(), textoDescripcion.getText());
+        if (!textoNumeroConsulta.getText().isEmpty()) {
+            c = new Categoria(textoNumeroConsulta.getText(), textoDescripcion.getText());
             fa.anadirCategoria(c);
         }
         ModeloListaStrings mListaRC = new ModeloListaStrings();
-        lstCategorias.setModel(mListaRC);
+        lstConsultas.setModel(mListaRC);
         mListaRC.setElementos(fa.nombreCategorias());
         if (mListaRC.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
-            lstCategorias.setSelectedIndex(0);
+            lstConsultas.setSelectedIndex(0);
             //activa el botón de Borrar
             btnBorrarCategoria.setEnabled(true);
         } else {
             btnBorrarCategoria.setEnabled(false);
         }
         categorias = fa.consultarCategorias();
-        textoNombre.setText(null);
+        textoNumeroConsulta.setText(null);
         textoDescripcion.setText(null);
-    }//GEN-LAST:event_btnAnadirCategoriaActionPerformed
+    }//GEN-LAST:event_btnBuscarConsultasActionPerformed
 
     //botón de Borrar, elimina una categoría (solo si no está siendo categoría de un libro)
     //cuando seleccionas un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
-    private void lstCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCategoriasMouseClicked
+    private void lstConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstConsultasMouseClicked
         // TODO add your handling code here:
-        ModeloListaStrings mListaRC = (ModeloListaStrings) lstCategorias.getModel();
-        textoNombre.setText(mListaRC.getElementAt(lstCategorias.getSelectedIndex()));
+        ModeloListaStrings mListaRC = (ModeloListaStrings) lstConsultas.getModel();
+        textoNumeroConsulta.setText(mListaRC.getElementAt(lstConsultas.getSelectedIndex()));
         for (Categoria c : categorias) {
-            if (c.getNombre().equals(mListaRC.getElementAt(lstCategorias.getSelectedIndex()))) {
+            if (c.getNombre().equals(mListaRC.getElementAt(lstConsultas.getSelectedIndex()))) {
                 textoDescripcion.setText(c.getDescripcion());
                 break;
             }
         }
-    }//GEN-LAST:event_lstCategoriasMouseClicked
+    }//GEN-LAST:event_lstConsultasMouseClicked
 
-    private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir2ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void btnSalir3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir3ActionPerformed
+    private void btnAnadirConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirConsultasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir3ActionPerformed
+    }//GEN-LAST:event_btnAnadirConsultasActionPerformed
 
-    private void btnSalir4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir4ActionPerformed
+    private void btnEliminarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarConsultasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir4ActionPerformed
+    }//GEN-LAST:event_btnEliminarConsultasActionPerformed
 
-    private void btnAnadirCategoria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirCategoria1ActionPerformed
+    private void btnGestionarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarMedicosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnadirCategoria1ActionPerformed
+    }//GEN-LAST:event_btnGestionarMedicosActionPerformed
 
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnadirCategoria;
-    private javax.swing.JButton btnAnadirCategoria1;
-    private javax.swing.JButton btnSalir1;
-    private javax.swing.JButton btnSalir2;
-    private javax.swing.JButton btnSalir3;
-    private javax.swing.JButton btnSalir4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnAnadirConsultas;
+    private javax.swing.JButton btnBuscarConsultas;
+    private javax.swing.JButton btnEliminarConsultas;
+    private javax.swing.JButton btnGestionarMedicos;
+    private javax.swing.JButton btnLimpiarConsultas;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JList lstCategorias;
+    private javax.swing.JList lstConsultas;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JTabbedPane panelUsuario;
-    private javax.swing.JTextField textoNombre;
-    private javax.swing.JTextField textoNombre1;
+    private javax.swing.JComboBox<String> seleccionEspecialidades;
+    private javax.swing.JTextField textoNumeroConsulta;
+    private javax.swing.JTextField textoTotalConsultas;
     // End of variables declaration//GEN-END:variables
 
 }
