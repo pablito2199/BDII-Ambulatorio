@@ -1,9 +1,10 @@
 package baseDatos;
 
-import aplicacion.Ejemplar;
-import aplicacion.Usuario;
-import aplicacion.Categoria;
-import aplicacion.Libro;
+import aplicacion.Cita;
+import aplicacion.Paciente;
+import aplicacion.Enfermedad;
+import aplicacion.Consulta;
+import aplicacion.Receta;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,10 +18,12 @@ public class FachadaBaseDatos {
 
     private aplicacion.FachadaAplicacion fa;    // Enlace a la fachada de aplicación
     private java.sql.Connection conexion;       // Conexión SQL
-    private DAOLibros daoLibros;                   // Enlace al DAO de Libros
-    private DAOCategorias daoCategorias;      // Enlace al DAO de Categorías
-    private DAOUsuarios daoUsuarios;            // Enlace al DAO de Usuarios
-    private DAOPrestamos daoPrestamos;       // Enlace al DAO de Préstamos
+    private DAOAmbulatorio daoAmbulatorio;                  // Enlace al DAO de Citas
+    private DAOCitas daoCitas;                  // Enlace al DAO de Citas
+    private DAOPacientes daoPacientes;          // Enlace al DAO de Pacientes
+    private DAOEnfermedades daoEnfermedades;    // Enlace al DAO de Enfermedades
+    private DAOConsultas daoConsultas;          // Enlace al DAO de Consultas
+    private DAORecetas daoRecetas;              // Enlace al DAO de Recetas
 
     //Contructor
     public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
@@ -51,12 +54,13 @@ public class FachadaBaseDatos {
                     usuario);
 
             //Inicializamos los DAOS
-            daoLibros = new DAOLibros(conexion, fa);
-            daoCategorias = new DAOCategorias(conexion, fa);
-            daoUsuarios = new DAOUsuarios(conexion, fa);
-            daoPrestamos = new DAOPrestamos(conexion, fa);
+            daoCitas = new DAOCitas(conexion, fa);                  // Enlace al DAO de Citas
+            daoPacientes = new DAOPacientes(conexion, fa);          // Enlace al DAO de Pacientes
+            daoEnfermedades = new DAOEnfermedades(conexion, fa);    // Enlace al DAO de Enfermedades
+            daoConsultas = new DAOConsultas(conexion, fa);          // Enlace al DAO de Consultas
+            daoRecetas = new DAORecetas(conexion, fa);              // Enlace al DAO de Recetas
 
-            //En caso de error capturamos la excepciones, imprimirmos el mensaje y genereramos la ventana de excepción
+            //En caso de error capturamos la excepciones, imprimimos el mensaje y genereramos la ventana de excepción
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
             fa.muestraExcepcion(f.getMessage());
@@ -71,7 +75,7 @@ public class FachadaBaseDatos {
     }
 
 ////////////////
-//DAOLIBROS
+//DAOCITAS
 ///////////////
     //Permite recuperar un array de libros
     public java.util.List<Libro> consultarCatalogo(Integer id, String titulo, String isbn, String autor) {
@@ -129,7 +133,7 @@ public class FachadaBaseDatos {
     }
 
 //////////////////////
-//DAOCATEGORIAS
+//DAOPACIENTES
 /////////////////////
     //Función para consultar la información de las categorías
     public java.util.List<Categoria> consultarCategorias() {
@@ -147,7 +151,7 @@ public class FachadaBaseDatos {
     }
 
 //////////////////
-//DAOUSUARIOS
+//DAOENFERMEDADES
 //////////////////
     //Permite recuperar un usuario de la base de datos a partir de su id y contraseña
     public Usuario validarUsuario(String idUsuario, String clave) {
@@ -186,7 +190,7 @@ public class FachadaBaseDatos {
     }
 
 ////////////////////
-//DAOPRESTAMOS
+//DAOCONSULTAS
 ////////////////////
     //Permite insertar un nuevo préstamo en la base de datos
     public void nuevoPrestamo(Integer idLibro, Ejemplar ej) {
@@ -198,4 +202,7 @@ public class FachadaBaseDatos {
         daoPrestamos.devolverPrestamo(idLibro, fp);
     }
 
+////////////////////
+//DAORECETAS
+////////////////////
 }
