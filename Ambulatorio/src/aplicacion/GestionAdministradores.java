@@ -25,9 +25,7 @@ public class GestionAdministradores {
 
     //Permite comprobar si el administrador que intenta acceder al programa tiene los credenciales necesarios
     public Boolean comprobarAutentificacion(String dni, String clave) {
-        Administrador u;
-
-        return u = fbd.validarAdministrador(dni, clave);
+        return fbd.validarAdministrador(dni, clave);
     }
 
     //Permite abrir una nueva ventana de usuarios
