@@ -8,10 +8,6 @@ package aplicacion;
 
 import java.sql.Timestamp;
 
-/**
- *
- * @author Martín Suárez García
- */
 public class Urgencia extends Cita {
 
     private Float soborno;

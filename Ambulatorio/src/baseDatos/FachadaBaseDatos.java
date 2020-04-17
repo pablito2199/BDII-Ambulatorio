@@ -13,10 +13,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.Properties;
 
-/**
- *
- * @author basesdatos
- */
 public class FachadaBaseDatos {
 
     private aplicacion.FachadaAplicacion fa;    // Enlace a la fachada de aplicación

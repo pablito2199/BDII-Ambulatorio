@@ -3,10 +3,7 @@ package aplicacion;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
-/**
- *
- * @author basesdatos
- */
+
 public class GestionAdministradores {
 
     FachadaGui fgui;                //Enlace a la facha de la GUI

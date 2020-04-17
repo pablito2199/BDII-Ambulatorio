@@ -5,10 +5,6 @@
  */
 package aplicacion;
 
-/**
- *
- * @author pabli
- */
 public class Administrador {
     private Integer ambulatorio;
     private String personal;

@@ -2,10 +2,6 @@ package aplicacion;
 
 import java.sql.Timestamp;
 
-/**
- *
- * @author Martín Suárez García
- */
 public class Cita {
 
     private Timestamp fechaHoraInicio;

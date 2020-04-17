@@ -5,10 +5,6 @@
  */
 package gui;
 
-/**
- *
- * @author basesdatos
- */
 public class VPrincipal extends javax.swing.JFrame {
 
     aplicacion.FachadaAplicacion fa;    //Enlace a la fachada de aplicación

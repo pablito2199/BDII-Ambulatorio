@@ -1,11 +1,6 @@
 package gui;
 
-import aplicacion.Ambulatorio;
-import aplicacion.Cita;
 import aplicacion.Paciente;
-import aplicacion.Enfermedad;
-import aplicacion.Consulta;
-import aplicacion.Receta;
 
 public class FachadaGui {
 

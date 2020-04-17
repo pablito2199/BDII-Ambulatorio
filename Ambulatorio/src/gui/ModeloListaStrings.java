@@ -1,9 +1,5 @@
 package gui;
 
-/**
- *
- * @author basesdatos
- */
 public class ModeloListaStrings extends javax.swing.AbstractListModel {
     
     java.util.List<String> elementos;   //Listado de los elementos

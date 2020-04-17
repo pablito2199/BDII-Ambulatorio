@@ -1,9 +1,5 @@
 package aplicacion;
 
-/**
- *
- * @author Martín Suárez García
- */
 public class Consulta {
 
     private Integer identificador;

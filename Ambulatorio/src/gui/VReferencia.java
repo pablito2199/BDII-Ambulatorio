@@ -8,10 +8,6 @@ package gui;
 import aplicacion.Libro;
 import aplicacion.Ejemplar;
 
-/**
- *
- * @author basesdatos
- */
 public class VLibro extends javax.swing.JDialog {
 
     private final Integer idLibro;                                        //ID del libro sobre el que se está trabajando

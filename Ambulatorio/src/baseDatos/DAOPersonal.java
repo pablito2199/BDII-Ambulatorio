@@ -3,10 +3,7 @@ package baseDatos;
 import aplicacion.Administrador;
 import java.sql.*;
 
-/**
- *
- * @author basesdatos
- */
+
 public class DAOPersonal extends AbstractDAO {
 
     //Contructor

@@ -1,22 +1,15 @@
 package gui;
 
-import aplicacion.Usuario;
-import aplicacion.TipoUsuario;
+import aplicacion.Enfermedad;
 
-public class VUsuario extends javax.swing.JDialog {
+public class VConsultas extends javax.swing.JDialog {
 
     private final VPrincipal padre;                           //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
 
-    /**
-     * Creates new form VUsuario
-     *
-     * @param parent
-     * @param modal
-     * @param fa
-     */
+    
     //Constructor de la ventana
-    public VUsuario(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
+    public VConsultas(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
