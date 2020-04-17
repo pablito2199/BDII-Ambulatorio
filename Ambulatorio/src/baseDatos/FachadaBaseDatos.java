@@ -10,6 +10,7 @@ import aplicacion.Receta;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class FachadaBaseDatos {
@@ -102,8 +103,8 @@ public class FachadaBaseDatos {
     }
 
     //Permite borrar una cita de la base de datos
-    public void borrarCita(Cita cita) {
-        daoCitas.borrarCita(cita);
+    public void atenderCita(Cita cita) {
+        daoCitas.atenderCita(cita);
     }
 
     //Permite insertar una nueva urgencia en la base de datos
@@ -112,8 +113,28 @@ public class FachadaBaseDatos {
     }
 
     //Permite borrar una urgencia de la base de datos
-    public void borrarUrgencia(Urgencia urgencia) {
-        daoCitas.borrarUrgencia(urgencia);
+    public void atenderUrgencia(Urgencia urgencia) {
+        daoCitas.atenderUrgencia(urgencia);
+    }
+    
+    //Consulta las citas pendientes
+    public ArrayList<Cita> citasPendientes(){
+        return daoCitas.citasPendientes();
+    }
+    
+    //Consulta las urgencias pendientes
+    public ArrayList<Urgencia> urgenciasPendientes(){
+        return daoCitas.urgenciasPendientes();
+    }
+    
+    //Consulta las citas pendientes de un paciente
+    public ArrayList<Cita> citasPaciente(Paciente paciente){
+        return daoCitas.citasPaciente(paciente);
+    }
+    
+    //Consulta las citas pendientes de un medico
+    public ArrayList<Urgencia> citasMedico(Personal medico){
+        return daoCitas.citasMedico(medico);
     }
 
 //////////////////////
