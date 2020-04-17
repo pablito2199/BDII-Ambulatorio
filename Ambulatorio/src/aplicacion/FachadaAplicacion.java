@@ -10,19 +10,19 @@ public class FachadaAplicacion {
     GestionEnfermedades genf;               // Enlace a la clase gestión de enfermedades
     GestionConsultas gcon;                  // Enlace a la clase gestión de consultas
     GestionRecetas grec;                    // Enlace a la clase gestión de recetas
-    GestionAdministradores cadm;            // Enlace a la clase gestión de administradores
+    GestionAdministradores gadm;            // Enlace a la clase gestión de administradores
 
     //Constructor
     public FachadaAplicacion() {
-        cgui = new gui.FachadaGui(this);
-        cbd = new baseDatos.FachadaBaseDatos(this);
-        ccit = new GestionAmbulatorios(fgui, fbd);
-        ccit = new GestionCitas(fgui, fbd);
-        cpac = new GestionPacientes(fgui, fbd);
-        cenf = new GestionEnfermedades(fgui, fbd);
-        cpac = new GestionConsultas(fgui, fbd);
-        crec = new GestionRecetas(fgui, fbd);
-        cadm = new GestionAdministradores(fgui, fbd);
+        fgui = new gui.FachadaGui(this);
+        fbd = new baseDatos.FachadaBaseDatos(this);
+        gamb = new GestionAmbulatorios(fgui, fbd);
+        gcit = new GestionCitas(fgui, fbd);
+        gpac = new GestionPacientes(fgui, fbd);
+        genf = new GestionEnfermedades(fgui, fbd);
+        gpac = new GestionConsultas(fgui, fbd);
+        grec = new GestionRecetas(fgui, fbd);
+        gadm = new GestionAdministradores(fgui, fbd);
     }
 
     //Main
@@ -34,7 +34,7 @@ public class FachadaAplicacion {
 
     //Comprueba si la autentificación es correcta
     public Boolean comprobarAutentificacion(String dni, String constrasena) {
-        return cadm.comprobarAutentificacion(dni, constrasena);
+        return gcadm.comprobarAutentificacion(dni, constrasena);
     }
 
     //Llamada para mostrar una excepción
@@ -56,6 +56,9 @@ public class FachadaAplicacion {
 
 /////////////////////////
 //GESTIÓN DE ENFERMEDADES
+public java.util.List<Enfermedad> consultarEnfermedades() {
+        return cenf.consultarEnfermedades();
+    }
 /////////////////////////
 
 /////////////////////////

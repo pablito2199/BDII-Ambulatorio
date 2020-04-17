@@ -12,7 +12,7 @@ public class VEnfermedades extends javax.swing.JDialog {
     private aplicacion.FachadaAplicacion fa;
     private java.util.List<Enfermedad> enfermedades;
 
-    public VEnfermedades(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
+    public VEnfermedades(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<String> restoEnfermedades) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
@@ -21,7 +21,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         //obtiene la lista de categorías para mostrarlas por pantalla
         ModeloListaEnfermedades mListaE = new ModeloListaEnfermedades();
         lstEnfermedades.setModel(mListaE);
-        mListaE.setElementos(listaenfermedades);
+        mListaE.setElementos(restoEnfermedades);
         enfermedades = fa.consultarEnfermedades();
         if (mListaE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
@@ -263,7 +263,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         // TODO add your handling code here:
         ModeloListaEnfermedades mListaE = (ModeloListaEnfermedades) lstEnfermedades.getModel();
         String nombre = mListaE.obtenerEnfermedad(lstEnfermedades.getSelectedIndex()).getNombre();
-        fa.borrarUsuarioID(nombre);
+        fa.borrarEnfermedad(nombre);
         textoNombre.setText(null);
         textoDescripcion.setText(null);
         buscarEnfermedades();
@@ -290,4 +290,19 @@ public class VEnfermedades extends javax.swing.JDialog {
     private javax.swing.JTextField textoNombre;
     // End of variables declaration//GEN-END:variables
 
+    //busca las enfermedades existentes en la lista
+    public void buscarEnfermedades() {
+        ModeloListaEnfermedades mListaE = new ModeloListaEnfermedades();
+        lstEnfermedades.setModel(mListaE);
+        enfermedades = fa.consultarEnfermedades();
+        mListaE.setElementos(fa.nombreEnfermedades());
+        if (mListaE.getSize() > 0) {
+            //selecciona el primer elemento de la lista automáticamente
+            lstEnfermedades.setSelectedIndex(0);
+            //activa el botón de Borrar
+            btnEliminarEnfermedad.setEnabled(true);
+        } else {
+            btnEliminarEnfermedad.setEnabled(false);
+        }
+    }
 }
