@@ -30,5 +30,11 @@ public class Enfermedad {
         this.descripcion = descripcion;
     }
     
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Enfermedad) {
+            return ((Enfermedad) obj).getNombre().equals(this.nombre);
+        }
+        return false;
+    }
 }

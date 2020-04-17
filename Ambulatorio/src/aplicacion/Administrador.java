@@ -41,4 +41,12 @@ public class Administrador {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }    
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Administrador) {
+            return ((Administrador) obj).getPersonal().equals(this.personal) && ((Administrador) obj).getAmbulatorio().equals(this.ambulatorio);
+        }
+        return false;
+    }
 }

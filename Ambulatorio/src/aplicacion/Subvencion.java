@@ -63,7 +63,7 @@ public class Subvencion {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Subvencion) {
-            return ((Subvencion) obj).getCodigo().equals(this.codigo) && ((Material) obj).getAmbulatorio().equals(this.ambulatorio);
+            return ((Subvencion) obj).getCodigo().equals(this.codigo) && ((Subvencion) obj).getAmbulatorio().equals(this.ambulatorio);
         }
         return false;
     }
