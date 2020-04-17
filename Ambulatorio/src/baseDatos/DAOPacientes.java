@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import aplicacion.Paciente;
+import aplicacion.GrupoSangre;
 
 public class DAOPacientes extends AbstractDAO {
     
@@ -150,7 +151,7 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     //Permite buscar pacientes por su id y/o nombre de paciente
-    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, Strign grupo) {
+    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
         //Declaramos variables
         java.util.List<Paciente> resultado = new java.util.ArrayList<Paciente>();
         Paciente pacienteActual;
@@ -164,25 +165,29 @@ public class DAOPacientes extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el id, clave, nombre, direccion, email y tipo de paciente de la tabla de pacientes
-            //que tengan el nombre dado
-            String consulta = "select dni, nombre, current_date-fechaNacimiento as edad, sexo, grupoSanguineo "
+            String consulta = "select dni, nombre, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad," +
+                    "sexo, grupoSanguineo "
                     + "from paciente "
                     + "where cip like ? "
                     + "and dni like ?"
                     + "and nombre like ?"
-                    + "and current_date-fechaNacimiento = "
-                    + "and dni like ?"
-                    + "and dni like ?"
-                    + "and dni like ?";
+                    + "and EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) = ?"
+                    + "and sexo like ?"
+                    + "and NSS like ?"
+                    + "and grupoSanguineo like ?";
 
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
-            stmPacientes.setString(1, "%" + nombre + "%"); //Nombre
-            if (id != null) {
-                stmPacientes.setString(2, "%" + id + "%"); //ID, en caso de no ser nulo
-            }
+            stmPacientes.setString(1, "%" + CIP + "%");
+            stmPacientes.setString(2, "%" + DNI + "%");
+            stmPacientes.setString(1, "%" + nombre + "%"); 
+            stmPacientes.setInt(2, edad); 
+            stmPacientes.setString(1, "%" + sexo + "%"); 
+            stmPacientes.setString(2, "%" + NSS + "%"); 
+            stmPacientes.setString(1, "%" + nombre + "%"); 
+            stmPacientes.setString(2, "%" + GrupoSangre.getvalueof(grupo) + "%"); 
+ 
             //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
             //Mientras haya coincidencias
