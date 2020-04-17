@@ -102,7 +102,7 @@ public class FachadaBaseDatos {
         daoCitas.insertarCita(cita);
     }
 
-    //Permite borrar una cita de la base de datos
+    //Atiende una cita o urgencia
     public void atenderCita(Cita cita) {
         daoCitas.atenderCita(cita);
     }
@@ -112,28 +112,28 @@ public class FachadaBaseDatos {
         daoCitas.insertarUrgencia(urgencia);
     }
 
-    //Permite borrar una urgencia de la base de datos
-    public void atenderUrgencia(Urgencia urgencia) {
-        daoCitas.atenderUrgencia(urgencia);
+    //Deriva una cita o urgencia a un hospital
+    public void derivarHospital(Cita cita) {
+        daoCitas.derivarHospital(cita);
     }
-    
+
     //Consulta las citas pendientes
-    public ArrayList<Cita> citasPendientes(){
+    public ArrayList<Cita> citasPendientes() {
         return daoCitas.citasPendientes();
     }
-    
+
     //Consulta las urgencias pendientes
-    public ArrayList<Urgencia> urgenciasPendientes(){
+    public ArrayList<Urgencia> urgenciasPendientes() {
         return daoCitas.urgenciasPendientes();
     }
-    
+
     //Consulta las citas pendientes de un paciente
-    public ArrayList<Cita> citasPaciente(Paciente paciente){
+    public ArrayList<Cita> citasPaciente(Paciente paciente) {
         return daoCitas.citasPaciente(paciente);
     }
-    
+
     //Consulta las citas pendientes de un medico
-    public ArrayList<Urgencia> citasMedico(Personal medico){
+    public ArrayList<Urgencia> citasMedico(Personal medico) {
         return daoCitas.citasMedico(medico);
     }
 

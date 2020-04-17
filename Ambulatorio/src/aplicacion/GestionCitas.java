@@ -18,20 +18,20 @@ public class GestionCitas {
     public void insertarCita(Cita cita){
         fbd.insertarCita(cita);
     }
-    
-    //Elimina una cita de la base de datos
-    public void atenderCita(Cita cita) {
-        fbd.atenderCita(cita);
-    }
-    
+        
     //Agrega una nueva cita a la base de datos
     public void insertarUrgencia(Urgencia urgencia){
         fbd.insertarUrgencia(urgencia);
     }
     
-    //Elimina una cita de la base de datos
-    public void atenderUrgencia(Urgencia urgencia) {
-        fbd.atenderUrgencia(urgencia);
+    //Atiende una cita o urgencia
+    public void atenderCita(Cita cita) {
+        fbd.atenderCita(cita);
+    }
+    
+    //Deriva una cita o urgencia a un hospital
+    public void derivarHospital(Cita cita){
+        fbd.derivarHospital(cita);
     }
     
     //Consulta las citas pendientes
