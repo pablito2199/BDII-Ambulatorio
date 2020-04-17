@@ -1,6 +1,6 @@
 package aplicacion;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -67,7 +67,7 @@ public class Donativo {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Donativo) {
-            return ((Donativo) obj).getCodigo().equals(this.codigo);
+            return ((Donativo) obj).getCodigo().equals(this.codigo) && ((Material) obj).getAmbulatorio().equals(this.ambulatorio);
         }
         return false;
     }

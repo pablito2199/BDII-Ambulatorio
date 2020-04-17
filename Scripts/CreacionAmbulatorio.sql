@@ -210,7 +210,8 @@ create table paciente (
     nacionalidad VARCHAR(40) NOT NULL DEFAULT 'Española',
     direccion varchar(50) NOT NULL,
     telefono char(9) NOT NULL,
-    primary key(cip)
+    unique(dni),
+	primary key(cip)
 );
 
 create table tenerEnfermedad(
@@ -274,7 +275,7 @@ create table receta (
     descripcion varchar(200) NOT NULL,
     fechaInicio date NOT NULL,
     fechaFin date CHECK (fechaInicio < fechaFin),
-    primary key(codigoReceta, cita, paciente, ambulatorio),
+    primary key(codigoReceta, cita, paciente, ambulatorio, consulta),
     foreign key (cita, paciente, consulta, ambulatorio) references cita(fechaHoraInicio, paciente, consulta, ambulatorio) on delete restrict on update cascade,
     foreign key (medicamento) references medicamento(nombre) on delete restrict on update cascade
 );
