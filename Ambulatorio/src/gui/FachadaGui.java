@@ -1,14 +1,12 @@
 package gui;
 
-import aplicacion.Categoria;
-import aplicacion.Libro;
-import aplicacion.Usuario;
-import aplicacion.Ejemplar;
+import aplicacion.Ambulatorio;
+import aplicacion.Cita;
+import aplicacion.Paciente;
+import aplicacion.Enfermedad;
+import aplicacion.Consulta;
+import aplicacion.Receta;
 
-/**
- *
- * @author alumno
- */
 public class FachadaGui {
 
     aplicacion.FachadaAplicacion fa;     // Enlace a la fachada de aplicación
@@ -21,82 +19,137 @@ public class FachadaGui {
         this.vp = new VPrincipal(fa);
     }
 
-////////////////////////
-//VENTANA DE LIBRO
-////////////////////////
-    //Permite generar una ventana para visualizar información de un libro
-    public void visualizaLibro(Libro l, java.util.List<String> restoCategorias) {
+////////////////////////////////
+//VENTANA DE CITAS
+////////////////////////////////
+    //Permite generar una ventana para visualizar información de una cita
+    public void nuevaVReservarCita() {
         //Declaramos variables
-        VLibro vl;
-        java.util.List<String> categorias = new java.util.ArrayList<String>();
-
-        //Recuperamos el nombre de las categorías del libro
-        for (Categoria c : l.getCategorias()) {
-            categorias.add(c.getNombre());
-        }
-
+        VReservarCita vC;
         //Generamos la ventana
-        vl = new VLibro(vp, true, fa, l, categorias, restoCategorias);
-
+        vRC = new VReservarCita(vp, true, fa);
         //Hacemos visible la ventana
-        vl.setVisible(true);
+        vRC.setVisible(true);
     }
 
-    //Permite generar una ventana para crear un nuevo libro
-    public void nuevoLibro(java.util.List<String> restoCategorias) {
-        //Declaramos la ventana
-        VLibro vl;
-        //La inicializamos
-        vl = new VLibro(vp, true, fa, restoCategorias);
-        //La hacemos visible
-        vl.setVisible(true);
-    }
-
-///////////////////////////
-//VENTANA DE USUARIO
-///////////////////////////
-    //Permite crear una nueva ventana de usuario 
-    public void nuevoUsuario() {
+    //Permite generar una ventana para escoger un hospital al que derivar al paciente
+    public void nuevaVDerivarHospital(Paciente paciente) {
+        //Declaramos variables
+        VCita vDH;
         //Generamos la ventana
-        VUsuario vu;
-        //La inicializamos
-        vu = new VUsuario(vp, true, fa);
-        //La hacemos visible
-        vu.setVisible(true);
+        vDH = new VDerivarHospital(vp, true, fa, paciente);
+        //Hacemos visible la ventana
+        vDH.setVisible(true);
+    }
+
+    //Permite generar una ventana para escoger un paciente al que consultar sus consultas pendientes
+    public void nuevaVCitasPendientes(Paciente paciente) {
+        //Declaramos variables
+        VCitasPendientes vCP;
+        //Generamos la ventana
+        vCP = new VCitas(vp, true, fa, paciente);
+        //Hacemos visible la ventana
+        vCP.setVisible(true);
     }
 
 
 ////////////////////////////////
-//VENTANA DE CATEGORIAS
+//VENTANA DE PACIENTES
 ////////////////////////////////
-    //Permite crear una nueva ventana de cateogorías
-    public void nuevaCategoria() {
-        //Declaramos
-        VCategoria v;
-        //Instanciamos la ventana
-        v = new VCategoria(vp, true, fa);
-        //La hacemos visible
-        v.setVisible(true);
+    //Permite generar una ventana para visualizar información de una cita
+    public void nuevaVPacientes() {
+        //Declaramos variables
+        VPaciente vP;
+        //Generamos la ventana
+        vP = new VPacientes(vp, true, fa);
+        //Hacemos visible la ventana
+        vP.setVisible(true);
+    }
+
+    //Permite generar una ventana para visualizar información sobre el historial médico del paciente
+    public void nuevaVHistorialMedico() {
+        //Declaramos variables
+        VHistorialMedico vHM;
+        //Generamos la ventana
+        vHM = new VHistorialMedico(vp, true, fa);
+        //Hacemos visible la ventana
+        vHM.setVisible(true);
+    }
+
+    //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
+    public void nuevaVHistorialRecetas() {
+        //Declaramos variables
+        VHistorialRecetas vHR;
+        //Generamos la ventana
+        vHR = new VHistorialRecetas(vp, true, fa);
+        //Hacemos visible la ventana
+        vHR.setVisible(true);
+    }
+
+    //Permite generar una ventana para visualizar la gestión de enfermedades de un paciente
+    public void nuevaVGestionarEnfermedades() {
+        //Declaramos variables
+        VGestionarEnfermedades vGE;
+        //Generamos la ventana
+        vGE = new VGestionarEnfermedades(vp, true, fa);
+        //Hacemos visible la ventana
+        vGE.setVisible(true);
     }
 
 /////////////////////////////
-//VENTANA DE PRESTAMO
+//VENTANA DE ENFERMEDADES
+/////////////////////////////
+    //Permite crear una nueva ventana de enfermedades
+    public void nuevaVEnfermedades() {
+        //Declaramos
+        VEnfermedades vE;
+        //Instanciamos la ventana
+        vE = new VEnfermedades(parent, true, fa);
+        //La hacemos visible
+        vE.setVisible(true);
+    }
+
+/////////////////////////////
+//VENTANA DE CONSULTAS
+/////////////////////////////
+    //Permite crear una nueva ventana de consultas
+    public void nuevaVConsultas() {
+        //Declaramos
+        VConsulta vC;
+        //Instanciamos la ventana
+        vC = new VConsulta(parent, true, fa);
+        //La hacemos visible
+        vC.setVisible(true);
+    }
+    
+    //Permite crear una nueva ventana de consultas
+    public void nuevaVGestionarMedicos() {
+        //Declaramos
+        VGestionarMedicos vGM;
+        //Instanciamos la ventana
+        vGM = new VGestionarMedicos(parent, true, fa);
+        //La hacemos visible
+        vGM.setVisible(true);
+    }
+
+/////////////////////////////
+//VENTANA DE RECETAS
 /////////////////////////////
     //Permite crear una nueva ventana de préstamos
-    public void accesoPrestamo(VLibro parent, Integer idLibro, Ejemplar e) {
+    public void nuevaVRecetar() {
         //Declaramos
-        VPrestamo p;
+        VRecetas vR;
         //Instanciamos la ventana
-        p = new VPrestamo(parent, true, fa, idLibro, e);
+        vR = new VRecetas(parent, true, fa);
         //La hacemos visible
-        p.setVisible(true);
+        vR.setVisible(true);
     }
-
+    
 //////////////////////
 //OTRAS VENTANAS
 //////////////////////
     //Permite iniciar la vista de la aplicación
-    public void iniciaVista() {
+    public void nuevaVAutentificacion() {
         //Generamos una ventana de autentificación que permite ingresarse en la base de datos
         VAutentificacion va;
         va  = new VAutentificacion(vp, true, fa);
@@ -107,13 +160,12 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana que muestre excepciones
-    public void muestraExcepcion(String txtExcepcion) {
+    public void nuevaVError(String mensajeError) {
         //Declaramos la ventana
-        VAviso va;
+        VMensaje vM;
         //Instanciamos
-        va  = new VAviso(vp, true, txtExcepcion);
+        vM  = new VMensaje(vp, true, mensajeError);
         //La hacemos visible
-        va.setVisible(true);
+        vM.setVisible(true);
     }
-
 }

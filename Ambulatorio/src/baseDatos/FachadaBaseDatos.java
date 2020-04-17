@@ -1,5 +1,6 @@
 package baseDatos;
 
+import aplicacion.Ambulatorio;
 import aplicacion.Cita;
 import aplicacion.Paciente;
 import aplicacion.Enfermedad;
@@ -18,12 +19,13 @@ public class FachadaBaseDatos {
 
     private aplicacion.FachadaAplicacion fa;    // Enlace a la fachada de aplicación
     private java.sql.Connection conexion;       // Conexión SQL
-    private DAOAmbulatorio daoAmbulatorio;                  // Enlace al DAO de Citas
+    private DAOAmbulatorios daoAmbulatorios;    // Enlace al DAO de Ambulatorios
     private DAOCitas daoCitas;                  // Enlace al DAO de Citas
     private DAOPacientes daoPacientes;          // Enlace al DAO de Pacientes
     private DAOEnfermedades daoEnfermedades;    // Enlace al DAO de Enfermedades
     private DAOConsultas daoConsultas;          // Enlace al DAO de Consultas
     private DAORecetas daoRecetas;              // Enlace al DAO de Recetas
+    private DAOPersonal daoPersonal;            // Enlace al DAO de Personal
 
     //Contructor
     public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
@@ -54,11 +56,13 @@ public class FachadaBaseDatos {
                     usuario);
 
             //Inicializamos los DAOS
+            daoAmbulatorios = new DAOAmbulatorios(conexion, fa);    // Enlace al DAO de Ambulatorios
             daoCitas = new DAOCitas(conexion, fa);                  // Enlace al DAO de Citas
             daoPacientes = new DAOPacientes(conexion, fa);          // Enlace al DAO de Pacientes
             daoEnfermedades = new DAOEnfermedades(conexion, fa);    // Enlace al DAO de Enfermedades
             daoConsultas = new DAOConsultas(conexion, fa);          // Enlace al DAO de Consultas
             daoRecetas = new DAORecetas(conexion, fa);              // Enlace al DAO de Recetas
+            daoPersonal = new DAOPersonal(conexion, fa);            // Enlace al DAO de Personal
 
             //En caso de error capturamos la excepciones, imprimimos el mensaje y genereramos la ventana de excepción
         } catch (FileNotFoundException f) {
@@ -75,134 +79,118 @@ public class FachadaBaseDatos {
     }
 
 ////////////////
+//DAOAMBULATORIOS
+////////////////
+    //Permite insertar un nuevo ambulatorio en la base de datos
+    public void insertarAmbulatorio(Ambulatorio ambulatorio) {
+        daoAmbulatorios.insertarAmbulatorio(ambulatorio);
+    }
+
+    //Permite borrar un ambulatorio de la base de datos
+    public void borrarAmbulatorio(Integer codigoAmbulatorio) {
+        daoAmbulatorios.borrarAmbulatorio(codigoAmbulatorio);
+    }
+
+    //Permite modificar un ambulatorio de la base de datos
+    public void modificarAmbulatorio(Ambulatorio ambulatorio) {
+        daoAmbulatorios.modificarAmbulatorio(ambulatorio);
+    }
+
+///////////////
 //DAOCITAS
 ///////////////
-    //Permite recuperar un array de libros
-    public java.util.List<Libro> consultarCatalogo(Integer id, String titulo, String isbn, String autor) {
-        return daoLibros.consultarCatalogo(id, titulo, isbn, autor);
+    //Permite insertar una nueva cita en la base de datos
+    public void insertarCita(Cita cita) {
+        daoCitas.insertarLibro(cita);
     }
-
-    //Consultar la información de un libro
-    public Libro consultarLibro(Integer idLibro) {
-        return daoLibros.consultarLibro(idLibro);
+    
+    //Permite modificar una cita de la base de datos
+    public void modificarCita(Cita cita) {
+        daoCitas.modificarCita(cita);
     }
-
-    //Consultar los ejemplares de un libro a partir de su id
-    public java.util.List<Ejemplar> consultarEjemplaresLibro(Integer idLibro) {
-        return daoLibros.consultarEjemplaresLibro(idLibro);
-    }
-
-    //Obtener el resto de categorías que no están en el libro
-    public java.util.List<String> obtenerRestoCategorias(Integer idLibro) {
-        return daoLibros.obtenerRestoCategorias(idLibro);
-    }
-
-    //Permite insertar un nuevo libro en la base de datos
-    public Integer insertarLibro(Libro libro) {
-        return daoLibros.insertarLibro(libro);
-    }
-
-    //Permite borrar un libro de la base de datos
-    public void borrarLibro(Integer idLibro) {
-        daoLibros.borrarLibro(idLibro);
-    }
-
-    //Permite modificar un libro de la base de datos
-    public void modificarLibro(Libro libro) {
-        daoLibros.modificarLibro(libro);
-    }
-
-    //Permite modificar las categorías de un libro de la base de datos
-    public void modificarCategoriasLibro(Integer idLibro, java.util.List<String> categorias) {
-        daoLibros.modificarCategoriasLibro(idLibro, categorias);
-    }
-
-    //Permite insertar ejemplares de un libro en la base de datos
-    public void insertarEjemplarLibro(Integer idLibro, Ejemplar ejemplar) {
-        daoLibros.insertarEjemplarLibro(idLibro, ejemplar);
-    }
-
-    //Permite borrar ejemplares de un libro de la base de datos
-    public void borrarEjemplaresLibro(Integer idLibro, java.util.List<Integer> numsEjemplar) {
-        daoLibros.borrarEjemplaresLibro(idLibro, numsEjemplar);
-    }
-
-    //Permite modificar los ejemplares de un libro de la base de datos
-    public void modificarEjemplarLibro(Integer idLibro, Ejemplar ejemplar) {
-        daoLibros.modificarEjemplarLibro(idLibro, ejemplar);
+    
+    //Permite borrar una cita de la base de datos
+    public void borrarCita(Date hora) {
+        daoCitas.borrarCita(hora);
     }
 
 //////////////////////
 //DAOPACIENTES
 /////////////////////
-    //Función para consultar la información de las categorías
-    public java.util.List<Categoria> consultarCategorias() {
-        return daoCategorias.consultarCategorias();
+    //Permite insertar un nuevo usuario en la base de datos
+    public void insertarPaciente(Paciente paciente) {
+        daoPacientes.insertarPaciente(paciente);
     }
 
-    //Se inserta una nueva categoría en la base de datos
-    public void nuevaCategoria(String n, String d) {
-        daoCategorias.nuevaCategoria(n, d);
+    //Permite modificar los datos de un paciente de la base de datos
+    public void modificarPaciente(Paciente paciente) {
+        daoPacientes.modificarPaciente(paciente);
     }
 
-    //Permite eliminar una categoría de la base de datos
-    public void eliminarCategoria(String n) {
-        daoCategorias.eliminarCategoria(n);
+    //Permite eliminar un paciente de la base de datos
+    public void borrarPaciente(Paciente dni) {
+        daoPacientes.borrarPaciente(dni);
     }
 
 //////////////////
 //DAOENFERMEDADES
-//////////////////
-    //Permite recuperar un usuario de la base de datos a partir de su id y contraseña
-    public Usuario validarUsuario(String idUsuario, String clave) {
-        return daoUsuarios.validarUsuario(idUsuario, clave);
+////////////////// 
+    //Permite insertar una nueva enfermedad en la base de datos
+    public void insertarEnfermedad(Enfermedad enfermedad) {
+        daoEnfermedades.insertarEnfermedad(enfermedad);
     }
 
-    //Permite insertar un nuevo usuario en la base de datos
-    public void insertarUsuario(Usuario user) {
-        daoUsuarios.insertarUsuario(user);
+    //Permite modificar los datos de una enfermedad de la base de datos
+    public void modificarEnfermedad(Enfermedad enfermedad) {
+        daoEnfermedades.modificarEnfermedad(enfermedad);
     }
 
-    //Permite eliminar un usuario de la base de datos
-    public void borrarUsuario(String id) {
-        daoUsuarios.borrarUsuario(id);
-    }
-
-    //Permite modificar los datos de un usuario de la base de datos
-    public void modificarUsuario(Usuario user) {
-        daoUsuarios.modificarUsuario(user);
-    }
-
-    //Permite consultar si existe un usuario con el id especificado en la base de datos
-    public boolean consultarUsuario(String id) {
-        return daoUsuarios.consultarUsuario(id);
-    }
-
-    //Permite buscar usuarios por su id y/o nombre de usuario
-    public java.util.List<Usuario> consultarUsuarios(String id, String nombre) {
-        return daoUsuarios.consultarUsuarios(id, nombre);
-    }
-
-    //Permite consultar la información de los usuarios buscados por su id y/o nombre 
-    //Incluye además infrormación sobre sus préstamos vencidos
-    public java.util.List<Usuario> consultarPUsuarios(String id, String nombre) {
-        return daoUsuarios.consultarPUsuarios(id, nombre);
+    //Permite eliminar una enfermedad de la base de datos
+    public void borrarEnfermedad(Enfermedad nombre) {
+        daoEnfermedades.borrarEnfermedad(nombre);
     }
 
 ////////////////////
 //DAOCONSULTAS
 ////////////////////
-    //Permite insertar un nuevo préstamo en la base de datos
-    public void nuevoPrestamo(Integer idLibro, Ejemplar ej) {
-        daoPrestamos.nuevoPrestamo(idLibro, ej);
+    //Permite insertar una nueva consulta en la base de datos
+    public void insertarConsulta(Consulta consulta) {
+        daoConsultas.insertarConsulta(consulta);
     }
 
-    //Permite devolver un ejemplar prestado y así reflejarlo en la base de datos
-    public void devolverPrestamo(Integer idLibro, Ejemplar fp) {
-        daoPrestamos.devolverPrestamo(idLibro, fp);
+    //Permite modificar los datos de una consulta de la base de datos
+    public void modificarConsulta(Consulta consulta) {
+        daoConsultas.modificarConsulta(consulta);
+    }
+
+    //Permite eliminar una enfermedad de la base de datos
+    public void borrarConsulta(Integer identificador) {
+        daoConsultas.borrarConsulta(identificador);
     }
 
 ////////////////////
 //DAORECETAS
 ////////////////////
+    //Permite insertar una nueva receta en la base de datos
+    public void insertarReceta(Receta receta) {
+        daoRecetas.insertarReceta(receta);
+    }
+
+    //Permite modificar los datos de una receta de la base de datos
+    public void modificarReceta(Receta receta) {
+        daoRecetas.modificarReceta(receta);
+    }
+
+    //Permite eliminar una receta de la base de datos
+    public void borrarReceta(Integer codigoReceta) {
+        daoRecetas.borrarReceta(codigoReceta);
+    }
+
+////////////////////
+//DAOPERSONAL
+////////////////////
+    //Permite recuperar un administrador de la base de datos a partir de su id y contraseña
+    public Administrador validarAdministrador(String idAdministrador, String clave) {
+        return daoPersonal.validarUsuario(idAdministrador, clave);
+    }
 }

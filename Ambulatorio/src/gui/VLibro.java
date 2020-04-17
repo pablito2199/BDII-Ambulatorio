@@ -324,14 +324,14 @@ public class VLibro extends javax.swing.JDialog {
         lstCategoriasLibro.setModel(new ModeloListaStrings());
         jScrollPane3.setViewportView(lstCategoriasLibro);
 
-        btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaD.jpg"))); // NOI18N
+        btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Asociar.png"))); // NOI18N
         btnDerecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDerechaActionPerformed(evt);
             }
         });
 
-        btnIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaI.jpg"))); // NOI18N
+        btnIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Desasociar.png"))); // NOI18N
         btnIzquierda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIzquierdaActionPerformed(evt);
@@ -352,26 +352,28 @@ public class VLibro extends javax.swing.JDialog {
             .addGroup(panelCategoriasLayout.createSequentialGroup()
                 .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCategoriasLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel8))
-                    .addGroup(panelCategoriasLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCategoriasLayout.createSequentialGroup()
-                        .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnDerecha, 0, 0, Short.MAX_VALUE)
-                            .addComponent(btnIzquierda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelCategoriasLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel8))
+                            .addGroup(panelCategoriasLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelCategoriasLayout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel9))
+                            .addGroup(panelCategoriasLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCategoriasLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(65, 65, 65))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCategoriasLayout.createSequentialGroup()
-                .addContainerGap(446, Short.MAX_VALUE)
-                .addComponent(btnActualizarCategoriasLibro)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnActualizarCategoriasLibro)))
                 .addContainerGap())
         );
         panelCategoriasLayout.setVerticalGroup(
@@ -379,7 +381,7 @@ public class VLibro extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCategoriasLayout.createSequentialGroup()
                 .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCategoriasLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
+                        .addGap(64, 64, 64)
                         .addComponent(btnDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -392,7 +394,7 @@ public class VLibro extends javax.swing.JDialog {
                         .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(btnActualizarCategoriasLibro)
                 .addContainerGap())
         );
