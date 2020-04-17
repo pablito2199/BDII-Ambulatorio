@@ -209,7 +209,7 @@ create table paciente (
     grupoSanguineo varchar(3) NOT NULL,
     nacionalidad VARCHAR(40) NOT NULL DEFAULT 'Española',
     direccion varchar(50) NOT NULL,
-    telefono int NOT NULL,
+    telefono char(9) NOT NULL,
     primary key(cip)
 );
 
