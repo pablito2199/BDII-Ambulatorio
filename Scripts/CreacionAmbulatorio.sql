@@ -210,7 +210,8 @@ create table paciente (
     nacionalidad VARCHAR(40) NOT NULL DEFAULT 'Española',
     direccion varchar(50) NOT NULL,
     telefono char(9) NOT NULL,
-    primary key(cip)
+    unique(dni),
+	primary key(cip)
 );
 
 create table tenerEnfermedad(
