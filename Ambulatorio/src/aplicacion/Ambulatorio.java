@@ -82,7 +82,7 @@ public class Ambulatorio {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Ambulatorio) {
-            return ((Ambulatorio) obj).getCodigo().equals(this.nombre);
+            return ((Ambulatorio) obj).getCodigo().equals(this.codigo);
         }
         return false;
     }
