@@ -23,6 +23,9 @@ public class DAOCitas extends AbstractDAO {
 
         //Establecemos conexión
         con = super.getConexion();
+        
+        //Quitamos autocommit
+        con.set
 
         //Intentamos la consulta SQL
         try {
@@ -50,9 +53,15 @@ public class DAOCitas extends AbstractDAO {
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
+            
+            if(e.getErrorCode() == 2601 && ){
+                
+            }
+            
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        
         } finally {
             //Finalmente intentamos cerrar los cursores
             try {
