@@ -96,7 +96,7 @@ insert into consulta (identificador, especialidad)
 	values
 	(101, 'Cirujia'),
 	(203, 'Oftalmologia'),
-	(005, 'Urgencias');
+	(005, 'General');
 
 insert into pertenecer (personal, consulta) 
 	values
@@ -163,7 +163,7 @@ insert into consulta (identificador, especialidad)
 	values
 	(203, 'Cirujia'),
 	(102, 'Oftalmologia'),
-	(305, 'Urgencias');
+	(305, 'General');
 
 insert into pertenecer (personal, consulta) 
 	values

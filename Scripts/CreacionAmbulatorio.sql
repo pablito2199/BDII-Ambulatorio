@@ -32,7 +32,7 @@ create table material (
 
 /* Función para asignar el codigo del material */
 create
-or replace function asignarCodigoMaterial() returns trigger as $ acm $ begin if exists (
+or replace function asignarCodigoMaterial() returns trigger as $acm$ begin if exists (
     select
         mt1.codigoMaterial
     from
@@ -76,7 +76,7 @@ return new;
 
 end;
 
-$ acm $ language plpgsql;
+$acm$ language plpgsql;
 
 /* Trigger para insertar el número del material */
 create trigger triggerCodigoMaterial before
@@ -144,18 +144,6 @@ create table personalAdministrador (
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     personal char(9) NOT NULL,
     contrasena varchar(30) NOT NULL,
-    check (
-        exists (
-            select
-                clase
-            from
-                personalNoSanitario as p
-            where
-                p.ambulatorio = ambulatorio
-                and p.dni = personal
-                and p.clase like 'Administrador'
-        )
-    ),
     primary key(ambulatorio, personal, contrasena),
     foreign key(ambulatorio, personal) references personalNoSanitario(ambulatorio, dni) on delete restrict on update cascade
 );
@@ -184,7 +172,6 @@ create table consulta (
     identificador int NOT NULL,
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     especialidad varchar(20) NOT NULL,
-    unique(ambulatorio, 'Urgencias'),
     primary key(identificador, ambulatorio),
     foreign key(ambulatorio) references ambulatorio(codigoAmbulatorio) on delete restrict on update cascade,
     foreign key(especialidad) references especialidad(nombre) on delete restrict on update cascade
@@ -196,25 +183,6 @@ create table pertenecer (
     ambulatorioConsulta int NOT NULL DEFAULT currval('secAmbulatorios'),
     consulta int NOT NULL,
     check (ambulatorioPersonal = ambulatorioConsulta),
-    check (
-        (
-            select
-                especialidad
-            from 
-                consulta as c
-            where
-                c.identificador = consulta
-                and c.ambulatorio = ambulatorioConsulta
-        ) = any (
-            select
-                especialidad
-            from
-                especializacionPersonal as ep
-            where
-                ep.personal = personal
-                and ep.ambulatorio = ambulatorioPersonal
-        )
-    ),
     primary key(
         ambulatorioPersonal,
         personal,
@@ -269,16 +237,6 @@ create table cita (
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     tipo varchar(30) NOT NULL,
     especialidad varchar(20) NOT NULL,
-    check (
-        tipo = any (
-            select
-                tipo
-            from
-                especialidad as e
-            where
-                e.nombre = especialidad
-        )
-    ),
     primary key(fechaHoraInicio, paciente, consulta, ambulatorio),
     foreign key (paciente) references paciente(cip) on delete restrict on update cascade,
     foreign key (consulta, ambulatorio) references consulta(identificador, ambulatorio) on delete restrict on update cascade,
@@ -294,28 +252,6 @@ create table urgencia (
     gravedad int NOT NULL DEFAULT 1 CHECK(
         gravedad BETWEEN 1
         AND 10
-    ),
-    check (
-        exists (
-            select
-                tipo
-            from
-                cita as c
-            where
-                c.fechaHoraInicio = cita
-                and c.paciente = paciente
-                and c.consulta = consulta
-                and c.ambulatorio = ambulatorio
-                and c.tipo like 'Urgencia'
-                and c.consulta = any (
-                    select
-                        identificador
-                    from
-                        consulta as co
-                    where
-                        co.especialidad like 'General'
-                )
-        )
     ),
     primary key(cita, paciente, consulta, ambulatorio),
     foreign key (cita, paciente, consulta, ambulatorio) references cita(fechaHoraInicio, paciente, consulta, ambulatorio) on delete restrict on update cascade
@@ -345,7 +281,7 @@ create table receta (
 
 /* Función para asignar el codigo de la receta */
 create
-or replace function asignarCodigoReceta() returns trigger as $ acr $ begin if exists (
+or replace function asignarCodigoReceta() returns trigger as $acr$ begin if exists (
     select
         r1.codigoReceta
     from
@@ -389,7 +325,7 @@ return new;
 
 end;
 
-$ acr $ language plpgsql;
+$acr$ language plpgsql;
 
 /* Trigger para insertar el número de receta */
 create trigger triggerCodigoReceta before
