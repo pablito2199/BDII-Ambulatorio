@@ -77,7 +77,7 @@ public class Material {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Material) {
-            return ((Material) obj).getCodigo().equals(this.codigo);
+            return ((Material) obj).getCodigo().equals(this.codigo) && ((Material) obj).getAmbulatorio().equals(this.ambulatorio);
         }
         return false;
     }
