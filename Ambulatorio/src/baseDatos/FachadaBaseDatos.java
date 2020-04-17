@@ -1,8 +1,8 @@
 package baseDatos;
 
-import aplicacion.Administrador;
 import aplicacion.Ambulatorio;
 import aplicacion.Cita;
+import aplicacion.Urgencia;
 import aplicacion.Paciente;
 import aplicacion.Enfermedad;
 import aplicacion.Consulta;
@@ -10,7 +10,7 @@ import aplicacion.Receta;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class FachadaBaseDatos {
@@ -99,17 +99,42 @@ public class FachadaBaseDatos {
 ///////////////
     //Permite insertar una nueva cita en la base de datos
     public void insertarCita(Cita cita) {
-        daoCitas.insertarLibro(cita);
+        daoCitas.insertarCita(cita);
     }
-    
-    //Permite modificar una cita de la base de datos
-    public void modificarCita(Cita cita) {
-        daoCitas.modificarCita(cita);
+
+    //Atiende una cita o urgencia
+    public void atenderCita(Cita cita) {
+        daoCitas.atenderCita(cita);
     }
-    
-    //Permite borrar una cita de la base de datos
-    public void borrarCita(Cita cita) {
-        daoCitas.borrarCita(cita);
+
+    //Permite insertar una nueva urgencia en la base de datos
+    public void insertarUrgencia(Urgencia urgencia) {
+        daoCitas.insertarUrgencia(urgencia);
+    }
+
+    //Deriva una cita o urgencia a un hospital
+    public void derivarHospital(Cita cita) {
+        daoCitas.derivarHospital(cita);
+    }
+
+    //Consulta las citas pendientes
+    public ArrayList<Cita> citasPendientes() {
+        return daoCitas.citasPendientes();
+    }
+
+    //Consulta las urgencias pendientes
+    public ArrayList<Urgencia> urgenciasPendientes() {
+        return daoCitas.urgenciasPendientes();
+    }
+
+    //Consulta las citas pendientes de un paciente
+    public ArrayList<Cita> citasPaciente(Paciente paciente) {
+        return daoCitas.citasPaciente(paciente);
+    }
+
+    //Consulta las citas pendientes de un medico
+    public ArrayList<Urgencia> citasMedico(Personal medico) {
+        return daoCitas.citasMedico(medico);
     }
 
 //////////////////////
