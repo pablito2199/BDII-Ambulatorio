@@ -45,7 +45,7 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE AMBULATORIOS
 /////////////////////////
-
+    
 /////////////////////////
 //GESTIÓN DE CITAS
 /////////////////////////
@@ -53,31 +53,62 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE PACIENTES
 /////////////////////////
+    //Permite insertar un nuevo usuario en la base de datos
+    public void insertarPaciente(Paciente paciente) {
+        gpac.insertarPaciente(paciente);
+    }
 
+    //Permite modificar los datos de un paciente de la base de datos
+    public void modificarPaciente(Paciente paciente) {
+        gpac.modificarPaciente(paciente);
+    }
+
+    //Permite eliminar un paciente de la base de datos
+    public void borrarPaciente(Paciente paciente) {
+        gpac.borrarPaciente(paciente);
+    }
+    
+     //Permite buscar pacientes por su id y/o nombre de paciente
+     public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
+         return gpac.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
+     }
+
+      //Permite consultar el historial clínico de un paciente
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente,  String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin){
+        return gpac.consultarHistorialClinico(paciente, tipo, especialidad, fechaInicio, fechaFin);
+    }
 /////////////////////////
 //GESTIÓN DE ENFERMEDADES
 /////////////////////////
-public void anadirEnfermedad(Enfermedad enfermedad) {
-    genf.anadirEnfermedad(enfermedad);
-}
+    public void anadirEnfermedad(Enfermedad enfermedad) {
+        genf.anadirEnfermedad(enfermedad);
+    }
 
-public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
+    public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
         return genf.consultarEnfermedades(nombre);
     }
 
-public void modificarEnfermedad(Enfermedad enfermedad) {
-    genf.modificarEnfermedad(enfermedad);
-}
+    public void modificarEnfermedad(Enfermedad enfermedad) {
+        genf.modificarEnfermedad(enfermedad);
+    }
 
-public void borrarEnfermedad(String nombre) {
-    genf.borrarEnfermedad(nombre);
-}
+    public void borrarEnfermedad(String nombre) {
+        genf.borrarEnfermedad(nombre);
+    }
 
 /////////////////////////
 //GESTIÓN DE CONSULTAS
 /////////////////////////
-
+    
 /////////////////////////
 //GESTIÓN DE RECETAS
 /////////////////////////
+    public void insertarReceta(Receta receta) {
+        grec.insertarReceta(receta);
+    }
+
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
+        return grec.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
+    }
 }
