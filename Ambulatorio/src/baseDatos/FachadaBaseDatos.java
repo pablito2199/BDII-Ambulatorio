@@ -85,8 +85,8 @@ public class FachadaBaseDatos {
     }
 
     //Permite borrar un ambulatorio de la base de datos
-    public void borrarAmbulatorio(Integer codigoAmbulatorio) {
-        daoAmbulatorios.borrarAmbulatorio(codigoAmbulatorio);
+    public void borrarAmbulatorio(Ambulatorio ambulatorio) {
+        daoAmbulatorios.borrarAmbulatorio(ambulatorio);
     }
 
     //Permite modificar un ambulatorio de la base de datos
@@ -108,8 +108,8 @@ public class FachadaBaseDatos {
     }
     
     //Permite borrar una cita de la base de datos
-    public void borrarCita(Date hora) {
-        daoCitas.borrarCita(hora);
+    public void borrarCita(Cita cita) {
+        daoCitas.borrarCita(cita);
     }
 
 //////////////////////
@@ -126,8 +126,8 @@ public class FachadaBaseDatos {
     }
 
     //Permite eliminar un paciente de la base de datos
-    public void borrarPaciente(Paciente dni) {
-        daoPacientes.borrarPaciente(dni);
+    public void borrarPaciente(Paciente paciente) {
+        daoPacientes.borrarPaciente(paciente);
     }
 
 //////////////////
@@ -144,8 +144,8 @@ public class FachadaBaseDatos {
     }
 
     //Permite eliminar una enfermedad de la base de datos
-    public void borrarEnfermedad(Enfermedad nombre) {
-        daoEnfermedades.borrarEnfermedad(nombre);
+    public void borrarEnfermedad(Enfermedad enfermedad) {
+        daoEnfermedades.borrarEnfermedad(enfermedad);
     }
 
 ////////////////////
@@ -162,8 +162,8 @@ public class FachadaBaseDatos {
     }
 
     //Permite eliminar una enfermedad de la base de datos
-    public void borrarConsulta(Integer identificador) {
-        daoConsultas.borrarConsulta(identificador);
+    public void borrarConsulta(Consulta consulta) {
+        daoConsultas.borrarConsulta(consulta);
     }
 
 ////////////////////
@@ -180,8 +180,8 @@ public class FachadaBaseDatos {
     }
 
     //Permite eliminar una receta de la base de datos
-    public void borrarReceta(Integer codigoReceta) {
-        daoRecetas.borrarReceta(codigoReceta);
+    public void borrarReceta(Receta receta) {
+        daoRecetas.borrarReceta(receta);
     }
 
 ////////////////////
