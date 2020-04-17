@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import aplicacion.Paciente;
 
+/**
+ * 
+ * @author Pablo Tarrío Otero
+ */
+
 public class DAOConsultas extends AbstractDAO {
     
     //Contructor
