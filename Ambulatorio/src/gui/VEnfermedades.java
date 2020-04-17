@@ -42,7 +42,7 @@ public class VEnfermedades extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelUsuario = new javax.swing.JTabbedPane();
+        panelEnfermedad = new javax.swing.JTabbedPane();
         panelGeneral = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         textoNombre = new javax.swing.JTextField();
@@ -183,24 +183,24 @@ public class VEnfermedades extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        panelUsuario.addTab("Enfermedades", panelGeneral);
+        panelEnfermedad.addTab("Enfermedades", panelGeneral);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelUsuario.getAccessibleContext().setAccessibleName("Libro");
+        panelEnfermedad.getAccessibleContext().setAccessibleName("Libro");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -284,8 +284,8 @@ public class VEnfermedades extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList lstEnfermedades;
+    private javax.swing.JTabbedPane panelEnfermedad;
     private javax.swing.JPanel panelGeneral;
-    private javax.swing.JTabbedPane panelUsuario;
     private javax.swing.JTextArea textoDescripcion;
     private javax.swing.JTextField textoNombre;
     // End of variables declaration//GEN-END:variables
