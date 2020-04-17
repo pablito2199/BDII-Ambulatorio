@@ -15,7 +15,7 @@ public class DAOCitas extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    //Permite insertar un nuevo paciente en la base de datos
+    //Permite insertar una nueva cita en la base de datos
     public void insertarCita(Cita cita) {
         //Declaramos variables
         Connection con;
@@ -64,7 +64,7 @@ public class DAOCitas extends AbstractDAO {
         }
     }
 
-    //Permite eliminar un paciente de la base de datos
+    //Pone la fecha de finalizacion de la cita a la actual del sistema gestor
     public void atenderCita(Cita cita) {
         //Declaramos variables
         Connection con;
@@ -78,7 +78,7 @@ public class DAOCitas extends AbstractDAO {
             //Preparamos la sentencia para insertar una fecha de finalización
             stmPaciente = con.prepareStatement(
                     "update from cita "
-                    + "set fechaHoraFin = ?"
+                    + "set fechaHoraFin = CURRENT_TIMESTAMP"
                     + "where fechaHoraInicio = ?"
                     + "and consulta = ?"
                     + "and ambulatorio = ?"
@@ -86,11 +86,10 @@ public class DAOCitas extends AbstractDAO {
             );
 
             //Sustituimos
-            stmPaciente.setTimestamp(1, cita.getFechaHoraFin());
             stmPaciente.setTimestamp(1, cita.getFechaHoraInicio());
-            stmPaciente.setInt(1, cita.getConsulta());
-            stmPaciente.setInt(1, cita.getAmbulatorio());
-            stmPaciente.setString(1, cita.getPaciente());
+            stmPaciente.setInt(2, cita.getConsulta());
+            stmPaciente.setInt(3, cita.getAmbulatorio());
+            stmPaciente.setString(4, cita.getPaciente());
             
             //Actualizamos
             stmPaciente.executeUpdate();

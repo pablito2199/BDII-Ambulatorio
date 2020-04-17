@@ -4,6 +4,7 @@ import aplicacion.Ambulatorio;
 import aplicacion.Cita;
 import aplicacion.Urgencia;
 import aplicacion.Paciente;
+import aplicacion.PersonalSanitario;
 import aplicacion.Enfermedad;
 import aplicacion.Consulta;
 import aplicacion.Receta;
@@ -102,14 +103,19 @@ public class FachadaBaseDatos {
         daoCitas.insertarCita(cita);
     }
 
-    //Atiende una cita o urgencia
+    //Permite insertar una nueva urgencia en la base de datos
+    public void insertarUrgencia(Urgencia urgencia) {
+        daoCitas.insertarUrgencia(urgencia);
+    }
+
+    //Atiende una cita
     public void atenderCita(Cita cita) {
         daoCitas.atenderCita(cita);
     }
 
-    //Permite insertar una nueva urgencia en la base de datos
-    public void insertarUrgencia(Urgencia urgencia) {
-        daoCitas.insertarUrgencia(urgencia);
+    //Atiende una urgencia
+    public void atenderUrgencia(Urgencia urgencia) {
+        daoCitas.atenderUrgencia(urgencia);
     }
 
     //Deriva una cita o urgencia a un hospital
@@ -133,7 +139,7 @@ public class FachadaBaseDatos {
     }
 
     //Consulta las citas pendientes de un medico
-    public ArrayList<Urgencia> citasMedico(Personal medico) {
+    public ArrayList<Urgencia> citasMedico(PersonalSanitario medico) {
         return daoCitas.citasMedico(medico);
     }
 
@@ -162,7 +168,7 @@ public class FachadaBaseDatos {
     public void insertarEnfermedad(Enfermedad enfermedad) {
         daoEnfermedades.insertarEnfermedad(enfermedad);
     }
-      
+
     public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
         return daoEnfermedades.consultarEnfermedades(nombre);
     }
