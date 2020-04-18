@@ -76,6 +76,7 @@ public class DAOCitas extends AbstractDAO {
 
             try {
                 //Si unique no se cumple entonces la hora esta ocupada
+                //Actualizamos la cita si el paciente es deluxe
                 if (e.getSQLState().equals("unique_violation") && paciente.getRango() == Rango.DELUXE) {
 
                     //Preparamos la consulta SQL para actualizar la cita
@@ -256,7 +257,7 @@ public class DAOCitas extends AbstractDAO {
             //Preparamos la sentencia para insertar una fecha de finalización
             stmCita = con.prepareStatement(
                     "update from cita "
-                    + "set fechaHoraFin = CURRENT_TIMESTAMP"
+                    + "set fechaHoraFin = CURRENT_TIMESTAMP "
                     + "where fechaHoraInicio = ? "
                     + "and consulta = ? "
                     + "and ambulatorio = ? "
@@ -408,7 +409,7 @@ public class DAOCitas extends AbstractDAO {
             //Preparamos la sentencia para recoger las citas
             stmCitas = con.prepareStatement(
                     "select fechaHoraInicio"
-                    + "from cita as ci, consulta as co, tipocita as t, especialidad as e"
+                    + "from cita as ci, consulta as co, tipocita as t, especialidad as e "
                     + "where ci.fechaHoraInicio > ? "
                     + "and ci.fechaHoraInicio < ? "
                     + "and ci.consulta = co.identificador "
@@ -452,4 +453,72 @@ public class DAOCitas extends AbstractDAO {
 
         return resultado;
     }
+
+    //Permite consultar la lista de urgencias pendientes de atender en un ambulatorio
+    public ArrayList<Urgencia> urgenciasPendientes(Ambulatorio ambulatorio) {
+
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmUrgencias = null;
+        ResultSet rsUrgencias = null;
+        ArrayList<Urgencia> resultado = new ArrayList<>();
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Preparamos la sentencia para recoger las citas
+            stmUrgencias = con.prepareStatement(
+                    "select c.*, u.*, least(10, u.gravedad + floor(u.soborno * 0.01)) as prioridad"
+                    + "from cita as c, urgencia as u "
+                    + "where c.fechaHoraInicio = u.fechaHoraInicio "
+                    + "and c.fechaHoraFin is null "
+                    + "and c.consulta = u.consulta "
+                    + "and c.ambulatorio = u.ambulatorio "
+                    + "and c.ambulatorio = ? "
+                    + "order by prioridad desc"
+            );
+
+            //Sustituimos
+            stmUrgencias.setInt(1, ambulatorio.getCodigo());
+
+            //Actualizamos
+            rsUrgencias = stmUrgencias.executeQuery();
+
+            //Recogemos valores de resultado
+            while (rsUrgencias.next()) {
+
+                resultado.add(new Urgencia(
+                        rsUrgencias.getFloat("soborno"),
+                        rsUrgencias.getInt("gravedad"),
+                        rsUrgencias.getInt("prioridad"),
+                        rsUrgencias.getTimestamp("fechaHoraInicio"),
+                        null,
+                        rsUrgencias.getString("paciente"),
+                        rsUrgencias.getInt("consulta"),
+                        rsUrgencias.getInt("ambulatorio"),
+                        rsUrgencias.getString("tipo"),
+                        rsUrgencias.getString("especialidad")                        
+                ));
+            }
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente intentamos cerrar cursores
+            try {
+                stmUrgencias.close();
+            } catch (SQLException e) {
+                //En caso de no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        return resultado;
+    }
+
 }

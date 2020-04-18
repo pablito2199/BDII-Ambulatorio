@@ -55,8 +55,8 @@ public class GestionCitas {
     }
 
     //Consulta las urgencias pendientes
-    public ArrayList<Urgencia> urgenciasPendientes() {
-        return fbd.urgenciasPendientes();
+    public ArrayList<Urgencia> urgenciasPendientes(Ambulatorio ambulatorio) {
+        return fbd.urgenciasPendientes(ambulatorio);
     }
 
     //Consulta las citas pendientes de un paciente

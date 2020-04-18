@@ -119,8 +119,8 @@ public class FachadaBaseDatos {
     }
 
     //Consulta las urgencias pendientes
-    public ArrayList<Urgencia> urgenciasPendientes() {
-        return daoCitas.urgenciasPendientes();
+    public ArrayList<Urgencia> urgenciasPendientes(Ambulatorio ambulatorio) {
+        return daoCitas.urgenciasPendientes(ambulatorio);
     }
 
     //Consulta las citas pendientes de un paciente

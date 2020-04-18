@@ -13,9 +13,9 @@ public class PersonalSanitario {
     private String nombre;
     private Date fechaIncorporacion;
     private String telefono;
-    private float sueldo;
+    private Float sueldo;
 
-    public PersonalSanitario(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, float sueldo) {
+    public PersonalSanitario(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo) {
         this.ambulatorio = ambulatorio;
         this.dni = dni;
         this.nombre = nombre;
@@ -64,11 +64,11 @@ public class PersonalSanitario {
         this.telefono = telefono;
     }
 
-    public float getSueldo() {
+    public Float getSueldo() {
         return sueldo;
     }
 
-    public void setSueldo(float sueldo) {
+    public void setSueldo(Float sueldo) {
         this.sueldo = sueldo;
     }
     

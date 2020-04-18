@@ -17,7 +17,7 @@ public class Paciente {
     private Rango rango;
 
     //Constructor
-    public Paciente(String CIP, String DNI, int NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono) {
+    public Paciente(String CIP, String DNI, Integer NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono) {
         this.CIP = CIP;
         this.DNI = DNI;
         this.NSS = NSS;
