@@ -9,7 +9,7 @@ import java.sql.Date;
 
 public class PersonalSanitario {
     private Integer ambulatorio;
-    private String dni;
+    private String DNI;
     private String nombre;
     private Date fechaIncorporacion;
     private String telefono;
@@ -17,7 +17,7 @@ public class PersonalSanitario {
 
     public PersonalSanitario(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo) {
         this.ambulatorio = ambulatorio;
-        this.dni = dni;
+        this.DNI = dni;
         this.nombre = nombre;
         this.fechaIncorporacion = fechaIncorporacion;
         this.telefono = telefono;
@@ -32,12 +32,12 @@ public class PersonalSanitario {
         this.ambulatorio = ambulatorio;
     }
 
-    public String getDni() {
-        return dni;
+    public String getDNI() {
+        return DNI;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
     }
 
     public String getNombre() {
@@ -75,7 +75,7 @@ public class PersonalSanitario {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof PersonalSanitario) {
-            return ((PersonalSanitario) obj).getDni().equals(this.dni) && ((PersonalSanitario) obj).getAmbulatorio().equals(this.ambulatorio);
+            return ((PersonalSanitario) obj).getDNI().equals(this.DNI) && ((PersonalSanitario) obj).getAmbulatorio().equals(this.ambulatorio);
         }
         return false;
     }

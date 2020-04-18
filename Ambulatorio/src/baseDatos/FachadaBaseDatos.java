@@ -129,7 +129,7 @@ public class FachadaBaseDatos {
     }
 
     //Consulta las citas pendientes de un medico
-    public ArrayList<Urgencia> citasMedico(PersonalSanitario medico) {
+    public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return daoCitas.citasMedico(medico);
     }
 

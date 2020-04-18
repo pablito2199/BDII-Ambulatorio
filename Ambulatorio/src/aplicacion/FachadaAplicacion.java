@@ -1,9 +1,9 @@
 package aplicacion;
 
-import aplicacion.clases.Receta;
-import aplicacion.clases.Paciente;
-import aplicacion.clases.Cita;
-import aplicacion.clases.Enfermedad;
+import aplicacion.clases.*;
+
+import java.util.ArrayList;
+import java.sql.Timestamp;
 
 public class FachadaAplicacion {
 
@@ -54,7 +54,45 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE CITAS
 /////////////////////////
+    //Agrega una nueva cita
+    public void insertarCita(Cita cita, Paciente paciente) {
+        gcit.insertarCita(cita, paciente);
+    }
 
+    //Agrega una nueva urgencia
+    public void insertarUrgencia(Urgencia urgencia) {
+        gcit.insertarUrgencia(urgencia);
+    }
+
+    //Atiende una cita o una urgencia
+    public void atenderCita(Cita cita) {
+        gcit.atenderCita(cita);
+    }
+
+    //Deriva una cita o urgencia a un hospital
+    public void derivarHospital(Hospital hospital, Cita cita) {
+        gcit.derivarHospital(hospital, cita);
+    }
+
+    //Devuelve una lista de horas de las citas que el paciente no puede reservar
+    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, Paciente paciente, TipoCita tipocita, Date inicio, Date fin) {
+        return gcit.citasOcupadas(ambulatorio, tipocita, inicio, fin);
+    }
+
+    //Lista de urgencias pendientes de atender
+    public ArrayList<Urgencia> urgenciasPendientes(Ambulatorio ambulatorio) {
+        return gcit.urgenciasPendientes(ambulatorio);
+    }
+
+    //Lista de citas pendientes de un paciente
+    public ArrayList<Cita> citasPaciente(Paciente paciente) {
+        return gcit.citasPaciente(paciente);
+    }
+
+    //Lista de citas pendientes de todas las consultas donde el medico trabaja
+    public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
+        return gcit.citasMedico(medico);
+    }
 /////////////////////////
 //GESTIÓN DE PACIENTES
 /////////////////////////

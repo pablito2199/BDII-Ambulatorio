@@ -31,7 +31,7 @@ public class GestionCitas {
         fbd.insertarCita(cita, paciente);
     }
 
-    //Agrega una nueva cita a la base de datos
+    //Agrega una nueva urgencia a la base de datos
     public void insertarUrgencia(Urgencia urgencia) {
         fbd.insertarUrgencia(urgencia);
     }
@@ -54,7 +54,7 @@ public class GestionCitas {
         return fbd.citasOcupadas(ambulatorio, tipocita, inicio, fin);
     }
 
-    //Consulta las urgencias pendientes
+    //Consulta las urgencias pendientes de atender
     public ArrayList<Urgencia> urgenciasPendientes(Ambulatorio ambulatorio) {
         return fbd.urgenciasPendientes(ambulatorio);
     }
@@ -64,8 +64,8 @@ public class GestionCitas {
         return fbd.citasPaciente(paciente);
     }
 
-    //Consulta las citas pendientes de un medico
-    public ArrayList<Urgencia> citasMedico(PersonalSanitario medico) {
+    //Consulta las citas pendientes de atender de un medico
+    public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return fbd.citasMedico(medico);
     }
 }

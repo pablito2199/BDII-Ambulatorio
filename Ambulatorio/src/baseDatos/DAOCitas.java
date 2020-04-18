@@ -18,6 +18,7 @@ import aplicacion.clases.Paciente;
 import aplicacion.clases.Rango;
 import aplicacion.clases.Hospital;
 import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.PersonalSanitario;
 
 /**
  *
@@ -536,6 +537,7 @@ public class DAOCitas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Preparamos la sentencia para obtener las citas pendientes
+            //Nos aseguramos que las citas no sean urgencias
             stmCitas = con.prepareStatement(
                     "select c.* "
                     + "from cita as c "
@@ -553,6 +555,79 @@ public class DAOCitas extends AbstractDAO {
 
             //Sustituimos
             stmCitas.setString(1, paciente.getCIP());
+
+            //Actualizamos
+            rsCitas = stmCitas.executeQuery();
+
+            //Recogemos valores de resultado
+            while (rsCitas.next()) {
+
+                resultado.add(new Cita(
+                        rsCitas.getTimestamp("fechaHoraInicio"),
+                        null,
+                        rsCitas.getString("paciente"),
+                        rsCitas.getInt("consulta"),
+                        rsCitas.getInt("ambulatorio"),
+                        rsCitas.getString("tipo"),
+                        rsCitas.getString("especialidad")
+                ));
+            }
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente intentamos cerrar cursores
+            try {
+                stmCitas.close();
+            } catch (SQLException e) {
+                //En caso de no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        return resultado;
+    }
+
+    //Permite consultar la lista de citas pendientes de atender de un paciente
+    public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
+
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmCitas = null;
+        ResultSet rsCitas = null;
+        ArrayList<Cita> resultado = new ArrayList<>();
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Preparamos la sentencia para obtener las citas pendientes de
+            //todas las consultas donde trabaja un medico
+            stmCitas = con.prepareStatement(
+                    "select ci.* "
+                    + "from cita as ci, consulta as co, pertenecer as p"
+                    + "where ci.fechaHoraFin is null "
+                    + "and ci.consulta = co.identificador "
+                    + "and ci.ambulatorio = co.ambulatorio "
+                    + "and p.ambulatorioPersonal = ? "
+                    + "and p.ambulatorioPersonal = co.ambulatorio "
+                    + "and p.personal = ? "
+                    + "and p.consulta = co.identificador "
+                    + "and co.especialidad in "
+                    + "(select ep.especialidad "
+                    + "from especializacionpersonal as ep "
+                    + "where ep.personal = p.personal "
+                    + "and ep.ambulatorio = p.ambulatorioPersonal) "
+                    + "order by ci.fechaHoraInicio asc"
+            );
+
+            //Sustituimos
+            stmCitas.setInt(1, medico.getAmbulatorio());
+            stmCitas.setString(2, medico.getDNI());
 
             //Actualizamos
             rsCitas = stmCitas.executeQuery();
