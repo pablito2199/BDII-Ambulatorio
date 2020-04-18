@@ -243,7 +243,7 @@ public class DAOCitas extends AbstractDAO {
         }
     }
 
-    //Pone el timestamp de finalizacion de la cita a la actual del sistema gestor
+    //Pone el timestamp de finalizacion de la cita al actual del sistema gestor
     public void atenderCita(Cita cita) {
         //Declaramos variables
         Connection con;
@@ -470,9 +470,9 @@ public class DAOCitas extends AbstractDAO {
         try {
             //Preparamos la sentencia para recoger las citas
             stmUrgencias = con.prepareStatement(
-                    "select c.*, u.*, least(10, u.gravedad + floor(u.soborno * 0.01)) as prioridad"
+                    "select c.*, u.*, least(10, u.gravedad + floor(u.soborno * 0.01)) as prioridad "
                     + "from cita as c, urgencia as u "
-                    + "where c.fechaHoraInicio = u.fechaHoraInicio "
+                    + "where c.fechaHoraInicio = u.cita "
                     + "and c.fechaHoraFin is null "
                     + "and c.consulta = u.consulta "
                     + "and c.ambulatorio = u.ambulatorio "
@@ -499,7 +499,7 @@ public class DAOCitas extends AbstractDAO {
                         rsUrgencias.getInt("consulta"),
                         rsUrgencias.getInt("ambulatorio"),
                         rsUrgencias.getString("tipo"),
-                        rsUrgencias.getString("especialidad")                        
+                        rsUrgencias.getString("especialidad")
                 ));
             }
 
@@ -521,5 +521,71 @@ public class DAOCitas extends AbstractDAO {
         return resultado;
     }
 
-    
+    //Permite consultar la lista de citas pendientes de atender de un paciente
+    public ArrayList<Cita> citasPaciente(Paciente paciente) {
+
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmCitas = null;
+        ResultSet rsCitas = null;
+        ArrayList<Cita> resultado = new ArrayList<>();
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Preparamos la sentencia para obtener las citas pendientes
+            stmCitas = con.prepareStatement(
+                    "select c.* "
+                    + "from cita as c "
+                    + "where c.fechaHoraFin is null "
+                    + "c.paciente = ? "
+                    + "and not exists "
+                    + "(select c.fechaHoraInicio "
+                    + "from urgencia as u "
+                    + "where c.fechaHoraInicio = u.cita "
+                    + "and c.ambulatorio = u.ambulatorio "
+                    + "and c.consulta = u.consulta "
+                    + "and c.paciente = u.paciente) "
+                    + "order by c.fechaHoraInicio asc"
+            );
+
+            //Sustituimos
+            stmCitas.setString(1, paciente.getCIP());
+
+            //Actualizamos
+            rsCitas = stmCitas.executeQuery();
+
+            //Recogemos valores de resultado
+            while (rsCitas.next()) {
+
+                resultado.add(new Cita(
+                        rsCitas.getTimestamp("fechaHoraInicio"),
+                        null,
+                        rsCitas.getString("paciente"),
+                        rsCitas.getInt("consulta"),
+                        rsCitas.getInt("ambulatorio"),
+                        rsCitas.getString("tipo"),
+                        rsCitas.getString("especialidad")
+                ));
+            }
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente intentamos cerrar cursores
+            try {
+                stmCitas.close();
+            } catch (SQLException e) {
+                //En caso de no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        return resultado;
+    }
 }
