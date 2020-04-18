@@ -4,11 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
+import java.sql.Timestamp;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import aplicacion.clases.Cita;
+import aplicacion.clases.TipoCita;
 import aplicacion.clases.Urgencia;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Rango;
 import aplicacion.clases.Hospital;
+import aplicacion.clases.Ambulatorio;
 
 /**
  *
@@ -284,7 +293,7 @@ public class DAOCitas extends AbstractDAO {
     public void derivarHospital(Hospital hospital, Cita cita) {
         //Declaramos variables
         Connection con;
-        PreparedStatement stmCita = null;
+        PreparedStatement stmDerivarHospital = null;
 
         //Establecemos conexión
         con = super.getConexion();
@@ -295,8 +304,9 @@ public class DAOCitas extends AbstractDAO {
             //Quitamos el autocommit
             con.setAutoCommit(false);
 
-            //Preparamos la sentencia para insertar una fecha de finalización
-            stmCita = con.prepareStatement(
+            //Preparamos la sentencia para insertar una fecha de
+            //finalización en la cita
+            stmDerivarHospital = con.prepareStatement(
                     "update from cita "
                     + "set fechaHoraFin = CURRENT_TIMESTAMP"
                     + "where fechaHoraInicio = ? "
@@ -306,16 +316,16 @@ public class DAOCitas extends AbstractDAO {
             );
 
             //Sustituimos
-            stmCita.setTimestamp(1, cita.getFechaHoraInicio());
-            stmCita.setInt(2, cita.getConsulta());
-            stmCita.setInt(3, cita.getAmbulatorio());
-            stmCita.setString(4, cita.getPaciente());
+            stmDerivarHospital.setTimestamp(1, cita.getFechaHoraInicio());
+            stmDerivarHospital.setInt(2, cita.getConsulta());
+            stmDerivarHospital.setInt(3, cita.getAmbulatorio());
+            stmDerivarHospital.setString(4, cita.getPaciente());
 
             //Actualizamos
-            stmCita.executeUpdate();
+            stmDerivarHospital.executeUpdate();
 
             //Preparamos la sentencia para agregar una relacion de derivarHospital
-            stmCita = con.prepareStatement(
+            stmDerivarHospital = con.prepareStatement(
                     "insert into derivarHospital "
                     + "(cita,"
                     + "consulta,"
@@ -326,14 +336,14 @@ public class DAOCitas extends AbstractDAO {
             );
 
             //Sustituimos
-            stmCita.setTimestamp(1, cita.getFechaHoraInicio());
-            stmCita.setInt(2, cita.getConsulta());
-            stmCita.setInt(3, cita.getAmbulatorio());
-            stmCita.setString(4, cita.getPaciente());
-            stmCita.setInt(5, hospital.getCodigo());
+            stmDerivarHospital.setTimestamp(1, cita.getFechaHoraInicio());
+            stmDerivarHospital.setInt(2, cita.getConsulta());
+            stmDerivarHospital.setInt(3, cita.getAmbulatorio());
+            stmDerivarHospital.setString(4, cita.getPaciente());
+            stmDerivarHospital.setInt(5, hospital.getCodigo());
 
             //Actualizamos
-            stmCita.executeUpdate();
+            stmDerivarHospital.executeUpdate();
 
             //Hacemos commit
             con.commit();
@@ -359,7 +369,7 @@ public class DAOCitas extends AbstractDAO {
         } finally {
             //Finalmente intentamos cerrar cursores
             try {
-                stmCita.close();
+                stmDerivarHospital.close();
             } catch (SQLException e) {
                 //En caso de no poder se notifica de ello
                 System.out.println("Imposible cerrar cursores");
@@ -367,4 +377,79 @@ public class DAOCitas extends AbstractDAO {
         }
     }
 
+    //Permite consultar las citas ocupadas entre dos fechas
+    //La fecha minima siempre será el día posterior a la consulta
+    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, TipoCita tipocita, Date inicio, Date fin) {
+
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmCitas = null;
+        ResultSet rsCitas = null;
+        ArrayList<Timestamp> resultado = new ArrayList<>();
+
+        //Comprobamos la fecha de incio
+        LocalDateTime minimo = LocalDate.now().plusDays(1).atStartOfDay();
+        LocalDateTime inicioLDT = inicio.toLocalDate().atStartOfDay();
+
+        if (minimo.compareTo(inicioLDT) < 0) {
+            minimo = inicioLDT;
+        }
+
+        //Recogemos la fecha en un Timestamp
+        //Fecha de fin sera a las 00:00 del dia siguiente al especificado
+        Timestamp inicioTS = Timestamp.valueOf(minimo);
+        Timestamp finTS = Timestamp.valueOf(fin.toLocalDate().atStartOfDay().plusDays(1));
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Preparamos la sentencia para recoger las citas
+            stmCitas = con.prepareStatement(
+                    "select fechaHoraInicio"
+                    + "from cita as ci, consulta as co, tipocita as t, especialidad as e"
+                    + "where ci.fechaHoraInicio > ? "
+                    + "and ci.fechaHoraInicio < ? "
+                    + "and ci.consulta = co.identificador "
+                    + "and t.tipo = ? "
+                    + "and t.especialidad = e.nombre "
+                    + "and e.nombre = co.especialidad "
+                    + "and ci.ambulatorio = co.ambulatorio "
+                    + "and co.ambulatorio = ? "
+                    + "order by fechaHoraInicio asc"
+            );
+
+            //Sustituimos
+            stmCitas.setTimestamp(1, inicioTS);
+            stmCitas.setTimestamp(2, finTS);
+            stmCitas.setString(3, tipocita.getNombre());
+            stmCitas.setInt(4, ambulatorio.getCodigo());
+
+            //Actualizamos
+            rsCitas = stmCitas.executeQuery();
+
+            //Recogemos valores de resultado
+            while (rsCitas.next()) {
+
+                resultado.add(rsCitas.getTimestamp("fechaHoraInicio"));
+            }
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente intentamos cerrar cursores
+            try {
+                stmCitas.close();
+            } catch (SQLException e) {
+                //En caso de no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        return resultado;
+    }
 }

@@ -1,6 +1,8 @@
 package baseDatos;
 
 import aplicacion.clases.*;
+import java.sql.Timestamp;
+import java.sql.Date;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -111,9 +113,9 @@ public class FachadaBaseDatos {
         daoCitas.derivarHospital(hospital, cita);
     }
 
-    //Consulta las citas pendientes
-    public ArrayList<Cita> citasPendientes() {
-        return daoCitas.citasPendientes();
+    //Devuelve una lista de las horas de las citas reservadas entre dos fechas
+    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, TipoCita tipocita, Date inicio, Date fin) {
+        return daoCitas.citasOcupadas(ambulatorio, tipocita, inicio, fin);
     }
 
     //Consulta las urgencias pendientes
