@@ -4,7 +4,7 @@
  */
 package gui;
 
-import aplicacion.Enfermedad;
+import aplicacion.clases.Enfermedad;
 
 public class VConsultas extends javax.swing.JDialog {
 

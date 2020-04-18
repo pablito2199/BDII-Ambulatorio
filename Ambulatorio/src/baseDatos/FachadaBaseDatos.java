@@ -1,13 +1,6 @@
 package baseDatos;
 
-import aplicacion.Ambulatorio;
-import aplicacion.Cita;
-import aplicacion.Urgencia;
-import aplicacion.Paciente;
-import aplicacion.PersonalSanitario;
-import aplicacion.Enfermedad;
-import aplicacion.Consulta;
-import aplicacion.Receta;
+import aplicacion.clases.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -114,8 +107,8 @@ public class FachadaBaseDatos {
     }
 
     //Deriva una cita o urgencia a un hospital
-    public void derivarHospital(Cita cita) {
-        daoCitas.derivarHospital(cita);
+    public void derivarHospital(Hospital hospital, Cita cita) {
+        daoCitas.derivarHospital(hospital, cita);
     }
 
     //Consulta las citas pendientes

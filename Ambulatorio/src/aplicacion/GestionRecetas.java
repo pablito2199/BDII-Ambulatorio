@@ -1,5 +1,7 @@
 package aplicacion;
 
+import aplicacion.clases.Paciente;
+import aplicacion.clases.Receta;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 

@@ -1,6 +1,6 @@
 package gui;
 
-import aplicacion.Paciente;
+import aplicacion.clases.Paciente;
 
 public class FachadaGui {
 

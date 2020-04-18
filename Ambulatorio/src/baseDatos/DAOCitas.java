@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import aplicacion.Cita;
-import aplicacion.Urgencia;
-import aplicacion.Paciente;
-import aplicacion.Rango;
+import aplicacion.clases.Cita;
+import aplicacion.clases.Urgencia;
+import aplicacion.clases.Paciente;
+import aplicacion.clases.Rango;
+import aplicacion.clases.Hospital;
 
 /**
  *
@@ -45,7 +46,7 @@ public class DAOCitas extends AbstractDAO {
                     + "fechaHoraInicio,"
                     + "tipo,"
                     + "especialidad) "
-                    + "values (?,?,?,?,?,?,?)"
+                    + "values (?,?,?,?,?,?)"
             );
             //Sustituimos
             stmCita.setString(1, cita.getPaciente());
@@ -57,6 +58,9 @@ public class DAOCitas extends AbstractDAO {
 
             //Actualizamos
             stmCita.executeUpdate();
+
+            //Hacemos commit
+            con.commit();
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -101,19 +105,31 @@ public class DAOCitas extends AbstractDAO {
                 }
             } catch (SQLException e2) {
 
-                //Se imprime el mensaje y se genera la ventana que muestra el mensaje
-                System.out.println(e2.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(e2.getMessage());
+                String mensajeExcepcion = e2.getMessage();
+
+                try {
+
+                    //Hacemos rollback
+                    con.rollback();
+
+                } catch (SQLException e3) {
+
+                    //Se añade el mensaje de excepcion
+                    mensajeExcepcion += "\n" + e3.getMessage();
+
+                } finally {
+
+                    //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+                    System.out.println(mensajeExcepcion);
+                    this.getFachadaAplicacion().muestraExcepcion(mensajeExcepcion);
+                }
+
             }
 
         } finally {
 
-            //Finalmente intentamos cerrar los cursores y hacer commit si no se hizo ya
+            //Finalmente intentamos cerrar los cursores
             try {
-                //Hacemos commit en caso de que el paciente no sea deluxe
-                if (paciente.getRango() != Rango.DELUXE) {
-                    con.commit();
-                }
 
                 stmCita.close();
             } catch (SQLException e) {
@@ -123,11 +139,105 @@ public class DAOCitas extends AbstractDAO {
         }
     }
 
-    //Pone la fecha de finalizacion de la cita a la actual del sistema gestor
+    //Permite insertar una nueva urgencia en la base de datos
+    public void insertarUrgencia(Urgencia urgencia) {
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmUrgencia = null;
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+
+            //Quitamos autocommit
+            con.setAutoCommit(false);
+
+            //Preparamos la consulta SQL para insertar una nueva cita de urgencia
+            stmUrgencia = con.prepareStatement(
+                    "insert into cita "
+                    + "(paciente,"
+                    + "consulta,"
+                    + "ambulatorio,"
+                    + "fechaHoraInicio,"
+                    + "tipo,"
+                    + "especialidad) "
+                    + "values (?,?,?,?,?,?)"
+            );
+            //Sustituimos
+            stmUrgencia.setString(1, urgencia.getPaciente());
+            stmUrgencia.setInt(2, urgencia.getConsulta());
+            stmUrgencia.setInt(3, urgencia.getAmbulatorio());
+            stmUrgencia.setTimestamp(4, urgencia.getFechaHoraInicio());
+            stmUrgencia.setString(5, urgencia.getTipo());
+            stmUrgencia.setString(6, urgencia.getEspecialidad());
+
+            //Actualizamos
+            stmUrgencia.executeUpdate();
+
+            //Preparamos la consulta SQL para insertar la referencia
+            //a la cita en la tabla de urgencias
+            stmUrgencia = con.prepareStatement(
+                    "insert into urgencia "
+                    + "(paciente,"
+                    + "consulta,"
+                    + "ambulatorio,"
+                    + "cita,"
+                    + "soborno,"
+                    + "gravedad) "
+                    + "values (?,?,?,?,?,?)"
+            );
+            //Sustituimos
+            stmUrgencia.setString(1, urgencia.getPaciente());
+            stmUrgencia.setInt(2, urgencia.getConsulta());
+            stmUrgencia.setInt(3, urgencia.getAmbulatorio());
+            stmUrgencia.setTimestamp(4, urgencia.getFechaHoraInicio());
+            stmUrgencia.setFloat(5, urgencia.getSoborno());
+            stmUrgencia.setInt(6, urgencia.getGravedad());
+
+            //Actualizamos
+            stmUrgencia.executeUpdate();
+
+            //Hacemos commit
+            con.commit();
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+
+            String mensajeExcepcion = e.getMessage();
+
+            try {
+                //Hacemos rollback
+                con.rollback();
+
+            } catch (SQLException e2) {
+
+                //Juntamos mensajes de excepcion
+                mensajeExcepcion += "\n" + e2.getMessage();
+            }
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(mensajeExcepcion);
+            this.getFachadaAplicacion().muestraExcepcion(mensajeExcepcion);
+
+        } finally {
+
+            //Finalmente intentamos cerrar los cursores
+            try {
+
+                stmUrgencia.close();
+            } catch (SQLException e) {
+                //De no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+
+    //Pone el timestamp de finalizacion de la cita a la actual del sistema gestor
     public void atenderCita(Cita cita) {
         //Declaramos variables
         Connection con;
-        PreparedStatement stmPaciente = null;
+        PreparedStatement stmCita = null;
 
         //Establecemos conexión
         con = super.getConexion();
@@ -135,7 +245,7 @@ public class DAOCitas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Preparamos la sentencia para insertar una fecha de finalización
-            stmPaciente = con.prepareStatement(
+            stmCita = con.prepareStatement(
                     "update from cita "
                     + "set fechaHoraFin = CURRENT_TIMESTAMP"
                     + "where fechaHoraInicio = ? "
@@ -145,13 +255,13 @@ public class DAOCitas extends AbstractDAO {
             );
 
             //Sustituimos
-            stmPaciente.setTimestamp(1, cita.getFechaHoraInicio());
-            stmPaciente.setInt(2, cita.getConsulta());
-            stmPaciente.setInt(3, cita.getAmbulatorio());
-            stmPaciente.setString(4, cita.getPaciente());
+            stmCita.setTimestamp(1, cita.getFechaHoraInicio());
+            stmCita.setInt(2, cita.getConsulta());
+            stmCita.setInt(3, cita.getAmbulatorio());
+            stmCita.setString(4, cita.getPaciente());
 
             //Actualizamos
-            stmPaciente.executeUpdate();
+            stmCita.executeUpdate();
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -161,7 +271,7 @@ public class DAOCitas extends AbstractDAO {
         } finally {
             //Finalmente intentamos cerrar cursores
             try {
-                stmPaciente.close();
+                stmCita.close();
             } catch (SQLException e) {
                 //En caso de no poder se notifica de ello
                 System.out.println("Imposible cerrar cursores");
@@ -169,121 +279,92 @@ public class DAOCitas extends AbstractDAO {
         }
     }
 
-    //Permite modificar los datos de un paciente de la base de datos
-    public void modificarPaciente(Paciente paciente) {
+    //Permite insertar una relacion derivarHospital en la base de datos e
+    //inserta un timestamp de finalizacion en la cita relacionada
+    public void derivarHospital(Hospital hospital, Cita cita) {
         //Declaramos variables
         Connection con;
-        PreparedStatement stmPaciente = null;
+        PreparedStatement stmCita = null;
 
         //Establecemos conexión
         con = super.getConexion();
 
         //Intentamos la consulta SQL
         try {
-            //Preparamos la sentencia para actualizar los datos del paciente con la id especificada
-            stmPaciente = con.prepareStatement("update paciente "
-                    + "set numSeguridadSocial = ?, "
-                    + "nombre = ?, "
-                    + "fechaNacimiento = ?, "
-                    + "sexo = ?, "
-                    + "grupoSanguineo = ?, "
-                    + "nacionalidad = ? "
-                    + "direccion = ? "
-                    + "telefono = ? "
-                    + "where cip = ?");
-            //Actualizamos
-            stmPaciente.setInt(1, paciente.getNSS());
-            stmPaciente.setString(2, paciente.getNombre());
-            stmPaciente.setDate(3, paciente.getFechaNacimiento());
-            stmPaciente.setString(4, paciente.getSexo());
-            stmPaciente.setString(5, paciente.getGrupo().getTipo());
-            stmPaciente.setString(6, paciente.getNacionalidad());
-            stmPaciente.setString(7, paciente.getDireccion());
-            stmPaciente.setString(8, paciente.getTelefono());
 
-            stmPaciente.setString(9, paciente.getCIP());  //Id de paciente
-            //NOTA: El DNI y el CIP de un paciente no se pueden modificar
+            //Quitamos el autocommit
+            con.setAutoCommit(false);
+
+            //Preparamos la sentencia para insertar una fecha de finalización
+            stmCita = con.prepareStatement(
+                    "update from cita "
+                    + "set fechaHoraFin = CURRENT_TIMESTAMP"
+                    + "where fechaHoraInicio = ? "
+                    + "and consulta = ? "
+                    + "and ambulatorio = ? "
+                    + "and paciente = ?"
+            );
+
+            //Sustituimos
+            stmCita.setTimestamp(1, cita.getFechaHoraInicio());
+            stmCita.setInt(2, cita.getConsulta());
+            stmCita.setInt(3, cita.getAmbulatorio());
+            stmCita.setString(4, cita.getPaciente());
 
             //Actualizamos
-            stmPaciente.executeUpdate();
+            stmCita.executeUpdate();
+
+            //Preparamos la sentencia para agregar una relacion de derivarHospital
+            stmCita = con.prepareStatement(
+                    "insert into derivarHospital "
+                    + "(cita,"
+                    + "consulta,"
+                    + "ambulatorio,"
+                    + "paciente,"
+                    + "hospital) "
+                    + "values(?,?,?,?,?)"
+            );
+
+            //Sustituimos
+            stmCita.setTimestamp(1, cita.getFechaHoraInicio());
+            stmCita.setInt(2, cita.getConsulta());
+            stmCita.setInt(3, cita.getAmbulatorio());
+            stmCita.setString(4, cita.getPaciente());
+            stmCita.setInt(5, hospital.getCodigo());
+
+            //Actualizamos
+            stmCita.executeUpdate();
+
+            //Hacemos commit
+            con.commit();
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
+
+            String mensajeExcepcion = e.getMessage();
+
+            try {
+                //Hacemos rollback
+                con.rollback();
+
+            } catch (SQLException e2) {
+
+                //Juntamos mensajes de excepcion
+                mensajeExcepcion += "\n" + e2.getMessage();
+            }
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            System.out.println(mensajeExcepcion);
+            this.getFachadaAplicacion().muestraExcepcion(mensajeExcepcion);
+
         } finally {
             //Finalmente intentamos cerrar cursores
             try {
-                stmPaciente.close();
+                stmCita.close();
             } catch (SQLException e) {
-                //De no poder se notifica de ello
+                //En caso de no poder se notifica de ello
                 System.out.println("Imposible cerrar cursores");
             }
         }
     }
 
-    //Permite buscar pacientes por su id y/o nombre de paciente
-    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, Strign grupo) {
-        //Declaramos variables
-        java.util.List<Paciente> resultado = new java.util.ArrayList<Paciente>();
-        Paciente pacienteActual;
-        Connection con;
-        PreparedStatement stmPacientes = null;
-        ResultSet rsPacientes;
-
-        //Establecemos conexión
-        con = this.getConexion();
-
-        //Intentamos la consulta SQL
-        try {
-            //Construimos la consulta
-            //Selecionamos el id, clave, nombre, direccion, email y tipo de paciente de la tabla de pacientes
-            //que tengan el nombre dado
-            String consulta = "select dni, nombre, current_date-fechaNacimiento as edad, sexo, grupoSanguineo "
-                    + "from paciente "
-                    + "where cip like ? "
-                    + "and dni like ?"
-                    + "and nombre like ?"
-                    + "and current_date-fechaNacimiento = "
-                    + "and dni like ?"
-                    + "and dni like ?"
-                    + "and dni like ?";
-
-            //Preparamos la consulta
-            stmPacientes = con.prepareStatement(consulta);
-            //Sustituimos
-            stmPacientes.setString(1, "%" + nombre + "%"); //Nombre
-            if (id != null) {
-                stmPacientes.setString(2, "%" + id + "%"); //ID, en caso de no ser nulo
-            }
-            //Ejecutamos
-            rsPacientes = stmPacientes.executeQuery();
-            //Mientras haya coincidencias
-            while (rsPacientes.next()) {
-                //Se crea una instancia de paciente con los datos recuperados de la base de datos
-                pacienteActual = new Paciente(rsPacientes.getString("id_paciente"), rsPacientes.getString("clave"),
-                        rsPacientes.getString("nombre"), rsPacientes.getString("direccion"),
-                        rsPacientes.getString("email"), TipoPaciente.CTU(rsPacientes.getString("tipo_paciente")), rsPacientes.getString("edad"));
-                //Y se añade la instancia a la lista de pacientes
-                resultado.add(pacienteActual);
-            }
-
-            //En caso de error se captura la excepción
-        } catch (SQLException e) {
-            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        } finally {
-            //Finalmente se intentan cerrar cursores
-            try {
-                stmPacientes.close();
-            } catch (SQLException e) {
-                //Si no se puede se imprime el error
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-        //Se devuelve el resultado (lista de pacientes)
-        return resultado;
-    }
 }

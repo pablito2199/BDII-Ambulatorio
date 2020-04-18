@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import aplicacion.Paciente;
-import aplicacion.GrupoSanguineo;
-import aplicacion.Rango;
-import aplicacion.Cita;
+import aplicacion.clases.Paciente;
+import aplicacion.clases.GrupoSanguineo;
+import aplicacion.clases.Rango;
+import aplicacion.clases.Cita;
 
 /* 
  * @author Ainhoa Vivel Couso

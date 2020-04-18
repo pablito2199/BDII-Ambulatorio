@@ -4,6 +4,7 @@
  */
 package aplicacion;
 
+import aplicacion.clases.Enfermedad;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 

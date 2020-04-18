@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import aplicacion.Paciente;
+import aplicacion.clases.Paciente;
 
 /**
  * 
@@ -155,7 +155,7 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Permite buscar pacientes por su id y/o nombre de paciente
-    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, Strign grupo) {
+    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
         //Declaramos variables
         java.util.List<Paciente> resultado = new java.util.ArrayList<Paciente>();
         Paciente pacienteActual;

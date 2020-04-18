@@ -1,5 +1,10 @@
 package aplicacion;
 
+import aplicacion.clases.Paciente;
+import aplicacion.clases.Hospital;
+import aplicacion.clases.Cita;
+import aplicacion.clases.PersonalSanitario;
+import aplicacion.clases.Urgencia;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 import java.util.ArrayList;
@@ -24,19 +29,14 @@ public class GestionCitas {
         fbd.insertarUrgencia(urgencia);
     }
     
-    //Atiende una cita
+    //Atiende una cita o una urgencia
     public void atenderCita(Cita cita) {
         fbd.atenderCita(cita);
     }
     
-    //Atiende una urgencia
-    public void atenderUrgencia(Urgencia urgencia) {
-        fbd.atenderUrgencia(urgencia);
-    }
-    
     //Deriva una cita o urgencia a un hospital
-    public void derivarHospital(Cita cita){
-        fbd.derivarHospital(cita);
+    public void derivarHospital(Hospital hospital, Cita cita){
+        fbd.derivarHospital(hospital, cita);
     }
     
     //Consulta las citas pendientes

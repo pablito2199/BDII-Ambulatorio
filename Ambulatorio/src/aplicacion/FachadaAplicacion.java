@@ -1,5 +1,10 @@
 package aplicacion;
 
+import aplicacion.clases.Receta;
+import aplicacion.clases.Paciente;
+import aplicacion.clases.Cita;
+import aplicacion.clases.Enfermedad;
+
 public class FachadaAplicacion {
 
     gui.FachadaGui fgui;                    // Enlace a la fachada de la GUI

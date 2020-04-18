@@ -1,4 +1,4 @@
-package aplicacion;
+package aplicacion.clases;
 
 public enum GrupoSanguineo {
 

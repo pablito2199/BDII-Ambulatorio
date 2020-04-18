@@ -1,4 +1,4 @@
-package aplicacion;
+package aplicacion.clases;
 
 import java.sql.Date;
 

@@ -1,6 +1,6 @@
 package baseDatos;
 
-import aplicacion.Administrador;
+import aplicacion.clases.Administrador;
 import java.sql.*;
 
 

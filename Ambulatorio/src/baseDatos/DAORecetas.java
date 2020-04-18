@@ -1,7 +1,7 @@
 package baseDatos;
 
-import aplicacion.Paciente;
-import aplicacion.Receta;
+import aplicacion.clases.Paciente;
+import aplicacion.clases.Receta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
