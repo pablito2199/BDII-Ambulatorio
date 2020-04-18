@@ -81,7 +81,7 @@ public class DAOCitas extends AbstractDAO {
                     );
 
                     //Sustituimos
-                    stmCita.setString(1, cita.getPaciente());
+                    stmCita.setString(1, paciente.getCIP());
                     stmCita.setString(2, cita.getTipo());
                     stmCita.setString(3, cita.getEspecialidad());
                     stmCita.setInt(4, cita.getConsulta());
