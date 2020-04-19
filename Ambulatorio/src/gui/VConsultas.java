@@ -11,18 +11,20 @@ public class VConsultas extends javax.swing.JDialog {
     private VPrincipal padre;
     private aplicacion.FachadaAplicacion fa;
     private java.util.List<Consulta> consultas;
+    private Integer ambulatorio;
 
-    public VConsultas(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<Integer> restoConsultas) {
+    public VConsultas(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<Integer> restoConsultas, Integer ambulatorio) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
         padre = (VPrincipal) parent;
+        this.ambulatorio = ambulatorio;
 
         //obtiene la lista de consultas para mostrarlas por pantalla
         ModeloListaConsultas m = new ModeloListaConsultas();
         lstConsultas.setModel(m);
         m.setElementos(restoConsultas);
-        consultas = fa.consultarConsultas(null);
+        consultas = fa.consultarConsultas(null, ambulatorio);
         if (m.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstConsultas.setSelectedIndex(0);
@@ -268,7 +270,7 @@ public class VConsultas extends javax.swing.JDialog {
     private void btnAnadirConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirConsultasActionPerformed
         // TODO add your handling code here:
         if (!textoNumeroConsulta.getText().isEmpty()) {
-            Consulta c = new Consulta(textoNumeroConsulta.getText(), ambulatorio, seleccionEspecialidades.getSelectedItem());
+            Consulta c = new Consulta(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
             //si la fila está seleccionada, modifica, en caso contrario, añade la enfermedad
             fa.anadirConsulta(c);
         } else {
@@ -284,7 +286,13 @@ public class VConsultas extends javax.swing.JDialog {
         // TODO add your handling code here:
         ModeloListaConsultas m = (ModeloListaConsultas) lstConsultas.getModel();
         Integer numero = m.obtenerConsulta(lstConsultas.getSelectedIndex());
-        fa.borrarConsulta(numero);
+        
+        //if(cuentaConsultasAmbulatorio>1) deja eliminar, si no pues no y manda un mensaje de error
+        //hacer consulta compleja
+        fa.borrarConsulta(numero, ambulatorio);
+        fa.traspasarCitas(numero, ambulatorio);
+        
+        
         textoNumeroConsulta.setText(null);
         seleccionEspecialidades.setSelectedItem(0);
         buscarConsultas();
@@ -317,7 +325,7 @@ public class VConsultas extends javax.swing.JDialog {
     public void buscarConsultas() {
         ModeloListaConsultas m = new ModeloListaConsultas();
         lstConsultas.setModel(m);
-        consultas = fa.consultarConsultas(Integer.parseInt(textoNumeroConsulta.getText()));
+        consultas = fa.consultarConsultas(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio);
         java.util.ArrayList<Integer> numero = new java.util.ArrayList<>();
         for (int i = 0; i < consultas.size(); i++) {
             numero.add(consultas.get(i).getIdentificador());

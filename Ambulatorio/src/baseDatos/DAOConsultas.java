@@ -1,5 +1,6 @@
 package baseDatos;
 
+import aplicacion.clases.Cita;
 import aplicacion.clases.Consulta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,7 +59,7 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Permite eliminar una consulta de la base de datos
-    public void borrarConsulta(Integer identificador) {
+    public void borrarConsulta(Integer identificador, Integer ambulatorio) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmConsulta = null;
@@ -69,9 +70,10 @@ public class DAOConsultas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Preparamos la sentencia para borrar de la tabla de consultas aquel con el identificador especificado por argumentos
-            stmConsulta = con.prepareStatement("delete from consulta where identificador = ?");
+            stmConsulta = con.prepareStatement("delete from consulta where identificador = ? and ambulatorio = ?");
             //Sustituimos
-            stmConsulta.setString(1, CIP);  //CIP del consulta
+            stmConsulta.setInt(1, identificador);  //identificador de la consulta
+            stmConsulta.setInt(2, ambulatorio);  //ambulatorio de la consulta
             //Actualizamos
             stmConsulta.executeUpdate();
 
@@ -90,9 +92,50 @@ public class DAOConsultas extends AbstractDAO {
             }
         }
     }
+    
+    public void traspasarCitas(Integer identificador, Integer ambulatorio) {
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmCita = null;
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Preparamos la sentencia para insertar una fecha de finalización
+            stmCita = con.prepareStatement(
+                    "update from cita "
+                    + "set consulta = 1 "
+                    + "where consulta = ? "
+                        + "and ambulatorio = ?"
+            );
+
+            //Sustituimos
+            stmCita.setInt(1, identificador);
+            stmCita.setInt(2, ambulatorio);
+
+            //Actualizamos
+            stmCita.executeUpdate();
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente intentamos cerrar cursores
+            try {
+                stmCita.close();
+            } catch (SQLException e) {
+                //En caso de no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
 
     //Permite buscar consultas por su identificador
-    public java.util.List<Consulta> consultarConsultas(Integer identificador) {
+    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio) {
         //Declaramos variables
         java.util.List<Consulta> resultado = new java.util.ArrayList<>();
         Consulta consultaActual;
@@ -110,12 +153,14 @@ public class DAOConsultas extends AbstractDAO {
             //que tengan el identificador dado
             String consulta = "select identificador, ambulatorio, especialidad "
                     + "from consulta "
-                    + "where identificador like ?";
+                    + "where identificador like ? "
+                        + " and ambulatorio = ?";
 
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
             stmConsultas.setString(1, "%" + identificador + "%"); //Identificador
+            stmConsultas.setInt(2, ambulatorio); //Ambulatorio
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias

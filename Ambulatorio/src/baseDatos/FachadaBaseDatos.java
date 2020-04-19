@@ -90,6 +90,9 @@ public class FachadaBaseDatos {
         daoAmbulatorios.modificarAmbulatorio(ambulatorio);
     }
 
+    public Integer numeroConsultas(Integer ambulatorio) {
+        return daoAmbulatorios.numeroConsultar(ambulatorio);
+    }
 ///////////////
 //DAOCITAS
 ///////////////
@@ -190,12 +193,16 @@ public class FachadaBaseDatos {
         daoConsultas.insertarConsulta(consulta);
     }
 
-    public java.util.List<Consulta> consultarConsultas(Integer identificador) {
-        return daoConsultas.consultarConsultas(identificador);
+    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio) {
+        return daoConsultas.consultarConsultas(identificador, ambulatorio);
     }
 
-    public void borrarConsulta(Integer identificador) {
-        daoConsultas.borrarConsulta(identificador);
+    public void borrarConsulta(Integer identificador, Integer ambulatorio) {
+        daoConsultas.borrarConsulta(identificador, ambulatorio);
+    }
+    
+    public void traspasarCitas(Integer identificador, Integer ambulatorio) {
+        daoConsultas.traspasarCitas(identificador, ambulatorio);
     }
 
 ////////////////////
