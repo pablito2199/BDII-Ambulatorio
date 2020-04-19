@@ -289,8 +289,8 @@ public class VConsultas extends javax.swing.JDialog {
         
         //if(cuentaConsultasAmbulatorio>1) deja eliminar, si no pues no y manda un mensaje de error
         //hacer consulta compleja
-        fa.borrarConsulta(numero, ambulatorio);
         fa.traspasarCitas(numero, ambulatorio);
+        fa.borrarConsulta(numero, ambulatorio);
         
         
         textoNumeroConsulta.setText(null);

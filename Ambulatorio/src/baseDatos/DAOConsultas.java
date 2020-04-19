@@ -105,10 +105,13 @@ public class DAOConsultas extends AbstractDAO {
         try {
             //Preparamos la sentencia para insertar una fecha de finalización
             stmCita = con.prepareStatement(
-                    "update from cita "
-                    + "set consulta = 1 "
-                    + "where consulta = ? "
-                        + "and ambulatorio = ?"
+                    "update from cita as c"
+                    + "set consulta = (select c2.identificador "
+                                + "from consulta as c2 "
+                                + "where c2.identificador != c.consulta "
+                                +   "and c2.ambulatorio = c.ambulatorio)"
+                    + "where c.consulta = ? "
+                        + "and c.ambulatorio = ?"
             );
 
             //Sustituimos
