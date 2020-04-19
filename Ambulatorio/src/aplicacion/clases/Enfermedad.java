@@ -6,6 +6,7 @@
 package aplicacion.clases;
 
 public class Enfermedad {
+
     private String nombre;
     private String descripcion;
 
@@ -29,7 +30,7 @@ public class Enfermedad {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Enfermedad) {

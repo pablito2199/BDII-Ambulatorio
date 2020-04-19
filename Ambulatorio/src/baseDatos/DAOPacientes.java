@@ -13,7 +13,7 @@ import aplicacion.clases.Cita;
  * @author Ainhoa Vivel Couso
  */
 public class DAOPacientes extends AbstractDAO {
-    
+
     //Contructor
     public DAOPacientes(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
@@ -37,16 +37,16 @@ public class DAOPacientes extends AbstractDAO {
                     + "sexo, grupoSanguineo, nacionalidad, direccion, telefono) "
                     + "values (?,?,?,?,?,?,?,?,?,?)");
             //Sustituimos
-            stmPaciente.setString(1, paciente.getCIP());        
-            stmPaciente.setString(2, paciente.getDNI());       
-            stmPaciente.setInt(3, paciente.getNSS()); 
+            stmPaciente.setString(1, paciente.getCIP());
+            stmPaciente.setString(2, paciente.getDNI());
+            stmPaciente.setInt(3, paciente.getNSS());
             stmPaciente.setString(4, paciente.getNombre());
-            stmPaciente.setDate(5, paciente.getFechaNacimiento());     
-            stmPaciente.setString(6, paciente.getSexo()); 
-            stmPaciente.setString(7, paciente.getGrupo().getTipo()); 
-            stmPaciente.setString(8, paciente.getNacionalidad()); 
-            stmPaciente.setString(9, paciente.getDireccion()); 
-            stmPaciente.setString(10, paciente.getTelefono()); 
+            stmPaciente.setDate(5, paciente.getFechaNacimiento());
+            stmPaciente.setString(6, paciente.getSexo());
+            stmPaciente.setString(7, paciente.getGrupo().getTipo());
+            stmPaciente.setString(8, paciente.getNacionalidad());
+            stmPaciente.setString(9, paciente.getDireccion());
+            stmPaciente.setString(10, paciente.getTelefono());
 
             //Actualizamos
             stmPaciente.executeUpdate();
@@ -124,14 +124,14 @@ public class DAOPacientes extends AbstractDAO {
                     + "telefono = ? "
                     + "where cip = ?");
             //Actualizamos
-            stmPaciente.setInt(1, paciente.getNSS());        
-            stmPaciente.setString(2, paciente.getNombre());       
-            stmPaciente.setDate(3, paciente.getFechaNacimiento()); 
+            stmPaciente.setInt(1, paciente.getNSS());
+            stmPaciente.setString(2, paciente.getNombre());
+            stmPaciente.setDate(3, paciente.getFechaNacimiento());
             stmPaciente.setString(4, paciente.getSexo());
-            stmPaciente.setString(5, paciente.getGrupo().getTipo());     
-            stmPaciente.setString(6, paciente.getNacionalidad()); 
-            stmPaciente.setString(7, paciente.getDireccion()); 
-            stmPaciente.setString(8, paciente.getTelefono()); 
+            stmPaciente.setString(5, paciente.getGrupo().getTipo());
+            stmPaciente.setString(6, paciente.getNacionalidad());
+            stmPaciente.setString(7, paciente.getDireccion());
+            stmPaciente.setString(8, paciente.getTelefono());
 
             stmPaciente.setString(9, paciente.getCIP());  //Id de paciente
             //NOTA: El DNI y el CIP de un paciente no se pueden modificar
@@ -166,12 +166,12 @@ public class DAOPacientes extends AbstractDAO {
         PreparedStatement stmRango = null;
         ResultSet rsRango;
 
-        String subconsulta;        
+        String subconsulta;
         //Establecemos conexión
         con = this.getConexion();
         //Impedimos que se la confirmación sea automática
         try {
-            con.setAutoCommit(false);            
+            con.setAutoCommit(false);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -180,7 +180,7 @@ public class DAOPacientes extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad," 
+            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad,"
                     + "sexo, grupoSanguineo "
                     + "from paciente "
                     + "where cip like ? "
@@ -196,47 +196,46 @@ public class DAOPacientes extends AbstractDAO {
             //Sustituimos
             stmPacientes.setString(1, "%" + CIP + "%");
             stmPacientes.setString(2, "%" + DNI + "%");
-            stmPacientes.setString(3, "%" + nombre + "%"); 
-            stmPacientes.setInt(4, edad); 
-            stmPacientes.setString(5, "%" + sexo + "%"); 
-            stmPacientes.setString(6, "%" + NSS + "%"); 
-            stmPacientes.setString(7, "%" + nombre + "%"); 
-            stmPacientes.setString(8, "%" + grupo + "%"); 
- 
+            stmPacientes.setString(3, "%" + nombre + "%");
+            stmPacientes.setInt(4, edad);
+            stmPacientes.setString(5, "%" + sexo + "%");
+            stmPacientes.setString(6, "%" + NSS + "%");
+            stmPacientes.setString(7, "%" + nombre + "%");
+            stmPacientes.setString(8, "%" + grupo + "%");
+
             //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
             //Mientras haya coincidencias
             while (rsPacientes.next()) {
                 //Se crea una instancia de paciente con los datos recuperados de la base de datos
-                pacienteActual = new Paciente(rsPacientes.getString("cip"), 
+                pacienteActual = new Paciente(rsPacientes.getString("cip"),
                         rsPacientes.getString("dni"),
-                        rsPacientes.getInt("numSeguridadSocial"), 
-                        rsPacientes.getString("nombre"), 
+                        rsPacientes.getInt("numSeguridadSocial"),
+                        rsPacientes.getString("nombre"),
                         rsPacientes.getDate("fechaNacimiento"),
-                        rsPacientes.getString("sexo"), 
-                        GrupoSanguineo.getTipo(rsPacientes.getString("grupoSanguineo")), 
+                        rsPacientes.getString("sexo"),
+                        GrupoSanguineo.getTipo(rsPacientes.getString("grupoSanguineo")),
                         rsPacientes.getString("nacionalidad"),
-                        rsPacientes.getString("direccion"), 
+                        rsPacientes.getString("direccion"),
                         rsPacientes.getString("telefono"),
-                        rsPacientes.getInt("edad"), 
+                        rsPacientes.getInt("edad"),
                         Rango.getTipo(rsPacientes.getString("rango")));
-               
+
                 //Intentamos la otra consulta para recuperar los datos del autor
                 try {
                     //Recuperamos el nombre del autor de la tabla de autores donde el libro sea el que pedimos y ordenamos
-                    subconsulta = "select " 
-                        + "CASE " 
-                        + "WHEN SUM(distinct soborno)>500 THEN 'deluxe " 
-                        + "WHEN COUNT(distinct paciente)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
-                        + "ELSE 'base' "
-                        + "END  as rango "
-                        + "from urgencia where paciente = ?"
-                        + "group by paciente, soborno;";
+                    subconsulta = "select "
+                            + "CASE "
+                            + "WHEN SUM(distinct soborno)>500 THEN 'deluxe "
+                            + "WHEN COUNT(distinct paciente)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
+                            + "ELSE 'base' "
+                            + "END  as rango "
+                            + "from urgencia where paciente = ?"
+                            + "group by paciente, soborno;";
                     stmRango = con.prepareStatement(subconsulta);
-                    
+
                     //Sustituimos con los datos propordionados
                     stmRango.setString(1, pacienteActual.getCIP()); //Id del libro
-                    
 
                     //Ejecutamos la consulta
                     rsRango = stmRango.executeQuery();
@@ -265,8 +264,7 @@ public class DAOPacientes extends AbstractDAO {
                 //Y se añade la instancia a la lista de pacientes
                 resultado.add(pacienteActual);
             }
-        }
-        //En caso de error se captura la excepción
+        } //En caso de error se captura la excepción
         catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
@@ -291,16 +289,16 @@ public class DAOPacientes extends AbstractDAO {
             //Confirmamos
             con.commit();
         } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage()); 
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
     }
-    
+
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente,  String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin){
-    //Declaramos variables
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
+        //Declaramos variables
         java.util.List<Cita> resultado = new java.util.ArrayList<Cita>();
         Cita citaActual;
         Connection con;
@@ -310,7 +308,7 @@ public class DAOPacientes extends AbstractDAO {
         con = this.getConexion();
         //Impedimos que se la confirmación sea automática
         try {
-            con.setAutoCommit(false);            
+            con.setAutoCommit(false);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -319,7 +317,7 @@ public class DAOPacientes extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select fechaHoraInicio, fechaHoraFin, paciente, consulta, ambulatorio, tipo, especialidad " 
+            String consulta = "select fechaHoraInicio, fechaHoraFin, paciente, consulta, ambulatorio, tipo, especialidad "
                     + "from cita where paciente = ? and tipo = ? and especialidad = ? and fechaHoraFin-fechaHoraInicio>=0 "
                     + "and fechaHoraFin <= ? and fechaHoraInicio >= ?;";
 
@@ -328,27 +326,26 @@ public class DAOPacientes extends AbstractDAO {
             //Sustituimos
             stmHistorial.setString(1, paciente.getCIP());
             stmHistorial.setString(2, tipo);
-            stmHistorial.setString(3, especialidad); 
-            stmHistorial.setTimestamp(4, fechaFin); 
-            stmHistorial.setTimestamp(5, fechaInicio); 
- 
+            stmHistorial.setString(3, especialidad);
+            stmHistorial.setTimestamp(4, fechaFin);
+            stmHistorial.setTimestamp(5, fechaInicio);
+
             //Ejecutamos
             rsHistorial = stmHistorial.executeQuery();
             //Mientras haya coincidencias
             while (rsHistorial.next()) {
                 //Se crea una instancia de cita con los datos recuperados de la base de datos
-                citaActual = new Cita(rsHistorial.getTimestamp("fechaHoraInicio"), 
+                citaActual = new Cita(rsHistorial.getTimestamp("fechaHoraInicio"),
                         rsHistorial.getTimestamp("fechaHoraFin"),
-                        rsHistorial.getString("paciente"), 
-                        rsHistorial.getInt("consulta"), 
+                        rsHistorial.getString("paciente"),
+                        rsHistorial.getInt("consulta"),
                         rsHistorial.getInt("ambulatorio"),
                         rsHistorial.getString("tipo"),
                         rsHistorial.getString("especialidad"));
-               //Y se añade la instancia a la lista de pacientes
+                //Y se añade la instancia a la lista de pacientes
                 resultado.add(citaActual);
             }
-        }
-        //En caso de error se captura la excepción
+        } //En caso de error se captura la excepción
         catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
@@ -373,10 +370,10 @@ public class DAOPacientes extends AbstractDAO {
             //Confirmamos
             con.commit();
         } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage()); 
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
-    } 
+    }
 }

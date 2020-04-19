@@ -6,6 +6,7 @@
 package aplicacion.clases;
 
 public class Administrador {
+
     private Integer ambulatorio;
     private String personal;
     private String contrasena;
@@ -40,8 +41,8 @@ public class Administrador {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }    
-    
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Administrador) {

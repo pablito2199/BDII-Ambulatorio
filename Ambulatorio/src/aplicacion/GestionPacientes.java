@@ -29,14 +29,14 @@ public class GestionPacientes {
     public void borrarPaciente(Paciente paciente) {
         fbd.borrarPaciente(paciente);
     }
-    
-     //Permite buscar pacientes por su id y/o nombre de paciente
-     public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
-         return fbd.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
-     }
 
-      //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente,  String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin){
+    //Permite buscar pacientes por su id y/o nombre de paciente
+    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
+        return fbd.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
+    }
+
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         return fbd.consultarHistorialClinico(paciente, tipo, especialidad, fechaInicio, fechaFin);
     }
 }

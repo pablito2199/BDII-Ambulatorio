@@ -25,7 +25,7 @@ public class FachadaAplicacion {
         gcit = new GestionCitas(fgui, fbd);
         gpac = new GestionPacientes(fgui, fbd);
         genf = new GestionEnfermedades(fgui, fbd);
-        gpac = new GestionConsultas(fgui, fbd);
+        gcon = new GestionConsultas(fgui, fbd);
         grec = new GestionRecetas(fgui, fbd);
         gadm = new GestionAdministradores(fgui, fbd);
     }
@@ -33,8 +33,8 @@ public class FachadaAplicacion {
     //Main
     public static void main(String args[]) {
         FachadaAplicacion fa;                   //Declaramos la variable fachada
-        fa = new FachadaAplicacion();       //La inicializamos
-        fa.iniciaInterfazAdministrador();              //LLamamos a la interfaz de usuario
+        fa = new FachadaAplicacion();           //La inicializamos
+        fa.iniciaInterfazAdministrador();       //Llamamos a la interfaz de usuario
     }
 
     //Comprueba si la autentificación es correcta
@@ -50,7 +50,6 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE AMBULATORIOS
 /////////////////////////
-    
 /////////////////////////
 //GESTIÓN DE CITAS
 /////////////////////////
@@ -93,6 +92,7 @@ public class FachadaAplicacion {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return gcit.citasMedico(medico);
     }
+
 /////////////////////////
 //GESTIÓN DE PACIENTES
 /////////////////////////
@@ -110,16 +110,17 @@ public class FachadaAplicacion {
     public void borrarPaciente(Paciente paciente) {
         gpac.borrarPaciente(paciente);
     }
-    
-     //Permite buscar pacientes por su id y/o nombre de paciente
-     public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
-         return gpac.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
-     }
 
-      //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente,  String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin){
+    //Permite buscar pacientes por su id y/o nombre de paciente
+    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
+        return gpac.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
+    }
+
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         return gpac.consultarHistorialClinico(paciente, tipo, especialidad, fechaInicio, fechaFin);
     }
+
 /////////////////////////
 //GESTIÓN DE ENFERMEDADES
 /////////////////////////
@@ -142,7 +143,18 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE CONSULTAS
 /////////////////////////
-    
+    public void anadirConsulta(Consulta consulta) {
+        gcon.anadirConsulta(consulta);
+    }
+
+    public java.util.List<Consulta> consultarConsultas(Integer identificador) {
+        return gcon.consultarConsultas(identificador);
+    }
+
+    public void borrarConsulta(Integer identificador) {
+        gcon.borrarConsulta(identificador);
+    }
+
 /////////////////////////
 //GESTIÓN DE RECETAS
 /////////////////////////

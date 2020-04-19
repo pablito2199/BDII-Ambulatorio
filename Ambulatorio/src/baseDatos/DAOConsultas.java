@@ -7,12 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * 
+ *
  * @author Pablo Tarrío Otero
  */
-
 public class DAOConsultas extends AbstractDAO {
-    
+
     //Contructor
     public DAOConsultas(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
@@ -35,8 +34,8 @@ public class DAOConsultas extends AbstractDAO {
             stmConsulta = con.prepareStatement("insert into consulta (identificador, ambulatorio, especialidad) "
                     + "values (?,?,?)");
             //Sustituimos
-            stmConsulta.setInt(1, consulta.getIdentificador());        
-            stmConsulta.setInt(2, consulta.getAmbulatorio());       
+            stmConsulta.setInt(1, consulta.getIdentificador());
+            stmConsulta.setInt(2, consulta.getAmbulatorio());
             stmConsulta.setString(3, consulta.getEspecialidad());
 
             //Actualizamos
@@ -59,7 +58,7 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Permite eliminar una consulta de la base de datos
-    public void borrarConsulta(String CIP) {
+    public void borrarConsulta(Integer identificador) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmConsulta = null;

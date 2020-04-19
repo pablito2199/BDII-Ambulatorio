@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import aplicacion.clases.Enfermedad;
 
 /**
- * 
+ *
  * @author Pablo Tarrío Otero
  */
-
 public class DAOEnfermedades extends AbstractDAO {
-    
+
     //Contructor
     public DAOEnfermedades(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
@@ -34,7 +33,7 @@ public class DAOEnfermedades extends AbstractDAO {
             stmEnfermedad = con.prepareStatement("insert into enfermedad (nombre, descripcion) "
                     + "values (?,?)");
             //Sustituimos
-            stmEnfermedad.setString(1, enfermedad.getNombre());        
+            stmEnfermedad.setString(1, enfermedad.getNombre());
             stmEnfermedad.setString(2, enfermedad.getDescripcion());
 
             //Actualizamos

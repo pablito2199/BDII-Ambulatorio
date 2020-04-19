@@ -18,7 +18,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         initComponents();
         padre = (VPrincipal) parent;
 
-        //obtiene la lista de categorías para mostrarlas por pantalla
+        //obtiene la lista de consultas para mostrarlas por pantalla
         ModeloListaEnfermedades mListaE = new ModeloListaEnfermedades();
         lstEnfermedades.setModel(mListaE);
         mListaE.setElementos(restoEnfermedades);
@@ -26,7 +26,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         if (mListaE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstEnfermedades.setSelectedIndex(0);
-            //activa el botón de Borrar
+            //activa el botón de Eliminar
             btnEliminarEnfermedad.setEnabled(true);
         } else {
             btnEliminarEnfermedad.setEnabled(false);

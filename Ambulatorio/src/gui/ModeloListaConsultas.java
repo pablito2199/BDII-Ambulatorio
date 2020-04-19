@@ -1,7 +1,7 @@
 package gui;
 
 public class ModeloListaConsultas extends javax.swing.AbstractListModel {
-    
+
     java.util.List<Integer> elementos;   //Listado de los elementos
 
     //Contructor
@@ -9,7 +9,6 @@ public class ModeloListaConsultas extends javax.swing.AbstractListModel {
         this.elementos = new java.util.ArrayList<Integer>();
     }
 
-   
     //Función que permite recuperar el número de filas
     @Override
     public int getSize() {

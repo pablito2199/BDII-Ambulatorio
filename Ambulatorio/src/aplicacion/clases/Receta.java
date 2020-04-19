@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.sql.Date;
 
 public class Receta {
+
     private Timestamp cita;
     private String paciente;
     private Integer consulta;
@@ -37,7 +38,7 @@ public class Receta {
         this.medicamento = medicamento;
         this.cantidad = cantidad;
     }
-   
+
     public Timestamp getCita() {
         return cita;
     }
@@ -118,8 +119,6 @@ public class Receta {
         this.cantidad = cantidad;
     }
 
-
- 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Receta) {
