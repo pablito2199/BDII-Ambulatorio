@@ -232,6 +232,7 @@
             <Component class="javax.swing.JButton" name="btnEliminarConsultas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarConsultasActionPerformed"/>
@@ -254,10 +255,8 @@
                 <Property name="text" type="java.lang.String" value="Gestionar M&#xe9;dicos"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="actionCommand" type="java.lang.String" value="Actualizar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGestionarMedicosActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="seleccionEspecialidades">
               <Properties>

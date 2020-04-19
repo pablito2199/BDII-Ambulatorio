@@ -221,7 +221,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         buscarEnfermedades();
     }//GEN-LAST:event_btnBuscarEnfermedadActionPerformed
 
-    //cuando se selecciona un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
+    //cuando se selecciona un elemento de la lista, los datos se pasan a la parte derecha para consultarse
     private void lstEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstEnfermedadesMouseClicked
         // TODO add your handling code here:
         ModeloListaEnfermedades mListaE = (ModeloListaEnfermedades) lstEnfermedades.getModel();
@@ -256,6 +256,8 @@ public class VEnfermedades extends javax.swing.JDialog {
             fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
         }
         buscarEnfermedades();
+        textoNombre.setText(null);
+        textoDescripcion.setText(null);
     }//GEN-LAST:event_btnAnadirEnfermedadActionPerformed
 
     //botón de Eliminar, elimina una enfermedad de la base de datos
