@@ -50,8 +50,6 @@ public class VPrincipal extends javax.swing.JFrame {
         btnSalaUrgencias = new javax.swing.JButton();
         btnConsultas = new javax.swing.JButton();
         btnPersonal = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        textoFondos1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
@@ -59,11 +57,11 @@ public class VPrincipal extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar3 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
+        menuMedicamentos = new javax.swing.JMenu();
+        menuEnfermedades = new javax.swing.JMenu();
+        menuPacientes = new javax.swing.JMenu();
+        menuEspecialidades = new javax.swing.JMenu();
+        menuHospitales = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Biblioteca de Informática");
@@ -188,22 +186,12 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Numero consultas:");
-        jLabel10.setToolTipText("");
-
-        textoFondos1.setEditable(false);
-        textoFondos1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoFondos1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -221,20 +209,15 @@ public class VPrincipal extends javax.swing.JFrame {
                             .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(textoFondos, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(textoAnoConstruccion, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(textoAntiguedad, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textoFondos1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addComponent(btnBuscar)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(textoFondos, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textoAnoConstruccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textoAntiguedad, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btnBuscar))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -288,10 +271,7 @@ public class VPrincipal extends javax.swing.JFrame {
                             .addComponent(textoFondos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textoFondos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(btnBuscar)))
+                        .addComponent(btnBuscar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -366,20 +346,20 @@ public class VPrincipal extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("RED DE AMBULATORIOS");
 
-        jMenu3.setText("Medicamentos");
-        jMenuBar3.add(jMenu3);
+        menuMedicamentos.setText("Medicamentos");
+        jMenuBar3.add(menuMedicamentos);
 
-        jMenu4.setText("Enfermedades");
-        jMenuBar3.add(jMenu4);
+        menuEnfermedades.setText("Enfermedades");
+        jMenuBar3.add(menuEnfermedades);
 
-        jMenu5.setText("Pacientes");
-        jMenuBar3.add(jMenu5);
+        menuPacientes.setText("Pacientes");
+        jMenuBar3.add(menuPacientes);
 
-        jMenu6.setText("Especialidades");
-        jMenuBar3.add(jMenu6);
+        menuEspecialidades.setText("Especialidades");
+        jMenuBar3.add(menuEspecialidades);
 
-        jMenu7.setText("Hospitales");
-        jMenuBar3.add(jMenu7);
+        menuHospitales.setText("Hospitales");
+        jMenuBar3.add(menuHospitales);
 
         setJMenuBar(jMenuBar3);
 
@@ -495,10 +475,6 @@ public class VPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPersonalActionPerformed
 
-    private void textoFondos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoFondos1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoFondos1ActionPerformed
-
     //Permite buscar el/los libro(s) que cumplar en criterio
     public void buscarLibros() {
         //Creamos el modelo de tabla de libros
@@ -535,7 +511,6 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -543,22 +518,21 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu menuEnfermedades;
+    private javax.swing.JMenu menuEspecialidades;
+    private javax.swing.JMenu menuHospitales;
+    private javax.swing.JMenu menuMedicamentos;
+    private javax.swing.JMenu menuPacientes;
     private javax.swing.JTable tablaAmbulatorios;
     private javax.swing.JTextField textoAnoConstruccion;
     private javax.swing.JTextField textoAntiguedad;
     private javax.swing.JTextField textoCodigo;
     private javax.swing.JTextField textoDireccion;
     private javax.swing.JTextField textoFondos;
-    private javax.swing.JTextField textoFondos1;
     private javax.swing.JTextField textoNombre;
     private javax.swing.JTextField textoProvincia;
     private javax.swing.JTextField textoTelefono;
