@@ -1,8 +1,3 @@
-/*
- * VPrincipal.java
- *
- * Created on 27-ene-2011, 10:31:24
- */
 package gui;
 
 public class VPrincipal extends javax.swing.JFrame {
