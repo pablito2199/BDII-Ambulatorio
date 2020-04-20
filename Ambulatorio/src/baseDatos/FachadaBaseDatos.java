@@ -93,12 +93,7 @@ public class FachadaBaseDatos {
     //Permite consultar los ambulatorios de la red
      public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia){
          return daoAmbulatorios.consultarAmbulatorios(nombre, codigo, Provincia);
-     }    
-     
-    //Permite calcular el número de consultas de un ambulatorio
-    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
-        return daoAmbulatorios.numeroConsultas(ambulatorio, especialidad);
-    }
+     }   
     
 ///////////////
 //DAOCITAS
@@ -179,6 +174,7 @@ public class FachadaBaseDatos {
         daoEnfermedades.insertarEnfermedad(enfermedad);
     }
 
+    //Permite consultar las enfermedades existentes en la base de datos
     public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
         return daoEnfermedades.consultarEnfermedades(nombre);
     }
@@ -196,20 +192,28 @@ public class FachadaBaseDatos {
 ////////////////////
 //DAOCONSULTAS
 ////////////////////
+    //Permite insertar una nueva consulta en la base de datos
     public void anadirConsulta(Consulta consulta) {
         daoConsultas.insertarConsulta(consulta);
     }
 
+    //Permite consultar las consultas existentes en la base de datos
     public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
         return daoConsultas.consultarConsultas(identificador, ambulatorio, especialidad);
     }
 
+    //Permite eliminar una consulta de la base de datos
     public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
         daoConsultas.borrarConsulta(identificador, ambulatorio, especialidad);
     }
     
     public void traspasarCitas(Integer identificador, Integer ambulatorio) {
         daoConsultas.traspasarCitas(identificador, ambulatorio);
+    } 
+     
+    //Devuelve el número de consultas de un ambulatorio
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
+        return daoConsultas.numeroConsultas(ambulatorio, especialidad);
     }
 
 ////////////////////

@@ -137,7 +137,7 @@ public class DAOConsultas extends AbstractDAO {
         }
     }
 
-    //Permite buscar consultas por su identificador
+    //Permite consultar las consultas existentes en la base de datos
     public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
         //Declaramos variables
         java.util.List<Consulta> resultado = new java.util.ArrayList<>();
@@ -192,5 +192,55 @@ public class DAOConsultas extends AbstractDAO {
         }
         //Se devuelve el resultado (lista de consultas)
         return resultado;
+    }
+
+    //Devuelve el número de consultas de un ambulatorio
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
+        //Declaramos variables
+        Integer consultas = 0;
+        Connection con;
+        PreparedStatement stmAmbulatorios = null;
+        ResultSet rsAmbulatorios;
+
+        //Establecemos conexión
+        con = this.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Construimos la consulta
+            String consulta = "select COUNT(distinct identificador) from consulta as consultas " 
+                    + "where ambulatorio = ? " 
+                    + "and especialidad like ? " 
+                    + "group by ambulatorio";
+            //Preparamos la consulta
+            stmAmbulatorios = con.prepareStatement(consulta);
+            //Sustituimos
+            stmAmbulatorios.setInt(1, ambulatorio);
+            stmAmbulatorios.setString(2, "%" + especialidad + "%");
+
+            //Ejecutamos
+            rsAmbulatorios = stmAmbulatorios.executeQuery();
+
+            //Mientras haya coincidencias
+            if (rsAmbulatorios.next()) {
+                //Se crea una instancia de ambulatorio con los datos recuperados de la base de datos
+                consultas = rsAmbulatorios.getInt("consultas");
+            }
+        } //En caso de error se captura la excepción
+        catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente se intentan cerrar cursores
+            try {
+                stmAmbulatorios.close();
+            } catch (SQLException e) {
+                //Si no se puede se imprime el error
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        //Se devuelve el resultado (total de consultas de un ambulatorio)
+        return consultas;
     }
 }

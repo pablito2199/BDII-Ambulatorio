@@ -70,11 +70,6 @@ public class FachadaAplicacion {
     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia) {
         return gamb.consultarAmbulatorios(nombre, codigo, Provincia);
     }
-
-    //Permite consultar el historial clínico de un ambulatorio
-    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
-        return gamb.numeroConsultas(ambulatorio, especialidad);
-    }
     
 /////////////////////////
 //GESTIÓN DE CITAS
@@ -122,7 +117,7 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE PACIENTES
 /////////////////////////
-    //Permite insertar un nuevo usuario en la base de datos
+    //Permite insertar un nuevo paciente en la base de datos
     public void insertarPaciente(Paciente paciente) {
         gpac.insertarPaciente(paciente);
     }
@@ -150,18 +145,22 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE ENFERMEDADES
 /////////////////////////
+    //Permite insertar una nueva enfermedad en la base de datos
     public void anadirEnfermedad(Enfermedad enfermedad) {
         genf.anadirEnfermedad(enfermedad);
     }
 
+    //Permite consultar las enfermedades existentes en la base de datos
     public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
         return genf.consultarEnfermedades(nombre);
     }
 
+    //Permite modificar los datos de una enfermedad en la base de datos
     public void modificarEnfermedad(Enfermedad enfermedad) {
         genf.modificarEnfermedad(enfermedad);
     }
 
+    //Permite eliminar una enfermedad de la base de datos
     public void borrarEnfermedad(String nombre) {
         genf.borrarEnfermedad(nombre);
     }
@@ -169,20 +168,28 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE CONSULTAS
 /////////////////////////
+    //Permite insertar una nueva consulta en la base de datos
     public void anadirConsulta(Consulta consulta) {
         gcon.anadirConsulta(consulta);
     }
 
+    //Permite consultar las consultas existentes en la base de datos
     public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
         return gcon.consultarConsultas(identificador, ambulatorio, especialidad);
     }
 
+    //Permite eliminar una consulta de la base de datos
     public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
         gcon.borrarConsulta(identificador, ambulatorio, especialidad);
     }
     
     public void traspasarCitas(Integer identificador, Integer ambulatorio) {
         gcon.traspasarCitas(identificador, ambulatorio);
+    }
+
+    //Devuelve el número de consultas de un ambulatorio
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
+        return gcon.numeroConsultas(ambulatorio, especialidad);
     }
 
 /////////////////////////

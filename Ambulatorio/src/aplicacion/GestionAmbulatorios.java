@@ -34,9 +34,4 @@ public class GestionAmbulatorios {
     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia) {
         return fbd.consultarAmbulatorios(nombre, codigo, Provincia);
     }
-
-    //Permite consultar el historial clínico de un ambulatorio
-    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
-        return fbd.numeroConsultas(ambulatorio, especialidad);
-    }
 }
