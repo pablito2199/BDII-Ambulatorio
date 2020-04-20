@@ -24,8 +24,4 @@ public class GestionAdministradores {
         return fbd.validarAdministrador(dni, clave);
     }
 
-    //Permite abrir una nueva ventana de usuarios
-    public void accesoAdministrador() {
-        fgui.nuevoAdministrador();
-    }
 }

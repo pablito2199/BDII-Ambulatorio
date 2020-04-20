@@ -35,7 +35,7 @@ public class DAOPacientes extends AbstractDAO {
             //clave, dirección, email y tipo de paciente especificados
             stmPaciente = con.prepareStatement("insert into paciente (cip, dni, numSeguridadSocial, nombre, fechaNacimiento, "
                     + "sexo, grupoSanguineo, nacionalidad, direccion, telefono) "
-                    + "values (?,?,?,?,?,?,?,?,?,?)");
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             //Sustituimos
             stmPaciente.setString(1, paciente.getCIP());
             stmPaciente.setString(2, paciente.getDNI());
@@ -163,26 +163,32 @@ public class DAOPacientes extends AbstractDAO {
         Connection con;
         PreparedStatement stmPacientes = null;
         ResultSet rsPacientes;
-        PreparedStatement stmRango = null;
-        ResultSet rsRango;
-
-        String subconsulta;
+       
         //Establecemos conexión
         con = this.getConexion();
-        //Impedimos que se la confirmación sea automática
-        try {
-            con.setAutoCommit(false);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }
+       
 
-        //Intentamos la consulta SQL
+        //Intentamos la consulta SQL 
         try {
-            //Construimos la consulta
-            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad,"
-                    + "sexo, grupoSanguineo "
+            //Construimos la consulta compleja que requiere de varias instrucciones sql
+            String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad, "
+                    + "sexo, grupoSanguineo, nacionalidad, direccion, telefono "
                     + "from paciente "
+                    
+                    + "natural JOIN "   //Unimos resultados
+                    + "(select distinct cip, SUM(distinct soborno) as totalSobornado, COUNT(distinct soborno) as numSobornos, " 
+                    //Calculamos el rango
+                    + "CASE " 
+                    + "WHEN SUM(distinct soborno)>500 THEN 'deluxe' " 
+                    + "WHEN COUNT(distinct cip)>5 and SUM(distinct soborno)>=50  THEN 'premium' " 
+                    + "ELSE 'base' " 
+                    + "END  as rango " 
+                    
+                    + "from paciente full outer JOIN urgencia ON paciente=cip " 
+                    + "group by cip " 
+                    + "order by cip, totalSobornado DESC) as rango " 
+                    
+                    //Criterios de la búsqueda
                     + "where cip like ? "
                     + "and dni like ?"
                     + "and nombre like ?"
@@ -200,8 +206,7 @@ public class DAOPacientes extends AbstractDAO {
             stmPacientes.setInt(4, edad);
             stmPacientes.setString(5, "%" + sexo + "%");
             stmPacientes.setString(6, "%" + NSS + "%");
-            stmPacientes.setString(7, "%" + nombre + "%");
-            stmPacientes.setString(8, "%" + grupo + "%");
+            stmPacientes.setString(7, "%" + grupo + "%");
 
             //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
@@ -220,48 +225,7 @@ public class DAOPacientes extends AbstractDAO {
                         rsPacientes.getString("telefono"),
                         rsPacientes.getInt("edad"),
                         Rango.getTipo(rsPacientes.getString("rango")));
-
-                //Intentamos la otra consulta para recuperar los datos del autor
-                try {
-                    //Recuperamos el nombre del autor de la tabla de autores donde el libro sea el que pedimos y ordenamos
-                    subconsulta = "select "
-                            + "CASE "
-                            + "WHEN SUM(distinct soborno)>500 THEN 'deluxe "
-                            + "WHEN COUNT(distinct paciente)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
-                            + "ELSE 'base' "
-                            + "END  as rango "
-                            + "from urgencia where paciente = ?"
-                            + "group by paciente, soborno;";
-                    stmRango = con.prepareStatement(subconsulta);
-
-                    //Sustituimos con los datos propordionados
-                    stmRango.setString(1, pacienteActual.getCIP()); //Id del libro
-
-                    //Ejecutamos la consulta
-                    rsRango = stmRango.executeQuery();
-                    //Mientras haya coincidencias
-                    if (rsRango.next()) {
-                        //Añadimos al autor a la lista de autores del libro
-                        pacienteActual.setRango(Rango.getTipo(rsRango.getString("rango")));
-                    }
-                    //En caso de fallar capturamos  la excepción
-                } catch (SQLException e) {
-                    //Imprimimos y generamos ventana
-                    System.out.println(e.getMessage());
-                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-                    //Como ha fallado deshacemos
-                    con.rollback();
-                } finally {
-                    //Finalmente cerramos la conexión de AUTORES
-                    //La de libros sigue abierta
-                    try {
-                        stmRango.close();
-                    } catch (SQLException e) {
-                        //De no poder notificamos al usuario
-                        System.out.println("Imposible cerrar cursores");
-                    }
-                }
-                //Y se añade la instancia a la lista de pacientes
+                //Añadimos al paciente a la lista de resultados
                 resultado.add(pacienteActual);
             }
         } //En caso de error se captura la excepción
@@ -269,13 +233,6 @@ public class DAOPacientes extends AbstractDAO {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-            try {
-                //Como ha fallado deshacemos
-                con.rollback();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-            }
         } finally {
             //Finalmente se intentan cerrar cursores
             try {
@@ -284,13 +241,6 @@ public class DAOPacientes extends AbstractDAO {
                 //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
             }
-        }
-        try {
-            //Confirmamos
-            con.commit();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
