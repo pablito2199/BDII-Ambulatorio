@@ -24,7 +24,7 @@ public class VConsultas extends javax.swing.JDialog {
         ModeloListaConsultas m = new ModeloListaConsultas();
         lstConsultas.setModel(m);
         m.setElementos(restoConsultas);
-        consultas = fa.consultarConsultas(null, ambulatorio);
+        consultas = fa.consultarConsultas(null, ambulatorio, null);
         if (m.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstConsultas.setSelectedIndex(0);
@@ -290,7 +290,7 @@ public class VConsultas extends javax.swing.JDialog {
         //if(cuentaConsultasAmbulatorio>1) deja eliminar, si no pues no y manda un mensaje de error
         //hacer consulta compleja
         fa.traspasarCitas(numero, ambulatorio);
-        fa.borrarConsulta(numero, ambulatorio);
+        fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         
         
         textoNumeroConsulta.setText(null);
@@ -325,7 +325,7 @@ public class VConsultas extends javax.swing.JDialog {
     public void buscarConsultas() {
         ModeloListaConsultas m = new ModeloListaConsultas();
         lstConsultas.setModel(m);
-        consultas = fa.consultarConsultas(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio);
+        consultas = fa.consultarConsultas(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         java.util.ArrayList<Integer> numero = new java.util.ArrayList<>();
         for (int i = 0; i < consultas.size(); i++) {
             numero.add(consultas.get(i).getIdentificador());

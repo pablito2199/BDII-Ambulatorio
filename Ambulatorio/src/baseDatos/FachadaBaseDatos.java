@@ -193,12 +193,12 @@ public class FachadaBaseDatos {
         daoConsultas.insertarConsulta(consulta);
     }
 
-    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio) {
-        return daoConsultas.consultarConsultas(identificador, ambulatorio);
+    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
+        return daoConsultas.consultarConsultas(identificador, ambulatorio, especialidad);
     }
 
-    public void borrarConsulta(Integer identificador, Integer ambulatorio) {
-        daoConsultas.borrarConsulta(identificador, ambulatorio);
+    public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
+        daoConsultas.borrarConsulta(identificador, ambulatorio, especialidad);
     }
     
     public void traspasarCitas(Integer identificador, Integer ambulatorio) {
