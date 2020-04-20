@@ -1,6 +1,5 @@
 package baseDatos;
 
-import aplicacion.clases.Cita;
 import aplicacion.clases.Consulta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

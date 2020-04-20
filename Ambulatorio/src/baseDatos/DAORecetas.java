@@ -32,7 +32,7 @@ public class DAORecetas extends AbstractDAO {
             //Preparamos la consulta SQL para insertar en la tabla de pacientes un nuevo paciente con el id de paciente, nombre
             //clave, dirección, email y tipo de paciente especificados
             stmReceta = con.prepareStatement("insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion, fechaInicio, fechaFin) "
-                    + "values (?,?,?,?,?,?,?)");
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?)");
             //Sustituimos
             stmReceta.setTimestamp(1, receta.getCita());
             stmReceta.setString(2, receta.getPaciente());
@@ -84,9 +84,13 @@ public class DAORecetas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select cita, fechaHoraInicio, fechaHoraFin, paciente, codigoReceta, medicamento"
-                    + "from receta where paciente = ? and codigoReceta = ? and medicamento = ? and fechaHoraFin-fechaHoraInicio>=0 "
-                    + "and fechaHoraFin <= ? and fechaHoraInicio >= ?;";
+            String consulta = "select cita, fechaHoraInicio, fechaHoraFin, paciente, codigoReceta, medicamento, cantidad "
+                    + "from receta where paciente = ? "
+                    + "and codigoReceta = ? "
+                    + "and medicamento = ? "
+                    + "and fechaHoraFin-fechaHoraInicio>=0 "
+                    + "and fechaHoraFin <= ? "
+                    + "and fechaHoraInicio >= ?;";
             //Preparamos la consulta
             stmHistorial = con.prepareStatement(consulta);
             //Sustituimos
@@ -103,7 +107,7 @@ public class DAORecetas extends AbstractDAO {
                 //Se crea una instancia de cita con los datos recuperados de la base de datos
                 recetaActual = new Receta(rsHistorial.getTimestamp("cita"),
                         rsHistorial.getString("paciente"),
-                        rsHistorial.getInt("codigo"),
+                        rsHistorial.getInt("codigoReceta"),
                         rsHistorial.getDate("fechaHoraInicio"),
                         rsHistorial.getDate("fechaHoraFin"),
                         rsHistorial.getString("medicamento"),
