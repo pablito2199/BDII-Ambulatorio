@@ -58,7 +58,7 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Permite eliminar una consulta de la base de datos
-    public void borrarConsulta(Integer identificador, Integer ambulatorio) {
+    public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmConsulta = null;
@@ -69,10 +69,11 @@ public class DAOConsultas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Preparamos la sentencia para borrar de la tabla de consultas aquel con el identificador especificado por argumentos
-            stmConsulta = con.prepareStatement("delete from consulta where identificador = ? and ambulatorio = ?");
+            stmConsulta = con.prepareStatement("delete from consulta where identificador = ? and ambulatorio = ? and especialidad = ?");
             //Sustituimos
             stmConsulta.setInt(1, identificador);  //identificador de la consulta
             stmConsulta.setInt(2, ambulatorio);  //ambulatorio de la consulta
+            stmConsulta.setString(3, especialidad);  //especialidad de la consulta
             //Actualizamos
             stmConsulta.executeUpdate();
 
@@ -137,7 +138,7 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Permite buscar consultas por su identificador
-    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio) {
+    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
         //Declaramos variables
         java.util.List<Consulta> resultado = new java.util.ArrayList<>();
         Consulta consultaActual;
@@ -155,14 +156,16 @@ public class DAOConsultas extends AbstractDAO {
             //que tengan el identificador dado
             String consulta = "select identificador, ambulatorio, especialidad "
                     + "from consulta "
-                    + "where identificador like ? "
-                        + " and ambulatorio = ?";
+                    + "where identificador = ? "
+                        + " and ambulatorio = ? "
+                        + "and especialidad = ?";
 
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
-            stmConsultas.setString(1, "%" + identificador + "%"); //Identificador
+            stmConsultas.setInt(1, identificador); //Identificador
             stmConsultas.setInt(2, ambulatorio); //Ambulatorio
+            stmConsultas.setString(3, especialidad); //Especialidad
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias

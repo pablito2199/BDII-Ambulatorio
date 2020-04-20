@@ -173,12 +173,12 @@ public class FachadaAplicacion {
         gcon.anadirConsulta(consulta);
     }
 
-    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio) {
-        return gcon.consultarConsultas(identificador, ambulatorio);
+    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
+        return gcon.consultarConsultas(identificador, ambulatorio, especialidad);
     }
 
-    public void borrarConsulta(Integer identificador, Integer ambulatorio) {
-        gcon.borrarConsulta(identificador, ambulatorio);
+    public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
+        gcon.borrarConsulta(identificador, ambulatorio, especialidad);
     }
     
     public void traspasarCitas(Integer identificador, Integer ambulatorio) {

@@ -22,12 +22,12 @@ public class GestionConsultas {
         fbd.anadirConsulta(consulta);
     }
 
-    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio) {
-        return fbd.consultarConsultas(identificador, ambulatorio);
+    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
+        return fbd.consultarConsultas(identificador, ambulatorio, especialidad);
     }
 
-    public void borrarConsulta(Integer identificador, Integer ambulatorio) {
-        fbd.borrarConsulta(identificador, ambulatorio);
+    public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
+        fbd.borrarConsulta(identificador, ambulatorio, especialidad);
     }
     
     public void traspasarCitas(Integer identificador, Integer ambulatorio) {
