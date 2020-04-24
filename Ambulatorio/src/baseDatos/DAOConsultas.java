@@ -93,33 +93,42 @@ public class DAOConsultas extends AbstractDAO {
         }
     }
     
-    public void traspasarCitas(Integer identificador, Integer ambulatorio) {
+    //Transaccion que dado un ambulatorio te devuelva la consulta de urgencias del mismo que menos pacientes tiene en espera (fechaHoraFin is null)
+    public Consulta menorNumeroPacientes (Integer ambulatorio) {
         //Declaramos variables
+        Consulta menorNumero = new Consulta();
         Connection con;
-        PreparedStatement stmCita = null;
+        PreparedStatement stmConsultas = null;
+        ResultSet rsConsultas;
 
         //Establecemos conexión
-        con = super.getConexion();
+        con = this.getConexion();
 
         //Intentamos la consulta SQL
         try {
-            //Preparamos la sentencia para insertar una fecha de finalización
-            stmCita = con.prepareStatement(
-                    "update from cita as c"
-                    + "set consulta = (select c2.identificador "
-                                + "from consulta as c2 "
-                                + "where c2.identificador != c.consulta "
-                                +   "and c2.ambulatorio = c.ambulatorio)"
-                    + "where c.consulta = ? "
-                        + "and c.ambulatorio = ?"
-            );
+            //Construimos la consulta
+            //Selecionamos el identificador, ambulatorio y especialdiad
+            //que tengan el ambulatorio dado
+            String consulta = "select c1.identificador, c1.ambulatorio, c1.especialidad "
+                    + "from consulta as c1, urgencia as u "
+                    + "where c1.ambulatorio = u.ambulatorio "
+                    +     "and c1.identificador = u.consulta "
+                    +     "and c1.ambulatorio = ? "
+                    +     "and c1.especialidad = 'Urgencia' "
+                    + "having count() < count() "
+                    + "group by c1.identificador, c1.ambulatorio, c1.especialidad";
 
+            //Preparamos la consulta
+            stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
-            stmCita.setInt(1, identificador);
-            stmCita.setInt(2, ambulatorio);
-
-            //Actualizamos
-            stmCita.executeUpdate();
+            stmConsultas.setInt(1, ambulatorio); //Ambulatorio
+            //Ejecutamos
+            rsConsultas = stmConsultas.executeQuery();
+            //Mientras haya coincidencias
+            while (rsConsultas.next()) {
+                //Se crea una instancia de consulta con los datos de la consulta con el menor número de pacientes de la base de datos
+                menorNumero = new Consulta(rsConsultas.getInt("identificador"), rsConsultas.getInt("ambulatorio"), rsConsultas.getString("especialidad"));
+            }
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -127,14 +136,16 @@ public class DAOConsultas extends AbstractDAO {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
-            //Finalmente intentamos cerrar cursores
+            //Finalmente se intentan cerrar cursores
             try {
-                stmCita.close();
+                stmConsultas.close();
             } catch (SQLException e) {
-                //En caso de no poder se notifica de ello
+                //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        //Se devuelve el resultado (lista de consultas)
+        return menorNumero;
     }
 
     //Permite consultar las consultas existentes en la base de datos

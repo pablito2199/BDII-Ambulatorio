@@ -156,7 +156,7 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     //Permite buscar pacientes por su id y/o nombre de paciente
-    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
+    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, Integer NSS, String grupo) {
         //Declaramos variables
         java.util.List<Paciente> resultado = new java.util.ArrayList<Paciente>();
         Paciente pacienteActual;
@@ -243,6 +243,56 @@ public class DAOPacientes extends AbstractDAO {
             }
         }
         //Se devuelve el resultado (lista de pacientes)
+        return resultado;
+    }
+   
+    //Permite saber si existe un paciente en la base de datos con el mismo identificador o no
+    public boolean existePaciente(String CIP) {
+        //Declaramos variables
+        boolean resultado = false;
+        Connection con;
+        PreparedStatement stmPacientes = null;
+        ResultSet rsPacientes;
+       
+        //Establecemos conexión
+        con = this.getConexion();
+       
+        //Intentamos la consulta SQL 
+        try {
+            //Construimos la consulta compleja que requiere de varias instrucciones sql
+            String consulta = "select case WHEN cip = ? THEN 'true' " 
+                    + "else 'false' " 
+                    + "end as existePaciente " 
+                    + "from paciente " 
+                    + "where cip = ?";
+            //Preparamos la consulta
+            stmPacientes = con.prepareStatement(consulta);
+            //Sustituimos
+            stmPacientes.setString(1, "%" + CIP + "%");
+            stmPacientes.setString(2, "%" + CIP+ "%");
+
+            //Ejecutamos
+            rsPacientes = stmPacientes.executeQuery();
+            //Mientras haya coincidencias
+            if (rsPacientes.next()) {
+                //Se compureba el resultado
+                resultado = Boolean.valueOf(rsPacientes.getString("existePaciente"));
+            }
+        } //En caso de error se captura la excepción
+        catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente se intentan cerrar cursores
+            try {
+                stmPacientes.close();
+            } catch (SQLException e) {
+                //Si no se puede se imprime el error
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        //Se devuelve el resultado (true si existe y false si no)
         return resultado;
     }
 

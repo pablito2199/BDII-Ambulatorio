@@ -70,7 +70,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnGuardarUsuario" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnActualizarPaciente" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnBorrar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -85,7 +85,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnLimpiar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="btnGuardarUsuario" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="btnActualizarPaciente" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btnBorrar" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -103,12 +103,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGuardarUsuario">
+        <Component class="javax.swing.JButton" name="btnActualizarPaciente">
           <Properties>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarUsuarioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarPacienteActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnBorrar">
