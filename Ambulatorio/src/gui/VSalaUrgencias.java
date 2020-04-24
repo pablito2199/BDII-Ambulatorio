@@ -5,6 +5,7 @@
  */
 package gui;
 
+import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Urgencia;
 import aplicacion.clases.Cita;
 
@@ -16,15 +17,21 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
     private VPrincipal padre;
     private aplicacion.FachadaAplicacion fa;
-    private java.util.List<Urgencia> urgencias;
-    private Integer ambulatorio;
+    private Ambulatorio ambulatorio;
 
-    public VSalaUrgencias(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Integer ambulatorio) {
+    public VSalaUrgencias(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Ambulatorio ambulatorio) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
         padre = (VPrincipal) parent;
         this.ambulatorio = ambulatorio;
+        
+        //Obtenemos urgencias actuales de la sala de espera
+        ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
+        tu.setFilas(fa.urgenciasPendientes(ambulatorio));
+
+        //Contamos urgencias
+        labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
     }
 
     /**
@@ -49,7 +56,7 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
         labelPrincipal.setText("Pacientes esperando en la sala de urgencias");
 
-        tablaUrgencias.setModel(ModeloTablaUrgencias);
+        tablaUrgencias.setModel(new ModeloTablaUrgencias());
         jScrollPane1.setViewportView(tablaUrgencias);
 
         labelCantidad.setText("Cantidad:");
@@ -64,8 +71,18 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         });
 
         btnDerivar.setText("Derivar al hospital");
+        btnDerivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDerivarActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,12 +133,36 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
         //Obtenemos modelo
         ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
-        
+
         //Atendemos la urgencia
         fa.atenderCita(tu.obtenerUrgencia());
         
-        
+        //Contamos urgencias
+        labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
+
     }//GEN-LAST:event_btnAtenderActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+
+        padre.buscarAmbulatorios();
+        this.dispose();
+
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnDerivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerivarActionPerformed
+        // TODO add your handling code here:
+        
+        //Obtenemos modelo
+        ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
+
+        //Atendemos la urgencia
+        fgui.nueva
+        
+        //Contamos urgencias
+        labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
+        
+    }//GEN-LAST:event_btnDerivarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtender;

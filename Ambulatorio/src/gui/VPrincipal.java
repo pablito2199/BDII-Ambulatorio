@@ -1,5 +1,7 @@
 package gui;
 
+import aplicacion.clases.Ambulatorio;
+
 public class VPrincipal extends javax.swing.JFrame {
 
     aplicacion.FachadaAplicacion fa;    //Enlace a la fachada de aplicación
@@ -27,18 +29,18 @@ public class VPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         textoCodigo = new javax.swing.JTextField();
         textoNombre = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        etiquetaCodigo = new javax.swing.JLabel();
+        etiquetaDireccion = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAmbulatorios = new javax.swing.JTable();
         etiquetaTitulo = new javax.swing.JLabel();
         textoDireccion = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        etiquetaProvincia = new javax.swing.JLabel();
+        etiquetaFondos = new javax.swing.JLabel();
+        etiquetaAntiguedad = new javax.swing.JLabel();
+        etiquetaAnoConstruccion = new javax.swing.JLabel();
+        etiquetaTelefono = new javax.swing.JLabel();
         textoProvincia = new javax.swing.JTextField();
         textoTelefono = new javax.swing.JTextField();
         textoAnoConstruccion = new javax.swing.JTextField();
@@ -55,7 +57,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        etiquetaNombreProyecto = new javax.swing.JLabel();
         jMenuBar3 = new javax.swing.JMenuBar();
         menuMedicamentos = new javax.swing.JMenu();
         menuEnfermedades = new javax.swing.JMenu();
@@ -71,15 +73,10 @@ public class VPrincipal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         textoNombre.setToolTipText("Titulo a buscar");
-        textoNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNombreActionPerformed(evt);
-            }
-        });
 
-        jLabel1.setText("Código:");
+        etiquetaCodigo.setText("Código:");
 
-        jLabel3.setText("Dirección Postal:");
+        etiquetaDireccion.setText("Dirección Postal:");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,76 +88,38 @@ public class VPrincipal extends javax.swing.JFrame {
         tablaAmbulatorios.setModel(new ModeloTablaLibros());
         tablaAmbulatorios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaAmbulatorios.getTableHeader().setReorderingAllowed(false);
+        tablaAmbulatorios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAmbulatoriosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaAmbulatorios);
         tablaAmbulatorios.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         etiquetaTitulo.setText("Nombre:");
 
-        jLabel4.setText("Provincia:");
+        etiquetaProvincia.setText("Provincia:");
 
-        jLabel6.setText("Fondos:");
+        etiquetaFondos.setText("Fondos:");
 
-        jLabel7.setText("Antigüedad:");
+        etiquetaAntiguedad.setText("Antigüedad:");
 
-        jLabel8.setText("Año Construcción:");
+        etiquetaAnoConstruccion.setText("Año Construcción:");
 
-        jLabel9.setText("Teléfono:");
-
-        textoProvincia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoProvinciaActionPerformed(evt);
-            }
-        });
-
-        textoTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoTelefonoActionPerformed(evt);
-            }
-        });
-
-        textoAnoConstruccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoAnoConstruccionActionPerformed(evt);
-            }
-        });
+        etiquetaTelefono.setText("Teléfono:");
 
         textoAntiguedad.setEditable(false);
-        textoAntiguedad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoAntiguedadActionPerformed(evt);
-            }
-        });
 
         textoFondos.setEditable(false);
-        textoFondos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoFondosActionPerformed(evt);
-            }
-        });
 
         btnIngresos.setText("Ingresos");
         btnIngresos.setEnabled(false);
-        btnIngresos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresosActionPerformed(evt);
-            }
-        });
 
         btnMateriales.setText("Materiales");
         btnMateriales.setEnabled(false);
-        btnMateriales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMaterialesActionPerformed(evt);
-            }
-        });
 
         btnAsociados.setText("Asociados");
         btnAsociados.setEnabled(false);
-        btnAsociados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAsociadosActionPerformed(evt);
-            }
-        });
 
         btnSalaUrgencias.setText("Sala Urgencias");
         btnSalaUrgencias.setEnabled(false);
@@ -196,12 +155,12 @@ public class VPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(etiquetaTitulo)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel6))
+                            .addComponent(etiquetaCodigo)
+                            .addComponent(etiquetaDireccion)
+                            .addComponent(etiquetaProvincia)
+                            .addComponent(etiquetaTelefono)
+                            .addComponent(etiquetaAnoConstruccion)
+                            .addComponent(etiquetaFondos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +173,7 @@ public class VPrincipal extends javax.swing.JFrame {
                                     .addComponent(textoFondos, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(textoAnoConstruccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
+                                .addComponent(etiquetaAntiguedad)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textoAntiguedad, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(btnBuscar))
@@ -247,29 +206,29 @@ public class VPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(etiquetaCodigo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(etiquetaDireccion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(etiquetaProvincia))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
+                            .addComponent(etiquetaTelefono))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoAnoConstruccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
+                            .addComponent(etiquetaAnoConstruccion)
                             .addComponent(textoAntiguedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
+                            .addComponent(etiquetaAntiguedad))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textoFondos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addComponent(etiquetaFondos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -343,8 +302,8 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel5.setText("RED DE AMBULATORIOS");
+        etiquetaNombreProyecto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        etiquetaNombreProyecto.setText("RED DE AMBULATORIOS");
 
         menuMedicamentos.setText("Medicamentos");
         jMenuBar3.add(menuMedicamentos);
@@ -370,7 +329,7 @@ public class VPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etiquetaNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -380,7 +339,7 @@ public class VPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(etiquetaNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -402,66 +361,73 @@ public class VPrincipal extends javax.swing.JFrame {
     //Permite buscar los libros (al hacer click en el botón)
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         //Buscamos los libros
-        buscarLibros();
+        buscarAmbulatorios();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    //Permite editar un libro abriendo la ventana de libro correspondiente con su información
+    //Botón Eliminar, permite eliminar un ambulatorio
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        //Creamos el modelo de tabla de libros
-        ModeloTablaLibros mtl = (ModeloTablaLibros) tablaAmbulatorios.getModel();
-        //Declaramos e inicializamos el id del libro
-        int idLibro;
-        //Que te toma de la tabla de libros (la fila seleccionada)
-        idLibro = mtl.obtenerLibro(tablaAmbulatorios.getSelectedRow()).getIdLibro();
-        //Visualizamos la información completa del libro (para editarla) generando así una nueva ventana
-        fa.visualizarLibro(idLibro);
+        //Obtenemos el ambulatorio deseado de la tabla
+        ModeloTablaAmbulatorios ma = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
+        Integer codigoAmbulatorio = ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo();
+        //Eliminamos el ambulatorio
+        fa.borrarAmbulatorio(codigoAmbulatorio);                                       
+        //Ponemos todos los campos de texto en blanco
+        textoAnoConstruccion.setText(null);                                       
+        textoAntiguedad.setText(null);                                       
+        textoCodigo.setText(null);                                       
+        textoDireccion.setText(null);                                       
+        textoNombre.setText(null);                                       
+        textoProvincia.setText(null);                                       
+        textoTelefono.setText(null);                                       
+        textoFondos.setText(null);
+        //Actualizamos la tabla
+        buscarAmbulatorios();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    //Función para crear un nuevo libro e insertarlo en la base de datos    
+    //Botón Limpiar, pone todos los campos de texto en blanco, y hace más fácil la inserción de un nuevo ambulatorio
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        //Creamos un nuevo libro, abriendo así la ventana correspondiente
-        fa.nuevoLibro();
+        textoAnoConstruccion.setText(null);                                       
+        textoAntiguedad.setText(null);                                       
+        textoCodigo.setText(null);                                       
+        textoDireccion.setText(null);                                       
+        textoNombre.setText(null);                                       
+        textoProvincia.setText(null);                                       
+        textoTelefono.setText(null);                                       
+        textoFondos.setText(null);        
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void textoProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoProvinciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoProvinciaActionPerformed
-
-    private void textoTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoTelefonoActionPerformed
-
-    private void textoAnoConstruccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoAnoConstruccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoAnoConstruccionActionPerformed
-
-    private void textoAntiguedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoAntiguedadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoAntiguedadActionPerformed
-
-    private void textoFondosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoFondosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoFondosActionPerformed
-
-    private void textoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoNombreActionPerformed
-
+    //Botón Actualizar, crea un nuevo ambulatorio o lo modifica
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
+        boolean modificar = false;
+        Ambulatorio a;
+        //si los campos no están vacíos
+        if (!textoCodigo.getText().isEmpty() && !textoNombre.getText().isEmpty() && !textoDireccion.getText().isEmpty()
+                && !textoProvincia.getText().isEmpty() && !textoTelefono.getText().isEmpty() && isNumeric(textoCodigo.getText())
+                && (isNumeric(textoAnoConstruccion.getText()) || textoAnoConstruccion.getText().isEmpty())) {
+            a = new Ambulatorio(Integer.parseInt(textoCodigo.getText()), textoNombre.getText(), textoDireccion.getText(), 
+                    textoAnoConstruccion.getText(), textoProvincia.getText(), textoTelefono.getText(),
+                    null, 0.0);
+            for (Ambulatorio amb : fa.obtenerAmbulatorios(null, null, null)) {
+                if (amb.getCodigo().equals(a.getCodigo())) {
+                    modificar = true;
+                    break;
+                }
+            }
+            if (!modificar) {
+                fa.insertarAmbulatorio(a);
+            } else {
+                fa.modificarAmbulatorio(a);
+            }
+            btnActualizar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            btnConsultas.setEnabled(true);
+            btnSalaUrgencias.setEnabled(true);
+            btnPersonal.setEnabled(true);
+        } else {
+            fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
-
-    private void btnMaterialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaterialesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMaterialesActionPerformed
-
-    private void btnIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIngresosActionPerformed
-
-    private void btnAsociadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAsociadosActionPerformed
 
     private void btnSalaUrgenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalaUrgenciasActionPerformed
         // TODO add your handling code here:
@@ -469,30 +435,26 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
         // TODO add your handling code here:
+        fa.abrirConsultas();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPersonalActionPerformed
 
-    //Permite buscar el/los libro(s) que cumplar en criterio
-    public void buscarLibros() {
-        //Creamos el modelo de tabla de libros
-        ModeloTablaLibros m;
-        m = (ModeloTablaLibros) tablaAmbulatorios.getModel();
-        //Tomamos las filas que regresa la función de búsqueda y por tanto cumplan el criterio
-        m.setFilas(fa.obtenerLibros((textoDireccion.getText().isEmpty()) ? null : Integer.parseInt(textoDireccion.getText()), textoNombre.getText(), textoCodigo.getText(), buscaAutor.getText()));
-        //Si hay algún resultado
-        if (m.getRowCount() > 0) {
-            //Se seleciona la primera fila
-            tablaAmbulatorios.setRowSelectionInterval(0, 0);
-            //Se habilita el botón de editar el libro
-            btnEliminar.setEnabled(true);
-        } else {
-            //En otro caso se deshabilita
-            btnEliminar.setEnabled(false);
-        }
-    }
+    //Al pulsar sobre un ambulatorio de la tabla, se colocan todos sus datos en los campos de texto 
+    private void tablaAmbulatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAmbulatoriosMouseClicked
+        // TODO add your handling code here
+        ModeloTablaAmbulatorios m = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
+        textoCodigo.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo()));
+        textoNombre.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getNombre());
+        textoDireccion.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getDireccion());
+        textoProvincia.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getProvicia());
+        textoTelefono.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getTelefono());
+        textoAnoConstruccion.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getAnoConstruccion());
+        textoAntiguedad.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getAntiguedad());
+        textoFondos.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getIngresos()));
+    }//GEN-LAST:event_tablaAmbulatoriosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -509,15 +471,15 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPersonal;
     private javax.swing.JButton btnSalaUrgencias;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel etiquetaAnoConstruccion;
+    private javax.swing.JLabel etiquetaAntiguedad;
+    private javax.swing.JLabel etiquetaCodigo;
+    private javax.swing.JLabel etiquetaDireccion;
+    private javax.swing.JLabel etiquetaFondos;
+    private javax.swing.JLabel etiquetaNombreProyecto;
+    private javax.swing.JLabel etiquetaProvincia;
+    private javax.swing.JLabel etiquetaTelefono;
     private javax.swing.JLabel etiquetaTitulo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -538,4 +500,42 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField textoTelefono;
     // End of variables declaration//GEN-END:variables
 
+    //Permite buscar el/los ambulatorio(s) que cumplan el criterio
+    public void buscarAmbulatorios() {
+        //Creamos el modelo de tabla de ambulatorios
+        ModeloTablaAmbulatorios m;
+        m = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
+        //Tomamos las filas que regresa la función de búsqueda y por tanto cumplan el criterio
+        m.setFilas(fa.obtenerAmbulatorios(textoNombre.getText(), Integer.parseInt(textoCodigo.getText()), textoProvincia.getText()));
+        //Si hay algún resultado
+        if (m.getRowCount() > 0) {
+            //Se seleciona la primera fila
+            tablaAmbulatorios.setRowSelectionInterval(0, 0);
+            //Se habilita el botón de Actualizar y Eliminar el ambulatorio
+            btnActualizar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            btnConsultas.setEnabled(true);
+            btnSalaUrgencias.setEnabled(true);
+            btnPersonal.setEnabled(true);
+        } else {
+            //En otro caso se deshabilita
+            btnActualizar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+            btnConsultas.setEnabled(false);
+            btnSalaUrgencias.setEnabled(false);
+            btnPersonal.setEnabled(false);
+        }
+    }
+    
+    //Comprueba si un dato se puede convertir a Integer
+    public static boolean isNumeric(String cadena) {
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        return resultado;
+    }
 }

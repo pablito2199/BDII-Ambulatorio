@@ -51,7 +51,7 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE AMBULATORIOS
 /////////////////////////
-     //Permite insertar un nuevo usuario en la base de datos
+    //Permite insertar un nuevo usuario en la base de datos
     public void insertarAmbulatorio(Ambulatorio ambulatorio) {
         gamb.insertarAmbulatorio(ambulatorio);
     }
@@ -62,12 +62,12 @@ public class FachadaAplicacion {
     }
 
     //Permite eliminar un ambulatorio de la base de datos
-    public void borrarAmbulatorio(Ambulatorio ambulatorio) {
+    public void borrarAmbulatorio(Integer ambulatorio) {
         gamb.borrarAmbulatorio(ambulatorio);
     }
 
     //Permite buscar ambulatorios por su id y/o nombre de ambulatorio
-    public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia) {
+    public java.util.List<Ambulatorio> obtenerAmbulatorios(String nombre, Integer codigo, String Provincia) {
         return gamb.consultarAmbulatorios(nombre, codigo, Provincia);
     }
     
@@ -112,6 +112,31 @@ public class FachadaAplicacion {
     //Lista de citas pendientes de todas las consultas donde el medico trabaja
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return gcit.citasMedico(medico);
+    }
+    
+    //Nueva ventana de reserva de citas
+    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente){
+        fgui.nuevaVReservarCita(ambulatorio, paciente);
+    }
+    
+    //Nueva ventana de derivar a hospital
+    public void nuevaVDerivarHospital(Cita cita){
+        fgui.nuevaVDerivarHospital(cita);
+    }
+    
+    //Nueva ventana de nuerva urgencia
+    public void nuevaVUrgencias(Paciente paciente){
+        fgui.nuevaVUrgencias(paciente);
+    }
+    
+    //Nueva ventana de sala de urgencias
+    public void nuevaVSalaUrgencias(Ambulatorio ambulatorio){
+        fgui.nuevaVSalaUrgencias(ambulatorio);
+    }
+    
+    //Nueva ventana de reserva de citas
+    public void nuevaVCitasPendientes(Paciente paciente){
+        fgui.nuevaVCitasPendientes(paciente);
     }
 
 /////////////////////////

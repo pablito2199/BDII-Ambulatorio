@@ -23,8 +23,8 @@ public class Ambulatorio {
         this.telefono = telefono;
         this.antiguedad = antiguedad;
         this.ingresos = ingresos;
-    }
-
+    } 
+    
     public Ambulatorio(Integer codigo, String nombre, String direccion, String anoConstruccion, String provicia, String telefono, String antiguedad) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -34,9 +34,7 @@ public class Ambulatorio {
         this.telefono = telefono;
         this.antiguedad = antiguedad;
         this.ingresos = 0.0;
-    }
-    
-    
+    }    
 
     //Getters y Setters
     public Integer getCodigo() {

@@ -64,7 +64,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel5" min="-2" pref="330" max="-2" attributes="0"/>
+                  <Component id="etiquetaNombreProyecto" min="-2" pref="330" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jPanel1" max="32767" attributes="0"/>
                       <Component id="jPanel3" max="32767" attributes="0"/>
@@ -78,7 +78,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Component id="jLabel5" min="-2" pref="16" max="-2" attributes="0"/>
+              <Component id="etiquetaNombreProyecto" min="-2" pref="16" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -107,12 +107,12 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="etiquetaTitulo" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" max="-2" attributes="0"/>
-                              <Component id="jLabel4" max="-2" attributes="0"/>
-                              <Component id="jLabel9" max="-2" attributes="0"/>
-                              <Component id="jLabel8" max="-2" attributes="0"/>
-                              <Component id="jLabel6" max="-2" attributes="0"/>
+                              <Component id="etiquetaCodigo" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaDireccion" max="-2" attributes="0"/>
+                              <Component id="etiquetaProvincia" max="-2" attributes="0"/>
+                              <Component id="etiquetaTelefono" max="-2" attributes="0"/>
+                              <Component id="etiquetaAnoConstruccion" max="-2" attributes="0"/>
+                              <Component id="etiquetaFondos" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -127,7 +127,7 @@
                                       <Component id="textoAnoConstruccion" alignment="0" pref="99" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel7" max="-2" attributes="0"/>
+                                  <Component id="etiquetaAntiguedad" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="textoAntiguedad" min="-2" pref="63" max="-2" attributes="0"/>
                               </Group>
@@ -169,34 +169,34 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="textoCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="textoDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="textoProvincia" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaProvincia" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="textoTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="textoAnoConstruccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaAnoConstruccion" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="textoAntiguedad" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaAntiguedad" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="textoFondos" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaFondos" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
@@ -224,16 +224,13 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Titulo a buscar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoNombreActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="etiquetaCodigo">
           <Properties>
             <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="etiquetaDireccion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Direcci&#xf3;n Postal:"/>
           </Properties>
@@ -268,6 +265,9 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaAmbulatoriosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -278,88 +278,64 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textoDireccion">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="etiquetaProvincia">
           <Properties>
             <Property name="text" type="java.lang.String" value="Provincia:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="etiquetaFondos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fondos:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="etiquetaAntiguedad">
           <Properties>
             <Property name="text" type="java.lang.String" value="Antig&#xfc;edad:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="etiquetaAnoConstruccion">
           <Properties>
             <Property name="text" type="java.lang.String" value="A&#xf1;o Construcci&#xf3;n:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
+        <Component class="javax.swing.JLabel" name="etiquetaTelefono">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoProvincia">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoProvinciaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textoTelefono">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoTelefonoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textoAnoConstruccion">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoAnoConstruccionActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textoAntiguedad">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoAntiguedadActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textoFondos">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoFondosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnIngresos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingresos"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnMateriales">
           <Properties>
             <Property name="text" type="java.lang.String" value="Materiales"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMaterialesActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAsociados">
           <Properties>
             <Property name="text" type="java.lang.String" value="Asociados"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsociadosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSalaUrgencias">
           <Properties>
@@ -467,7 +443,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="etiquetaNombreProyecto">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>

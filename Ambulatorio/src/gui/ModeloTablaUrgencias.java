@@ -6,12 +6,10 @@ import javax.swing.table.*;
 
 public class ModeloTablaUrgencias extends AbstractTableModel {
 
-    private FachadaAplicacion fa;
     private java.util.List<Urgencia> urgencias;   //Listado de usuarios de la tabla
 
     //Constructor
-    public ModeloTablaUrgencias(FachadaAplicacion fa) {
-        this.fa = fa;
+    public ModeloTablaUrgencias() {
         this.urgencias = new java.util.ArrayList<Urgencia>();
     }
 

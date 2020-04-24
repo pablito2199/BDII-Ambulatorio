@@ -78,7 +78,7 @@ public class FachadaBaseDatos {
     }
 
     //Permite borrar un ambulatorio de la base de datos
-    public void borrarAmbulatorio(Ambulatorio ambulatorio) {
+    public void borrarAmbulatorio(Integer ambulatorio) {
         daoAmbulatorios.borrarAmbulatorio(ambulatorio);
     }
 
