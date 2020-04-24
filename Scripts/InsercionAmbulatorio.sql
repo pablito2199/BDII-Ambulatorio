@@ -106,8 +106,15 @@ insert into pertenecer (personal, consulta)
 	
 insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
 	values ('2019-10-12 12:22:23', '2019-10-12 13:05:00', 'cip124', 005, 'Urgencia', 'General');
+insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
+	values ('2019-01-22 16:52:32', 'cip124', 005, 'Urgencia', 'General');
 insert into urgencia (cita, paciente, consulta, soborno, gravedad)
-	values ('2019-10-12 12:22:23', 'cip124', 005, 0.01, 1);
+	values ('2019-01-22 16:52:32', 'cip124', 005, 0.01, 2);
+insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
+	values ('2019-04-07 09:42:21', 'cip123', 005, 'Urgencia', 'General');
+insert into urgencia (cita, paciente, consulta, soborno, gravedad)
+	values ('2019-04-07 09:42:21', 'cip123', 005, 150.00, 3);
+
 insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion, fechaInicio, fechaFin)
 	values ('2019-10-12 12:22:23', 'cip124', 005, 'Acetaminofeno', 3, 'Drogarse cada 6 horas.', '2003-06-24', '2009-01-02');
 insert into derivarHospital (cita, paciente, consulta)

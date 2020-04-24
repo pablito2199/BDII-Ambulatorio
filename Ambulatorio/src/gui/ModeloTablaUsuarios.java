@@ -1,6 +1,6 @@
 package gui;
 
-import aplicacion.Usuario;
+import aplicacion.clases.Usuario;
 import javax.swing.table.*;
 
 public class ModeloTablaUsuarios extends AbstractTableModel {

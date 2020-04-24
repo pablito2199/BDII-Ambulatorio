@@ -461,7 +461,7 @@ public class DAOCitas extends AbstractDAO {
         //Declaramos variables
         Connection con;
         PreparedStatement stmUrgencias = null;
-        ResultSet rsUrgencias = null;
+        ResultSet rsUrgencias;
         ArrayList<Urgencia> resultado = new ArrayList<>();
 
         //Establecemos conexión
@@ -478,7 +478,7 @@ public class DAOCitas extends AbstractDAO {
                     + "and c.consulta = u.consulta "
                     + "and c.ambulatorio = u.ambulatorio "
                     + "and c.ambulatorio = ? "
-                    + "order by prioridad desc"
+                    + "order by prioridad desc, c.fechaHoraInicio asc"
             );
 
             //Sustituimos
