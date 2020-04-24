@@ -174,15 +174,13 @@ public class DAOCitas extends AbstractDAO {
                     + "fechaHoraInicio,"
                     + "tipo,"
                     + "especialidad) "
-                    + "values (?,?,?,?,?,?)"
+                    + "values (?,?,?,?,'Urgencia','General')"
             );
             //Sustituimos
             stmUrgencia.setString(1, urgencia.getPaciente());
             stmUrgencia.setInt(2, urgencia.getConsulta());
             stmUrgencia.setInt(3, urgencia.getAmbulatorio());
             stmUrgencia.setTimestamp(4, urgencia.getFechaHoraInicio());
-            stmUrgencia.setString(5, urgencia.getTipo());
-            stmUrgencia.setString(6, urgencia.getEspecialidad());
 
             //Actualizamos
             stmUrgencia.executeUpdate();
@@ -497,12 +495,9 @@ public class DAOCitas extends AbstractDAO {
                         rsUrgencias.getInt("prioridad"),
                         rsUrgencias.getString("nombre"),
                         rsUrgencias.getTimestamp("fechaHoraInicio"),
-                        null,
                         rsUrgencias.getString("paciente"),
                         rsUrgencias.getInt("consulta"),
-                        rsUrgencias.getInt("ambulatorio"),
-                        rsUrgencias.getString("tipo"),
-                        rsUrgencias.getString("especialidad")
+                        rsUrgencias.getInt("ambulatorio")
                 ));
             }
 
@@ -566,7 +561,6 @@ public class DAOCitas extends AbstractDAO {
 
                 resultado.add(new Cita(
                         rsCitas.getTimestamp("fechaHoraInicio"),
-                        null,
                         rsCitas.getString("paciente"),
                         rsCitas.getInt("consulta"),
                         rsCitas.getInt("ambulatorio"),
@@ -639,7 +633,6 @@ public class DAOCitas extends AbstractDAO {
 
                 resultado.add(new Cita(
                         rsCitas.getTimestamp("fechaHoraInicio"),
-                        null,
                         rsCitas.getString("paciente"),
                         rsCitas.getInt("consulta"),
                         rsCitas.getInt("ambulatorio"),

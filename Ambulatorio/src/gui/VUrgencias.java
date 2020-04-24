@@ -6,26 +6,29 @@
 package gui;
 
 import aplicacion.FachadaAplicacion;
-import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Paciente;
+import aplicacion.clases.Urgencia;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class VUrgencias extends javax.swing.JDialog {
 
-    private VPrincipal padre;
+    private VPacientes padre;
     private aplicacion.FachadaAplicacion fa;
     private Paciente paciente;
 
-    public VUrgencias(java.awt.Frame parent, boolean modal, FachadaAplicacion fa, Paciente paciente) {
+    public VUrgencias(javax.swing.JDialog parent, boolean modal, FachadaAplicacion fa, Paciente paciente) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
-        padre = (VPrincipal) parent;
+        padre = (VPacientes) parent;
         this.paciente = paciente;
 
         //Obtenemos modelo
         ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
         tau.setFilas(fa.obtenerAmbulatorios(null, null, null));
-    
+
     }
 
     /**
@@ -48,6 +51,7 @@ public class VUrgencias extends javax.swing.JDialog {
         txtGravedad = new javax.swing.JTextField();
         btnConfirmar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JToggleButton();
+        labelError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,8 +72,21 @@ public class VUrgencias extends javax.swing.JDialog {
         jLabel1.setText("Gravedad:");
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+
+        labelError.setForeground(new java.awt.Color(255, 0, 0));
+        labelError.setText("Error");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,7 +113,10 @@ public class VUrgencias extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar)))
+                        .addComponent(btnRegresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelError)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,12 +130,14 @@ public class VUrgencias extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelError)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelSoborno)
                     .addComponent(txtSoborno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(txtGravedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnRegresar))
@@ -130,6 +152,28 @@ public class VUrgencias extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+
+        //Comprobamos que los datos son validos
+        if (datosValidos()) {
+
+            //Añadimos la urgencia
+            Urgencia u = new Urgencia(Timestamp.valueOf(LocalDateTime.now()),
+            );
+            
+            //Añadimos urgencia al ambulatorio
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+
+        this.dispose();
+
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;
@@ -137,10 +181,26 @@ public class VUrgencias extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelAmbulatorio;
+    private javax.swing.JLabel labelError;
     private javax.swing.JLabel labelSoborno;
     private javax.swing.JTable tablaAmbulatorios;
     private javax.swing.JTextField txtAmbulatorio;
     private javax.swing.JTextField txtGravedad;
     private javax.swing.JTextField txtSoborno;
     // End of variables declaration//GEN-END:variables
+
+    private boolean datosValidos() {
+        if (!(txtSoborno.getText().matches("\\d+\\.?\\d{1,2}") && txtGravedad.getText().matches("\\d|10"))) {
+            labelError.setVisible(true);
+            labelError.setText("Los campos de soborno y gravedad contienen valores no validos!");
+            return false;
+        } else if (tablaAmbulatorios.getSelectedRow() < 0) {
+            labelError.setVisible(true);
+            labelError.setText("No se ha seleccionado un ambulatorio!");
+            return false;
+        }
+
+        labelError.setVisible(false);
+        return true;
+    }
 }

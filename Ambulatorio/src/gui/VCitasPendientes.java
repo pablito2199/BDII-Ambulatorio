@@ -5,18 +5,23 @@
  */
 package gui;
 
+import aplicacion.clases.Consulta;
+import java.util.ArrayList;
+
 /**
  *
  * @author martin
  */
-public class VCitasPendientes extends javax.swing.JDialog {
+public class VCitasPendientes extends java.awt.Frame {
+
+    private ArrayList<Consulta> consultas;
 
     /**
      * Creates new form VCitasPendientes
      */
-    public VCitasPendientes(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public VCitasPendientes(ArrayList<Consulta> consultas) {
         initComponents();
+        this.consultas = consultas;
     }
 
     /**

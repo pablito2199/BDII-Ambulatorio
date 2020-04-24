@@ -13,6 +13,15 @@ public class Cita {
     private String especialidad;
 
     //Constructor
+    public Cita(Timestamp fechaHoraInicio, String paciente, Integer consulta, Integer ambulatorio, String tipo, String especialidad) {
+        this.fechaHoraInicio = fechaHoraInicio;
+        this.paciente = paciente;
+        this.consulta = consulta;
+        this.ambulatorio = ambulatorio;
+        this.tipo = tipo;
+        this.especialidad = especialidad;
+    }
+
     public Cita(Timestamp fechaHoraInicio, Timestamp fechaHoraFin, String paciente, Integer consulta, Integer ambulatorio, String tipo, String especialidad) {
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFin = fechaHoraFin;

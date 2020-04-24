@@ -15,21 +15,21 @@ public class Urgencia extends Cita {
     private String nombre;
 
     //Constructor
-    public Urgencia(Float soborno, Integer gravedad, Integer prioridad, String nombrePaciente, Timestamp fechaHoraInicio, Timestamp fechaHoraFin, String paciente, Integer consulta, Integer ambulatorio, String tipo, String especialidad) {
-        super(fechaHoraInicio, fechaHoraFin, paciente, consulta, ambulatorio, tipo, especialidad);
+    public Urgencia(Float soborno, Integer gravedad, Integer prioridad, String nombrePaciente, Timestamp fechaHoraInicio, String paciente, Integer consulta, Integer ambulatorio) {
+        super(fechaHoraInicio, paciente, consulta, ambulatorio, "Urgencia", "General");
         this.soborno = soborno;
         this.gravedad = gravedad;
         this.prioridad = prioridad;
         this.nombre = nombrePaciente;
     }
-    
-    public Urgencia(Float soborno, Integer gravedad, Integer prioridad, Timestamp fechaHoraInicio, Timestamp fechaHoraFin, String paciente, Integer consulta, Integer ambulatorio, String tipo, String especialidad) {
-        super(fechaHoraInicio, fechaHoraFin, paciente, consulta, ambulatorio, tipo, especialidad);
+
+    public Urgencia(Float soborno, Integer gravedad, Integer prioridad, Timestamp fechaHoraInicio, String paciente, Integer consulta, Integer ambulatorio) {
+        super(fechaHoraInicio, paciente, consulta, ambulatorio, "Urgencia", "General");
         this.soborno = soborno;
         this.gravedad = gravedad;
         this.prioridad = prioridad;
     }
-    
+
     //Getters y Setters
     public Float getSoborno() {
         return soborno;
@@ -62,5 +62,5 @@ public class Urgencia extends Cita {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
 }
