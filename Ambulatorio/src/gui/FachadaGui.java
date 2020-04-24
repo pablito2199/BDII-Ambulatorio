@@ -1,5 +1,8 @@
 package gui;
 
+import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.Cita;
+import aplicacion.clases.Hospital;
 import aplicacion.clases.Paciente;
 
 public class FachadaGui {
@@ -18,21 +21,21 @@ public class FachadaGui {
 //VENTANA DE CITAS
 ////////////////////////////////
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita() {
+    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente) {
         //Declaramos variables
-        VReservarCita vC;
+        VReservarCita vRC;
         //Generamos la ventana
-        vRC = new VReservarCita(vp, true, fa);
+        vRC = new VReservarCita(vp, true, fa, ambulatorio, paciente);
         //Hacemos visible la ventana
         vRC.setVisible(true);
     }
 
-    //Permite generar una ventana para escoger un hospital al que derivar al paciente
-    public void nuevaVDerivarHospital(Paciente paciente) {
+    //Permite generar una ventana para escoger un hospital al que derivar la cita o urgencia
+    public void nuevaVDerivarHospital(Cita cita) {
         //Declaramos variables
-        VCita vDH;
+        VDerivarHospital vDH;
         //Generamos la ventana
-        vDH = new VDerivarHospital(vp, true, fa, paciente);
+        vDH = new VDerivarHospital(vp, true, fa, cita);
         //Hacemos visible la ventana
         vDH.setVisible(true);
     }
@@ -42,9 +45,29 @@ public class FachadaGui {
         //Declaramos variables
         VCitasPendientes vCP;
         //Generamos la ventana
-        vCP = new VCitas(vp, true, fa, paciente);
+        vCP = new VReservarCita(vp, true, fa, paciente);
         //Hacemos visible la ventana
         vCP.setVisible(true);
+    }
+
+    //Permite generar una ventana para consultar la lista de urgencias pendientes por antender
+    public void nuevaVSalaUrgencias(Ambulatorio ambulatorio) {
+        //Declaramos variables
+        VSalaUrgencias vSU;
+        //Generamos la ventana
+        vSU = new VSalaUrgencias(vp, true, fa, ambulatorio);
+        //Hacemos visible la ventana
+        vSU.setVisible(true);
+    }
+
+    //Permite generar una ventana para insertar una nueva urgencia del paciente
+    public void nuevaVUrgencias(Paciente paciente) {
+        //Declaramos variables
+        VUrgencias vU;
+        //Generamos la ventana
+        vU = new VUrgencias(vp, true, fa, paciente);
+        //Hacemos visible la ventana
+        vU.setVisible(true);
     }
 
 ////////////////////////////////

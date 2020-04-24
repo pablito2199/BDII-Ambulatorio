@@ -9,12 +9,12 @@ package gui;
  *
  * @author martin
  */
-public class VCitas extends javax.swing.JDialog {
+public class VReservarCita extends javax.swing.JDialog {
 
     /**
      * Creates new form VCitas
      */
-    public VCitas(java.awt.Frame parent, boolean modal) {
+    public VReservarCita(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }

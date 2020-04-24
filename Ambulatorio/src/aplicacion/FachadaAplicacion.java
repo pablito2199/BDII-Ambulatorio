@@ -113,6 +113,31 @@ public class FachadaAplicacion {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return gcit.citasMedico(medico);
     }
+    
+    //Nueva ventana de reserva de citas
+    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente){
+        fgui.nuevaVReservarCita(ambulatorio, paciente);
+    }
+    
+    //Nueva ventana de derivar a hospital
+    public void nuevaVDerivarHospital(Cita cita){
+        fgui.nuevaVDerivarHospital(cita);
+    }
+    
+    //Nueva ventana de nuerva urgencia
+    public void nuevaVUrgencias(Paciente paciente){
+        fgui.nuevaVUrgencias(paciente);
+    }
+    
+    //Nueva ventana de sala de urgencias
+    public void nuevaVSalaUrgencias(Ambulatorio ambulatorio){
+        fgui.nuevaVSalaUrgencias(ambulatorio);
+    }
+    
+    //Nueva ventana de reserva de citas
+    public void nuevaVCitasPendientes(Paciente paciente){
+        fgui.nuevaVCitasPendientes(paciente);
+    }
 
 /////////////////////////
 //GESTIÓN DE PACIENTES
