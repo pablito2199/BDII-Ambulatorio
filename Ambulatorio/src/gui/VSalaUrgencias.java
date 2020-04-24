@@ -5,21 +5,17 @@
  */
 package gui;
 
+import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Urgencia;
-import aplicacion.clases.Cita;
 
-/**
- *
- * @author martin
- */
 public class VSalaUrgencias extends javax.swing.JDialog {
 
     private VPrincipal padre;
-    private aplicacion.FachadaAplicacion fa;
+    private FachadaAplicacion fa;
     private Ambulatorio ambulatorio;
 
-    public VSalaUrgencias(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Ambulatorio ambulatorio) {
+    public VSalaUrgencias(java.awt.Frame parent, boolean modal, FachadaAplicacion fa, Ambulatorio ambulatorio) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
@@ -156,11 +152,14 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         //Obtenemos modelo
         ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
 
-        //Atendemos la urgencia
-        fgui.nueva
+        //Quitamos urgencia
+        Urgencia u = tu.obtenerUrgencia();
         
         //Contamos urgencias
         labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
+        
+        //Derivamos la urgencia
+        fa.nuevaVDerivarHospital(u);
         
     }//GEN-LAST:event_btnDerivarActionPerformed
 
