@@ -21,7 +21,7 @@ public class VConsultas extends javax.swing.JDialog {
         this.ambulatorio = ambulatorio;
 
         //obtiene la lista de consultas para mostrarlas por pantalla
-        ModeloListaConsultas m = new ModeloListaConsultas();
+        ModeloListaIntegers m = new ModeloListaIntegers();
         lstConsultas.setModel(m);
         m.setElementos(restoConsultas);
         consultas = fa.consultarConsultas(null, ambulatorio, null);
@@ -147,12 +147,15 @@ public class VConsultas extends javax.swing.JDialog {
                         .addContainerGap())
                     .addGroup(panelGeneralLayout.createSequentialGroup()
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                 .addGap(13, 13, 13)
                                 .addComponent(etiquetaNumeroConsultasAmbulatorio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelGeneralLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -253,7 +256,7 @@ public class VConsultas extends javax.swing.JDialog {
     //cuando seleccionas un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
     private void lstConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstConsultasMouseClicked
         // TODO add your handling code here:
-        ModeloListaConsultas m = (ModeloListaConsultas) lstConsultas.getModel();
+        ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
 
         /*SELECCIÓN DE LA ESPECIALIDAD*/
@@ -284,8 +287,8 @@ public class VConsultas extends javax.swing.JDialog {
     //botón de Eliminar, elimina una consulta
     private void btnEliminarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarConsultasActionPerformed
         // TODO add your handling code here:
-        ModeloListaConsultas m = (ModeloListaConsultas) lstConsultas.getModel();
-        Integer numero = m.obtenerConsulta(lstConsultas.getSelectedIndex());
+        ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
+        Integer numero = m.getElementAt(lstConsultas.getSelectedIndex());
         
         //if(cuentaConsultasAmbulatorio>1) deja eliminar, si no pues no y manda un mensaje de error
         //hacer consulta compleja
@@ -323,7 +326,7 @@ public class VConsultas extends javax.swing.JDialog {
 
     //busca las consultas existentes en la tabla
     public void buscarConsultas() {
-        ModeloListaConsultas m = new ModeloListaConsultas();
+        ModeloListaIntegers m = new ModeloListaIntegers();
         lstConsultas.setModel(m);
         consultas = fa.consultarConsultas(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         java.util.ArrayList<Integer> numero = new java.util.ArrayList<>();

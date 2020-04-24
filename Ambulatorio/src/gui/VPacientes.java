@@ -2,7 +2,6 @@ package gui;
 
 import aplicacion.clases.Paciente;
 import aplicacion.clases.GrupoSanguineo;
-import java.awt.event.ActionEvent;
 import java.sql.Date;
 
 public class VPacientes extends javax.swing.JDialog {
@@ -23,6 +22,7 @@ public class VPacientes extends javax.swing.JDialog {
         this.fa = fa;
         initComponents();
         padre = (VPrincipal) parent;
+        padre.setVisible(false);
         //Hacemos invisible el aviso de que hay campos obligatorios sin cubrir
         btnBorrar.setEnabled(false);
     }
@@ -153,6 +153,7 @@ public class VPacientes extends javax.swing.JDialog {
 
         btnNuevaUrgencia.setText("Nueva Urgencia");
         btnNuevaUrgencia.setToolTipText("");
+        btnNuevaUrgencia.setEnabled(false);
         btnNuevaUrgencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevaUrgenciaActionPerformed(evt);
@@ -160,6 +161,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnEnfermedades.setText("Enfermedades");
+        btnEnfermedades.setEnabled(false);
         btnEnfermedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnfermedadesActionPerformed(evt);
@@ -167,6 +169,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnSolicitarCita.setText("Solicitar Cita");
+        btnSolicitarCita.setEnabled(false);
         btnSolicitarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSolicitarCitaActionPerformed(evt);
@@ -174,6 +177,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnCitasPendientes.setText("Citas Pendientes");
+        btnCitasPendientes.setEnabled(false);
         btnCitasPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCitasPendientesActionPerformed(evt);
@@ -181,6 +185,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnHistorialClinico.setText("Historial Clinico");
+        btnHistorialClinico.setEnabled(false);
         btnHistorialClinico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistorialClinicoActionPerformed(evt);
@@ -188,6 +193,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnHistorialRecetas.setText("Historial Recetas");
+        btnHistorialRecetas.setEnabled(false);
         btnHistorialRecetas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistorialRecetasActionPerformed(evt);
@@ -449,6 +455,7 @@ public class VPacientes extends javax.swing.JDialog {
 
     //Función que permite salir de la ventana de usuario
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        padre.setVisible(false);
         //Buscamos libros
         padre.buscarAmbulatorios();
         //Y destruimos esta ventana
@@ -485,7 +492,7 @@ public class VPacientes extends javax.swing.JDialog {
         //Metemos un array vacío como las filas
         m.setFilas(new java.util.ArrayList<>());
         //Setteamos todo a null
-          varCIP.setText(null);
+        varCIP.setText(null);
         varNSS.setText(null);
         varNombre.setText(null);
         varDNI.setText(null);
@@ -502,15 +509,14 @@ public class VPacientes extends javax.swing.JDialog {
     //Función que permite guardar el usuario en la base de datos
     private void btnActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPacienteActionPerformed
         //Comprobarmos que no haya ningún campo obligatorio sin cubrir
-        if (varCIP.getText().isEmpty() || varDNI.getText().isEmpty() || varNSS.getText().isEmpty() || varNombre.getText().isEmpty() ||
-                varSexo.getText().isEmpty() || varEdad.getText().isEmpty() || varGrupoSanguineo.getText().isEmpty() || varNacionalidad.getText().isEmpty() ||
-                varFechaNacimiento.getText().isEmpty() || varDireccion.getText().isEmpty() || varTelefono.getText().isEmpty()) {
+        if (varCIP.getText().isEmpty() || varDNI.getText().isEmpty() || varNSS.getText().isEmpty() || varNombre.getText().isEmpty()
+                || varSexo.getText().isEmpty() || varEdad.getText().isEmpty() || varGrupoSanguineo.getText().isEmpty() || varNacionalidad.getText().isEmpty()
+                || varFechaNacimiento.getText().isEmpty() || varDireccion.getText().isEmpty() || varTelefono.getText().isEmpty()) {
             //Si lo hay activamos el aviso
             fa.muestraExcepcion("Necesitas rellenar todos los campos antes de poder actualizar");
             //Regresamos
             return;
-        }
-        else if(!varRango.getText().isEmpty()){
+        } else if (!varRango.getText().isEmpty()) {
             //Si se ha cubierto un campo que no se debe
             fa.muestraExcepcion("No se puede modificar el campo Rango");
             //Regresamos
@@ -538,16 +544,16 @@ public class VPacientes extends javax.swing.JDialog {
         //Si ya existe el ID actualiza
         if (fa.existePaciente(varCIP.getText())) {
             //Instanciamos el usuario con los datos proporcionados
-            Paciente u = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(), 
-                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()), 
+            Paciente u = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(),
+                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()),
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Actualizamos la base de datos
             fa.modificarPaciente(u);
             //De no existir se crea uno nuevo
         } else {
             //Instanciamos el usuario
-            Paciente p = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(), 
-                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()), 
+            Paciente p = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(),
+                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()),
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Lo insertamos en la base de datos
             fa.insertarPaciente(p);
@@ -580,6 +586,13 @@ public class VPacientes extends javax.swing.JDialog {
         varDireccion.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDireccion());
         varTelefono.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getTelefono());
         varRango.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getRango().toString());
+        //Activamos los botones
+        btnEnfermedades.setEnabled(true);
+        btnNuevaUrgencia.setEnabled(true);
+        btnSolicitarCita.setEnabled(true);
+        btnCitasPendientes.setEnabled(true);
+        btnHistorialClinico.setEnabled(true);
+        btnHistorialRecetas.setEnabled(true);
     }//GEN-LAST:event_tablaPacientesMouseClicked
 
     private void varSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varSexoActionPerformed
@@ -599,27 +612,88 @@ public class VPacientes extends javax.swing.JDialog {
     }//GEN-LAST:event_varNacionalidadActionPerformed
 
     private void btnNuevaUrgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaUrgenciaActionPerformed
-        // TODO add your handling code here:
+        if (varCIP.getText().isEmpty()) {
+            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
+            //Desactivamos los botones
+            btnEnfermedades.setEnabled(false);
+            btnNuevaUrgencia.setEnabled(false);
+            btnSolicitarCita.setEnabled(false);
+            btnCitasPendientes.setEnabled(false);
+            btnHistorialClinico.setEnabled(false);
+            btnHistorialRecetas.setEnabled(false);
+            return;
+        }
+
     }//GEN-LAST:event_btnNuevaUrgenciaActionPerformed
 
     private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
-        // TODO add your handling code here:
+        if (varCIP.getText().isEmpty()) {
+            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
+            //Desactivamos los botones
+            btnEnfermedades.setEnabled(false);
+            btnNuevaUrgencia.setEnabled(false);
+            btnSolicitarCita.setEnabled(false);
+            btnCitasPendientes.setEnabled(false);
+            btnHistorialClinico.setEnabled(false);
+            btnHistorialRecetas.setEnabled(false);
+            return;
+        }
     }//GEN-LAST:event_btnEnfermedadesActionPerformed
 
     private void btnSolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCitaActionPerformed
-        // TODO add your handling code here:
+        if (varCIP.getText().isEmpty()) {
+            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
+            //Desactivamos los botones
+            btnEnfermedades.setEnabled(false);
+            btnNuevaUrgencia.setEnabled(false);
+            btnSolicitarCita.setEnabled(false);
+            btnCitasPendientes.setEnabled(false);
+            btnHistorialClinico.setEnabled(false);
+            btnHistorialRecetas.setEnabled(false);
+            return;
+        }
     }//GEN-LAST:event_btnSolicitarCitaActionPerformed
 
     private void btnCitasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasPendientesActionPerformed
-        // TODO add your handling code here:
+        if (varCIP.getText().isEmpty()) {
+            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
+            //Desactivamos los botones
+            btnEnfermedades.setEnabled(false);
+            btnNuevaUrgencia.setEnabled(false);
+            btnSolicitarCita.setEnabled(false);
+            btnCitasPendientes.setEnabled(false);
+            btnHistorialClinico.setEnabled(false);
+            btnHistorialRecetas.setEnabled(false);
+            return;
+        }
     }//GEN-LAST:event_btnCitasPendientesActionPerformed
 
     private void btnHistorialClinicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialClinicoActionPerformed
-        // TODO add your handling code here:
+        if (varCIP.getText().isEmpty()) {
+            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
+            //Desactivamos los botones
+            btnEnfermedades.setEnabled(false);
+            btnNuevaUrgencia.setEnabled(false);
+            btnSolicitarCita.setEnabled(false);
+            btnCitasPendientes.setEnabled(false);
+            btnHistorialClinico.setEnabled(false);
+            btnHistorialRecetas.setEnabled(false);
+            return;
+        }
     }//GEN-LAST:event_btnHistorialClinicoActionPerformed
 
     private void btnHistorialRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialRecetasActionPerformed
-        // TODO add your handling code here:
+        if (varCIP.getText().isEmpty()) {
+            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
+            //Desactivamos los botones
+            btnEnfermedades.setEnabled(false);
+            btnNuevaUrgencia.setEnabled(false);
+            btnSolicitarCita.setEnabled(false);
+            btnCitasPendientes.setEnabled(false);
+            btnHistorialClinico.setEnabled(false);
+            btnHistorialRecetas.setEnabled(false);
+            return;
+        }
     }//GEN-LAST:event_btnHistorialRecetasActionPerformed
 
     //Función que permite buscar un usuario en la base de datos
@@ -627,9 +701,9 @@ public class VPacientes extends javax.swing.JDialog {
         //Creamos el modelo de tabla préstamos
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
-        Integer NSS=0, edad=0;
+        Integer NSS = 0, edad = 0;
         //Setteamos las filas con el resultado de la búsqueda
-         if (!varNSS.getText().isEmpty()) {
+        if (!varNSS.getText().isEmpty()) {
             //Intentamos convertir el NSS a entero
             try {
                 NSS = Integer.parseInt(varNSS.getText());
@@ -644,7 +718,7 @@ public class VPacientes extends javax.swing.JDialog {
                 return;
             }
         }
-           if (!varEdad.getText().isEmpty()) {
+        if (!varEdad.getText().isEmpty()) {
             //Intentamos convertirla a entero
             try {
                 edad = Integer.parseInt(varEdad.getText());
@@ -659,7 +733,7 @@ public class VPacientes extends javax.swing.JDialog {
                 return;
             }
         }
-        m.setFilas(fa.consultarPacientes(varCIP.getText(), varDNI.getText(), varNombre.getText(), 
+        m.setFilas(fa.consultarPacientes(varCIP.getText(), varDNI.getText(), varNombre.getText(),
                 edad, varSexo.getText(), NSS, varGrupoSanguineo.getText()));
         //Si hay coincidencias
         if (m.getRowCount() > 0) {

@@ -19,9 +19,9 @@ public class FachadaGui {
     //Permite generar una ventana para visualizar información de un trabajador
     public void nuevaVPacientes() {
         //Declaramos variables
-        VPersonal vP;
+        VPacientes vP;
         //Generamos la ventana
-        vP = new VPersonal(vp, true, fa);
+        vP = new VPacientes(vp, true, fa);
         //Hacemos visible la ventana
         vP.setVisible(true);
     }

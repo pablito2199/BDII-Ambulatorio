@@ -19,7 +19,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         padre = (VPrincipal) parent;
 
         //obtiene la lista de consultas para mostrarlas por pantalla
-        ModeloListaEnfermedades mListaE = new ModeloListaEnfermedades();
+        ModeloListaStrings mListaE = new ModeloListaStrings();
         lstEnfermedades.setModel(mListaE);
         mListaE.setElementos(restoEnfermedades);
         enfermedades = fa.consultarEnfermedades(textoNombre.getText());
@@ -224,7 +224,7 @@ public class VEnfermedades extends javax.swing.JDialog {
     //cuando se selecciona un elemento de la lista, los datos se pasan a la parte derecha para consultarse
     private void lstEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstEnfermedadesMouseClicked
         // TODO add your handling code here:
-        ModeloListaEnfermedades mListaE = (ModeloListaEnfermedades) lstEnfermedades.getModel();
+        ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
         textoNombre.setText(mListaE.getElementAt(lstEnfermedades.getSelectedIndex()));
         for (Enfermedad e : enfermedades) {
             if (e.getNombre().equals(mListaE.getElementAt(lstEnfermedades.getSelectedIndex()))) {
@@ -263,8 +263,8 @@ public class VEnfermedades extends javax.swing.JDialog {
     //botón de Eliminar, elimina una enfermedad de la base de datos
     private void btnEliminarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEnfermedadActionPerformed
         // TODO add your handling code here:
-        ModeloListaEnfermedades mListaE = (ModeloListaEnfermedades) lstEnfermedades.getModel();
-        String nombre = mListaE.obtenerEnfermedad(lstEnfermedades.getSelectedIndex());
+        ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
+        String nombre = mListaE.getElementAt(lstEnfermedades.getSelectedIndex());
         fa.borrarEnfermedad(nombre);
         textoNombre.setText(null);
         textoDescripcion.setText(null);
@@ -294,7 +294,7 @@ public class VEnfermedades extends javax.swing.JDialog {
 
     //busca las enfermedades existentes en la lista
     public void buscarEnfermedades() {
-        ModeloListaEnfermedades mListaE = new ModeloListaEnfermedades();
+        ModeloListaStrings mListaE = new ModeloListaStrings();
         lstEnfermedades.setModel(mListaE);
         enfermedades = fa.consultarEnfermedades(textoNombre.getText());
         java.util.ArrayList<String> nombres = new java.util.ArrayList<>();

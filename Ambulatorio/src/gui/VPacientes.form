@@ -216,6 +216,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Nueva Urgencia"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevaUrgenciaActionPerformed"/>
@@ -224,6 +225,7 @@
         <Component class="javax.swing.JButton" name="btnEnfermedades">
           <Properties>
             <Property name="text" type="java.lang.String" value="Enfermedades"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnfermedadesActionPerformed"/>
@@ -232,6 +234,7 @@
         <Component class="javax.swing.JButton" name="btnSolicitarCita">
           <Properties>
             <Property name="text" type="java.lang.String" value="Solicitar Cita"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSolicitarCitaActionPerformed"/>
@@ -240,6 +243,7 @@
         <Component class="javax.swing.JButton" name="btnCitasPendientes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Citas Pendientes"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCitasPendientesActionPerformed"/>
@@ -248,6 +252,7 @@
         <Component class="javax.swing.JButton" name="btnHistorialClinico">
           <Properties>
             <Property name="text" type="java.lang.String" value="Historial Clinico"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistorialClinicoActionPerformed"/>
@@ -256,6 +261,7 @@
         <Component class="javax.swing.JButton" name="btnHistorialRecetas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Historial Recetas"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistorialRecetasActionPerformed"/>
