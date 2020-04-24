@@ -6,6 +6,7 @@
 package gui;
 
 import aplicacion.FachadaAplicacion;
+import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Urgencia;
 
@@ -51,7 +52,6 @@ public class VUrgencias extends javax.swing.JDialog {
         txtGravedad = new javax.swing.JTextField();
         btnConfirmar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JToggleButton();
-        labelError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,9 +85,6 @@ public class VUrgencias extends javax.swing.JDialog {
             }
         });
 
-        labelError.setForeground(new java.awt.Color(255, 0, 0));
-        labelError.setText("Error");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,10 +110,7 @@ public class VUrgencias extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConfirmar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelError)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btnRegresar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -130,8 +124,6 @@ public class VUrgencias extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labelError)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelSoborno)
                     .addComponent(txtSoborno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,7 +133,7 @@ public class VUrgencias extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnRegresar))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,6 +141,12 @@ public class VUrgencias extends javax.swing.JDialog {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+
+        //Obtenemos modelo
+        ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
+
+        //Buscamos ambulatorio
+        tau.setFilas(fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, null));
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -158,13 +156,25 @@ public class VUrgencias extends javax.swing.JDialog {
         //Comprobamos que los datos son validos
         if (datosValidos()) {
 
+            //Obtenemos ambulatorio
+            ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
+            Ambulatorio a = tau.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow());
+
             //Añadimos la urgencia
-            Urgencia u = new Urgencia(Timestamp.valueOf(LocalDateTime.now()),
-            );
-            
+            Urgencia u = new Urgencia(
+                    txtSoborno.getText(),
+                    txtGravedad.getText(),
+                    Timestamp.valueOf(LocalDateTime.now()),
+                    paciente.getCIP(),
+                    fa.menorNumeroPacientes(a.getCodigo()),
+                    a.getCodigo());
+
+            fa.insertarUrgencia(u);
+
             //Añadimos urgencia al ambulatorio
             this.dispose();
         }
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -181,7 +191,6 @@ public class VUrgencias extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelAmbulatorio;
-    private javax.swing.JLabel labelError;
     private javax.swing.JLabel labelSoborno;
     private javax.swing.JTable tablaAmbulatorios;
     private javax.swing.JTextField txtAmbulatorio;
@@ -189,18 +198,23 @@ public class VUrgencias extends javax.swing.JDialog {
     private javax.swing.JTextField txtSoborno;
     // End of variables declaration//GEN-END:variables
 
+    //Comprobacion de que los datos introducidos y escogidos son validos
     private boolean datosValidos() {
+        
+        //Comprobamos si los campos de Soborno y Gravedad tienen valores no validos
         if (!(txtSoborno.getText().matches("\\d+\\.?\\d{1,2}") && txtGravedad.getText().matches("\\d|10"))) {
-            labelError.setVisible(true);
-            labelError.setText("Los campos de soborno y gravedad contienen valores no validos!");
+            
+            fa.muestraExcepcion("!Los campos de soborno y gravedad contienen valores no validos!");
             return false;
+        
+        //Comprobamos si se ha seleccionado un ambulatorio
         } else if (tablaAmbulatorios.getSelectedRow() < 0) {
-            labelError.setVisible(true);
-            labelError.setText("No se ha seleccionado un ambulatorio!");
+            
+            fa.muestraExcepcion("!No se ha seleccionado un ambulatorio de la tabla!");
             return false;
         }
 
-        labelError.setVisible(false);
+        //Son datos validos
         return true;
     }
 }

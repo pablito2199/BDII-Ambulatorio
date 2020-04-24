@@ -85,7 +85,7 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
 
-        tablaAmbulatorios.setModel(new ModeloTablaLibros());
+        tablaAmbulatorios.setModel(new ModeloTablaAmbulatorios());
         tablaAmbulatorios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaAmbulatorios.getTableHeader().setReorderingAllowed(false);
         tablaAmbulatorios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,7 +122,6 @@ public class VPrincipal extends javax.swing.JFrame {
         btnAsociados.setEnabled(false);
 
         btnSalaUrgencias.setText("Sala Urgencias");
-        btnSalaUrgencias.setEnabled(false);
         btnSalaUrgencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalaUrgenciasActionPerformed(evt);
@@ -380,15 +379,15 @@ public class VPrincipal extends javax.swing.JFrame {
         ModeloTablaAmbulatorios ma = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
         Integer codigoAmbulatorio = ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo();
         //Eliminamos el ambulatorio
-        fa.borrarAmbulatorio(codigoAmbulatorio);                                       
+        fa.borrarAmbulatorio(codigoAmbulatorio);
         //Ponemos todos los campos de texto en blanco
-        textoAnoConstruccion.setText(null);                                       
-        textoAntiguedad.setText(null);                                       
-        textoCodigo.setText(null);                                       
-        textoDireccion.setText(null);                                       
-        textoNombre.setText(null);                                       
-        textoProvincia.setText(null);                                       
-        textoTelefono.setText(null);                                       
+        textoAnoConstruccion.setText(null);
+        textoAntiguedad.setText(null);
+        textoCodigo.setText(null);
+        textoDireccion.setText(null);
+        textoNombre.setText(null);
+        textoProvincia.setText(null);
+        textoTelefono.setText(null);
         textoFondos.setText(null);
         //Actualizamos la tabla
         buscarAmbulatorios();
@@ -396,14 +395,14 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Botón Limpiar, pone todos los campos de texto en blanco, y hace más fácil la inserción de un nuevo ambulatorio
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        textoAnoConstruccion.setText(null);                                       
-        textoAntiguedad.setText(null);                                       
-        textoCodigo.setText(null);                                       
-        textoDireccion.setText(null);                                       
-        textoNombre.setText(null);                                       
-        textoProvincia.setText(null);                                       
-        textoTelefono.setText(null);                                       
-        textoFondos.setText(null);        
+        textoAnoConstruccion.setText(null);
+        textoAntiguedad.setText(null);
+        textoCodigo.setText(null);
+        textoDireccion.setText(null);
+        textoNombre.setText(null);
+        textoProvincia.setText(null);
+        textoTelefono.setText(null);
+        textoFondos.setText(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Botón Actualizar, crea un nuevo ambulatorio o lo modifica
@@ -415,7 +414,7 @@ public class VPrincipal extends javax.swing.JFrame {
         if (!textoCodigo.getText().isEmpty() && !textoNombre.getText().isEmpty() && !textoDireccion.getText().isEmpty()
                 && !textoProvincia.getText().isEmpty() && !textoTelefono.getText().isEmpty() && isNumeric(textoCodigo.getText())
                 && (isNumeric(textoAnoConstruccion.getText()) || textoAnoConstruccion.getText().isEmpty())) {
-            a = new Ambulatorio(Integer.parseInt(textoCodigo.getText()), textoNombre.getText(), textoDireccion.getText(), 
+            a = new Ambulatorio(Integer.parseInt(textoCodigo.getText()), textoNombre.getText(), textoDireccion.getText(),
                     textoAnoConstruccion.getText(), textoProvincia.getText(), textoTelefono.getText(),
                     null, 0.0);
             for (Ambulatorio amb : fa.obtenerAmbulatorios(null, null, null)) {
@@ -435,7 +434,7 @@ public class VPrincipal extends javax.swing.JFrame {
             btnSalaUrgencias.setEnabled(true);
             btnPersonal.setEnabled(true);
         } else {
-            fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
+            fa.muestraExcepcion("!Debes rellenar todos los campos obligatorios!");
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -557,7 +556,7 @@ public class VPrincipal extends javax.swing.JFrame {
             btnPersonal.setEnabled(false);
         }
     }
-    
+
     //Comprueba si un dato se puede convertir a Integer
     public static boolean isNumeric(String cadena) {
         boolean resultado;

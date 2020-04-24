@@ -114,7 +114,7 @@ public class DAOConsultas extends AbstractDAO {
                     + "where c1.ambulatorio = u.ambulatorio "
                     +     "and c1.identificador = u.consulta "
                     +     "and c1.ambulatorio = ? "
-                    +     "and c1.especialidad = 'Urgencia' "
+                    +     "and c1.especialidad = 'General' "
                     + "having count() < count() "
                     + "group by c1.identificador, c1.ambulatorio, c1.especialidad";
 
