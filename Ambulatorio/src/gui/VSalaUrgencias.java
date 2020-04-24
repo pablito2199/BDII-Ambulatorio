@@ -157,9 +157,7 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
 
         //Atendemos la urgencia
-        fgui
-        
-        fa.derivarHospital(tu.obtenerUrgencia());
+        fgui.nueva
         
         //Contamos urgencias
         labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));

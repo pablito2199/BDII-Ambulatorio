@@ -45,7 +45,7 @@ public class FachadaGui {
         //Declaramos variables
         VCitasPendientes vCP;
         //Generamos la ventana
-        vCP = new VReservarCita(vp, true, fa, paciente);
+        vCP = new nuevaVCitasPendientes(vp, true, fa, paciente);
         //Hacemos visible la ventana
         vCP.setVisible(true);
     }
