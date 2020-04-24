@@ -97,7 +97,7 @@ public class ModeloTablaUrgencias extends AbstractTableModel {
                 break;
             //Permite recuperar el nombre
             case 1:
-                resultado = fa.consultarPacientes(urgencias.get(row).getPaciente(), null, null, null, null, null, null);
+                resultado = urgencias.get(row).getNombre();
                 break;
             //Permite recuperar la gravedad
             case 2:
@@ -120,7 +120,15 @@ public class ModeloTablaUrgencias extends AbstractTableModel {
 
     //Permite recuperar la primera urgencia
     public Urgencia obtenerUrgencia() {
-        return this.urgencias.get(0);
+        
+        //Obtenemos urgencia
+        Urgencia u = this.urgencias.get(0);
+        
+        //Eliminamos urgencia y actualizamos
+        this.urgencias.remove(u);
+        fireTableDataChanged();
+        
+        return u;
     }
 
 }
