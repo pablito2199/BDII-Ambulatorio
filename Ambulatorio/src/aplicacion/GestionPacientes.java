@@ -45,4 +45,8 @@ public class GestionPacientes {
     public boolean existePaciente(String CIP) {
         return fbd.existePaciente(CIP);
     }
+    //Permite generar una ventana para visualizar información de un paciente
+    public void nuevaVPacientes(){
+        fgui.nuevaVPacientes();
+    }
 }

@@ -37,4 +37,9 @@ public class GestionEnfermedades {
     public void borrarEnfermedad(String nombre) {
         fbd.borrarEnfermedad(nombre);
     }
+    
+    //Permite crear una nueva ventana de enfermedades
+    public void nuevaVEnfermedades(java.util.List<String> enfermedades){
+        fgui.nuevaVEnfermedades(enfermedades);
+    }
 }
