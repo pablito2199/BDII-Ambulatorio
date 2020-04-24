@@ -309,9 +309,19 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenuBar3.add(menuMedicamentos);
 
         menuEnfermedades.setText("Enfermedades");
+        menuEnfermedades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEnfermedadesActionPerformed(evt);
+            }
+        });
         jMenuBar3.add(menuEnfermedades);
 
         menuPacientes.setText("Pacientes");
+        menuPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPacientesActionPerformed(evt);
+            }
+        });
         jMenuBar3.add(menuPacientes);
 
         menuEspecialidades.setText("Especialidades");
@@ -429,17 +439,26 @@ public class VPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    //Botón Sala Urgencias, abre una nueva ventana de urgencias
     private void btnSalaUrgenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalaUrgenciasActionPerformed
         // TODO add your handling code here:
+        //Obtenemos el ambulatorio deseado de la tabla
+        ModeloTablaAmbulatorios ma = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
+        fa.nuevaVSalaUrgencias(ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()));
     }//GEN-LAST:event_btnSalaUrgenciasActionPerformed
 
+    //Menú de consultas, abre una nueva ventana de Enfermedades
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
-        fa.abrirConsultas();
+        // TODO add your handling code here:                                            
+        //Obtenemos el ambulatorio deseado de la tabla
+        ModeloTablaAmbulatorios ma = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
+        fa.nuevaVConsultas(ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo());
     }//GEN-LAST:event_btnConsultasActionPerformed
 
+    //Botoón Personal, abre una nueva ventana de personal
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
         // TODO add your handling code here:
+        fa.nuevaVPersonal();
     }//GEN-LAST:event_btnPersonalActionPerformed
 
     //Al pulsar sobre un ambulatorio de la tabla, se colocan todos sus datos en los campos de texto 
@@ -455,6 +474,18 @@ public class VPrincipal extends javax.swing.JFrame {
         textoAntiguedad.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getAntiguedad());
         textoFondos.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getIngresos()));
     }//GEN-LAST:event_tablaAmbulatoriosMouseClicked
+
+    //Menú de enfermedades, abre una nueva ventana de Enfermedades
+    private void menuEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEnfermedadesActionPerformed
+        // TODO add your handling code here:
+        fa.nuevaVEnfermedades();
+    }//GEN-LAST:event_menuEnfermedadesActionPerformed
+
+    //Menú de pacientes, abre una nueva ventana de Pacientes
+    private void menuPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPacientesActionPerformed
+        // TODO add your handling code here:
+        fa.nuevaVPacientes();
+    }//GEN-LAST:event_menuPacientesActionPerformed
 
     /**
      * @param args the command line arguments

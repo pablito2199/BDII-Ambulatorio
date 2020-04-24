@@ -40,4 +40,9 @@ public class GestionPacientes {
     public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         return fbd.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
+    
+    //Permite generar una ventana para visualizar información de un paciente
+    public void nuevaVPacientes(){
+        fgui.nuevaVPacientes();
+    }
 }

@@ -2,7 +2,6 @@ package gui;
 
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Cita;
-import aplicacion.clases.Hospital;
 import aplicacion.clases.Paciente;
 
 public class FachadaGui {
@@ -15,6 +14,16 @@ public class FachadaGui {
         this.fa = fa;
         //Se crea la ventana principal
         this.vp = new VPrincipal(fa);
+    }
+    
+    //Permite generar una ventana para visualizar información de un trabajador
+    public void nuevaVPacientes() {
+        //Declaramos variables
+        VPersonal vP;
+        //Generamos la ventana
+        vP = new VPersonal(vp, true, fa);
+        //Hacemos visible la ventana
+        vP.setVisible(true);
     }
 
 ////////////////////////////////
@@ -40,7 +49,7 @@ public class FachadaGui {
         vDH.setVisible(true);
     }
 
-    //Permite generar una ventana para escoger un paciente al que consultar sus consultas pendientes
+    //Permite generar una ventana para escoger un paciente al que consultar sus citas pendientes
     public void nuevaVCitasPendientes(Paciente paciente) {
         //Declaramos variables
         VCitasPendientes vCP;
@@ -73,10 +82,10 @@ public class FachadaGui {
 ////////////////////////////////
 //VENTANA DE PACIENTES
 ////////////////////////////////
-    //Permite generar una ventana para visualizar información de una cita
+    //Permite generar una ventana para visualizar información de un paciente
     public void nuevaVPacientes() {
         //Declaramos variables
-        VPaciente vP;
+        VPacientes vP;
         //Generamos la ventana
         vP = new VPacientes(vp, true, fa);
         //Hacemos visible la ventana
@@ -117,11 +126,11 @@ public class FachadaGui {
 //VENTANA DE ENFERMEDADES
 /////////////////////////////
     //Permite crear una nueva ventana de enfermedades
-    public void nuevaVEnfermedades() {
+    public void nuevaVEnfermedades(java.util.List<String> enfermedades) {
         //Declaramos
         VEnfermedades vE;
         //Instanciamos la ventana
-        vE = new VEnfermedades(parent, true, fa);
+        vE = new VEnfermedades(vp, true, fa, enfermedades);
         //La hacemos visible
         vE.setVisible(true);
     }
@@ -130,11 +139,11 @@ public class FachadaGui {
 //VENTANA DE CONSULTAS
 /////////////////////////////
     //Permite crear una nueva ventana de consultas
-    public void nuevaVConsultas() {
+    public void nuevaVConsultas(java.util.List<Integer> consultas, Integer ambulatorio) {
         //Declaramos
-        VConsulta vC;
+        VConsultas vC;
         //Instanciamos la ventana
-        vC = new VConsulta(parent, true, fa);
+        vC = new VConsultas(vp, true, fa, consultas, ambulatorio);
         //La hacemos visible
         vC.setVisible(true);
     }

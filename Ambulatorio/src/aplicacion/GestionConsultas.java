@@ -41,4 +41,9 @@ public class GestionConsultas {
     public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
         return fbd.numeroConsultas(ambulatorio, especialidad);
     }
+    
+    //Permite crear una nueva ventana de consultas
+    public void nuevaVConsultas(java.util.List<Integer> consultas, Integer ambulatorio){
+        fgui.nuevaVConsultas(consultas, ambulatorio);
+    }
 }
