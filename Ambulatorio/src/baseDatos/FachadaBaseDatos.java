@@ -62,12 +62,9 @@ public class FachadaBaseDatos {
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
             fa.muestraExcepcion(f.getMessage());
-        } catch (IOException i) {
+        } catch (IOException | java.sql.SQLException i) {
             System.out.println(i.getMessage());
             fa.muestraExcepcion(i.getMessage());
-        } catch (java.sql.SQLException e) {
-            System.out.println(e.getMessage());
-            fa.muestraExcepcion(e.getMessage());
         }
 
     }
@@ -162,8 +159,8 @@ public class FachadaBaseDatos {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
-        return daoPacientes.consultarHistorialClinico(paciente, tipo, especialidad, fechaInicio, fechaFin);
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
+        return daoPacientes.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
 
 //////////////////

@@ -2,6 +2,7 @@ package aplicacion;
 
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Cita;
+import aplicacion.clases.TipoCita;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
@@ -36,7 +37,7 @@ public class GestionPacientes {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
-        return fbd.consultarHistorialClinico(paciente, tipo, especialidad, fechaInicio, fechaFin);
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
+        return fbd.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
 }

@@ -8,7 +8,7 @@ import aplicacion.clases.Paciente;
 import aplicacion.clases.GrupoSanguineo;
 import aplicacion.clases.Rango;
 import aplicacion.clases.Cita;
-
+import aplicacion.clases.TipoCita;
 /* 
  * @author Ainhoa Vivel Couso
  */
@@ -201,7 +201,7 @@ public class DAOPacientes extends AbstractDAO {
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
             stmPacientes.setString(1, "%" + CIP + "%");
-            stmPacientes.setString(2, "%" + DNI + "%");
+            stmPacientes.setString(2, "%" + DNI+ "%");
             stmPacientes.setString(3, "%" + nombre + "%");
             stmPacientes.setInt(4, edad);
             stmPacientes.setString(5, "%" + sexo + "%");
@@ -247,7 +247,7 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         //Declaramos variables
         java.util.List<Cita> resultado = new java.util.ArrayList<Cita>();
         Cita citaActual;
@@ -275,8 +275,8 @@ public class DAOPacientes extends AbstractDAO {
             stmHistorial = con.prepareStatement(consulta);
             //Sustituimos
             stmHistorial.setString(1, paciente.getCIP());
-            stmHistorial.setString(2, tipo);
-            stmHistorial.setString(3, especialidad);
+            stmHistorial.setString(2, tipoCita.getNombre());
+            stmHistorial.setString(3, tipoCita.getEspecialidad());
             stmHistorial.setTimestamp(4, fechaFin);
             stmHistorial.setTimestamp(5, fechaInicio);
 
