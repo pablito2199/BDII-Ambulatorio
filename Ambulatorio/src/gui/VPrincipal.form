@@ -224,9 +224,6 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Titulo a buscar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoNombreActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -304,62 +301,38 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoProvincia">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoProvinciaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textoTelefono">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoTelefonoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textoAnoConstruccion">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoAnoConstruccionActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textoAntiguedad">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoAntiguedadActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textoFondos">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoFondosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnIngresos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingresos"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnMateriales">
           <Properties>
             <Property name="text" type="java.lang.String" value="Materiales"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMaterialesActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAsociados">
           <Properties>
             <Property name="text" type="java.lang.String" value="Asociados"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsociadosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSalaUrgencias">
           <Properties>

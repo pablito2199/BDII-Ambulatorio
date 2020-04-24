@@ -1,5 +1,7 @@
 package gui;
 
+import aplicacion.clases.Ambulatorio;
+
 public class VPrincipal extends javax.swing.JFrame {
 
     aplicacion.FachadaAplicacion fa;    //Enlace a la fachada de aplicación
@@ -71,11 +73,6 @@ public class VPrincipal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         textoNombre.setToolTipText("Titulo a buscar");
-        textoNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNombreActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Código:");
 
@@ -106,61 +103,18 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jLabel9.setText("Teléfono:");
 
-        textoProvincia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoProvinciaActionPerformed(evt);
-            }
-        });
-
-        textoTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoTelefonoActionPerformed(evt);
-            }
-        });
-
-        textoAnoConstruccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoAnoConstruccionActionPerformed(evt);
-            }
-        });
-
         textoAntiguedad.setEditable(false);
-        textoAntiguedad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoAntiguedadActionPerformed(evt);
-            }
-        });
 
         textoFondos.setEditable(false);
-        textoFondos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoFondosActionPerformed(evt);
-            }
-        });
 
         btnIngresos.setText("Ingresos");
         btnIngresos.setEnabled(false);
-        btnIngresos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresosActionPerformed(evt);
-            }
-        });
 
         btnMateriales.setText("Materiales");
         btnMateriales.setEnabled(false);
-        btnMateriales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMaterialesActionPerformed(evt);
-            }
-        });
 
         btnAsociados.setText("Asociados");
         btnAsociados.setEnabled(false);
-        btnAsociados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAsociadosActionPerformed(evt);
-            }
-        });
 
         btnSalaUrgencias.setText("Sala Urgencias");
         btnSalaUrgencias.setEnabled(false);
@@ -402,7 +356,7 @@ public class VPrincipal extends javax.swing.JFrame {
     //Permite buscar los libros (al hacer click en el botón)
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         //Buscamos los libros
-        buscarLibros();
+        buscarAmbulatorios();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     //Permite editar un libro abriendo la ventana de libro correspondiente con su información
@@ -417,51 +371,50 @@ public class VPrincipal extends javax.swing.JFrame {
         fa.visualizarLibro(idLibro);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    //Función para crear un nuevo libro e insertarlo en la base de datos    
+    //Función para limpiar todos los campos de texto, y hacer más fácil la inserción de un nuevo ambulatorio
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        //Creamos un nuevo libro, abriendo así la ventana correspondiente
-        fa.nuevoLibro();
+        textoAnoConstruccion.setText(null);                                       
+        textoAntiguedad.setText(null);                                       
+        textoCodigo.setText(null);                                       
+        textoDireccion.setText(null);                                       
+        textoNombre.setText(null);                                       
+        textoProvincia.setText(null);                                       
+        textoTelefono.setText(null);                                       
+        textoFondos.setText(null);        
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void textoProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoProvinciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoProvinciaActionPerformed
-
-    private void textoTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoTelefonoActionPerformed
-
-    private void textoAnoConstruccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoAnoConstruccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoAnoConstruccionActionPerformed
-
-    private void textoAntiguedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoAntiguedadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoAntiguedadActionPerformed
-
-    private void textoFondosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoFondosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoFondosActionPerformed
-
-    private void textoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoNombreActionPerformed
-
+    //Función para crear un nuevo ambulatorio o modificarlo
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
+        boolean modificar = false;
+        Ambulatorio a;
+        //si los campos no están vacíos
+        if (!textoCodigo.getText().isEmpty() && !textoNombre.getText().isEmpty() && !textoDireccion.getText().isEmpty()
+                && !textoProvincia.getText().isEmpty() && !textoTelefono.getText().isEmpty() 
+                && (isNumeric(textoAnoConstruccion.getText()) || textoAnoConstruccion.getText().isEmpty())) {
+            a = new Ambulatorio(Integer.parseInt(textoCodigo.getText()), textoNombre.getText(), textoDireccion.getText(), 
+                    textoAnoConstruccion.getText(), textoProvincia.getText(), textoTelefono.getText(),
+                    null, Double.parseDouble(textoFondos.getText()));
+            for (Ambulatorio amb : fa.obtenerAmbulatorios(null, null, null)) {
+                if (amb.getCodigo().equals(a.getCodigo())) {
+                    modificar = true;
+                    break;
+                }
+            }
+            if (!modificar) {
+                fa.insertarAmbulatorio(a);
+            } else {
+                fa.modificarAmbulatorio(a);
+            }
+            btnActualizar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            btnConsultas.setEnabled(true);
+            btnSalaUrgencias.setEnabled(true);
+            btnPersonal.setEnabled(true);
+        } else {
+            fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
-
-    private void btnMaterialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaterialesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMaterialesActionPerformed
-
-    private void btnIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIngresosActionPerformed
-
-    private void btnAsociadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsociadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAsociadosActionPerformed
 
     private void btnSalaUrgenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalaUrgenciasActionPerformed
         // TODO add your handling code here:
@@ -475,24 +428,6 @@ public class VPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPersonalActionPerformed
 
-    //Permite buscar el/los libro(s) que cumplar en criterio
-    public void buscarLibros() {
-        //Creamos el modelo de tabla de libros
-        ModeloTablaLibros m;
-        m = (ModeloTablaLibros) tablaAmbulatorios.getModel();
-        //Tomamos las filas que regresa la función de búsqueda y por tanto cumplan el criterio
-        m.setFilas(fa.obtenerLibros((textoDireccion.getText().isEmpty()) ? null : Integer.parseInt(textoDireccion.getText()), textoNombre.getText(), textoCodigo.getText(), buscaAutor.getText()));
-        //Si hay algún resultado
-        if (m.getRowCount() > 0) {
-            //Se seleciona la primera fila
-            tablaAmbulatorios.setRowSelectionInterval(0, 0);
-            //Se habilita el botón de editar el libro
-            btnEliminar.setEnabled(true);
-        } else {
-            //En otro caso se deshabilita
-            btnEliminar.setEnabled(false);
-        }
-    }
 
     /**
      * @param args the command line arguments
@@ -538,4 +473,36 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField textoTelefono;
     // End of variables declaration//GEN-END:variables
 
+    //Permite buscar el/los ambulatorio(s) que cumplan el criterio
+    public void buscarAmbulatorios() {
+        //Creamos el modelo de tabla de ambulatorios
+        ModeloTablaAmbulatorios m;
+        m = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
+        //Tomamos las filas que regresa la función de búsqueda y por tanto cumplan el criterio
+        m.setFilas(fa.obtenerAmbulatorios(textoNombre.getText(), Integer.parseInt(textoCodigo.getText()), textoProvincia.getText()));
+        //Si hay algún resultado
+        if (m.getRowCount() > 0) {
+            //Se seleciona la primera fila
+            tablaAmbulatorios.setRowSelectionInterval(0, 0);
+            //Se habilita el botón de editar el libro
+            btnEliminar.setEnabled(true);
+        } else {
+            //En otro caso se deshabilita
+            btnEliminar.setEnabled(false);
+        }
+    }
+    
+    public static boolean isNumeric(String cadena) {
+
+        boolean resultado;
+
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
+    }
 }

@@ -51,7 +51,7 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE AMBULATORIOS
 /////////////////////////
-     //Permite insertar un nuevo usuario en la base de datos
+    //Permite insertar un nuevo usuario en la base de datos
     public void insertarAmbulatorio(Ambulatorio ambulatorio) {
         gamb.insertarAmbulatorio(ambulatorio);
     }
@@ -67,7 +67,7 @@ public class FachadaAplicacion {
     }
 
     //Permite buscar ambulatorios por su id y/o nombre de ambulatorio
-    public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia) {
+    public java.util.List<Ambulatorio> obtenerAmbulatorios(String nombre, Integer codigo, String Provincia) {
         return gamb.consultarAmbulatorios(nombre, codigo, Provincia);
     }
     
