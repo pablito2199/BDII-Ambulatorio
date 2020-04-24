@@ -7,23 +7,25 @@ package gui;
 
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.Paciente;
 
-/**
- *
- * @author martin
- */
 public class VUrgencias extends javax.swing.JDialog {
 
     private VPrincipal padre;
     private aplicacion.FachadaAplicacion fa;
-    private Ambulatorio ambulatorio;
+    private Paciente paciente;
 
-    public VUrgencias(java.awt.Frame parent, boolean modal, FachadaAplicacion fa, Ambulatorio ambulatorio) {
+    public VUrgencias(java.awt.Frame parent, boolean modal, FachadaAplicacion fa, Paciente paciente) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
         padre = (VPrincipal) parent;
-        this.ambulatorio = ambulatorio;
+        this.paciente = paciente;
+
+        //Obtenemos modelo
+        ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
+        tau.setFilas(fa.obtenerAmbulatorios(null, null, null));
+    
     }
 
     /**
@@ -39,7 +41,7 @@ public class VUrgencias extends javax.swing.JDialog {
         txtAmbulatorio = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaAmbulatorios = new javax.swing.JTable();
         labelSoborno = new javax.swing.JLabel();
         txtSoborno = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -58,8 +60,8 @@ public class VUrgencias extends javax.swing.JDialog {
             }
         });
 
-        jTable1.setModel(new ModeloTablaAmbulatoriosUrgencias(fa));
-        jScrollPane1.setViewportView(jTable1);
+        tablaAmbulatorios.setModel(new ModeloTablaAmbulatoriosUrgencias(fa));
+        jScrollPane1.setViewportView(tablaAmbulatorios);
 
         labelSoborno.setText("Soborno:");
 
@@ -125,6 +127,7 @@ public class VUrgencias extends javax.swing.JDialog {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -133,9 +136,9 @@ public class VUrgencias extends javax.swing.JDialog {
     private javax.swing.JToggleButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelAmbulatorio;
     private javax.swing.JLabel labelSoborno;
+    private javax.swing.JTable tablaAmbulatorios;
     private javax.swing.JTextField txtAmbulatorio;
     private javax.swing.JTextField txtGravedad;
     private javax.swing.JTextField txtSoborno;
