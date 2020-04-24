@@ -47,6 +47,11 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e) {
         fgui.muestraExcepcion(e);
     }
+    
+    //Permite generar una ventana para visualizar información de un trabajador
+    public void nuevaVPersonal(){
+        gadm.nuevaVPersonal();
+    }
 
 /////////////////////////
 //GESTIÓN DE AMBULATORIOS
@@ -114,29 +119,29 @@ public class FachadaAplicacion {
         return gcit.citasMedico(medico);
     }
     
-    //Nueva ventana de reserva de citas
+    //Permite generar una ventana para visualizar información de una cita
     public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente){
-        fgui.nuevaVReservarCita(ambulatorio, paciente);
+        gcit.nuevaVReservarCita(ambulatorio, paciente);
     }
     
-    //Nueva ventana de derivar a hospital
+    //Permite generar una ventana para escoger un hospital al que derivar la cita o urgencia
     public void nuevaVDerivarHospital(Cita cita){
-        fgui.nuevaVDerivarHospital(cita);
+        gcit.nuevaVDerivarHospital(cita);
     }
     
-    //Nueva ventana de nuerva urgencia
+    //Permite generar una ventana para insertar una nueva urgencia del paciente
     public void nuevaVUrgencias(Paciente paciente){
-        fgui.nuevaVUrgencias(paciente);
+        gcit.nuevaVUrgencias(paciente);
     }
     
-    //Nueva ventana de sala de urgencias
+    //Permite generar una ventana para consultar la lista de urgencias pendientes por antender
     public void nuevaVSalaUrgencias(Ambulatorio ambulatorio){
-        fgui.nuevaVSalaUrgencias(ambulatorio);
+        gcit.nuevaVSalaUrgencias(ambulatorio);
     }
     
-    //Nueva ventana de reserva de citas
+    //Permite generar una ventana para escoger un paciente al que consultar sus citas pendientes
     public void nuevaVCitasPendientes(Paciente paciente){
-        fgui.nuevaVCitasPendientes(paciente);
+        gcit.nuevaVCitasPendientes(paciente);
     }
 
 /////////////////////////
@@ -166,6 +171,11 @@ public class FachadaAplicacion {
     public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         return gpac.consultarHistorialClinico(paciente, tipo, especialidad, fechaInicio, fechaFin);
     }
+    
+    //Permite generar una ventana para visualizar información de un paciente
+    public void nuevaVPacientes(){
+        gpac.nuevaVPacientes();
+    }
 
 /////////////////////////
 //GESTIÓN DE ENFERMEDADES
@@ -188,6 +198,15 @@ public class FachadaAplicacion {
     //Permite eliminar una enfermedad de la base de datos
     public void borrarEnfermedad(String nombre) {
         genf.borrarEnfermedad(nombre);
+    }
+    
+    //Permite crear una nueva ventana de enfermedades
+    public void nuevaVEnfermedades(){
+        java.util.ArrayList<String> enfermedades = new java.util.ArrayList<>();
+        for (Enfermedad e : this.consultarEnfermedades(null)) {
+            enfermedades.add(e.getNombre());
+        }
+        genf.nuevaVEnfermedades(enfermedades);
     }
 
 /////////////////////////
@@ -215,6 +234,15 @@ public class FachadaAplicacion {
     //Devuelve el número de consultas de un ambulatorio
     public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
         return gcon.numeroConsultas(ambulatorio, especialidad);
+    }
+    
+    //Permite crear una nueva ventana de consultas
+    public void nuevaVConsultas(Integer ambulatorio){
+        java.util.ArrayList<Integer> consultas = new java.util.ArrayList<>();
+        for (Consulta c : this.consultarConsultas(null, ambulatorio, null)) {
+            consultas.add(c.getIdentificador());
+        }
+        gcon.nuevaVConsultas(consultas, ambulatorio);
     }
 
 /////////////////////////

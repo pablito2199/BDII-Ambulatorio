@@ -13,11 +13,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Enfermedades"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuEnfermedadesActionPerformed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuPacientes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pacientes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuPacientesActionPerformed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuEspecialidades">
           <Properties>

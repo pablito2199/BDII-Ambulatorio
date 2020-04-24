@@ -13,7 +13,7 @@ public class VConsultas extends javax.swing.JDialog {
     private java.util.List<Consulta> consultas;
     private Integer ambulatorio;
 
-    public VConsultas(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<Integer> restoConsultas, Integer ambulatorio) {
+    public VConsultas(javax.swing.JFrame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<Integer> restoConsultas, Integer ambulatorio) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
