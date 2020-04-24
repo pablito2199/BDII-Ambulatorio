@@ -59,7 +59,7 @@ public class DAOAmbulatorios extends AbstractDAO {
     }
 
     //Permite eliminar un ambulatorio de la base de datos
-    public void borrarAmbulatorio(Ambulatorio ambulatorio) {
+    public void borrarAmbulatorio(Integer ambulatorio) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmAmbulatorio = null;
@@ -72,7 +72,7 @@ public class DAOAmbulatorios extends AbstractDAO {
             //Preparamos la sentencia para borrar de la tabla de ambulatorios aquel con la id especificada por argumentos
             stmAmbulatorio = con.prepareStatement("delete from ambulatorio where codigoAmbulatorio = ?");
             //Sustituimos
-            stmAmbulatorio.setInt(1, ambulatorio.getCodigo());  //CIP del ambulatorio
+            stmAmbulatorio.setInt(1, ambulatorio);  //CIP del ambulatorio
             //Actualizamos
             stmAmbulatorio.executeUpdate();
 

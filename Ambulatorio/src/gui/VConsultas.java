@@ -46,7 +46,7 @@ public class VConsultas extends javax.swing.JDialog {
 
         panelUsuario = new javax.swing.JTabbedPane();
         panelGeneral = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        etiquetaNumeroConsulta = new javax.swing.JLabel();
         textoNumeroConsulta = new javax.swing.JTextField();
         btnBuscarConsultas = new javax.swing.JButton();
         btnLimpiarConsultas = new javax.swing.JButton();
@@ -56,11 +56,11 @@ public class VConsultas extends javax.swing.JDialog {
         btnAnadirConsultas = new javax.swing.JButton();
         btnEliminarConsultas = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
+        etiquetaNumeroConsultasAmbulatorio = new javax.swing.JLabel();
         textoTotalConsultas = new javax.swing.JTextField();
         btnGestionarMedicos = new javax.swing.JButton();
         seleccionEspecialidades = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
+        etiquetaEspecialidad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de libros");
@@ -68,7 +68,7 @@ public class VConsultas extends javax.swing.JDialog {
 
         panelGeneral.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel2.setText("Número Consulta:");
+        etiquetaNumeroConsulta.setText("Número Consulta:");
 
         btnBuscarConsultas.setText("Buscar");
         btnBuscarConsultas.setToolTipText("");
@@ -116,7 +116,7 @@ public class VConsultas extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setText("Total:");
+        etiquetaNumeroConsultasAmbulatorio.setText("Total:");
 
         textoTotalConsultas.setEditable(false);
 
@@ -127,7 +127,7 @@ public class VConsultas extends javax.swing.JDialog {
 
         seleccionEspecialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel5.setText("Especialidad");
+        etiquetaEspecialidad.setText("Especialidad");
 
         javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
         panelGeneral.setLayout(panelGeneralLayout);
@@ -150,7 +150,7 @@ public class VConsultas extends javax.swing.JDialog {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                 .addGap(13, 13, 13)
-                                .addComponent(jLabel4)
+                                .addComponent(etiquetaNumeroConsultasAmbulatorio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +158,7 @@ public class VConsultas extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelGeneralLayout.createSequentialGroup()
-                                        .addComponent(jLabel2)
+                                        .addComponent(etiquetaNumeroConsulta)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(panelGeneralLayout.createSequentialGroup()
                                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +173,7 @@ public class VConsultas extends javax.swing.JDialog {
                                         .addContainerGap())))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
+                                .addComponent(etiquetaEspecialidad)
                                 .addGap(121, 121, 121))))))
             .addGroup(panelGeneralLayout.createSequentialGroup()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,7 +185,7 @@ public class VConsultas extends javax.swing.JDialog {
                 .addGap(10, 10, 10)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(etiquetaNumeroConsulta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textoNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -193,14 +193,14 @@ public class VConsultas extends javax.swing.JDialog {
                             .addComponent(btnBuscarConsultas)
                             .addComponent(btnGestionarMedicos))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
+                        .addComponent(etiquetaEspecialidad)
                         .addGap(5, 5, 5)
                         .addComponent(seleccionEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 78, Short.MAX_VALUE))
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(etiquetaNumeroConsultasAmbulatorio)
                     .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,9 +308,9 @@ public class VConsultas extends javax.swing.JDialog {
     private javax.swing.JButton btnGestionarMedicos;
     private javax.swing.JButton btnLimpiarConsultas;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel etiquetaEspecialidad;
+    private javax.swing.JLabel etiquetaNumeroConsulta;
+    private javax.swing.JLabel etiquetaNumeroConsultasAmbulatorio;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList lstConsultas;

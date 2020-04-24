@@ -44,9 +44,9 @@ public class VEnfermedades extends javax.swing.JDialog {
 
         panelEnfermedad = new javax.swing.JTabbedPane();
         panelGeneral = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        etiquetaNombre = new javax.swing.JLabel();
         textoNombre = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        etiquetaDescripcion = new javax.swing.JLabel();
         btnBuscarEnfermedad = new javax.swing.JButton();
         btnLimpiarEnfermedad = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -64,9 +64,9 @@ public class VEnfermedades extends javax.swing.JDialog {
 
         panelGeneral.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel2.setText("Nombre:");
+        etiquetaNombre.setText("Nombre:");
 
-        jLabel3.setText("Descripción:");
+        etiquetaDescripcion.setText("Descripción:");
 
         btnBuscarEnfermedad.setText("Buscar");
         btnBuscarEnfermedad.setToolTipText("");
@@ -140,8 +140,8 @@ public class VEnfermedades extends javax.swing.JDialog {
                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
+                                    .addComponent(etiquetaDescripcion)
+                                    .addComponent(etiquetaNombre))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,11 +162,11 @@ public class VEnfermedades extends javax.swing.JDialog {
                 .addGap(10, 10, 10)
                 .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(etiquetaNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(etiquetaDescripcion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -280,8 +280,8 @@ public class VEnfermedades extends javax.swing.JDialog {
     private javax.swing.JButton btnEliminarEnfermedad;
     private javax.swing.JButton btnLimpiarEnfermedad;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel etiquetaDescripcion;
+    private javax.swing.JLabel etiquetaNombre;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
