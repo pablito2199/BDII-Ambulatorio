@@ -1,7 +1,6 @@
 package aplicacion;
 
 import aplicacion.clases.Ambulatorio;
-import aplicacion.clases.Cita;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
@@ -26,7 +25,7 @@ public class GestionAmbulatorios {
     }
 
     //Permite eliminar un ambulatorio de la base de datos
-    public void borrarAmbulatorio(Ambulatorio ambulatorio) {
+    public void borrarAmbulatorio(Integer ambulatorio) {
         fbd.borrarAmbulatorio(ambulatorio);
     }
 
