@@ -32,7 +32,7 @@ public class GestionPacientes {
     }
 
     //Permite buscar pacientes por su id y/o nombre de paciente
-    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
+    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, Integer NSS, String grupo) {
         return fbd.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
     }
 
@@ -41,6 +41,10 @@ public class GestionPacientes {
         return fbd.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
     
+    //Permite saber si existe un paciente en la base de datos con el mismo identificador o no
+    public boolean existePaciente(String CIP) {
+        return fbd.existePaciente(CIP);
+    }
     //Permite generar una ventana para visualizar información de un paciente
     public void nuevaVPacientes(){
         fgui.nuevaVPacientes();
