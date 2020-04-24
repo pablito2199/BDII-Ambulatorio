@@ -1,6 +1,9 @@
 package gui;
 
 import aplicacion.clases.Paciente;
+import aplicacion.clases.GrupoSanguineo;
+import java.awt.event.ActionEvent;
+import java.sql.Date;
 
 public class VPacientes extends javax.swing.JDialog {
 
@@ -8,7 +11,7 @@ public class VPacientes extends javax.swing.JDialog {
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
 
     /**
-     * Creates new form VUsuario
+     * Creates new form VPaciente
      *
      * @param parent
      * @param modal
@@ -35,7 +38,7 @@ public class VPacientes extends javax.swing.JDialog {
 
         jPanel4 = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JButton();
-        btnGuardarUsuario = new javax.swing.JButton();
+        btnActualizarPaciente = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -88,10 +91,10 @@ public class VPacientes extends javax.swing.JDialog {
             }
         });
 
-        btnGuardarUsuario.setText("Actualizar");
-        btnGuardarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarPaciente.setText("Actualizar");
+        btnActualizarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarUsuarioActionPerformed(evt);
+                btnActualizarPacienteActionPerformed(evt);
             }
         });
 
@@ -117,7 +120,7 @@ public class VPacientes extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(btnLimpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnGuardarUsuario)
+                .addComponent(btnActualizarPaciente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBorrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -130,7 +133,7 @@ public class VPacientes extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir))
                 .addContainerGap(9, Short.MAX_VALUE))
@@ -447,7 +450,7 @@ public class VPacientes extends javax.swing.JDialog {
     //Función que permite salir de la ventana de usuario
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         //Buscamos libros
-        padre.buscarAmbulatorio();
+        padre.buscarAmbulatorios();
         //Y destruimos esta ventana
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -455,7 +458,7 @@ public class VPacientes extends javax.swing.JDialog {
     //Función que permite borrar un usuario
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         Paciente paciente = new Paciente(varCIP.getText());
-        //Llamamos al borrado de usuarios
+        //Llamamos al borrado de pacientes
         fa.borrarPaciente(paciente);
         //Ponemos todos los campos a NULL
         varCIP.setText(null);
@@ -497,11 +500,19 @@ public class VPacientes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Función que permite guardar el usuario en la base de datos
-    private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
+    private void btnActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPacienteActionPerformed
         //Comprobarmos que no haya ningún campo obligatorio sin cubrir
-        if (varNombre.getText().isEmpty() || varClave.getText().isEmpty() || varDNI.getText().isEmpty() || varNSS.getText().isEmpty()) {
+        if (varCIP.getText().isEmpty() || varDNI.getText().isEmpty() || varNSS.getText().isEmpty() || varNombre.getText().isEmpty() ||
+                varSexo.getText().isEmpty() || varEdad.getText().isEmpty() || varGrupoSanguineo.getText().isEmpty() || varNacionalidad.getText().isEmpty() ||
+                varFechaNacimiento.getText().isEmpty() || varDireccion.getText().isEmpty() || varTelefono.getText().isEmpty()) {
             //Si lo hay activamos el aviso
-            varAviso.setVisible(true);
+            fa.muestraExcepcion("Necesitas rellenar todos los campos antes de poder actualizar");
+            //Regresamos
+            return;
+        }
+        else if(!varRango.getText().isEmpty()){
+            //Si se ha cubierto un campo que no se debe
+            fa.muestraExcepcion("No se puede modificar el campo Rango");
             //Regresamos
             return;
         }
@@ -524,49 +535,51 @@ public class VPacientes extends javax.swing.JDialog {
                 return;
             }
         }
-
         //Si ya existe el ID actualiza
-        if (fa.consultarUsuario(varNombre.getText())) {
+        if (fa.existePaciente(varCIP.getText())) {
             //Instanciamos el usuario con los datos proporcionados
-            Usuario u = new Usuario(varNombre.getText(), varClave.getText(), varNSS.getText(), varDireccion.getText(),
-                    varDNI.getText(), TipoUsuario.CTU((String) varTipoUsuario.getSelectedItem()), varSexo.getText());
+            Paciente u = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(), 
+                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()), 
+                    varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Actualizamos la base de datos
-            fa.actualizarUsuario(u);
+            fa.modificarPaciente(u);
             //De no existir se crea uno nuevo
         } else {
             //Instanciamos el usuario
-            Usuario u;
-            u = new Usuario(varNombre.getText(), varClave.getText(), varNSS.getText(), varDireccion.getText(),
-                    varDNI.getText(), TipoUsuario.CTU((String) varTipoUsuario.getSelectedItem()), varSexo.getText());
+            Paciente p = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(), 
+                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()), 
+                    varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Lo insertamos en la base de datos
-            fa.nuevoUsuario(u);
+            fa.insertarPaciente(p);
         }
-        //Finalmente buscamos otra vez usuarios
-        buscarUsuarios();
-        //Y hacemos desaparecer el aviso
-        varAviso.setVisible(false);
-
-    }//GEN-LAST:event_btnGuardarUsuarioActionPerformed
+        //Finalmente buscamos otra vez pacientes
+        buscarPacientes();
+    }//GEN-LAST:event_btnActualizarPacienteActionPerformed
 
     //Función que permite buscar el/los usuario(s) una vez hecho click en el botón buscar
     private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
         //Buscamos
-        buscarUsuarios();
+        buscarPacientes();
     }//GEN-LAST:event_btnBuscarUsuarioActionPerformed
 
-    //Función que permite resolver un click en la tabla de usuarios
+    //Función que permite resolver un click en la tabla de pacientes
     private void tablaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPacientesMouseClicked
         //Creamos el modelo de tabla préstamos
-        ModeloTablaUsuarios m;
-        m = (ModeloTablaUsuarios) tablaPacientes.getModel();
+        ModeloTablaPacientes m;
+        m = (ModeloTablaPacientes) tablaPacientes.getModel();
         //Obtenemos todos los datos del usuario (fila) en el que se hizo click y los metemos en los campos
-        varNombre.setText(m.obtenerUsuario(tablaPacientes.getSelectedRow()).getIdUsuario());
-        varClave.setText(m.obtenerUsuario(tablaPacientes.getSelectedRow()).getClave());
-        varNSS.setText(m.obtenerUsuario(tablaPacientes.getSelectedRow()).getNombre());
-        varDireccion.setText(m.obtenerUsuario(tablaPacientes.getSelectedRow()).getDireccion());
-        varDNI.setText(m.obtenerUsuario(tablaPacientes.getSelectedRow()).getEmail());
-        varTipoUsuario.setSelectedItem(m.obtenerUsuario(tablaPacientes.getSelectedRow()).getTipoUsuario().toString());
-        varSexo.setText(m.obtenerUsuario(tablaPacientes.getSelectedRow()).getEdad());
+        varCIP.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
+        varNSS.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNSS().toString());
+        varNombre.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNombre());
+        varDNI.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDNI());
+        varSexo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getSexo());
+        varEdad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getEdad().toString());
+        varGrupoSanguineo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getGrupo().toString());
+        varNacionalidad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNacionalidad());
+        varFechaNacimiento.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getFechaNacimiento().toString());
+        varDireccion.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDireccion());
+        varTelefono.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getTelefono());
+        varRango.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getRango().toString());
     }//GEN-LAST:event_tablaPacientesMouseClicked
 
     private void varSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varSexoActionPerformed
@@ -614,19 +627,48 @@ public class VPacientes extends javax.swing.JDialog {
         //Creamos el modelo de tabla préstamos
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
+        Integer NSS=0, edad=0;
         //Setteamos las filas con el resultado de la búsqueda
-        m.setFilas(fa.obtenerPacientes(
-                (buscaID.getText().isEmpty()) ? null : buscaID.getText(), buscaNombre.getText()));
+         if (!varNSS.getText().isEmpty()) {
+            //Intentamos convertir el NSS a entero
+            try {
+                NSS = Integer.parseInt(varNSS.getText());
+                //Si al hacerlo es negativo imprimimos el error
+                if (NSS < 0) {
+                    fa.muestraExcepcion("El NSS (Número de la Seguridad Social) debe ser un número positivo.");
+                    return;
+                }
+                //De no poder convertir a entero se imprime la excepción
+            } catch (NumberFormatException ex) {
+                fa.muestraExcepcion("El valor introducido para el NSS (Número de la Seguridad Social) no es válido.");
+                return;
+            }
+        }
+           if (!varEdad.getText().isEmpty()) {
+            //Intentamos convertirla a entero
+            try {
+                edad = Integer.parseInt(varEdad.getText());
+                //Si al hacerlo la edad es negativa imprimimos el error
+                if (edad < 0) {
+                    fa.muestraExcepcion("La edad debe ser un número positivo.");
+                    return;
+                }
+                //De no poder convertir a entero se imprime la excepción
+            } catch (NumberFormatException ex) {
+                fa.muestraExcepcion("El valor introducido para la edad no es válido.");
+                return;
+            }
+        }
+        m.setFilas(fa.consultarPacientes(varCIP.getText(), varDNI.getText(), varNombre.getText(), 
+                edad, varSexo.getText(), NSS, varGrupoSanguineo.getText()));
         //Si hay coincidencias
         if (m.getRowCount() > 0) {
             //Seleccionamos la primera
             tablaPacientes.setRowSelectionInterval(0, 0);
-            //Habilitamos el guardado y el borrado
-            btnGuardarUsuario.setEnabled(true);
+            //Habilitamos el borrado
             btnBorrar.setEnabled(true);
         } else {
-            //De no haberlas, deshabilitamos el guardado y el borrado
-            btnGuardarUsuario.setEnabled(false);
+            //De no haberlas, deshabilitamos el borrado
             btnBorrar.setEnabled(false);
         }
     }
@@ -635,11 +677,11 @@ public class VPacientes extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarPaciente;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBuscarUsuario;
     private javax.swing.JButton btnCitasPendientes;
     private javax.swing.JButton btnEnfermedades;
-    private javax.swing.JButton btnGuardarUsuario;
     private javax.swing.JButton btnHistorialClinico;
     private javax.swing.JButton btnHistorialRecetas;
     private javax.swing.JButton btnLimpiar;

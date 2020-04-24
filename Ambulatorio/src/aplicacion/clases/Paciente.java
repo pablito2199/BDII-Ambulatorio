@@ -6,7 +6,7 @@ public class Paciente {
 
     private String CIP;
     private String DNI;
-    private Integer NSS;    //NSS
+    private Integer NSS;  
     private String nombre;
     private Date fechaNacimiento;
     private String sexo;
@@ -38,7 +38,7 @@ public class Paciente {
     }
 
     //Constructor por si le quieres meter la edad
-    public Paciente(String CIP, String DNI, int NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad, Rango rango) {
+    public Paciente(String CIP, String DNI, Integer NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad, Rango rango) {
         this.CIP = CIP;
         this.DNI = DNI;
         this.NSS = NSS;

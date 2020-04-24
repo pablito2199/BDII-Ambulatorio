@@ -158,13 +158,18 @@ public class FachadaAplicacion {
     }
 
     //Permite buscar pacientes por su id y/o nombre de paciente
-    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
+    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, Integer NSS, String grupo) {
         return gpac.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
     }
 
+    //Permite saber si existe un paciente en la base de datos con el mismo identificador o no
+    public boolean existePaciente(String CIP) {
+        return gpac.existePaciente(CIP);
+    }
+    
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
-        return gpac.consultarHistorialClinico(paciente, tipo, especialidad, fechaInicio, fechaFin);
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
+        return gpac.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
 
 /////////////////////////
