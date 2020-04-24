@@ -1,0 +1,415 @@
+/*
+ * VLibro.java
+ *
+ * Created on 16-feb-2011, 18:17:07
+ */
+package gui;
+
+import aplicacion.Libro;
+import aplicacion.Ejemplar;
+
+public class VLibro extends javax.swing.JDialog {
+
+    private final Integer idLibro;                                        //ID del libro sobre el que se está trabajando
+    private final java.util.List<Integer> ejemplaresBorrados;   //Lista de ejemplares del libro que se han borrado
+    private final VPrincipal padre;                                      //Enlace a la ventana padre 
+    private final aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
+
+    /**
+     * Creates new form VLibro
+     *
+     * @param parent
+     * @param modal
+     * @param fa
+     * @param restoCategorias
+     */
+    //Constructor para un nuevo libro
+    public VLibro(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<String> restoCategorias) {
+        //Instanciamos
+        super(parent, modal);
+        this.fa = fa;
+        initComponents();
+        padre = (VPrincipal) parent;
+        //Desactivamos botones
+        btnActualizarCategoriasLibro.setEnabled(false);
+        btnActualizarEjemplaresLibro.setEnabled(false);
+        btnBorrarLibro.setEnabled(false);
+        //Inicializamos
+        this.idLibro = null;
+        this.ejemplaresBorrados = new java.util.ArrayList<Integer>();
+
+        //Instanciamos la tabla lista con el resto de categorías
+        ModeloListaStrings mListaRC = new ModeloListaStrings();
+        lstRestoCategorias.setModel(mListaRC);
+        mListaRC.setElementos(restoCategorias);
+        //Si tiene algún elemento  lo seleccionamos y activamos la flecha derecha
+        if (mListaRC.getSize() > 0) {
+            lstRestoCategorias.setSelectedIndex(0);
+            btnDerecha.setEnabled(true);
+            //De no tenerlo se desactiva la flecha
+        } else {
+            btnDerecha.setEnabled(false);
+        }
+        //Desactivamos botones
+        btnIzquierda.setEnabled(false); //Flecha que apunta hacia la izquierda
+        btnBorrarEjemplar.setEnabled(false);
+    }
+
+    //Constructor para un libro existente
+    public VLibro(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Libro libro, java.util.List<String> categorias, java.util.List<String> restoCategorias) {
+        //Instanciamos
+        super(parent, modal);
+        this.fa = fa;
+        initComponents();
+        padre = (VPrincipal) parent;
+        idLibro = libro.getIdLibro();
+        textoAno.setText(libro.getAno().toString());
+        textoEditorial.setText(libro.getEditorial());
+        textoIsbn.setText(libro.getIsbn());
+        textoPaginas.setText((libro.getPaginas()).toString());
+        textoTitulo.setText(libro.getTitulo());
+        textoId.setText(idLibro.toString());
+
+        //Instanciamos la lista de autores
+        ModeloListaStrings mListaAutores = new ModeloListaStrings();
+        lstAutores.setModel(mListaAutores);
+        mListaAutores.setElementos(libro.getAutores());
+        if (mListaAutores.getSize() > 0) {
+            lstAutores.setSelectedIndex(0);
+            btnBorrarAutor.setEnabled(true);
+        } else {
+            btnBorrarAutor.setEnabled(false);
+        }
+
+        //Instanciamos la lista de resto de categorías
+        ModeloListaStrings mListaRC = new ModeloListaStrings();
+        lstRestoCategorias.setModel(mListaRC);
+        mListaRC.setElementos(restoCategorias);
+        if (mListaRC.getSize() > 0) {
+            lstRestoCategorias.setSelectedIndex(0);
+            btnDerecha.setEnabled(true);
+        } else {
+            btnDerecha.setEnabled(false);
+        }
+
+        //Instanciamos la lista de categorías
+        ModeloListaStrings mListaC = new ModeloListaStrings();
+        lstCategoriasLibro.setModel(mListaC);
+        mListaC.setElementos(categorias);
+        if (mListaC.getSize() > 0) {
+            lstCategoriasLibro.setSelectedIndex(0);
+            btnIzquierda.setEnabled(true);
+        } else {
+            btnIzquierda.setEnabled(false);
+        }
+
+        //Instanciamos la tabla de ejemplares
+        ModeloTablaEjemplares mTEjemplares = new ModeloTablaEjemplares(fa);
+        tablaEjemplares.setModel(mTEjemplares);
+        //Obtenemos los ejemplares del libro
+        mTEjemplares.setFilas(libro.getEjemplares());
+        //En caso de que haya ejemplares
+        if (mTEjemplares.getRowCount() > 0) {
+            //Seleccionamos el primero
+            tablaEjemplares.setRowSelectionInterval(0, 0);
+            //Activamos el borrado
+            btnBorrarEjemplar.setEnabled(true);
+        } else {
+            //Desactivamos el borrado
+            btnBorrarEjemplar.setEnabled(false);
+        }
+
+        //Inicializamos ejemplares borrados
+        this.ejemplaresBorrados = new java.util.ArrayList<Integer>();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        btnLimpiar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        btnIzquierda = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstEnfermedadesPadecidas = new javax.swing.JList();
+        btnDerecha = new javax.swing.JButton();
+        etiquetaRestoEnfermedades = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstRestoEnfermedades = new javax.swing.JList();
+        etiquetaEnfermedadesPadecidas = new javax.swing.JLabel();
+        btnActualizar = new javax.swing.JButton();
+        etiquetaNombre = new javax.swing.JLabel();
+        textoNombre = new javax.swing.JTextField();
+        btnRegresar = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gestión de libros");
+        setResizable(false);
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("GESTIONAR ENFERMEDADES");
+
+        btnIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Desasociar.png"))); // NOI18N
+        btnIzquierda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzquierdaActionPerformed(evt);
+            }
+        });
+
+        lstEnfermedadesPadecidas.setModel(new ModeloListaStrings());
+        jScrollPane3.setViewportView(lstEnfermedadesPadecidas);
+
+        btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Asociar.png"))); // NOI18N
+        btnDerecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDerechaActionPerformed(evt);
+            }
+        });
+
+        etiquetaRestoEnfermedades.setText("Enfermedades");
+
+        lstRestoEnfermedades.setModel(new ModeloListaStrings());
+        jScrollPane2.setViewportView(lstRestoEnfermedades);
+
+        etiquetaEnfermedadesPadecidas.setText("Enfermedades que padece");
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
+        etiquetaNombre.setText("Nombre:");
+
+        textoNombre.setToolTipText("Nombre de usuario");
+
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(etiquetaNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnLimpiar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnActualizar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegresar))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(etiquetaRestoEnfermedades, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(etiquetaEnfermedadesPadecidas))))
+                            .addGap(0, 0, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaNombre)
+                    .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(btnDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etiquetaRestoEnfermedades)
+                            .addComponent(etiquetaEnfermedadesPadecidas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnRegresar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    //Permite salir de la ventana de libro
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        //Buscamos libros
+        padre.buscarLibros();
+        //Destruimos esta ventana
+        this.dispose();
+
+        //NOTA: Si no se presionó el botón actualizar no se guardan los cambios hechos
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    //Permite insertar un nuevo autor
+    //Permite borrar uno de los autores
+    //Permite asignar una categoría al libro
+    private void btnDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerechaActionPerformed
+        //Declaramos la lista de categorías y resto de categorías
+        ModeloListaStrings mRC;
+        ModeloListaStrings mC;
+        //Inicializamos la lista de categorías y resto de categorías
+        mRC = (ModeloListaStrings) lstRestoCategorias.getModel();
+        mC = (ModeloListaStrings) lstCategoriasLibro.getModel();
+        //Añadimos el elemento seleccionado a la lista de categorias y lo quitamos de la lista de resto
+        mC.nuevoElemento(mRC.getElementAt(lstRestoCategorias.getSelectedIndex()));
+        mRC.borrarElemento(lstRestoCategorias.getSelectedIndex());
+        //Si el resto de categoría no tiene elementos desactivamos el botón derecha
+        if (mRC.getSize() == 0) {
+            btnDerecha.setEnabled(false);
+        } else {
+            //En otro caso seleccionamos automáticamente el primer elemento
+            lstRestoCategorias.setSelectedIndex(0);
+        }
+        lstCategoriasLibro.setSelectedIndex(mC.getSize() - 1);
+        //El botón flecha izquierda se habilita
+        btnIzquierda.setEnabled(true);
+    }//GEN-LAST:event_btnDerechaActionPerformed
+
+    //Permite quitar la categoría del libor
+    private void btnIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzquierdaActionPerformed
+        //Declaramos la lista de categorías y resto de categorías
+        ModeloListaStrings mRC;
+        ModeloListaStrings mC;
+        //Inicializamos la lista de categorías y resto de categorías
+        mRC = (ModeloListaStrings) lstRestoCategorias.getModel();
+        mC = (ModeloListaStrings) lstCategoriasLibro.getModel();
+        //Añadimos el elemento seleccionado a la lista de restos de categorias y lo quitamos de categorías
+        mRC.nuevoElemento(mC.getElementAt(lstCategoriasLibro.getSelectedIndex()));
+        mC.borrarElemento(lstCategoriasLibro.getSelectedIndex());
+        //Si categorías no tiene elementos desactivamos el botón izquierda
+        if (mC.getSize() == 0) {
+            btnIzquierda.setEnabled(false);
+        } else {
+            //En otro caso seleccionamos automáticamente el primer elemento
+            lstCategoriasLibro.setSelectedIndex(0);
+        }
+        lstRestoCategorias.setSelectedIndex(mRC.getSize() - 1);
+        //El botón flecha derecha se habilita
+        btnDerecha.setEnabled(true);
+    }//GEN-LAST:event_btnIzquierdaActionPerformed
+
+    //Permite insertar un nuevo ejemplar
+    //Permite borrar un ejemplar
+    //Permite borrar el libro de la base de datos
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        //Llamamos a la función para borrar el libro
+        fa.borrarLibro(idLibro);
+        //Buscamos los libros otra vez
+        padre.buscarLibros();
+        //Destruimos la ventana de libro actual
+        this.dispose();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    //Permite actualizar la información del libro
+    //Permite actualizar la información de las categorías del libro
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        //Declaramos e inicializamos la lista de categorías
+        ModeloListaStrings ma = (ModeloListaStrings) lstCategoriasLibro.getModel();
+        //Actualizamos las categorías
+        fa.actualizarCategoriasLibro(idLibro, ma.getElementos());
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    //Permite actualizar la información de los ejemplares del libro
+    //Permite prestar un ejemplar del libro (accedes a la ventana de préstamos)
+    //Permite devolver un ejemplar del libro
+    //Permite actualizar la información del libro
+    //Permite actualizar la tabla de ejemplares
+    public void actualizarTablaEjemplares() {
+        //Creamos el modelo de tabla
+        ModeloTablaEjemplares mTEjemplares = new ModeloTablaEjemplares(fa);
+        tablaEjemplares.setModel(mTEjemplares);
+        //Metemos las filas actualizadas en la tabla
+        mTEjemplares.setFilas(fa.actualizarEjemplaresLibro(idLibro, mTEjemplares.getFilas(), ejemplaresBorrados));
+        //Si hay ejemplares
+        if (mTEjemplares.getRowCount() > 0) {
+            //Seleccionamos el primero y habilitamos el botón de borrado
+            tablaEjemplares.setRowSelectionInterval(0, 0);
+            btnBorrarEjemplar.setEnabled(true);
+        } else {
+            //De no haberlo, deshabillitamos el botón de borrado
+            btnBorrarEjemplar.setEnabled(false);
+        }
+
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnDerecha;
+    private javax.swing.JButton btnIzquierda;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel etiquetaEnfermedadesPadecidas;
+    private javax.swing.JLabel etiquetaNombre;
+    private javax.swing.JLabel etiquetaRestoEnfermedades;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList lstEnfermedadesPadecidas;
+    private javax.swing.JList lstRestoEnfermedades;
+    private javax.swing.JTextField textoNombre;
+    // End of variables declaration//GEN-END:variables
+
+}

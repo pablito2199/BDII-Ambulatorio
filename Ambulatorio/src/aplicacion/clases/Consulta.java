@@ -7,6 +7,12 @@ public class Consulta {
     private String especialidad;
 
     //Constructor
+    public Consulta() {
+        this.identificador = null;
+        this.ambulatorio = null;
+        this.especialidad = null;
+    }
+    
     public Consulta(Integer identificador, Integer ambulatorio, String especialidad) {
         this.identificador = identificador;
         this.ambulatorio = ambulatorio;
