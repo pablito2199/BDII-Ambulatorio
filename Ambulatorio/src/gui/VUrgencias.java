@@ -6,6 +6,7 @@
 package gui;
 
 import aplicacion.FachadaAplicacion;
+import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Urgencia;
 
@@ -150,6 +151,12 @@ public class VUrgencias extends javax.swing.JDialog {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
 
+        //Obtenemos modelo
+        ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
+        
+        //Buscamos ambulatorio
+        tau.setFilas(fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, null));
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
@@ -158,13 +165,25 @@ public class VUrgencias extends javax.swing.JDialog {
         //Comprobamos que los datos son validos
         if (datosValidos()) {
 
+            //Obtenemos ambulatorio
+            ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
+            Ambulatorio a = tau.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow());
+
             //Añadimos la urgencia
-            Urgencia u = new Urgencia(Timestamp.valueOf(LocalDateTime.now()),
-            );
+            Urgencia u = new Urgencia(
+                    txtSoborno.getText(),
+                    txtGravedad.getText(),
+                    Timestamp.valueOf(LocalDateTime.now()),
+                    paciente.getCIP(),
+                    fa.menorNumeroPacientes(a.getCodigo()),
+                    a.getCodigo());
             
+            fa.insertarUrgencia(u);
+
             //Añadimos urgencia al ambulatorio
             this.dispose();
         }
+        
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -196,7 +215,7 @@ public class VUrgencias extends javax.swing.JDialog {
             return false;
         } else if (tablaAmbulatorios.getSelectedRow() < 0) {
             labelError.setVisible(true);
-            labelError.setText("No se ha seleccionado un ambulatorio!");
+            labelError.setText("No se ha seleccionado un ambulatorio de la tabla!");
             return false;
         }
 
