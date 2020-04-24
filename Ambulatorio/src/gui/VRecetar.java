@@ -11,6 +11,7 @@ public class VRecetar extends javax.swing.JDialog {
     private final VCitasPendientes padre;                           //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
     private final Cita cita;
+    private final String medicamento;
     
     /**
      * Creates new form VPaciente
@@ -51,12 +52,12 @@ public class VRecetar extends javax.swing.JDialog {
         labelMEDICAMENTO = new javax.swing.JLabel();
         labelReceta = new javax.swing.JLabel();
         labelFechaFin = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaPacientes = new javax.swing.JTable();
         labelFechaInicio = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         varDescripcion = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaMedicamentos = new javax.swing.JList<>();
         labelRecetar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -130,16 +131,6 @@ public class VRecetar extends javax.swing.JDialog {
 
         labelFechaFin.setText("Fecha Fin:");
 
-        tablaPacientes.setModel(new ModeloListaStrings());
-        tablaPacientes.setAutoscrolls(false);
-        tablaPacientes.getTableHeader().setReorderingAllowed(false);
-        tablaPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaPacientesMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tablaPacientes);
-
         labelFechaInicio.setText("Fecha Inicio:");
 
         varDescripcion.setColumns(20);
@@ -148,13 +139,15 @@ public class VRecetar extends javax.swing.JDialog {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        jScrollPane3.setViewportView(listaMedicamentos);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelReceta)
@@ -177,14 +170,14 @@ public class VRecetar extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelMEDICAMENTO)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane3)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labelMedicamento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(varMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,9 +193,9 @@ public class VRecetar extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelMEDICAMENTO, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(varFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(labelFechaInicio))
@@ -214,7 +207,9 @@ public class VRecetar extends javax.swing.JDialog {
                                 .addComponent(labelDescripcion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
@@ -257,6 +252,8 @@ public class VRecetar extends javax.swing.JDialog {
 
     //Función que permite guardar el usuario en la base de datos
     private void btnRecetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetarActionPerformed
+        
+
         //Comprobarmos que no haya ningún campo obligatorio sin cubrir
         if (varFechaFin.getText().isEmpty() || varFechaInicio.getText().isEmpty() || varDescripcion.getText().isEmpty() || FALTA MEDICAMENTO) {
             //Si lo hay activamos el aviso
@@ -273,33 +270,6 @@ public class VRecetar extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnRecetarActionPerformed
 
-    //Función que permite resolver un click en la tabla de pacientes
-    private void tablaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPacientesMouseClicked
-        //Creamos el modelo de tabla préstamos
-        ModeloTablaPacientes m;
-        m = (ModeloTablaPacientes) tablaPacientes.getModel();
-        //Obtenemos todos los datos del usuario (fila) en el que se hizo click y los metemos en los campos
-        varCIP.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
-        varNSS.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNSS().toString());
-        varNombre.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNombre());
-        varDNI.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDNI());
-        varSexo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getSexo());
-        varEdad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getEdad().toString());
-        varGrupoSanguineo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getGrupo().toString());
-        varFechaInicio.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNacionalidad());
-        varFechaFin.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getFechaNacimiento().toString());
-        varMedicamento.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDireccion());
-        varTelefono.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getTelefono());
-        varRango.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getRango().toString());
-        //Activamos los botones
-        btnEnfermedades.setEnabled(true);
-        btnNuevaUrgencia.setEnabled(true);
-        btnSolicitarCita.setEnabled(true);
-        btnCitasPendientes.setEnabled(true);
-        btnHistorialClinico.setEnabled(true);
-        btnHistorialRecetas.setEnabled(true);
-    }//GEN-LAST:event_tablaPacientesMouseClicked
-
     //Función que permite buscar el/los usuario(s) una vez hecho click en el botón buscar
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         //Buscamos
@@ -314,7 +284,7 @@ public class VRecetar extends javax.swing.JDialog {
     public void buscarPacientes() {
         //Creamos el modelo de tabla préstamos
         ModeloTablaPacientes m;
-        m = (ModeloTablaPacientes) tablaPacientes.getModel();
+        m = (ModeloTablaPacientes) listaMedicamentos.getModel();
         Integer NSS = 0, edad = 0;
         //Setteamos las filas con el resultado de la búsqueda
         if (!varNSS.getText().isEmpty()) {
@@ -352,7 +322,7 @@ public class VRecetar extends javax.swing.JDialog {
         //Si hay coincidencias
         if (m.getRowCount() > 0) {
             //Seleccionamos la primera
-            tablaPacientes.setRowSelectionInterval(0, 0);
+            listaMedicamentos.setRowSelectionInterval(0, 0);
             //Habilitamos el borrado
             btnBorrar.setEnabled(true);
         } else {
@@ -371,7 +341,7 @@ public class VRecetar extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelDescripcion;
     private javax.swing.JLabel labelFechaFin;
@@ -380,7 +350,7 @@ public class VRecetar extends javax.swing.JDialog {
     private javax.swing.JLabel labelMedicamento;
     private javax.swing.JLabel labelReceta;
     private javax.swing.JLabel labelRecetar;
-    private javax.swing.JTable tablaPacientes;
+    private javax.swing.JList<String> listaMedicamentos;
     private javax.swing.JTextArea varDescripcion;
     private javax.swing.JTextField varFechaFin;
     private javax.swing.JTextField varFechaInicio;
