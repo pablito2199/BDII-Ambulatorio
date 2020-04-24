@@ -471,13 +471,14 @@ public class DAOCitas extends AbstractDAO {
         try {
             //Preparamos la sentencia para recoger las citas
             stmUrgencias = con.prepareStatement(
-                    "select c.*, u.*, least(10, u.gravedad + floor(u.soborno * 0.01)) as prioridad "
-                    + "from cita as c, urgencia as u "
+                    "select c.*, u.*, least(10, u.gravedad + floor(u.soborno * 0.01)) as prioridad, p.nombre "
+                    + "from cita as c, urgencia as u, paciente as p "
                     + "where c.fechaHoraInicio = u.cita "
                     + "and c.fechaHoraFin is null "
                     + "and c.consulta = u.consulta "
                     + "and c.ambulatorio = u.ambulatorio "
                     + "and c.ambulatorio = ? "
+                    + "and p.cip = c.paciente "
                     + "order by prioridad desc, c.fechaHoraInicio asc"
             );
 
@@ -494,6 +495,7 @@ public class DAOCitas extends AbstractDAO {
                         rsUrgencias.getFloat("soborno"),
                         rsUrgencias.getInt("gravedad"),
                         rsUrgencias.getInt("prioridad"),
+                        rsUrgencias.getString("nombre"),
                         rsUrgencias.getTimestamp("fechaHoraInicio"),
                         null,
                         rsUrgencias.getString("paciente"),
