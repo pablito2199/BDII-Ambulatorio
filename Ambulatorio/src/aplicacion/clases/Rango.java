@@ -1,6 +1,5 @@
 package aplicacion.clases;
 
-
 public enum Rango {
     BASE("base"), PREMIUM("premiun"), DELUXE("deluxe");
 
@@ -19,7 +18,7 @@ public enum Rango {
     public static Rango getTipo(String tipo) {
         Rango temp;
         switch (tipo) {
-                case "deluxe":
+            case "deluxe":
                 temp = DELUXE;
                 break;
             case "premium":

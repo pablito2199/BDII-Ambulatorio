@@ -1,12 +1,12 @@
 package gui;
 
-public class ModeloListaStrings extends javax.swing.AbstractListModel {
+public class ModeloListaConsultas extends javax.swing.AbstractListModel {
 
-    java.util.List<String> elementos;   //Listado de los elementos
+    java.util.List<Integer> elementos;   //Listado de los elementos
 
     //Contructor
-    public ModeloListaStrings() {
-        this.elementos = new java.util.ArrayList<String>();
+    public ModeloListaConsultas() {
+        this.elementos = new java.util.ArrayList<Integer>();
     }
 
     //Función que permite recuperar el número de filas
@@ -17,12 +17,12 @@ public class ModeloListaStrings extends javax.swing.AbstractListModel {
 
     //Permite recuperar el elemento en la fila i
     @Override
-    public String getElementAt(int i) {
+    public Integer getElementAt(int i) {
         return elementos.get(i);
     }
 
     //Permite meter un nuevo elemento en la lista
-    public void nuevoElemento(String e) {
+    public void nuevoElemento(Integer e) {
         this.elementos.add(e);
         //Función que notifica a los listeners de que se añadió un elemento a la lista
         fireIntervalAdded(this, this.elementos.size() - 1, this.elementos.size() - 1);
@@ -30,7 +30,7 @@ public class ModeloListaStrings extends javax.swing.AbstractListModel {
 
     //Permite borrar el elementos i de la lista
     public void borrarElemento(int i) {
-        String e;
+        Integer e;
         e = this.elementos.get(i);
         this.elementos.remove(i);
         //Función que notifica a los listeners de que se ha borrado un elemento
@@ -38,14 +38,19 @@ public class ModeloListaStrings extends javax.swing.AbstractListModel {
     }
 
     //Permite sobreescribir los elementos existentes por otros nuevos
-    public void setElementos(java.util.List<String> elementos) {
+    public void setElementos(java.util.List<Integer> elementos) {
         this.elementos = elementos;
         //Función que notifica a los listeners que se han cambiado los contenidos de las celdas
         fireContentsChanged(this, 0, elementos.size() - 1);
     }
 
     //Permite recuperar los elementos
-    public java.util.List<String> getElementos() {
+    public java.util.List<Integer> getElementos() {
         return this.elementos;
+    }
+
+    //devuelve la enfermedad indicada
+    public Integer obtenerConsulta(int i) {
+        return this.elementos.get(i);
     }
 }

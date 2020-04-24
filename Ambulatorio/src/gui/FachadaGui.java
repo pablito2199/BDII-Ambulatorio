@@ -47,7 +47,6 @@ public class FachadaGui {
         vCP.setVisible(true);
     }
 
-
 ////////////////////////////////
 //VENTANA DE PACIENTES
 ////////////////////////////////
@@ -116,7 +115,7 @@ public class FachadaGui {
         //La hacemos visible
         vC.setVisible(true);
     }
-    
+
     //Permite crear una nueva ventana de consultas
     public void nuevaVGestionarMedicos() {
         //Declaramos
@@ -139,7 +138,7 @@ public class FachadaGui {
         //La hacemos visible
         vR.setVisible(true);
     }
-    
+
 //////////////////////
 //OTRAS VENTANAS
 //////////////////////
@@ -171,13 +170,13 @@ public class FachadaGui {
         va  = new VAviso(vp, true, txtExcepcion);
         va.setVisible(true);
     }
-    
+
     //Permite generar una ventana que muestre excepciones
     public void nuevaVError(String mensajeError) {
         //Declaramos la ventana
         VMensaje vM;
         //Instanciamos
-        vM  = new VMensaje(vp, true, mensajeError);
+        vM = new VMensaje(vp, true, mensajeError);
         //La hacemos visible
         vM.setVisible(true);
     }

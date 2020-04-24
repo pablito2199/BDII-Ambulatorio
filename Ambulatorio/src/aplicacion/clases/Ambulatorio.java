@@ -1,30 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package aplicacion.clases;
 
-import java.time.Year;
+package aplicacion.clases;
 
 public class Ambulatorio {
 
     private Integer codigo;
     private String nombre;
     private String direccion;
-    private Year anoConstruccion;
+    private String anoConstruccion;
     private String provicia;
     private String telefono;
+    private String antiguedad;
+    private Double ingresos;
 
     //Constructor
-    public Ambulatorio(Integer codigo, String nombre, String direccion, Year anoConstruccion, String provicia, String telefono) {
+
+    public Ambulatorio(Integer codigo, String nombre, String direccion, String anoConstruccion, String provicia, String telefono, String antiguedad, Double ingresos) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
         this.anoConstruccion = anoConstruccion;
         this.provicia = provicia;
         this.telefono = telefono;
+        this.antiguedad = antiguedad;
+        this.ingresos = ingresos;
     }
+
+    public Ambulatorio(Integer codigo, String nombre, String direccion, String anoConstruccion, String provicia, String telefono, String antiguedad) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.anoConstruccion = anoConstruccion;
+        this.provicia = provicia;
+        this.telefono = telefono;
+        this.antiguedad = antiguedad;
+        this.ingresos = 0.0;
+    }
+    
+    
 
     //Getters y Setters
     public Integer getCodigo() {
@@ -51,11 +63,11 @@ public class Ambulatorio {
         this.direccion = direccion;
     }
 
-    public Year getAnoConstruccion() {
+    public String getAnoConstruccion() {
         return anoConstruccion;
     }
 
-    public void setAnoConstruccion(Year anoConstruccion) {
+    public void setAnoConstruccion(String anoConstruccion) {
         this.anoConstruccion = anoConstruccion;
     }
 
@@ -75,6 +87,23 @@ public class Ambulatorio {
         this.telefono = telefono;
     }
 
+    public String getAntiguedad() {
+        return antiguedad;
+    }
+
+    public void setAntiguedad(String antiguedad) {
+        this.antiguedad = antiguedad;
+    }
+
+    public Double getIngresos() {
+        return ingresos;
+    }
+
+    public void setIngresos(Double ingresos) {
+        this.ingresos = ingresos;
+    }
+
+    
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Ambulatorio) {

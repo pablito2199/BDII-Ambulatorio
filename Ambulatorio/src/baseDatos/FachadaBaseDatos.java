@@ -50,13 +50,13 @@ public class FachadaBaseDatos {
                     usuario);
 
             //Inicializamos los DAOS
-            daoAmbulatorios = new DAOAmbulatorios(conexion, fa);    // Enlace al DAO de Ambulatorios
-            daoCitas = new DAOCitas(conexion, fa);                  // Enlace al DAO de Citas
-            daoPacientes = new DAOPacientes(conexion, fa);          // Enlace al DAO de Pacientes
+            daoAmbulatorios = new DAOAmbulatorios(conexion, fa);       // Enlace al DAO de Ambulatorios
+            daoCitas = new DAOCitas(conexion, fa);                           // Enlace al DAO de Citas
+            daoPacientes = new DAOPacientes(conexion, fa);               // Enlace al DAO de Pacientes
             daoEnfermedades = new DAOEnfermedades(conexion, fa);    // Enlace al DAO de Enfermedades
-            daoConsultas = new DAOConsultas(conexion, fa);          // Enlace al DAO de Consultas
-            daoRecetas = new DAORecetas(conexion, fa);              // Enlace al DAO de Recetas
-            daoPersonal = new DAOPersonal(conexion, fa);            // Enlace al DAO de Personal
+            daoConsultas = new DAOConsultas(conexion, fa);               // Enlace al DAO de Consultas
+            daoRecetas = new DAORecetas(conexion, fa);                   // Enlace al DAO de Recetas
+            daoPersonal = new DAOPersonal(conexion, fa);                  // Enlace al DAO de Personal
 
             //En caso de error capturamos la excepciones, imprimimos el mensaje y genereramos la ventana de excepción
         } catch (FileNotFoundException f) {
@@ -90,6 +90,11 @@ public class FachadaBaseDatos {
         daoAmbulatorios.modificarAmbulatorio(ambulatorio);
     }
 
+    //Permite consultar los ambulatorios de la red
+     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia){
+         return daoAmbulatorios.consultarAmbulatorios(nombre, codigo, Provincia);
+     }   
+    
 ///////////////
 //DAOCITAS
 ///////////////
@@ -150,14 +155,14 @@ public class FachadaBaseDatos {
     public void borrarPaciente(Paciente paciente) {
         daoPacientes.borrarPaciente(paciente);
     }
-    
-     //Permite buscar pacientes por su id y/o nombre de paciente
-     public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
-         return daoPacientes.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
-     }
 
-      //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente,  String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin){
+    //Permite buscar pacientes por su id y/o nombre de paciente
+    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
+        return daoPacientes.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
+    }
+
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, String tipo, String especialidad, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         return daoPacientes.consultarHistorialClinico(paciente, tipo, especialidad, fechaInicio, fechaFin);
     }
 
@@ -169,6 +174,7 @@ public class FachadaBaseDatos {
         daoEnfermedades.insertarEnfermedad(enfermedad);
     }
 
+    //Permite consultar las enfermedades existentes en la base de datos
     public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
         return daoEnfermedades.consultarEnfermedades(nombre);
     }
@@ -187,18 +193,27 @@ public class FachadaBaseDatos {
 //DAOCONSULTAS
 ////////////////////
     //Permite insertar una nueva consulta en la base de datos
-    public void insertarConsulta(Consulta consulta) {
+    public void anadirConsulta(Consulta consulta) {
         daoConsultas.insertarConsulta(consulta);
     }
 
-    //Permite modificar los datos de una consulta de la base de datos
-    public void modificarConsulta(Consulta consulta) {
-        daoConsultas.modificarConsulta(consulta);
+    //Permite consultar las consultas existentes en la base de datos
+    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
+        return daoConsultas.consultarConsultas(identificador, ambulatorio, especialidad);
     }
 
-    //Permite eliminar una enfermedad de la base de datos
-    public void borrarConsulta(Consulta consulta) {
-        daoConsultas.borrarConsulta(consulta);
+    //Permite eliminar una consulta de la base de datos
+    public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
+        daoConsultas.borrarConsulta(identificador, ambulatorio, especialidad);
+    }
+    
+    public void traspasarCitas(Integer identificador, Integer ambulatorio) {
+        daoConsultas.traspasarCitas(identificador, ambulatorio);
+    } 
+     
+    //Devuelve el número de consultas de un ambulatorio
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
+        return daoConsultas.numeroConsultas(ambulatorio, especialidad);
     }
 
 ////////////////////
@@ -210,7 +225,7 @@ public class FachadaBaseDatos {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente,  java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento){
+    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return daoRecetas.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
     }
 

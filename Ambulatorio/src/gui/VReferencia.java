@@ -568,12 +568,13 @@ public class VLibro extends javax.swing.JDialog {
         //Borramos el elemento seleccionado de la lista
         ma.borrarElemento(lstAutores.getSelectedIndex());
         //Si tras borrar no hay autores 
-        if (ma.getSize() == 0)
-            //Deshabilitamos el botón
+        if (ma.getSize() == 0) //Deshabilitamos el botón
+        {
             btnBorrarAutor.setEnabled(false);
-        else
-            //En otro caso seleccionamos el primer autor de la lista
+        } else //En otro caso seleccionamos el primer autor de la lista
+        {
             lstAutores.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_btnBorrarAutorActionPerformed
 
     //Permite asignar una categoría al libro
@@ -794,7 +795,6 @@ public class VLibro extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarCategoriasLibro;
     private javax.swing.JButton btnActualizarEjemplaresLibro;

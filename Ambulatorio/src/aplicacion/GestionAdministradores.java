@@ -3,7 +3,6 @@ package aplicacion;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
-
 public class GestionAdministradores {
 
     FachadaGui fgui;                //Enlace a la facha de la GUI
@@ -25,8 +24,4 @@ public class GestionAdministradores {
         return fbd.validarAdministrador(dni, clave);
     }
 
-    //Permite abrir una nueva ventana de usuarios
-    public void accesoAdministrador() {
-        fgui.nuevoAdministrador();
-    }
 }

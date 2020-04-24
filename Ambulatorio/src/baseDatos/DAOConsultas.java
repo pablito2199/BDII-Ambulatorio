@@ -1,54 +1,45 @@
 package baseDatos;
 
+import aplicacion.clases.Consulta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import aplicacion.clases.Paciente;
 
 /**
- * 
+ *
  * @author Pablo Tarrío Otero
  */
-
 public class DAOConsultas extends AbstractDAO {
-    
+
     //Contructor
     public DAOConsultas(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
 
-    //Permite insertar un nuevo paciente en la base de datos
-    public void insertarPaciente(Paciente paciente) {
+    //Permite insertar una nueva consulta en la base de datos
+    public void insertarConsulta(Consulta consulta) {
         //Declaramos variables
         Connection con;
-        PreparedStatement stmPaciente = null;
+        PreparedStatement stmConsulta = null;
 
         //Establecemos conexión
         con = super.getConexion();
 
         //Intentamos la consulta SQL
         try {
-            //Preparamos la consulta SQL para insertar en la tabla de pacientes un nuevo paciente con el id de paciente, nombre
-            //clave, dirección, email y tipo de paciente especificados
-            stmPaciente = con.prepareStatement("insert into paciente (cip, dni, numSeguridadSocial, nombre, fechaNacimiento, "
-                    + "sexo, grupoSanguineo, nacionalidad, direccion, telefono) "
-                    + "values (?,?,?,?,?,?,?)");
+            //Preparamos la consulta SQL para insertar en la tabla de consultas una nueva consulta 
+            //con el identificador, ambulatorio y especialidad de consulta especificados
+            stmConsulta = con.prepareStatement("insert into consulta (identificador, ambulatorio, especialidad) "
+                    + "values (?,?,?)");
             //Sustituimos
-            stmPaciente.setString(1, paciente.getCIP());        
-            stmPaciente.setString(2, paciente.getDNI());       
-            stmPaciente.setInt(3, paciente.getNSS()); 
-            stmPaciente.setString(4, paciente.getNombre());
-            stmPaciente.setDate(5, paciente.getFechaNacimiento());     
-            stmPaciente.setString(6, paciente.getSexo()); 
-            stmPaciente.setString(7, paciente.getGrupo().getTipo()); 
-            stmPaciente.setString(8, paciente.getNacionalidad()); 
-            stmPaciente.setString(9, paciente.getDireccion()); 
-            stmPaciente.setString(10, paciente.getTelefono()); 
+            stmConsulta.setInt(1, consulta.getIdentificador());
+            stmConsulta.setInt(2, consulta.getAmbulatorio());
+            stmConsulta.setString(3, consulta.getEspecialidad());
 
             //Actualizamos
-            stmPaciente.executeUpdate();
+            stmConsulta.executeUpdate();
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -58,7 +49,7 @@ public class DAOConsultas extends AbstractDAO {
         } finally {
             //Finalmente intentamos cerrar los cursores
             try {
-                stmPaciente.close();
+                stmConsulta.close();
             } catch (SQLException e) {
                 //De no poder se notifica de ello
                 System.out.println("Imposible cerrar cursores");
@@ -66,23 +57,25 @@ public class DAOConsultas extends AbstractDAO {
         }
     }
 
-    //Permite eliminar un paciente de la base de datos
-    public void borrarPaciente(String CIP) {
+    //Permite eliminar una consulta de la base de datos
+    public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
         //Declaramos variables
         Connection con;
-        PreparedStatement stmPaciente = null;
+        PreparedStatement stmConsulta = null;
 
         //Establecemos conexión
         con = super.getConexion();
 
         //Intentamos la consulta SQL
         try {
-            //Preparamos la sentencia para borrar de la tabla de pacientes aquel con la id especificada por argumentos
-            stmPaciente = con.prepareStatement("delete from paciente where cip = ?");
+            //Preparamos la sentencia para borrar de la tabla de consultas aquel con el identificador especificado por argumentos
+            stmConsulta = con.prepareStatement("delete from consulta where identificador = ? and ambulatorio = ? and especialidad = ?");
             //Sustituimos
-            stmPaciente.setString(1, CIP);  //CIP del paciente
+            stmConsulta.setInt(1, identificador);  //identificador de la consulta
+            stmConsulta.setInt(2, ambulatorio);  //ambulatorio de la consulta
+            stmConsulta.setString(3, especialidad);  //especialidad de la consulta
             //Actualizamos
-            stmPaciente.executeUpdate();
+            stmConsulta.executeUpdate();
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -92,7 +85,51 @@ public class DAOConsultas extends AbstractDAO {
         } finally {
             //Finalmente intentamos cerrar cursores
             try {
-                stmPaciente.close();
+                stmConsulta.close();
+            } catch (SQLException e) {
+                //En caso de no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+    
+    public void traspasarCitas(Integer identificador, Integer ambulatorio) {
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmCita = null;
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Preparamos la sentencia para insertar una fecha de finalización
+            stmCita = con.prepareStatement(
+                    "update from cita as c"
+                    + "set consulta = (select c2.identificador "
+                                + "from consulta as c2 "
+                                + "where c2.identificador != c.consulta "
+                                +   "and c2.ambulatorio = c.ambulatorio)"
+                    + "where c.consulta = ? "
+                        + "and c.ambulatorio = ?"
+            );
+
+            //Sustituimos
+            stmCita.setInt(1, identificador);
+            stmCita.setInt(2, ambulatorio);
+
+            //Actualizamos
+            stmCita.executeUpdate();
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente intentamos cerrar cursores
+            try {
+                stmCita.close();
             } catch (SQLException e) {
                 //En caso de no poder se notifica de ello
                 System.out.println("Imposible cerrar cursores");
@@ -100,68 +137,14 @@ public class DAOConsultas extends AbstractDAO {
         }
     }
 
-    //Permite modificar los datos de un paciente de la base de datos
-    public void modificarPaciente(Paciente paciente) {
+    //Permite consultar las consultas existentes en la base de datos
+    public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
         //Declaramos variables
+        java.util.List<Consulta> resultado = new java.util.ArrayList<>();
+        Consulta consultaActual;
         Connection con;
-        PreparedStatement stmPaciente = null;
-
-        //Establecemos conexión
-        con = super.getConexion();
-
-        //Intentamos la consulta SQL
-        try {
-            //Preparamos la sentencia para actualizar los datos del paciente con la id especificada
-            stmPaciente = con.prepareStatement("update paciente "
-                    + "set numSeguridadSocial = ?, "
-                    + "nombre = ?, "
-                    + "fechaNacimiento = ?, "
-                    + "sexo = ?, "
-                    + "grupoSanguineo = ?, "
-                    + "nacionalidad = ? "
-                    + "direccion = ? "
-                    + "telefono = ? "
-                    + "where cip = ?");
-            //Actualizamos
-            stmPaciente.setInt(1, paciente.getNSS());        
-            stmPaciente.setString(2, paciente.getNombre());       
-            stmPaciente.setDate(3, paciente.getFechaNacimiento()); 
-            stmPaciente.setString(4, paciente.getSexo());
-            stmPaciente.setString(5, paciente.getGrupo().getTipo());     
-            stmPaciente.setString(6, paciente.getNacionalidad()); 
-            stmPaciente.setString(7, paciente.getDireccion()); 
-            stmPaciente.setString(8, paciente.getTelefono()); 
-
-            stmPaciente.setString(9, paciente.getCIP());  //Id de paciente
-            //NOTA: El DNI y el CIP de un paciente no se pueden modificar
-
-            //Actualizamos
-            stmPaciente.executeUpdate();
-
-            //En caso de error se captura la excepción
-        } catch (SQLException e) {
-            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        } finally {
-            //Finalmente intentamos cerrar cursores
-            try {
-                stmPaciente.close();
-            } catch (SQLException e) {
-                //De no poder se notifica de ello
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-    }
-
-    //Permite buscar pacientes por su id y/o nombre de paciente
-    public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, String NSS, String grupo) {
-        //Declaramos variables
-        java.util.List<Paciente> resultado = new java.util.ArrayList<Paciente>();
-        Paciente pacienteActual;
-        Connection con;
-        PreparedStatement stmPacientes = null;
-        ResultSet rsPacientes;
+        PreparedStatement stmConsultas = null;
+        ResultSet rsConsultas;
 
         //Establecemos conexión
         con = this.getConexion();
@@ -169,35 +152,28 @@ public class DAOConsultas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el id, clave, nombre, direccion, email y tipo de paciente de la tabla de pacientes
-            //que tengan el nombre dado
-            String consulta = "select dni, nombre, current_date-fechaNacimiento as edad, sexo, grupoSanguineo "
-                    + "from paciente "
-                    + "where cip like ? "
-                    + "and dni like ?"
-                    + "and nombre like ?"
-                    + "and current_date-fechaNacimiento = "
-                    + "and dni like ?"
-                    + "and dni like ?"
-                    + "and dni like ?";
+            //Selecionamos el identificador, ambulatorio y especialdiad
+            //que tengan el identificador dado
+            String consulta = "select identificador, ambulatorio, especialidad "
+                    + "from consulta "
+                    + "where identificador = ? "
+                        + " and ambulatorio = ? "
+                        + "and especialidad = ?";
 
             //Preparamos la consulta
-            stmPacientes = con.prepareStatement(consulta);
+            stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
-            stmPacientes.setString(1, "%" + nombre + "%"); //Nombre
-            if (id != null) {
-                stmPacientes.setString(2, "%" + id + "%"); //ID, en caso de no ser nulo
-            }
+            stmConsultas.setInt(1, identificador); //Identificador
+            stmConsultas.setInt(2, ambulatorio); //Ambulatorio
+            stmConsultas.setString(3, especialidad); //Especialidad
             //Ejecutamos
-            rsPacientes = stmPacientes.executeQuery();
+            rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias
-            while (rsPacientes.next()) {
-                //Se crea una instancia de paciente con los datos recuperados de la base de datos
-                pacienteActual = new Paciente(rsPacientes.getString("id_paciente"), rsPacientes.getString("clave"),
-                        rsPacientes.getString("nombre"), rsPacientes.getString("direccion"),
-                        rsPacientes.getString("email"), TipoPaciente.CTU(rsPacientes.getString("tipo_paciente")), rsPacientes.getString("edad"));
-                //Y se añade la instancia a la lista de pacientes
-                resultado.add(pacienteActual);
+            while (rsConsultas.next()) {
+                //Se crea una instancia de consulta con los datos recuperados de la base de datos
+                consultaActual = new Consulta(rsConsultas.getInt("identificador"), rsConsultas.getInt("ambulatorio"), rsConsultas.getString("especialidad"));
+                //Y se añade la instancia a la lista de consultas
+                resultado.add(consultaActual);
             }
 
             //En caso de error se captura la excepción
@@ -208,27 +184,23 @@ public class DAOConsultas extends AbstractDAO {
         } finally {
             //Finalmente se intentan cerrar cursores
             try {
-                stmPacientes.close();
+                stmConsultas.close();
             } catch (SQLException e) {
                 //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        //Se devuelve el resultado (lista de pacientes)
+        //Se devuelve el resultado (lista de consultas)
         return resultado;
     }
 
-    //Permite consultar la información de los pacientes buscados por su id y/o nombre 
-    //Incluye además infrormación sobre sus préstamos vencidos
-    public java.util.List<Paciente> consultarPPacientes(String id, String nombre) {
+    //Devuelve el número de consultas de un ambulatorio
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
         //Declaramos variables
-        java.util.List<Paciente> resultado = new java.util.ArrayList<Paciente>();
-        Paciente pacienteActual;
+        Integer consultas = 0;
         Connection con;
-        PreparedStatement stmPacientes = null;
-        PreparedStatement stmPrestamos = null;
-        ResultSet rsPacientes;
-        ResultSet rsPrestamos;
+        PreparedStatement stmAmbulatorios = null;
+        ResultSet rsAmbulatorios;
 
         //Establecemos conexión
         con = this.getConexion();
@@ -236,90 +208,39 @@ public class DAOConsultas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el id, clave, nombre, direccion, email y tipo de paciente de la tabla de pacientes
-            //que tengan el nombre dado
-            String consulta = "select id_paciente, clave, nombre, direccion, email, tipo_paciente, edad "
-                    + "from paciente as u "
-                    + "where nombre like ?";
-            if (id != null) {
-                consulta = consulta + " and id_paciente like ?";
-            }
-
-            //En caso de aportar el id
-            if (id != null) {
-                //También se busca por id y, por tanto, se especifica en la consulta
-                consulta = consulta + " and id_paciente like ?";
-            }
-
+            String consulta = "select COUNT(distinct identificador) from consulta as consultas " 
+                    + "where ambulatorio = ? " 
+                    + "and especialidad like ? " 
+                    + "group by ambulatorio";
             //Preparamos la consulta
-            stmPacientes = con.prepareStatement(consulta);
+            stmAmbulatorios = con.prepareStatement(consulta);
             //Sustituimos
-            stmPacientes.setString(1, "%" + nombre + "%"); //Nombre
-            if (id != null) {
-                stmPacientes.setString(2, "%" + id + "%"); //ID, en caso de no ser nulo
-            }
+            stmAmbulatorios.setInt(1, ambulatorio);
+            stmAmbulatorios.setString(2, "%" + especialidad + "%");
+
             //Ejecutamos
-            rsPacientes = stmPacientes.executeQuery();
+            rsAmbulatorios = stmAmbulatorios.executeQuery();
+
             //Mientras haya coincidencias
-            while (rsPacientes.next()) {
-                //Se crea una instancia de paciente con los datos recuperados de la base de datos
-                pacienteActual = new Paciente(rsPacientes.getString("id_paciente"), rsPacientes.getString("clave"),
-                        rsPacientes.getString("nombre"), rsPacientes.getString("direccion"),
-                        rsPacientes.getString("email"), TipoPaciente.CTU(rsPacientes.getString("tipo_paciente")), rsPacientes.getString("edad"));
-
-                //Se intenta consultar la tabla de préstamos
-                try {
-                    //Construimos una consulta que cuente el número de préstamos vencidos
-                    //Para elllo se comprueba que los ejemplares no estén devueltos y que la fecha 
-                    //actual (current_date) supere la de préstamo + 30 (fecha de devolución) para el paciente dado
-                    consulta = "select COUNT(distinct ejemplar) as vencidos from prestamo where "
-                            + "paciente like ? and fecha_devolucion is null and current_date > fecha_prestamo + 30";
-                    //Preparamos la consulta
-                    stmPrestamos = con.prepareStatement(consulta);
-                    //Sustituimos
-                    stmPrestamos.setString(1, pacienteActual.getIdPaciente());  //Id del paciente
-                    //Ejecutamos
-                    rsPrestamos = stmPrestamos.executeQuery();
-                    //Como solo devuelve un valor lo recuperamos
-                    rsPrestamos.next();
-                    //Y lo guardamos como el número de préstamos vencidos (que han superado la fecha límite 
-                    //para su devolución)
-                    pacienteActual.setNumPrestamosVencidos(rsPrestamos.getInt("vencidos"));
-
-                    //En caso de error se captura la excepción
-                } catch (SQLException e) {
-                    //Se imprime el mensaje y se genera la ventana que muestra el mensaje
-                    System.out.println(e.getMessage());
-                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-                } finally {
-                    //Finalmente intentamos cerrar el cursor de PRESTAMOS. El de pacientes sigue abierto.
-                    try {
-                        stmPrestamos.close();
-                    } catch (SQLException e) {
-                        //Si no se puede se imprime el error por pantalla
-                        System.out.println("Imposible cerrar cursores");
-                    }
-                }
-                //Se añade el paciente a la lista de pacientes
-                resultado.add(pacienteActual);
+            if (rsAmbulatorios.next()) {
+                //Se crea una instancia de ambulatorio con los datos recuperados de la base de datos
+                consultas = rsAmbulatorios.getInt("consultas");
             }
-
-            //En caso de error se captura la excepción
-        } catch (SQLException e) {
+        } //En caso de error se captura la excepción
+        catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
-            //Finalmente intentamos cerrar el cursor de pacientes 
+            //Finalmente se intentan cerrar cursores
             try {
-                stmPacientes.close();
+                stmAmbulatorios.close();
             } catch (SQLException e) {
-                //Si no se puede se imprime el error por pantalla
+                //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        //Devolvemos el resultado (lista de pacientes con información de préstamos vencidos)
-        return resultado;
+        //Se devuelve el resultado (total de consultas de un ambulatorio)
+        return consultas;
     }
-    
 }

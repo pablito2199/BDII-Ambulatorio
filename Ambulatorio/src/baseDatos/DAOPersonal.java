@@ -3,7 +3,6 @@ package baseDatos;
 import aplicacion.clases.Administrador;
 import java.sql.*;
 
-
 public class DAOPersonal extends AbstractDAO {
 
     //Contructor
@@ -55,9 +54,10 @@ public class DAOPersonal extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        if (resultado != null) 
+        if (resultado != null) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 }

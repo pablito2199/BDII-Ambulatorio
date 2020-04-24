@@ -22,7 +22,7 @@ public class Cita {
         this.tipo = tipo;
         this.especialidad = especialidad;
     }
-    
+
     //Constructor solo con la pk
     public Cita(Timestamp fechaHoraInicio, String paciente, Integer consulta, Integer ambulatorio) {
         this.fechaHoraInicio = fechaHoraInicio;
@@ -30,7 +30,6 @@ public class Cita {
         this.consulta = consulta;
         this.ambulatorio = ambulatorio;
     }
-    
 
     //Getters y Setters
     public Timestamp getFechaHoraInicio() {

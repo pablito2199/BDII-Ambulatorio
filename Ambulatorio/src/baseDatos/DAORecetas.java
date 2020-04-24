@@ -11,7 +11,8 @@ import java.sql.SQLException;
  * @author Ainhoa Vivel Couso
  */
 public class DAORecetas extends AbstractDAO {
-      //Contructor
+    //Contructor
+
     public DAORecetas(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
@@ -31,16 +32,16 @@ public class DAORecetas extends AbstractDAO {
             //Preparamos la consulta SQL para insertar en la tabla de pacientes un nuevo paciente con el id de paciente, nombre
             //clave, dirección, email y tipo de paciente especificados
             stmReceta = con.prepareStatement("insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion, fechaInicio, fechaFin) "
-                    + "values (?,?,?,?,?,?,?)");
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?)");
             //Sustituimos
-            stmReceta.setTimestamp(1, receta.getCita());        
-            stmReceta.setString(2, receta.getPaciente());       
-            stmReceta.setInt(3, receta.getConsulta()); 
+            stmReceta.setTimestamp(1, receta.getCita());
+            stmReceta.setString(2, receta.getPaciente());
+            stmReceta.setInt(3, receta.getConsulta());
             stmReceta.setString(4, receta.getMedicamento());
-            stmReceta.setInt(5, receta.getCantidad());     
-            stmReceta.setString(6, receta.getDescripcion()); 
-            stmReceta.setDate(7, receta.getFechaInicio()); 
-            stmReceta.setDate(8, receta.getFechaFin()); 
+            stmReceta.setInt(5, receta.getCantidad());
+            stmReceta.setString(6, receta.getDescripcion());
+            stmReceta.setDate(7, receta.getFechaInicio());
+            stmReceta.setDate(8, receta.getFechaFin());
 
             //Actualizamos
             stmReceta.executeUpdate();
@@ -62,7 +63,7 @@ public class DAORecetas extends AbstractDAO {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente,  java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento){
+    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         //Declaramos variables
         java.util.List<Receta> resultado = new java.util.ArrayList<Receta>();
         Receta recetaActual;
@@ -74,7 +75,7 @@ public class DAORecetas extends AbstractDAO {
         con = this.getConexion();
         //Impedimos que se la confirmación sea automática
         try {
-            con.setAutoCommit(false);            
+            con.setAutoCommit(false);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -83,35 +84,38 @@ public class DAORecetas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select cita, fechaHoraInicio, fechaHoraFin, paciente, codigoReceta, medicamento" 
-                    + "from receta where paciente = ? and codigoReceta = ? and medicamento = ? and fechaHoraFin-fechaHoraInicio>=0 "
-                    + "and fechaHoraFin <= ? and fechaHoraInicio >= ?;";
+            String consulta = "select cita, fechaHoraInicio, fechaHoraFin, paciente, codigoReceta, medicamento, cantidad "
+                    + "from receta where paciente = ? "
+                    + "and codigoReceta = ? "
+                    + "and medicamento = ? "
+                    + "and fechaHoraFin-fechaHoraInicio>=0 "
+                    + "and fechaHoraFin <= ? "
+                    + "and fechaHoraInicio >= ?;";
             //Preparamos la consulta
             stmHistorial = con.prepareStatement(consulta);
             //Sustituimos
             stmHistorial.setString(1, paciente.getCIP());
             stmHistorial.setInt(2, codigoReceta);
-            stmHistorial.setString(3, medicamento); 
-            stmHistorial.setTimestamp(4, fechaFin); 
-            stmHistorial.setTimestamp(5, fechaInicio); 
- 
+            stmHistorial.setString(3, medicamento);
+            stmHistorial.setTimestamp(4, fechaFin);
+            stmHistorial.setTimestamp(5, fechaInicio);
+
             //Ejecutamos
             rsHistorial = stmHistorial.executeQuery();
             //Mientras haya coincidencias
             while (rsHistorial.next()) {
                 //Se crea una instancia de cita con los datos recuperados de la base de datos
-                recetaActual = new Receta(rsHistorial.getTimestamp("cita"), 
-                        rsHistorial.getString("paciente"), 
-                        rsHistorial.getInt("codigo"), 
-                        rsHistorial.getDate("fechaHoraInicio"), 
+                recetaActual = new Receta(rsHistorial.getTimestamp("cita"),
+                        rsHistorial.getString("paciente"),
+                        rsHistorial.getInt("codigoReceta"),
+                        rsHistorial.getDate("fechaHoraInicio"),
                         rsHistorial.getDate("fechaHoraFin"),
                         rsHistorial.getString("medicamento"),
                         rsHistorial.getInt("cantidad"));
-               //Y se añade la instancia a la lista de pacientes
+                //Y se añade la instancia a la lista de pacientes
                 resultado.add(recetaActual);
             }
-        }
-        //En caso de error se captura la excepción
+        } //En caso de error se captura la excepción
         catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
@@ -136,11 +140,11 @@ public class DAORecetas extends AbstractDAO {
             //Confirmamos
             con.commit();
         } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage()); 
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
-    } 
+    }
 
 }

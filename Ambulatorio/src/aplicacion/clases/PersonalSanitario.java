@@ -8,6 +8,7 @@ package aplicacion.clases;
 import java.sql.Date;
 
 public class PersonalSanitario {
+
     private Integer ambulatorio;
     private String DNI;
     private String nombre;
@@ -71,7 +72,7 @@ public class PersonalSanitario {
     public void setSueldo(Float sueldo) {
         this.sueldo = sueldo;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof PersonalSanitario) {

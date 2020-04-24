@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import aplicacion.clases.Enfermedad;
 
 /**
- * 
+ *
  * @author Pablo Tarrío Otero
  */
-
 public class DAOEnfermedades extends AbstractDAO {
-    
+
     //Contructor
     public DAOEnfermedades(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
@@ -34,7 +33,7 @@ public class DAOEnfermedades extends AbstractDAO {
             stmEnfermedad = con.prepareStatement("insert into enfermedad (nombre, descripcion) "
                     + "values (?,?)");
             //Sustituimos
-            stmEnfermedad.setString(1, enfermedad.getNombre());        
+            stmEnfermedad.setString(1, enfermedad.getNombre());
             stmEnfermedad.setString(2, enfermedad.getDescripcion());
 
             //Actualizamos
@@ -89,7 +88,7 @@ public class DAOEnfermedades extends AbstractDAO {
         }
     }
 
-    //Permite modificar los datos de una enfermedad de la base de datos
+    //Permite modificar los datos de una enfermedad en la base de datos
     public void modificarEnfermedad(Enfermedad enfermedad) {
         //Declaramos variables
         Connection con;
@@ -129,7 +128,8 @@ public class DAOEnfermedades extends AbstractDAO {
         }
     }
 
-    //Permite buscar enfermedades por su nombre
+    
+    //Permite consultar las enfermedades existentes en la base de datos
     public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
         //Declaramos variables
         java.util.List<Enfermedad> resultado = new java.util.ArrayList<Enfermedad>();

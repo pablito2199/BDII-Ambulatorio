@@ -3,6 +3,7 @@ package aplicacion.clases;
 import java.sql.Date;
 
 public class Paciente {
+
     private String CIP;
     private String DNI;
     private Integer NSS;    //NSS
@@ -29,7 +30,7 @@ public class Paciente {
         this.direccion = direccion;
         this.telefono = telefono;
     }
-    
+
     //Constructor por si le quieres meter la edad
     public Paciente(String CIP, String DNI, int NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad, Rango rango) {
         this.CIP = CIP;
@@ -47,7 +48,7 @@ public class Paciente {
     }
 
     //Constructor solo para borrado
-    public Paciente(String CIP){
+    public Paciente(String CIP) {
         this.CIP = CIP;
     }
 
@@ -148,7 +149,6 @@ public class Paciente {
         this.rango = rango;
     }
 
-    
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Paciente) {

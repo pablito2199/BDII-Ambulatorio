@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package aplicacion.clases;
 
 import java.sql.Timestamp;
@@ -13,7 +12,7 @@ public class Urgencia extends Cita {
     private Float soborno;
     private Integer gravedad;
     private Integer prioridad;
-    
+
     //Constructor
     public Urgencia(Float soborno, Integer gravedad, Integer prioridad, Timestamp fechaHoraInicio, Timestamp fechaHoraFin, String paciente, Integer consulta, Integer ambulatorio, String tipo, String especialidad) {
         super(fechaHoraInicio, fechaHoraFin, paciente, consulta, ambulatorio, tipo, especialidad);
@@ -21,7 +20,7 @@ public class Urgencia extends Cita {
         this.gravedad = gravedad;
         this.prioridad = prioridad;
     }
-    
+
     //Getters y Setters
     public Float getSoborno() {
         return soborno;

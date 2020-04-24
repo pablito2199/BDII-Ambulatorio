@@ -48,9 +48,10 @@ public class GestionCitas {
 
     //Devuelve una lista de horas de las citas que el paciente no puede reservar
     public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, Paciente paciente, TipoCita tipocita, Date inicio, Date fin) {
-        
-        if(paciente.getRango() == Rango.DELUXE)
+
+        if (paciente.getRango() == Rango.DELUXE) {
             return new ArrayList<>();
+        }
         return fbd.citasOcupadas(ambulatorio, tipocita, inicio, fin);
     }
 

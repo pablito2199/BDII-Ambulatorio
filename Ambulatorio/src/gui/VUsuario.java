@@ -377,18 +377,18 @@ public class VUsuario extends javax.swing.JDialog {
         }
         //Para edad
         //declaramos un integer a null
-        Integer edad=null;
+        Integer edad = null;
         //Si se ha introducido una edad en el campo
         if (!varEdad.getText().isEmpty()) {
             //Intentamos convertirla a entero
             try {
-                edad=Integer.parseInt(varEdad.getText());
+                edad = Integer.parseInt(varEdad.getText());
                 //Si al hacerlo la edad es negativa imprimimos el error
-                if (edad< 0) {
+                if (edad < 0) {
                     fa.muestraExcepcion("La edad debe ser un número positivo.");
                     return;
                 }
-            //De no poder convertir a entero se imprime la excepción
+                //De no poder convertir a entero se imprime la excepción
             } catch (NumberFormatException ex) {
                 fa.muestraExcepcion("El valor introducido para la edad no es válido.");
                 return;
@@ -467,7 +467,6 @@ public class VUsuario extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBuscarUsuario;
