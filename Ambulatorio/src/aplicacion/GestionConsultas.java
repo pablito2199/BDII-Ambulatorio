@@ -32,10 +32,6 @@ public class GestionConsultas {
     public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
         fbd.borrarConsulta(identificador, ambulatorio, especialidad);
     }
-    
-    public void traspasarCitas(Integer identificador, Integer ambulatorio) {
-        fbd.traspasarCitas(identificador, ambulatorio);
-    }
 
     //Devuelve el número de consultas de un ambulatorio
     public Integer numeroConsultas(Integer ambulatorio, String especialidad) {

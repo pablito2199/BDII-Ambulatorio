@@ -224,10 +224,6 @@ public class FachadaBaseDatos {
     public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
         daoConsultas.borrarConsulta(identificador, ambulatorio, especialidad);
     }
-    
-    public void traspasarCitas(Integer identificador, Integer ambulatorio) {
-        daoConsultas.traspasarCitas(identificador, ambulatorio);
-    } 
      
     //Devuelve el número de consultas de un ambulatorio
     public Integer numeroConsultas(Integer ambulatorio, String especialidad) {

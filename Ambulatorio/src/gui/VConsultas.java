@@ -155,7 +155,6 @@ public class VConsultas extends javax.swing.JDialog {
                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                 .addGap(5, 5, 5)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelGeneralLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -290,12 +289,12 @@ public class VConsultas extends javax.swing.JDialog {
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         Integer numero = m.getElementAt(lstConsultas.getSelectedIndex());
         
-        //if(cuentaConsultasAmbulatorio>1) deja eliminar, si no pues no y manda un mensaje de error
-        //hacer consulta compleja
-        fa.traspasarCitas(numero, ambulatorio);
-        fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
-        
-        
+        if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()) > 1) {
+            fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
+        } else {
+            fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
+        }
+                
         textoNumeroConsulta.setText(null);
         seleccionEspecialidades.setSelectedItem(0);
         buscarConsultas();
