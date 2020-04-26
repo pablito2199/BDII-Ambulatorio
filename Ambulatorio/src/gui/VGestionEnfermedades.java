@@ -5,15 +5,11 @@
  */
 package gui;
 
-import aplicacion.Libro;
-import aplicacion.Ejemplar;
+public class VGestionEnfermedades extends javax.swing.JDialog {
 
-public class VLibro extends javax.swing.JDialog {
-
-    private final Integer idLibro;                                        //ID del libro sobre el que se está trabajando
-    private final java.util.List<Integer> ejemplaresBorrados;   //Lista de ejemplares del libro que se han borrado
-    private final VPrincipal padre;                                      //Enlace a la ventana padre 
+    private final VPacientes padre;                                //Enlace a la ventana padre 
     private final aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
+    private String cipPaciente;                                    //Paciente actual
 
     /**
      * Creates new form VLibro
@@ -21,106 +17,40 @@ public class VLibro extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param fa
-     * @param restoCategorias
+     * @param cipPaciente
+     * @param enfermedades
+     * @param restoEnfermedades
      */
     //Constructor para un nuevo libro
-    public VLibro(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<String> restoCategorias) {
+    public VGestionEnfermedades(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, String cipPaciente, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
         //Instanciamos
         super(parent, modal);
         this.fa = fa;
         initComponents();
-        padre = (VPrincipal) parent;
-        //Desactivamos botones
-        btnActualizarCategoriasLibro.setEnabled(false);
-        btnActualizarEjemplaresLibro.setEnabled(false);
-        btnBorrarLibro.setEnabled(false);
-        //Inicializamos
-        this.idLibro = null;
-        this.ejemplaresBorrados = new java.util.ArrayList<Integer>();
+        padre = (VPacientes) parent;
+        this.cipPaciente = cipPaciente;
 
-        //Instanciamos la tabla lista con el resto de categorías
-        ModeloListaStrings mListaRC = new ModeloListaStrings();
-        lstRestoCategorias.setModel(mListaRC);
-        mListaRC.setElementos(restoCategorias);
-        //Si tiene algún elemento  lo seleccionamos y activamos la flecha derecha
-        if (mListaRC.getSize() > 0) {
-            lstRestoCategorias.setSelectedIndex(0);
-            btnDerecha.setEnabled(true);
-            //De no tenerlo se desactiva la flecha
-        } else {
-            btnDerecha.setEnabled(false);
-        }
-        //Desactivamos botones
-        btnIzquierda.setEnabled(false); //Flecha que apunta hacia la izquierda
-        btnBorrarEjemplar.setEnabled(false);
-    }
-
-    //Constructor para un libro existente
-    public VLibro(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Libro libro, java.util.List<String> categorias, java.util.List<String> restoCategorias) {
-        //Instanciamos
-        super(parent, modal);
-        this.fa = fa;
-        initComponents();
-        padre = (VPrincipal) parent;
-        idLibro = libro.getIdLibro();
-        textoAno.setText(libro.getAno().toString());
-        textoEditorial.setText(libro.getEditorial());
-        textoIsbn.setText(libro.getIsbn());
-        textoPaginas.setText((libro.getPaginas()).toString());
-        textoTitulo.setText(libro.getTitulo());
-        textoId.setText(idLibro.toString());
-
-        //Instanciamos la lista de autores
-        ModeloListaStrings mListaAutores = new ModeloListaStrings();
-        lstAutores.setModel(mListaAutores);
-        mListaAutores.setElementos(libro.getAutores());
-        if (mListaAutores.getSize() > 0) {
-            lstAutores.setSelectedIndex(0);
-            btnBorrarAutor.setEnabled(true);
-        } else {
-            btnBorrarAutor.setEnabled(false);
-        }
-
-        //Instanciamos la lista de resto de categorías
-        ModeloListaStrings mListaRC = new ModeloListaStrings();
-        lstRestoCategorias.setModel(mListaRC);
-        mListaRC.setElementos(restoCategorias);
-        if (mListaRC.getSize() > 0) {
-            lstRestoCategorias.setSelectedIndex(0);
+        //lista de enfermedades no registradas al paciente
+        ModeloListaStrings mListaRE = new ModeloListaStrings();
+        lstRestoEnfermedades.setModel(mListaRE);
+        mListaRE.setElementos(restoEnfermedades);
+        if (mListaRE.getSize() > 0) {
+            lstRestoEnfermedades.setSelectedIndex(0);
             btnDerecha.setEnabled(true);
         } else {
             btnDerecha.setEnabled(false);
         }
 
-        //Instanciamos la lista de categorías
-        ModeloListaStrings mListaC = new ModeloListaStrings();
-        lstCategoriasLibro.setModel(mListaC);
-        mListaC.setElementos(categorias);
-        if (mListaC.getSize() > 0) {
-            lstCategoriasLibro.setSelectedIndex(0);
+        //crea la lista de enfermedades del paciente
+        ModeloListaStrings mListaE = new ModeloListaStrings();
+        lstEnfermedadesPadecidas.setModel(mListaE);
+        mListaE.setElementos(enfermedades);
+        if (mListaE.getSize() > 0) {
+            lstEnfermedadesPadecidas.setSelectedIndex(0);
             btnIzquierda.setEnabled(true);
         } else {
             btnIzquierda.setEnabled(false);
         }
-
-        //Instanciamos la tabla de ejemplares
-        ModeloTablaEjemplares mTEjemplares = new ModeloTablaEjemplares(fa);
-        tablaEjemplares.setModel(mTEjemplares);
-        //Obtenemos los ejemplares del libro
-        mTEjemplares.setFilas(libro.getEjemplares());
-        //En caso de que haya ejemplares
-        if (mTEjemplares.getRowCount() > 0) {
-            //Seleccionamos el primero
-            tablaEjemplares.setRowSelectionInterval(0, 0);
-            //Activamos el borrado
-            btnBorrarEjemplar.setEnabled(true);
-        } else {
-            //Desactivamos el borrado
-            btnBorrarEjemplar.setEnabled(false);
-        }
-
-        //Inicializamos ejemplares borrados
-        this.ejemplaresBorrados = new java.util.ArrayList<Integer>();
     }
 
     /**
@@ -223,29 +153,28 @@ public class VLibro extends javax.swing.JDialog {
                         .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnBuscar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnLimpiar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnActualizar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegresar))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel10)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(etiquetaRestoEnfermedades, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(etiquetaEnfermedadesPadecidas))))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLimpiar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRegresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(etiquetaRestoEnfermedades, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(etiquetaEnfermedadesPadecidas))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -274,122 +203,71 @@ public class VLibro extends javax.swing.JDialog {
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpiar)
-                    .addComponent(btnActualizar)
-                    .addComponent(btnRegresar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegresar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnLimpiar)
+                        .addComponent(btnActualizar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Permite salir de la ventana de libro
+    //Botón Buscar, filtra las enfermedades en ambas listas
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        //Buscamos libros
-        padre.buscarLibros();
-        //Destruimos esta ventana
-        this.dispose();
-
-        //NOTA: Si no se presionó el botón actualizar no se guardan los cambios hechos
+        buscarEnfermedadesPadecidas(textoNombre.getText());
+        buscarEnfermedadesNoPadecidas(textoNombre.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    //Permite insertar un nuevo autor
-    //Permite borrar uno de los autores
-    //Permite asignar una categoría al libro
+    //Botón Flecha Derecha, asigna una enfermedad al paciente
     private void btnDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerechaActionPerformed
-        //Declaramos la lista de categorías y resto de categorías
-        ModeloListaStrings mRC;
-        ModeloListaStrings mC;
-        //Inicializamos la lista de categorías y resto de categorías
-        mRC = (ModeloListaStrings) lstRestoCategorias.getModel();
-        mC = (ModeloListaStrings) lstCategoriasLibro.getModel();
-        //Añadimos el elemento seleccionado a la lista de categorias y lo quitamos de la lista de resto
-        mC.nuevoElemento(mRC.getElementAt(lstRestoCategorias.getSelectedIndex()));
-        mRC.borrarElemento(lstRestoCategorias.getSelectedIndex());
-        //Si el resto de categoría no tiene elementos desactivamos el botón derecha
-        if (mRC.getSize() == 0) {
+        ModeloListaStrings mRE = (ModeloListaStrings) lstRestoEnfermedades.getModel();
+        ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();
+        mE.nuevoElemento(mRE.getElementAt(lstRestoEnfermedades.getSelectedIndex()));
+        mRE.borrarElemento(lstRestoEnfermedades.getSelectedIndex());
+        if (mRE.getSize() == 0) {
             btnDerecha.setEnabled(false);
         } else {
-            //En otro caso seleccionamos automáticamente el primer elemento
-            lstRestoCategorias.setSelectedIndex(0);
+            lstRestoEnfermedades.setSelectedIndex(0);
         }
-        lstCategoriasLibro.setSelectedIndex(mC.getSize() - 1);
-        //El botón flecha izquierda se habilita
+        lstEnfermedadesPadecidas.setSelectedIndex(mE.getSize() - 1);
         btnIzquierda.setEnabled(true);
     }//GEN-LAST:event_btnDerechaActionPerformed
 
-    //Permite quitar la categoría del libor
+    //Botón Flecha Izquierda, quita una enfermedad al paciente
     private void btnIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzquierdaActionPerformed
-        //Declaramos la lista de categorías y resto de categorías
-        ModeloListaStrings mRC;
-        ModeloListaStrings mC;
-        //Inicializamos la lista de categorías y resto de categorías
-        mRC = (ModeloListaStrings) lstRestoCategorias.getModel();
-        mC = (ModeloListaStrings) lstCategoriasLibro.getModel();
-        //Añadimos el elemento seleccionado a la lista de restos de categorias y lo quitamos de categorías
-        mRC.nuevoElemento(mC.getElementAt(lstCategoriasLibro.getSelectedIndex()));
-        mC.borrarElemento(lstCategoriasLibro.getSelectedIndex());
-        //Si categorías no tiene elementos desactivamos el botón izquierda
-        if (mC.getSize() == 0) {
+        ModeloListaStrings mRE = (ModeloListaStrings) lstRestoEnfermedades.getModel();
+        ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();
+        mRE.nuevoElemento(mE.getElementAt(lstEnfermedadesPadecidas.getSelectedIndex()));
+        mE.borrarElemento(lstEnfermedadesPadecidas.getSelectedIndex());
+        if (mE.getSize() == 0) {
             btnIzquierda.setEnabled(false);
         } else {
-            //En otro caso seleccionamos automáticamente el primer elemento
-            lstCategoriasLibro.setSelectedIndex(0);
+            lstEnfermedadesPadecidas.setSelectedIndex(0);
         }
-        lstRestoCategorias.setSelectedIndex(mRC.getSize() - 1);
-        //El botón flecha derecha se habilita
+        lstRestoEnfermedades.setSelectedIndex(mRE.getSize() - 1);
         btnDerecha.setEnabled(true);
     }//GEN-LAST:event_btnIzquierdaActionPerformed
 
-    //Permite insertar un nuevo ejemplar
-    //Permite borrar un ejemplar
-    //Permite borrar el libro de la base de datos
+    //Botón Limpiar, pone el campo de texto del nombre a nulo
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        //Llamamos a la función para borrar el libro
-        fa.borrarLibro(idLibro);
-        //Buscamos los libros otra vez
-        padre.buscarLibros();
-        //Destruimos la ventana de libro actual
-        this.dispose();
+        textoNombre.setText(null);
+        lstRestoEnfermedades.getModel();
+        lstEnfermedadesPadecidas.getModel();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    //Permite actualizar la información del libro
-    //Permite actualizar la información de las categorías del libro
+    //Botón Actualizar, guarda correctamente las enfermedades padecidas y no padecidas por el paciente
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        //Declaramos e inicializamos la lista de categorías
-        ModeloListaStrings ma = (ModeloListaStrings) lstCategoriasLibro.getModel();
-        //Actualizamos las categorías
-        fa.actualizarCategoriasLibro(idLibro, ma.getElementos());
+        ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();
+        fa.actualizarEnfermedadesPaciente(cipPaciente, mE.getElementos());
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    //Botón Regresar, vuelve a la ventana anterior, cerrando la ventana actual
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        padre.buscarPacientes();
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    //Permite actualizar la información de los ejemplares del libro
-    //Permite prestar un ejemplar del libro (accedes a la ventana de préstamos)
-    //Permite devolver un ejemplar del libro
-    //Permite actualizar la información del libro
-    //Permite actualizar la tabla de ejemplares
-    public void actualizarTablaEjemplares() {
-        //Creamos el modelo de tabla
-        ModeloTablaEjemplares mTEjemplares = new ModeloTablaEjemplares(fa);
-        tablaEjemplares.setModel(mTEjemplares);
-        //Metemos las filas actualizadas en la tabla
-        mTEjemplares.setFilas(fa.actualizarEjemplaresLibro(idLibro, mTEjemplares.getFilas(), ejemplaresBorrados));
-        //Si hay ejemplares
-        if (mTEjemplares.getRowCount() > 0) {
-            //Seleccionamos el primero y habilitamos el botón de borrado
-            tablaEjemplares.setRowSelectionInterval(0, 0);
-            btnBorrarEjemplar.setEnabled(true);
-        } else {
-            //De no haberlo, deshabillitamos el botón de borrado
-            btnBorrarEjemplar.setEnabled(false);
-        }
-
-    }
 
     /**
      * @param args the command line arguments
@@ -411,5 +289,46 @@ public class VLibro extends javax.swing.JDialog {
     private javax.swing.JList lstRestoEnfermedades;
     private javax.swing.JTextField textoNombre;
     // End of variables declaration//GEN-END:variables
-
+        
+    //busca las enfermedades no padecidas en la lista
+    public void buscarEnfermedadesNoPadecidas(String enfermedad) {
+        java.util.List<String> enfermedadesNoPadecidas;
+        ModeloListaStrings mListaRE = new ModeloListaStrings();
+        lstEnfermedadesPadecidas.setModel(mListaRE);
+        enfermedadesNoPadecidas = fa.obtenerEnfermedadesNoPadecidas(cipPaciente, enfermedad);
+        java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
+        for (int i = 0; i < enfermedadesNoPadecidas.size(); i++) {
+            nombres.add(enfermedadesNoPadecidas.get(i));
+        }
+        mListaRE.setElementos(nombres);
+        if (mListaRE.getSize() > 0) {
+            //selecciona el primer elemento de la lista automáticamente
+            lstEnfermedadesPadecidas.setSelectedIndex(0);
+            //activa el botón de Eliminar
+            btnIzquierda.setEnabled(true);
+        } else {
+            btnIzquierda.setEnabled(false);
+        }
+    }
+    
+    //busca las enfermedades no padecidas en la lista
+    public void buscarEnfermedadesPadecidas(String enfermedad) {
+        java.util.List<String> enfermedadesPadecidas;
+        ModeloListaStrings mListaE = new ModeloListaStrings();
+        lstEnfermedadesPadecidas.setModel(mListaE);
+        enfermedadesPadecidas = fa.obtenerEnfermedadesPadecidas(cipPaciente, enfermedad);
+        java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
+        for (int i = 0; i < enfermedadesPadecidas.size(); i++) {
+            nombres.add(enfermedadesPadecidas.get(i));
+        }
+        mListaE.setElementos(nombres);
+        if (mListaE.getSize() > 0) {
+            //selecciona el primer elemento de la lista automáticamente
+            lstEnfermedadesPadecidas.setSelectedIndex(0);
+            //activa el botón de Eliminar
+            btnIzquierda.setEnabled(true);
+        } else {
+            btnIzquierda.setEnabled(false);
+        }
+    }
 }

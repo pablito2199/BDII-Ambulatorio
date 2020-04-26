@@ -167,6 +167,21 @@ public class FachadaBaseDatos {
     public boolean existePaciente(String CIP) {
         return daoPacientes.existePaciente(CIP);
     }
+    
+    //Permite recuperar las enfermedades no padecidas por el paciente
+    public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
+        return daoPacientes.obtenerEnfermedadesNoPadecidas(cip, enfermedad);
+    }
+    
+    //Permite recuperar las enfermedades padecidas por el paciente
+    public java.util.List<String> obtenerEnfermedadesPadecidas(String cip, String enfermedad) {
+        return daoPacientes.obtenerEnfermedadesPadecidas(cip, enfermedad);
+    }
+
+    //Permite actualizar las enfermedades de un paciente de la base de datos
+    public void actualizarEnfermedadesPaciente(String cip, java.util.List<String> enfermedades) {
+        daoPacientes.actualizarEnfermedadesPaciente(cip, enfermedades);
+    }
 
 
 //////////////////

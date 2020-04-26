@@ -177,9 +177,29 @@ public class FachadaAplicacion {
         return gpac.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
     
+    //Permite recuperar las enfermedades no padecidas por el paciente
+    public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
+        return gpac.obtenerEnfermedadesNoPadecidas(cip, enfermedad);
+    }
+    
+    //Permite recuperar las enfermedades padecidas por el paciente
+    public java.util.List<String> obtenerEnfermedadesPadecidas(String cip, String enfermedad) {
+        return gpac.obtenerEnfermedadesPadecidas(cip, enfermedad);
+    }
+    
     //Permite generar una ventana para visualizar información de un paciente
     public void nuevaVPacientes(){
         gpac.nuevaVPacientes();
+    }
+
+    //Permite actualizar las enfermedades de un paciente de la base de datos
+    public void actualizarEnfermedadesPaciente(String cip, java.util.List<String> enfermedades) {
+        gpac.actualizarEnfermedadesPaciente(cip, enfermedades);
+    }
+    
+    //Permite generar una nueva ventana de gestión de enfermedades de un paciente
+    public void nuevaVGestionEnfermedades(String cip){
+        gpac.nuevaVGestionEnfermedades(cip, this.obtenerEnfermedadesNoPadecidas(cip, null), this.obtenerEnfermedadesPadecidas(cip, null));
     }
 
 /////////////////////////

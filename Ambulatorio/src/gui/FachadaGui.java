@@ -113,11 +113,11 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para visualizar la gestión de enfermedades de un paciente
-    public void nuevaVGestionarEnfermedades() {
+    public void nuevaVGestionEnfermedades(String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
         //Declaramos variables
-        VGestionarEnfermedades vGE;
+        VGestionEnfermedades vGE;
         //Generamos la ventana
-        vGE = new VGestionarEnfermedades(vp, true, fa);
+        vGE = new VGestionEnfermedades(vp, true, fa, cip, enfermedades, restoEnfermedades);
         //Hacemos visible la ventana
         vGE.setVisible(true);
     }

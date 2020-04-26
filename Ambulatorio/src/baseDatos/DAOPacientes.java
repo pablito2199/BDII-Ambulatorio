@@ -376,4 +376,131 @@ public class DAOPacientes extends AbstractDAO {
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
     }
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    //Autor siguientes métodos: Pablo Tarrío Otero
+    
+        
+    //Permite recuperar las enfermedades no padecidas por el paciente
+    public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
+        java.util.List<String> resultado = new java.util.ArrayList<>();
+        String enfermedadActual;
+        Connection con;
+        PreparedStatement stmEnfermedades = null;
+        ResultSet rsEnfermedades;
+
+        con = super.getConexion();
+
+        try {
+            stmEnfermedades = con.prepareStatement("select nombre "
+                    + "from enfermedad e "
+                    + "where not exists (select * "
+                    + "		  from tenerenfermedad el "
+                    + "		  where el.paciente = ? and el.enfermedad = e.nombre and e.nombre like ?)");
+            stmEnfermedades.setString(1, cip); //CIP
+            stmEnfermedades.setString(2, "%" + enfermedad + "%"); //Enfermedad
+            rsEnfermedades = stmEnfermedades.executeQuery();
+            while (rsEnfermedades.next()) {
+                enfermedadActual = rsEnfermedades.getString("nombre");
+                resultado.add(enfermedadActual);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEnfermedades.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    //Permite recuperar las enfermedades padecidas por el paciente
+    public java.util.List<String> obtenerEnfermedadesPadecidas(String cip, String enfermedad) {
+        java.util.List<String> resultado = new java.util.ArrayList<>();
+        String enfermedadActual;
+        Connection con;
+        PreparedStatement stmEnfermedades = null;
+        ResultSet rsEnfermedades;
+
+        con = super.getConexion();
+
+        try {
+            stmEnfermedades = con.prepareStatement("select enfermedad "
+                    + "from tenerenfermedad "
+                    + "where paciente = ? and enfermedad like ?");
+            stmEnfermedades.setString(1, cip); //CIP
+            stmEnfermedades.setString(2, "%" + enfermedad + "%"); //Enfermedad
+            rsEnfermedades = stmEnfermedades.executeQuery();
+            while (rsEnfermedades.next()) {
+                enfermedadActual = rsEnfermedades.getString("enfermedad");
+                resultado.add(enfermedadActual);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEnfermedades.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+
+    
+    //Permite actualizar las enfermedades de un paciente de la base de datos
+    public void actualizarEnfermedadesPaciente(String cip, java.util.List<String> enfermedades) {
+        Connection con;
+        PreparedStatement stmBorrado = null;
+        PreparedStatement stmInsercion = null;
+
+        con = super.getConexion();
+
+        try {
+            stmBorrado = con.prepareStatement("delete from tenerenfermedad where paciente = ?");
+            stmBorrado.setString(1, cip);
+            stmBorrado.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBorrado.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        try {
+            stmInsercion = con.prepareStatement("insert into tenerenfermedad(enfermedad, paciente) values (?,?)");
+            for (String e : enfermedades) {
+                stmInsercion.setString(1, e);
+                stmInsercion.setString(2, cip);
+                stmInsercion.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBorrado.close();
+                stmInsercion.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
 }

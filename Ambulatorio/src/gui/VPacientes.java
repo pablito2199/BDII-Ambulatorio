@@ -627,17 +627,8 @@ public class VPacientes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNuevaUrgenciaActionPerformed
 
     private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
-        if (varCIP.getText().isEmpty()) {
-            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
-            //Desactivamos los botones
-            btnEnfermedades.setEnabled(false);
-            btnNuevaUrgencia.setEnabled(false);
-            btnSolicitarCita.setEnabled(false);
-            btnCitasPendientes.setEnabled(false);
-            btnHistorialClinico.setEnabled(false);
-            btnHistorialRecetas.setEnabled(false);
-            return;
-        }
+        ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
+        fa.nuevaVGestionEnfermedades(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
     }//GEN-LAST:event_btnEnfermedadesActionPerformed
 
     private void btnSolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCitaActionPerformed

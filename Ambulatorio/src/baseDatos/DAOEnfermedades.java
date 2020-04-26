@@ -135,7 +135,7 @@ public class DAOEnfermedades extends AbstractDAO {
         java.util.List<Enfermedad> resultado = new java.util.ArrayList<Enfermedad>();
         Enfermedad enfermedadActual;
         Connection con;
-        PreparedStatement stmEnfermedads = null;
+        PreparedStatement stmEnfermedades = null;
         ResultSet rsEnfermedad;
 
         //Establecemos conexión
@@ -150,11 +150,11 @@ public class DAOEnfermedades extends AbstractDAO {
                     + "where nombre like ? ";
 
             //Preparamos la consulta
-            stmEnfermedads = con.prepareStatement(consulta);
+            stmEnfermedades = con.prepareStatement(consulta);
             //Sustituimos
-            stmEnfermedads.setString(1, "%" + nombre + "%"); //Nombre
+            stmEnfermedades.setString(1, "%" + nombre + "%"); //Nombre
             //Ejecutamos
-            rsEnfermedad = stmEnfermedads.executeQuery();
+            rsEnfermedad = stmEnfermedades.executeQuery();
             //Mientras haya coincidencias
             while (rsEnfermedad.next()) {
                 //Se crea una instancia de enfermedad con los datos recuperados de la base de datos
@@ -171,7 +171,7 @@ public class DAOEnfermedades extends AbstractDAO {
         } finally {
             //Finalmente se intentan cerrar cursores
             try {
-                stmEnfermedads.close();
+                stmEnfermedades.close();
             } catch (SQLException e) {
                 //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
