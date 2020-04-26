@@ -30,6 +30,12 @@ public class Urgencia extends Cita {
         this.prioridad = prioridad;
     }
 
+    public Urgencia(Float soborno, Integer gravedad, Timestamp fechaHoraInicio, String paciente, Integer consulta, Integer ambulatorio) {
+        super(fechaHoraInicio, paciente, consulta, ambulatorio, "Urgencia", "General");
+        this.soborno = soborno;
+        this.gravedad = gravedad;
+    }
+
     //Getters y Setters
     public Float getSoborno() {
         return soborno;
