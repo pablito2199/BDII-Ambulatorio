@@ -292,7 +292,7 @@ public class VConsultas extends javax.swing.JDialog {
         if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()) > 1) {
             fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         } else {
-            fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
+            fa.muestraExcepcion("¡¡No puedes eliminar esta consulta, es la única de la especialidad!!");
         }
                 
         textoNumeroConsulta.setText(null);
