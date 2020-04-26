@@ -186,15 +186,15 @@ public class FachadaAplicacion {
     public java.util.List<String> obtenerEnfermedadesPadecidas(String cip, String enfermedad) {
         return gpac.obtenerEnfermedadesPadecidas(cip, enfermedad);
     }
-    
-    //Permite generar una ventana para visualizar información de un paciente
-    public void nuevaVPacientes(){
-        gpac.nuevaVPacientes();
-    }
 
     //Permite actualizar las enfermedades de un paciente de la base de datos
     public void actualizarEnfermedadesPaciente(String cip, java.util.List<String> enfermedades) {
         gpac.actualizarEnfermedadesPaciente(cip, enfermedades);
+    }
+    
+    //Permite generar una ventana para visualizar información de un paciente
+    public void nuevaVPacientes(){
+        gpac.nuevaVPacientes();
     }
     
     //Permite generar una nueva ventana de gestión de enfermedades de un paciente
