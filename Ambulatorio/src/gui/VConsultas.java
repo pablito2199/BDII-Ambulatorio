@@ -288,13 +288,13 @@ public class VConsultas extends javax.swing.JDialog {
         // TODO add your handling code here:
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         Integer numero = m.getElementAt(lstConsultas.getSelectedIndex());
-        
+
         if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()) > 1) {
             fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         } else {
             fa.muestraExcepcion("¡¡No puedes eliminar esta consulta, es la única de la especialidad!!");
         }
-                
+
         textoNumeroConsulta.setText(null);
         seleccionEspecialidades.setSelectedItem(0);
         buscarConsultas();

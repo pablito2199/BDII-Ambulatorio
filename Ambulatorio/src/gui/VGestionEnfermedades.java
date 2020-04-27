@@ -289,7 +289,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     private javax.swing.JList lstRestoEnfermedades;
     private javax.swing.JTextField textoNombre;
     // End of variables declaration//GEN-END:variables
-        
+
     //busca las enfermedades no padecidas en la lista
     public void buscarEnfermedadesNoPadecidas(String enfermedad) {
         java.util.List<String> enfermedadesNoPadecidas;
@@ -310,7 +310,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
             btnIzquierda.setEnabled(false);
         }
     }
-    
+
     //busca las enfermedades no padecidas en la lista
     public void buscarEnfermedadesPadecidas(String enfermedad) {
         java.util.List<String> enfermedadesPadecidas;

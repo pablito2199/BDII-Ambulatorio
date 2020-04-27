@@ -23,9 +23,9 @@ public class GestionAdministradores {
     public Boolean comprobarAutentificacion(String dni, String clave) {
         return fbd.validarAdministrador(dni, clave);
     }
-    
+
     //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal(){
+    public void nuevaVPersonal() {
         fgui.nuevaVPersonal();
     }
 }

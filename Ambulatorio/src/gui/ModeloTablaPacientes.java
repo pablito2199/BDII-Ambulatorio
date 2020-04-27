@@ -49,7 +49,7 @@ public class ModeloTablaPacientes extends AbstractTableModel {
             case 4:
                 nombre = "Sexo";
                 break;
-           //La sexta y última el grupo sanguíneo
+            //La sexta y última el grupo sanguíneo
             case 5:
                 nombre = "GS";
                 break;

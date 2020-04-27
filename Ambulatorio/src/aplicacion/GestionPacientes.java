@@ -40,17 +40,17 @@ public class GestionPacientes {
     public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         return fbd.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
-    
+
     //Permite saber si existe un paciente en la base de datos con el mismo identificador o no
     public boolean existePaciente(String CIP) {
         return fbd.existePaciente(CIP);
     }
-    
+
     //Permite recuperar las enfermedades no padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
         return fbd.obtenerEnfermedadesNoPadecidas(cip, enfermedad);
     }
-    
+
     //Permite recuperar las enfermedades padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesPadecidas(String cip, String enfermedad) {
         return fbd.obtenerEnfermedadesPadecidas(cip, enfermedad);
@@ -60,14 +60,14 @@ public class GestionPacientes {
     public void actualizarEnfermedadesPaciente(String cip, java.util.List<String> enfermedades) {
         fbd.actualizarEnfermedadesPaciente(cip, enfermedades);
     }
-    
+
     //Permite generar una ventana para visualizar información de un paciente
-    public void nuevaVPacientes(){
+    public void nuevaVPacientes() {
         fgui.nuevaVPacientes();
     }
-    
+
     //Permite generar una nueva ventana de gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades){
+    public void nuevaVGestionEnfermedades(String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
         fgui.nuevaVGestionEnfermedades(cip, enfermedades, restoEnfermedades);
     }
 }

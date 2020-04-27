@@ -92,9 +92,9 @@ public class DAOConsultas extends AbstractDAO {
             }
         }
     }
-    
+
     //Transaccion que dado un ambulatorio te devuelva la consulta de urgencias del mismo que menos pacientes tiene en espera (fechaHoraFin is null)
-    public Consulta menorNumeroPacientes (Integer ambulatorio) {
+    public Consulta menorNumeroPacientes(Integer ambulatorio) {
         //Declaramos variables
         Consulta menorNumero = new Consulta();
         Connection con;
@@ -112,9 +112,9 @@ public class DAOConsultas extends AbstractDAO {
             String consulta = "select c1.identificador, c1.ambulatorio, c1.especialidad "
                     + "from consulta as c1, urgencia as u "
                     + "where c1.ambulatorio = u.ambulatorio "
-                    +     "and c1.identificador = u.consulta "
-                    +     "and c1.ambulatorio = ? "
-                    +     "and c1.especialidad = 'General' "
+                    + "and c1.identificador = u.consulta "
+                    + "and c1.ambulatorio = ? "
+                    + "and c1.especialidad = 'General' "
                     + "having count() < count() "
                     + "group by c1.identificador, c1.ambulatorio, c1.especialidad";
 
@@ -168,8 +168,8 @@ public class DAOConsultas extends AbstractDAO {
             String consulta = "select identificador, ambulatorio, especialidad "
                     + "from consulta "
                     + "where identificador = ? "
-                        + " and ambulatorio = ? "
-                        + "and especialidad = ?";
+                    + " and ambulatorio = ? "
+                    + "and especialidad = ?";
 
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
@@ -219,9 +219,9 @@ public class DAOConsultas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select COUNT(distinct identificador) from consulta as consultas " 
-                    + "where ambulatorio = ? " 
-                    + "and especialidad like ? " 
+            String consulta = "select COUNT(distinct identificador) from consulta as consultas "
+                    + "where ambulatorio = ? "
+                    + "and especialidad like ? "
                     + "group by ambulatorio";
             //Preparamos la consulta
             stmAmbulatorios = con.prepareStatement(consulta);

@@ -12,7 +12,7 @@ public class Consulta {
         this.ambulatorio = null;
         this.especialidad = null;
     }
-    
+
     public Consulta(Integer identificador, Integer ambulatorio, String especialidad) {
         this.identificador = identificador;
         this.ambulatorio = ambulatorio;

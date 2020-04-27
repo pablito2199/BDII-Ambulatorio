@@ -69,29 +69,29 @@ public class GestionCitas {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return fbd.citasMedico(medico);
     }
-    
+
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente){
+    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente) {
         fgui.nuevaVReservarCita(ambulatorio, paciente);
     }
-    
+
     //Permite generar una ventana para escoger un hospital al que derivar la cita o urgencia
-    public void nuevaVDerivarHospital(Cita cita){
+    public void nuevaVDerivarHospital(Cita cita) {
         fgui.nuevaVDerivarHospital(cita);
     }
-    
+
     //Permite generar una ventana para insertar una nueva urgencia del paciente
-    public void nuevaVUrgencias(Paciente paciente){
+    public void nuevaVUrgencias(Paciente paciente) {
         fgui.nuevaVUrgencias(paciente);
     }
-    
+
     //Permite generar una ventana para consultar la lista de urgencias pendientes por antender
-    public void nuevaVSalaUrgencias(Ambulatorio ambulatorio){
+    public void nuevaVSalaUrgencias(Ambulatorio ambulatorio) {
         fgui.nuevaVSalaUrgencias(ambulatorio);
     }
-    
+
     //Permite generar una ventana para escoger un paciente al que consultar sus citas pendientes
-    public void nuevaVCitasPendientes(Paciente paciente){
+    public void nuevaVCitasPendientes(Paciente paciente) {
         fgui.nuevaVCitasPendientes(paciente);
     }
 }

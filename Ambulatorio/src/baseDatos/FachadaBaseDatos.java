@@ -88,10 +88,10 @@ public class FachadaBaseDatos {
     }
 
     //Permite consultar los ambulatorios de la red
-     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia){
-         return daoAmbulatorios.consultarAmbulatorios(nombre, codigo, Provincia);
-     }   
-    
+    public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia) {
+        return daoAmbulatorios.consultarAmbulatorios(nombre, codigo, Provincia);
+    }
+
 ///////////////
 //DAOCITAS
 ///////////////
@@ -162,17 +162,17 @@ public class FachadaBaseDatos {
     public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         return daoPacientes.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
-    
+
     //Permite saber si existe un paciente en la base de datos con el mismo identificador o no
     public boolean existePaciente(String CIP) {
         return daoPacientes.existePaciente(CIP);
     }
-    
+
     //Permite recuperar las enfermedades no padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
         return daoPacientes.obtenerEnfermedadesNoPadecidas(cip, enfermedad);
     }
-    
+
     //Permite recuperar las enfermedades padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesPadecidas(String cip, String enfermedad) {
         return daoPacientes.obtenerEnfermedadesPadecidas(cip, enfermedad);
@@ -182,7 +182,6 @@ public class FachadaBaseDatos {
     public void actualizarEnfermedadesPaciente(String cip, java.util.List<String> enfermedades) {
         daoPacientes.actualizarEnfermedadesPaciente(cip, enfermedades);
     }
-
 
 //////////////////
 //DAOENFERMEDADES
@@ -224,7 +223,7 @@ public class FachadaBaseDatos {
     public void borrarConsulta(Integer identificador, Integer ambulatorio, String especialidad) {
         daoConsultas.borrarConsulta(identificador, ambulatorio, especialidad);
     }
-     
+
     //Devuelve el número de consultas de un ambulatorio
     public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
         return daoConsultas.numeroConsultas(ambulatorio, especialidad);

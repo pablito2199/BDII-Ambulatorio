@@ -47,9 +47,9 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e) {
         fgui.muestraExcepcion(e);
     }
-    
+
     //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal(){
+    public void nuevaVPersonal() {
         gadm.nuevaVPersonal();
     }
 
@@ -75,7 +75,7 @@ public class FachadaAplicacion {
     public java.util.List<Ambulatorio> obtenerAmbulatorios(String nombre, Integer codigo, String Provincia) {
         return gamb.consultarAmbulatorios(nombre, codigo, Provincia);
     }
-    
+
 /////////////////////////
 //GESTIÓN DE CITAS
 /////////////////////////
@@ -118,29 +118,29 @@ public class FachadaAplicacion {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return gcit.citasMedico(medico);
     }
-    
+
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente){
+    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente) {
         gcit.nuevaVReservarCita(ambulatorio, paciente);
     }
-    
+
     //Permite generar una ventana para escoger un hospital al que derivar la cita o urgencia
-    public void nuevaVDerivarHospital(Cita cita){
+    public void nuevaVDerivarHospital(Cita cita) {
         gcit.nuevaVDerivarHospital(cita);
     }
-    
+
     //Permite generar una ventana para insertar una nueva urgencia del paciente
-    public void nuevaVUrgencias(Paciente paciente){
+    public void nuevaVUrgencias(Paciente paciente) {
         gcit.nuevaVUrgencias(paciente);
     }
-    
+
     //Permite generar una ventana para consultar la lista de urgencias pendientes por antender
-    public void nuevaVSalaUrgencias(Ambulatorio ambulatorio){
+    public void nuevaVSalaUrgencias(Ambulatorio ambulatorio) {
         gcit.nuevaVSalaUrgencias(ambulatorio);
     }
-    
+
     //Permite generar una ventana para escoger un paciente al que consultar sus citas pendientes
-    public void nuevaVCitasPendientes(Paciente paciente){
+    public void nuevaVCitasPendientes(Paciente paciente) {
         gcit.nuevaVCitasPendientes(paciente);
     }
 
@@ -171,17 +171,17 @@ public class FachadaAplicacion {
     public boolean existePaciente(String CIP) {
         return gpac.existePaciente(CIP);
     }
-    
+
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
         return gpac.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
-    
+
     //Permite recuperar las enfermedades no padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
         return gpac.obtenerEnfermedadesNoPadecidas(cip, enfermedad);
     }
-    
+
     //Permite recuperar las enfermedades padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesPadecidas(String cip, String enfermedad) {
         return gpac.obtenerEnfermedadesPadecidas(cip, enfermedad);
@@ -191,14 +191,14 @@ public class FachadaAplicacion {
     public void actualizarEnfermedadesPaciente(String cip, java.util.List<String> enfermedades) {
         gpac.actualizarEnfermedadesPaciente(cip, enfermedades);
     }
-    
+
     //Permite generar una ventana para visualizar información de un paciente
-    public void nuevaVPacientes(){
+    public void nuevaVPacientes() {
         gpac.nuevaVPacientes();
     }
-    
+
     //Permite generar una nueva ventana de gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(String cip){
+    public void nuevaVGestionEnfermedades(String cip) {
         gpac.nuevaVGestionEnfermedades(cip, this.obtenerEnfermedadesNoPadecidas(cip, null), this.obtenerEnfermedadesPadecidas(cip, null));
     }
 
@@ -224,9 +224,9 @@ public class FachadaAplicacion {
     public void borrarEnfermedad(String nombre) {
         genf.borrarEnfermedad(nombre);
     }
-    
+
     //Permite crear una nueva ventana de enfermedades
-    public void nuevaVEnfermedades(){
+    public void nuevaVEnfermedades() {
         java.util.ArrayList<String> enfermedades = new java.util.ArrayList<>();
         for (Enfermedad e : this.consultarEnfermedades(null)) {
             enfermedades.add(e.getNombre());
@@ -256,9 +256,9 @@ public class FachadaAplicacion {
     public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
         return gcon.numeroConsultas(ambulatorio, especialidad);
     }
-    
+
     //Permite crear una nueva ventana de consultas
-    public void nuevaVConsultas(Integer ambulatorio){
+    public void nuevaVConsultas(Integer ambulatorio) {
         java.util.ArrayList<Integer> consultas = new java.util.ArrayList<>();
         for (Consulta c : this.consultarConsultas(null, ambulatorio, null)) {
             consultas.add(c.getIdentificador());

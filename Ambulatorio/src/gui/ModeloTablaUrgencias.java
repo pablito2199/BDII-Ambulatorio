@@ -118,14 +118,14 @@ public class ModeloTablaUrgencias extends AbstractTableModel {
 
     //Permite recuperar la primera urgencia
     public Urgencia obtenerUrgencia() {
-        
+
         //Obtenemos urgencia
         Urgencia u = this.urgencias.get(0);
-        
+
         //Eliminamos urgencia y actualizamos
         this.urgencias.remove(u);
         fireTableDataChanged();
-        
+
         return u;
     }
 

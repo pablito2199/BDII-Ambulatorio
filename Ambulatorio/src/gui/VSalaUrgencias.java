@@ -21,7 +21,7 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         initComponents();
         padre = (VPrincipal) parent;
         this.ambulatorio = ambulatorio;
-        
+
         //Obtenemos urgencias actuales de la sala de espera
         ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
         tu.setFilas(fa.urgenciasPendientes(ambulatorio));
@@ -132,7 +132,7 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
         //Atendemos la urgencia
         fa.atenderCita(tu.obtenerUrgencia());
-        
+
         //Contamos urgencias
         labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
 
@@ -148,19 +148,19 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
     private void btnDerivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerivarActionPerformed
         // TODO add your handling code here:
-        
+
         //Obtenemos modelo
         ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
 
         //Quitamos urgencia
         Urgencia u = tu.obtenerUrgencia();
-        
+
         //Contamos urgencias
         labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
-        
+
         //Derivamos la urgencia
         fa.nuevaVDerivarHospital(u);
-        
+
     }//GEN-LAST:event_btnDerivarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

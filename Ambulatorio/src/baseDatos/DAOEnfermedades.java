@@ -128,7 +128,6 @@ public class DAOEnfermedades extends AbstractDAO {
         }
     }
 
-    
     //Permite consultar las enfermedades existentes en la base de datos
     public java.util.List<Enfermedad> consultarEnfermedades(String nombre) {
         //Declaramos variables

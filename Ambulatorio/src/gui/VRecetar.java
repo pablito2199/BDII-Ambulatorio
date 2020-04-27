@@ -12,7 +12,7 @@ public class VRecetar extends javax.swing.JDialog {
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
     private final Cita cita;
     private final String medicamento;
-    
+
     /**
      * Creates new form VPaciente
      *
@@ -252,10 +252,14 @@ public class VRecetar extends javax.swing.JDialog {
 
     //Función que permite guardar el usuario en la base de datos
     private void btnRecetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetarActionPerformed
-        
 
         //Comprobarmos que no haya ningún campo obligatorio sin cubrir
-        if (varFechaFin.getText().isEmpty() || varFechaInicio.getText().isEmpty() || varDescripcion.getText().isEmpty() || FALTA MEDICAMENTO) {
+        if (varFechaFin.getText().isEmpty() || varFechaInicio.getText().isEmpty() || varDescripcion.getText().isEmpty() || FALTA 
+            
+            MEDICAMENTO
+        
+        
+            ) {
             //Si lo hay activamos el aviso
             fa.muestraExcepcion("Necesitas rellenar todos los campos antes de poder actualizar");
             //Regresamos
@@ -263,8 +267,8 @@ public class VRecetar extends javax.swing.JDialog {
         }
         //Instanciamos la receta
         Receta r = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(),
-                    Date.valueOf(varFechaFin.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()),
-                    varFechaInicio.getText(), varMedicamento.getText(), varTelefono.getText());
+                Date.valueOf(varFechaFin.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()),
+                varFechaInicio.getText(), varMedicamento.getText(), varTelefono.getText());
         fa.insertarPaciente(p);
         //Finalmente buscamos otra vez pacientes
         this.dispose();

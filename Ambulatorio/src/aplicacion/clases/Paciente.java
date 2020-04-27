@@ -6,7 +6,7 @@ public class Paciente {
 
     private String CIP;
     private String DNI;
-    private Integer NSS;  
+    private Integer NSS;
     private String nombre;
     private Date fechaNacimiento;
     private String sexo;
@@ -17,12 +17,11 @@ public class Paciente {
     private Integer edad;
     private Rango rango;
 
-    
     //Constructor solo para borrado
     public Paciente(String CIP) {
         this.CIP = CIP;
     }
-     
+
     //Constructores
     public Paciente(String CIP, String DNI, Integer NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono) {
         this.CIP = CIP;

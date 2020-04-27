@@ -345,26 +345,26 @@ public class VPersonal extends javax.swing.JDialog {
 
     //Botón Limpiar, pone todos los campos de texto en blanco
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        textoAntiguedad.setText(null);                                  
-        textoClase.setText(null);                                  
-        textoContrasena.setText(null);                                  
-        textoFechaIncorporacion.setText(null);                                  
-        textoNombre.setText(null);                                  
-        textoDNI.setText(null);                                  
-        textoTelefono.setText(null);                                  
-        textoSueldo.setText(null);     
+        textoAntiguedad.setText(null);
+        textoClase.setText(null);
+        textoContrasena.setText(null);
+        textoFechaIncorporacion.setText(null);
+        textoNombre.setText(null);
+        textoDNI.setText(null);
+        textoTelefono.setText(null);
+        textoSueldo.setText(null);
         btnAdmin.setEnabled(false);
         btnSanitario.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Botón Buscar, busca el personal del ambulatorio
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     //Función que permite recoger los datos de un trabajador con un click en la tabla de personal
     private void tablaPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPersonalMouseClicked
-        
+
     }//GEN-LAST:event_tablaPersonalMouseClicked
 
     //Botón Citas, abre la ventana de citas del médico

@@ -9,6 +9,7 @@ import aplicacion.clases.GrupoSanguineo;
 import aplicacion.clases.Rango;
 import aplicacion.clases.Cita;
 import aplicacion.clases.TipoCita;
+
 /* 
  * @author Ainhoa Vivel Couso
  */
@@ -163,10 +164,9 @@ public class DAOPacientes extends AbstractDAO {
         Connection con;
         PreparedStatement stmPacientes = null;
         ResultSet rsPacientes;
-       
+
         //Establecemos conexión
         con = this.getConexion();
-       
 
         //Intentamos la consulta SQL 
         try {
@@ -174,20 +174,17 @@ public class DAOPacientes extends AbstractDAO {
             String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad, "
                     + "sexo, grupoSanguineo, nacionalidad, direccion, telefono "
                     + "from paciente "
-                    
-                    + "natural JOIN "   //Unimos resultados
-                    + "(select distinct cip, SUM(distinct soborno) as totalSobornado, COUNT(distinct soborno) as numSobornos, " 
+                    + "natural JOIN " //Unimos resultados
+                    + "(select distinct cip, SUM(distinct soborno) as totalSobornado, COUNT(distinct soborno) as numSobornos, "
                     //Calculamos el rango
-                    + "CASE " 
-                    + "WHEN SUM(distinct soborno)>500 THEN 'deluxe' " 
-                    + "WHEN COUNT(distinct cip)>5 and SUM(distinct soborno)>=50  THEN 'premium' " 
-                    + "ELSE 'base' " 
-                    + "END  as rango " 
-                    
-                    + "from paciente full outer JOIN urgencia ON paciente=cip " 
-                    + "group by cip " 
-                    + "order by cip, totalSobornado DESC) as rango " 
-                    
+                    + "CASE "
+                    + "WHEN SUM(distinct soborno)>500 THEN 'deluxe' "
+                    + "WHEN COUNT(distinct cip)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
+                    + "ELSE 'base' "
+                    + "END  as rango "
+                    + "from paciente full outer JOIN urgencia ON paciente=cip "
+                    + "group by cip "
+                    + "order by cip, totalSobornado DESC) as rango "
                     //Criterios de la búsqueda
                     + "where cip like ? "
                     + "and dni like ?"
@@ -201,7 +198,7 @@ public class DAOPacientes extends AbstractDAO {
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
             stmPacientes.setString(1, "%" + CIP + "%");
-            stmPacientes.setString(2, "%" + DNI+ "%");
+            stmPacientes.setString(2, "%" + DNI + "%");
             stmPacientes.setString(3, "%" + nombre + "%");
             stmPacientes.setInt(4, edad);
             stmPacientes.setString(5, "%" + sexo + "%");
@@ -245,7 +242,7 @@ public class DAOPacientes extends AbstractDAO {
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
     }
-   
+
     //Permite saber si existe un paciente en la base de datos con el mismo identificador o no
     public boolean existePaciente(String CIP) {
         //Declaramos variables
@@ -253,23 +250,23 @@ public class DAOPacientes extends AbstractDAO {
         Connection con;
         PreparedStatement stmPacientes = null;
         ResultSet rsPacientes;
-       
+
         //Establecemos conexión
         con = this.getConexion();
-       
+
         //Intentamos la consulta SQL 
         try {
             //Construimos la consulta compleja que requiere de varias instrucciones sql
-            String consulta = "select case WHEN cip = ? THEN 'true' " 
-                    + "else 'false' " 
-                    + "end as existePaciente " 
-                    + "from paciente " 
+            String consulta = "select case WHEN cip = ? THEN 'true' "
+                    + "else 'false' "
+                    + "end as existePaciente "
+                    + "from paciente "
                     + "where cip = ?";
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
             stmPacientes.setString(1, "%" + CIP + "%");
-            stmPacientes.setString(2, "%" + CIP+ "%");
+            stmPacientes.setString(2, "%" + CIP + "%");
 
             //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
@@ -376,19 +373,19 @@ public class DAOPacientes extends AbstractDAO {
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
     }
-    
-    
-    
-    
-    
-    
-    
 
-
-
+    
+    
+    
+    
+    
+    
+    
+    
     //Autor siguientes métodos: Pablo Tarrío Otero
     
-        
+
+
     //Permite recuperar las enfermedades no padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
         java.util.List<String> resultado = new java.util.ArrayList<>();
@@ -398,6 +395,14 @@ public class DAOPacientes extends AbstractDAO {
         ResultSet rsEnfermedades;
 
         con = super.getConexion();
+
+        //Impedimos que la confirmación sea automática
+        try {
+            con.setAutoCommit(false);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
 
         try {
             stmEnfermedades = con.prepareStatement("select nombre "
@@ -416,16 +421,32 @@ public class DAOPacientes extends AbstractDAO {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            try {
+                //Como ha fallado deshacemos
+                con.rollback();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+            }
         } finally {
+            //Finalmente se intentan cerrar cursores
             try {
                 stmEnfermedades.close();
             } catch (SQLException e) {
+                //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        try {
+            con.commit();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
+
         return resultado;
     }
-    
+
     //Permite recuperar las enfermedades padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesPadecidas(String cip, String enfermedad) {
         java.util.List<String> resultado = new java.util.ArrayList<>();
@@ -435,6 +456,14 @@ public class DAOPacientes extends AbstractDAO {
         ResultSet rsEnfermedades;
 
         con = super.getConexion();
+
+        //Impedimos que la confirmación sea automática
+        try {
+            con.setAutoCommit(false);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
 
         try {
             stmEnfermedades = con.prepareStatement("select enfermedad "
@@ -451,17 +480,32 @@ public class DAOPacientes extends AbstractDAO {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            try {
+                //Como ha fallado deshacemos
+                con.rollback();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+            }
         } finally {
+            //Finalmente se intentan cerrar cursores
             try {
                 stmEnfermedades.close();
             } catch (SQLException e) {
+                //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        try {
+            con.commit();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
+
         return resultado;
     }
 
-    
     //Permite actualizar las enfermedades de un paciente de la base de datos
     public void actualizarEnfermedadesPaciente(String cip, java.util.List<String> enfermedades) {
         Connection con;

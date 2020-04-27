@@ -48,6 +48,5 @@ public class ModeloListaIntegers extends javax.swing.AbstractListModel {
     public java.util.List<Integer> getElementos() {
         return this.elementos;
     }
-    
-    
+
 }

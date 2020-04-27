@@ -15,7 +15,7 @@ public class FachadaGui {
         //Se crea la ventana principal
         this.vp = new VPrincipal(fa);
     }
-    
+
     //Permite generar una ventana para visualizar información de un trabajador
     public void nuevaVPacientes() {
         //Declaramos variables

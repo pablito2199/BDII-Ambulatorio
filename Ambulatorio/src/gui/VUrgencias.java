@@ -200,16 +200,16 @@ public class VUrgencias extends javax.swing.JDialog {
 
     //Comprobacion de que los datos introducidos y escogidos son validos
     private boolean datosValidos() {
-        
+
         //Comprobamos si los campos de Soborno y Gravedad tienen valores no validos
         if (!(txtSoborno.getText().matches("\\d+\\.?\\d{1,2}") && txtGravedad.getText().matches("\\d|10"))) {
-            
+
             fa.muestraExcepcion("!Los campos de soborno y gravedad contienen valores no validos!");
             return false;
-        
-        //Comprobamos si se ha seleccionado un ambulatorio
+
+            //Comprobamos si se ha seleccionado un ambulatorio
         } else if (tablaAmbulatorios.getSelectedRow() < 0) {
-            
+
             fa.muestraExcepcion("!No se ha seleccionado un ambulatorio de la tabla!");
             return false;
         }
