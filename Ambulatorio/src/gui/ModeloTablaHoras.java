@@ -2,21 +2,29 @@ package gui;
 
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.Paciente;
+import aplicacion.clases.TipoCita;
 
+import java.sql.Date;
+import java.time.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.swing.table.*;
 
 public class ModeloTablaHoras extends AbstractTableModel {
 
     private FachadaAplicacion fa;
+    private Paciente pa;
     private java.util.List<Ambulatorio> ambulatorios; //Listado de ambulatorios de la tabla
     private java.util.List<Timestamp> horas; //Listado de horas disponibles
 
     //Constructor
-    public ModeloTablaHoras(FachadaAplicacion fa) {
+    public ModeloTablaHoras(FachadaAplicacion fa, Paciente pa) {
         this.fa = fa;
-        this.ambulatorios = new java.util.ArrayList<>();
+        this.pa = pa;
+        this.ambulatorios = new ArrayList<>();
+        this.horas = new ArrayList<>();
     }
 
     //Permite obtener el número de columnas
@@ -105,14 +113,34 @@ public class ModeloTablaHoras extends AbstractTableModel {
     }
 
     //Permite cambiar las filas de la tabla
-    public void setFilas(java.util.List<Ambulatorio> ambulatorios) {
-        this.ambulatorios = ambulatorios;
+    public void setFilas(java.util.List<Ambulatorio> ambulatorios, TipoCita tipo, Date inicio, Date fin) {
+
+        //Creamos array de horas posibles desde las 9 hasta las 17 
+        LocalTime t = LocalTime.of(9, 0);
+        ArrayList<LocalTime> a = new ArrayList<>();
+        
+        while (t.getHour() < 17) {
+            
+            a.add(t);
+            t.plusMinutes(30);
+        }
+
+        for (Ambulatorio a : ambulatorios) {
+            
+            ArrayList<Timestamp> ocupadas = fa.ci
+        }
+
         //Notifica a los listeners del cambio
         fireTableDataChanged();
     }
 
-    //Permite recuperar el libro de la tabla especificado
+    //Permite recuperar el ambulatorio especificado
     public Ambulatorio obtenerAmbulatorio(int i) {
         return this.ambulatorios.get(i);
+    }
+
+    //Permite recuperar el Timestamp especificado
+    public Timestamp obtenerFechaHora(int i) {
+        return this.horas.get(i);
     }
 }

@@ -1,14 +1,22 @@
 package gui;
 
+import aplicacion.FachadaAplicacion;
+import aplicacion.clases.Paciente;
+
 public class VReservarCita extends javax.swing.JDialog {
 
-    
+    private FachadaAplicacion fa;
+    private Paciente pa;
+
     /**
      * Creates new form VCitas
      */
-    public VReservarCita(java.awt.Frame parent, boolean modal) {
+    public VReservarCita(java.awt.Frame parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
         super(parent, modal);
+        this.fa = fa;
+        this.pa = pa;
         initComponents();
+
     }
 
     /**
@@ -34,7 +42,7 @@ public class VReservarCita extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable(new ModeloTablaHoras(fa));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,9 +69,9 @@ public class VReservarCita extends javax.swing.JDialog {
 
         labelHasta.setText("Hasta:");
 
-        ftxtDesde.setText("01/01/20 00:00");
+        ftxtDesde.setText("01/01/20");
 
-        ftxtHasta.setText("01/01/20 00:00");
+        ftxtHasta.setText("01/01/20");
 
         jLabel1.setText("Ambulatorio:");
 
@@ -111,8 +119,8 @@ public class VReservarCita extends javax.swing.JDialog {
                                     .addComponent(labelTipo))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ftxtDesde, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                                    .addComponent(ftxtHasta)
+                                    .addComponent(ftxtDesde)
+                                    .addComponent(ftxtHasta, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                                     .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap())
         );
@@ -168,4 +176,7 @@ public class VReservarCita extends javax.swing.JDialog {
     private javax.swing.JLabel labelTipo;
     private javax.swing.JTextField txtAmbulatorio;
     // End of variables declaration//GEN-END:variables
+
+    //Metodo para conseguir el listaje de horas posibles para las citas
+    private getHoras()
 }

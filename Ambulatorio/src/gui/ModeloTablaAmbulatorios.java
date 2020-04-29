@@ -117,7 +117,7 @@ public class ModeloTablaAmbulatorios extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    //Permite recuperar el libro de la tabla especificado
+    //Permite recuperar el ambulatorio especificado
     public Ambulatorio obtenerAmbulatorio(int i) {
         return this.ambulatorios.get(i);
     }
