@@ -18,6 +18,7 @@ import aplicacion.clases.Paciente;
 import aplicacion.clases.Rango;
 import aplicacion.clases.Hospital;
 import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.Consulta;
 import aplicacion.clases.PersonalSanitario;
 
 /**
@@ -377,9 +378,9 @@ public class DAOCitas extends AbstractDAO {
         }
     }
 
-    //Permite consultar las citas ocupadas entre dos fechas
+    //Permite consultar las citas ocupadas entre dos fechas en una consulta
     //La fecha minima siempre será el día posterior a la consulta
-    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, TipoCita tipocita, Date inicio, Date fin) {
+    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, Consulta consulta, Date inicio, Date fin) {
 
         //Declaramos variables
         Connection con;
@@ -408,14 +409,11 @@ public class DAOCitas extends AbstractDAO {
             //Preparamos la sentencia para recoger las citas
             stmCitas = con.prepareStatement(
                     "select fechaHoraInicio"
-                    + "from cita as ci, consulta as co, tipocita as t, especialidad as e "
+                    + "from cita as ci "
                     + "where ci.fechaHoraInicio > ? "
                     + "and ci.fechaHoraInicio < ? "
-                    + "and ci.consulta = co.identificador "
-                    + "and t.tipo = ? "
-                    + "and t.especialidad = e.nombre "
-                    + "and e.nombre = co.especialidad "
-                    + "and ci.ambulatorio = co.ambulatorio "
+                    + "and ci.fechaHoraFin is null"
+                    + "and ci.consulta = ? "
                     + "and co.ambulatorio = ? "
                     + "order by fechaHoraInicio asc"
             );
@@ -423,7 +421,7 @@ public class DAOCitas extends AbstractDAO {
             //Sustituimos
             stmCitas.setTimestamp(1, inicioTS);
             stmCitas.setTimestamp(2, finTS);
-            stmCitas.setString(3, tipocita.getNombre());
+            stmCitas.setInt(3, consulta.getIdentificador());
             stmCitas.setInt(4, ambulatorio.getCodigo());
 
             //Actualizamos
