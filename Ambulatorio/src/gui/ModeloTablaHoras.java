@@ -22,7 +22,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
     //Permite obtener el número de columnas
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     //Permite obtener el número de filas de la tabla
@@ -36,23 +36,18 @@ public class ModeloTablaHoras extends AbstractTableModel {
     public String getColumnName(int col) {
         String nombre = "";
         switch (col) {
-            //La primera es el código del ambulatorio
+            //La primera es el nombre del ambulatorio
             case 0:
-                nombre = "Código";
+                nombre = "Ambulatorio";
                 break;
-            //La segunda el nombre
+            //La segunda la fecha
             case 1:
-                nombre = "Nombre";
+                nombre = "Fecha";
                 break;
-            //La tercera la provincia
+            //La tercera la hora
             case 2:
-                nombre = "Provincia";
+                nombre = "Hora";
                 break;
-            //La cuarta el teléfono
-            case 3:
-                nombre = "Teléfono";
-                break;
-            //La quinta el año de publicación
         }
         //Regresamos el nombre de la columna correspondiente
         return nombre;
@@ -65,19 +60,15 @@ public class ModeloTablaHoras extends AbstractTableModel {
         switch (col) {
             //El código es un Integer
             case 0:
-                clase = java.lang.Integer.class;
+                clase = java.lang.String.class;
                 break;
             //El nombre es un String
             case 1:
-                clase = java.lang.String.class;
+                clase = java.time.LocalDate.class;
                 break;
             //La provincia es un String
             case 2:
-                clase = java.lang.String.class;
-                break;
-            //El teléfono es un String  
-            case 3:
-                clase = java.lang.String.class;
+                clase = java.time.LocalTime.class;
                 break;
         }
         //Regresamos la clase
@@ -88,7 +79,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int col) {
         //En este caso el nombre y el teléfono
-        return col == 1 && col == 3;
+        return false;
     }
 
     //Permite obtener el valor de la celda especificada
@@ -100,17 +91,13 @@ public class ModeloTablaHoras extends AbstractTableModel {
             case 0:
                 resultado = ambulatorios.get(row).getCodigo();
                 break;
-            //Recuperamos el nombre del ambulatorio
+            //Recuperamos la fecha
             case 1:
-                resultado = ambulatorios.get(row).getNombre();
+                resultado = horas.get(row).toLocalDateTime().toLocalDate();
                 break;
-            //Recuperamos la provincia del ambulatorio
+            //Recuperamos la hora
             case 2:
-                resultado = ambulatorios.get(row).getProvicia();
-                break;
-            //Recuperamos el teleéfono del ambulatorio
-            case 3:
-                resultado = ambulatorios.get(row).getTelefono();
+                resultado = horas.get(row).toLocalDateTime().toLocalTime();
                 break;
         }
         //Devolvemos el resultado
