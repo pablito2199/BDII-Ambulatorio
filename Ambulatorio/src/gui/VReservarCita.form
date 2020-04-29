@@ -75,9 +75,9 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ftxtDesde" max="32767" attributes="0"/>
-                                  <Component id="ftxtHasta" pref="198" max="32767" attributes="0"/>
-                                  <Component id="comboTipo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="comboTipo" max="32767" attributes="0"/>
+                                  <Component id="txtDesde" pref="198" max="32767" attributes="0"/>
+                                  <Component id="txtHasta" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -99,13 +99,13 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ftxtDesde" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelDesde" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDesde" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ftxtHasta" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelHasta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtHasta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -132,11 +132,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reservar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReservarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRegresar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Regresar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelTipo">
       <Properties>
@@ -164,16 +170,6 @@
         <Property name="text" type="java.lang.String" value="Hasta:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="ftxtDesde">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="01/01/20"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="ftxtHasta">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="01/01/20"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtAmbulatorio">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -185,6 +181,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
@@ -193,22 +192,30 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable2">
+        <Component class="javax.swing.JTable" name="tablaHoras">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-              </Table>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new ModeloTablaHoras(fa, pa)" type="code"/>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0"/>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(new ModeloTablaHoras(fa))"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JTextField" name="txtDesde">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="01/01/2020"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtHasta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="01/01/2020"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

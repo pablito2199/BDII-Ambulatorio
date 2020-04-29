@@ -1,12 +1,13 @@
 package gui;
 
+import aplicacion.clases.TipoCita;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
 
 public class ModeloComboTipoCita implements ComboBoxModel {
 
-    private ArrayList<String> tipos;
+    private ArrayList<TipoCita> tipos;
     private Integer selected;
 
     //Constructor
@@ -15,17 +16,17 @@ public class ModeloComboTipoCita implements ComboBoxModel {
         selected = null;
     }
 
-    ModeloComboTipoCita(ArrayList<String> tipos) {
+    ModeloComboTipoCita(ArrayList<TipoCita> tipos) {
         this.tipos = tipos;
         selected = null;
     }
 
     //Getters y Setters
-    void setTipos(ArrayList<String> tipos) {
+    void setTipos(ArrayList<TipoCita> tipos) {
         this.tipos = tipos;
     }
 
-    ArrayList<String> getTipos() {
+    ArrayList<TipoCita> getTipos() {
         return tipos;
     }
 
@@ -33,7 +34,7 @@ public class ModeloComboTipoCita implements ComboBoxModel {
     @Override
     public void setSelectedItem(Object o) {
         if (o instanceof String) {
-            selected = tipos.indexOf((String) o);
+            selected = tipos.indexOf((TipoCita) o);
         } else {
             selected = null;
         }
@@ -60,7 +61,7 @@ public class ModeloComboTipoCita implements ComboBoxModel {
     @Override
     public Object getElementAt(int i) {
         if (i < tipos.size() && tipos != null) {
-            return tipos.get(i);
+            return tipos.get(i).getNombre();
         } else {
             return null;
         }

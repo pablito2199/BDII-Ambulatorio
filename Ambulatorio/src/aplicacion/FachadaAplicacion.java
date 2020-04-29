@@ -100,8 +100,8 @@ public class FachadaAplicacion {
     }
 
     //Devuelve una lista de horas de las citas que el paciente no puede reservar
-    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, Paciente paciente, TipoCita tipocita, Date inicio, Date fin) {
-        return gcit.citasOcupadas(ambulatorio, paciente, tipocita, inicio, fin);
+    public ArrayList<Timestamp> citasOcupadas(Paciente paciente, Consulta consulta, Date inicio, Date fin) {
+        return gcit.citasOcupadas(paciente, consulta, inicio, fin);
     }
 
     //Lista de urgencias pendientes de atender
@@ -258,7 +258,7 @@ public class FachadaAplicacion {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, String tipoCita) {
+    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
         return gcon.menorNumeroPacientes(ambulatorio, tipoCita);
     }
 

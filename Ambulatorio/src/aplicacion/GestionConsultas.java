@@ -1,6 +1,7 @@
 package aplicacion;
 
 import aplicacion.clases.Consulta;
+import aplicacion.clases.TipoCita;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
@@ -35,7 +36,7 @@ public class GestionConsultas {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, String tipoCita) {
+    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
         return fbd.menorNumeroPacientes(ambulatorio, tipoCita);
     }
 

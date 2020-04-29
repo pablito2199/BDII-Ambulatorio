@@ -4,6 +4,7 @@ import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Hospital;
 import aplicacion.clases.Cita;
+import aplicacion.clases.Consulta;
 import aplicacion.clases.PersonalSanitario;
 import aplicacion.clases.Rango;
 import aplicacion.clases.Urgencia;
@@ -47,12 +48,12 @@ public class GestionCitas {
     }
 
     //Devuelve una lista de horas de las citas que el paciente no puede reservar
-    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, Paciente paciente, TipoCita tipocita, Date inicio, Date fin) {
+    public ArrayList<Timestamp> citasOcupadas(Paciente paciente, Consulta consulta, Date inicio, Date fin) {
 
         if (paciente.getRango() == Rango.DELUXE) {
             return new ArrayList<>();
         }
-        return fbd.citasOcupadas(ambulatorio, tipocita, inicio, fin);
+        return fbd.citasOcupadas(consulta, inicio, fin);
     }
 
     //Consulta las urgencias pendientes de atender

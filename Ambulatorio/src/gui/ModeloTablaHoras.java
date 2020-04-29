@@ -2,14 +2,15 @@ package gui;
 
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.Consulta;
 import aplicacion.clases.Paciente;
-import aplicacion.clases.Rango;
 import aplicacion.clases.TipoCita;
 
 import java.sql.Date;
 import java.time.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.table.*;
 
@@ -18,6 +19,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
     private FachadaAplicacion fa;
     private Paciente pa;
     private java.util.List<Ambulatorio> ambulatorios; //Listado de ambulatorios de la tabla
+    private HashMap<Ambulatorio, Consulta> consultas; //Listado de consultas con menos pacientes recogidas en la tabla
     private java.util.List<Timestamp> horas; //Listado de horas disponibles
 
     //Constructor
@@ -25,6 +27,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
         this.fa = fa;
         this.pa = pa;
         this.ambulatorios = new ArrayList<>();
+        this.consultas = new HashMap<>();
         this.horas = new ArrayList<>();
     }
 
@@ -114,15 +117,20 @@ public class ModeloTablaHoras extends AbstractTableModel {
     }
 
     //Permite cambiar las filas de la tabla
-    public void setFilas(java.util.List<Ambulatorio> ambulatorios, TipoCita tipo, Date inicio, Date fin) {
+    public void setFilas(java.util.List<Ambulatorio> ambulatorios, TipoCita tipocita, Date inicio, Date fin) {
 
+        //Vaciamos elementos
+        this.ambulatorios.clear();
+        this.consultas.clear();
+        this.horas.clear();
+        
         //Creamos array de horas posibles desde las 9 hasta las 17 
         LocalTime t = LocalTime.of(9, 0);
-        ArrayList<LocalTime> a = new ArrayList<>();
+        ArrayList<LocalTime> arr = new ArrayList<>();
 
         while (t.getHour() < 17) {
 
-            a.add(t);
+            arr.add(t);
             t.plusMinutes(30);
         }
 
@@ -130,16 +138,15 @@ public class ModeloTablaHoras extends AbstractTableModel {
         for (Ambulatorio ambulatorio : ambulatorios) {
 
             //Obtenemos citas no posibles para el paciente
-            if (pa.getRango() == Rango.DELUXE) {
-                ocupadas = fa.citasOcupadas(fa.menorNumeroPacientes(ambulatorio, tipo), inicio, fin);
-            } else {
-                ocupadas = new ArrayList<>();
-            }
+            consultas.put(ambulatorio, fa.menorNumeroPacientes(ambulatorio.getCodigo(), tipocita));
+            ocupadas = fa.citasOcupadas(pa, consultas.get(ambulatorio), inicio, fin);
 
             //Actualizamos lista de horas
             LocalDate actual = inicio.toLocalDate();
-            while (actual.compareTo(fin.toLocalDate()) != 0) {
-                for (LocalTime hora : a) {
+            while (!actual.isAfter(fin.toLocalDate())) {
+
+                //Añadimos Timestamp del dia y la hora si no esta ocupada
+                for (LocalTime hora : arr) {
 
                     Timestamp temp = Timestamp.valueOf(LocalDateTime.of(actual, hora));
                     if (!ocupadas.contains(temp)) {
@@ -165,5 +172,10 @@ public class ModeloTablaHoras extends AbstractTableModel {
     //Permite recuperar el Timestamp especificado
     public Timestamp obtenerFechaHora(int i) {
         return this.horas.get(i);
+    }
+    
+    //Permite recuperar la Consulta especificada
+    public Consulta obtenerConsulta(Ambulatorio ambulatorio) {
+        return this.consultas.get(ambulatorio);
     }
 }

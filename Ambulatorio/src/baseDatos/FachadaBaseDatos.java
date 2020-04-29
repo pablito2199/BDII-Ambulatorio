@@ -116,8 +116,8 @@ public class FachadaBaseDatos {
     }
 
     //Devuelve una lista de las horas de las citas reservadas entre dos fechas
-    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, TipoCita tipocita, Date inicio, Date fin) {
-        return daoCitas.citasOcupadas(ambulatorio, tipocita, inicio, fin);
+    public ArrayList<Timestamp> citasOcupadas(Consulta consulta, Date inicio, Date fin) {
+        return daoCitas.citasOcupadas(consulta, inicio, fin);
     }
 
     //Consulta las urgencias pendientes
@@ -230,7 +230,7 @@ public class FachadaBaseDatos {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, String tipoCita) {
+    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
         return daoConsultas.menorNumeroPacientes(ambulatorio, tipoCita);
     }
 

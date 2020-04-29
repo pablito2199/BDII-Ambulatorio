@@ -1,6 +1,7 @@
 package baseDatos;
 
 import aplicacion.clases.Consulta;
+import aplicacion.clases.TipoCita;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -201,7 +202,7 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, String tipoCita) {
+    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
         //Declaramos variables
         Consulta menorNumero = new Consulta();
         Connection con;
@@ -224,18 +225,20 @@ public class DAOConsultas extends AbstractDAO {
             //Construimos la consulta
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
-            String consulta = "select ci.consulta " +
-                              "from consulta as c1, cita as ci " +
-                              "where c1.ambulatorio = ci.ambulatorio " +
-                                    "and ci.ambulatorio = ? " + 
-                                    "and ci.tipo = ? " +
-                              "group by ci.consulta " +
-                              "having count(ci.consulta) <= any(select count(*) from consulta)";
+            String consulta = "select ci.consulta "
+                    + "from consulta as c1, cita as ci "
+                    + "where c1.ambulatorio = ci.ambulatorio "
+                    + "and ci.ambulatorio = ? "
+                    + "and ci.tipo = ? "
+                    + "and ci.especialidad = ? "
+                    + "group by ci.consulta "
+                    + "having count(ci.consulta) <= any(select count(*) from consulta)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
             stmConsultas.setInt(1, ambulatorio); //Ambulatorio
-            stmConsultas.setString(2, tipoCita); //Ambulatorio
+            stmConsultas.setString(2, tipoCita.getNombre()); //TipoCita
+            stmConsultas.setString(3, tipoCita.getEspecialidad()); //Especialidad
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias

@@ -157,11 +157,11 @@ public class VUrgencias extends javax.swing.JDialog {
 
             //Añadimos la urgencia
             Urgencia u = new Urgencia(
-                    txtSoborno.getText(),
-                    txtGravedad.getText(),
+                    Float.parseFloat(txtSoborno.getText()),
+                    Integer.parseInt(txtGravedad.getText()),
                     Timestamp.valueOf(LocalDateTime.now()),
                     paciente.getCIP(),
-                    fa.menorNumeroPacientes(a.getCodigo(), "Urgencia"),
+                    fa.menorNumeroPacientes(a.getCodigo(), "Urgencia").getIdentificador(),
                     a.getCodigo());
 
             fa.insertarUrgencia(u);
