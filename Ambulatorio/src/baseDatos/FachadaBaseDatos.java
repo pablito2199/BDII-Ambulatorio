@@ -229,6 +229,11 @@ public class FachadaBaseDatos {
         return daoConsultas.numeroConsultas(ambulatorio, especialidad);
     }
 
+    //Permite obtener la consulta con menos citas pendientes
+    public Consulta menorNumeroPacientes(Integer ambulatorio, String tipoCita) {
+        return daoConsultas.menorNumeroPacientes(ambulatorio, tipoCita);
+    }
+
 ////////////////////
 //DAORECETAS
 ////////////////////

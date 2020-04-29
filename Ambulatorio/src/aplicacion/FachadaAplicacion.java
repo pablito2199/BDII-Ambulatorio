@@ -257,6 +257,11 @@ public class FachadaAplicacion {
         return gcon.numeroConsultas(ambulatorio, especialidad);
     }
 
+    //Permite obtener la consulta con menos citas pendientes
+    public Consulta menorNumeroPacientes(Integer ambulatorio, String tipoCita) {
+        return gcon.menorNumeroPacientes(ambulatorio, tipoCita);
+    }
+
     //Permite crear una nueva ventana de consultas
     public void nuevaVConsultas(Integer ambulatorio) {
         java.util.ArrayList<Integer> consultas = new java.util.ArrayList<>();

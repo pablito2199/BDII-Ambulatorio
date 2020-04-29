@@ -93,78 +93,6 @@ public class DAOConsultas extends AbstractDAO {
         }
     }
 
-    //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio) {
-        //Declaramos variables
-        Consulta menorNumero = new Consulta();
-        Connection con;
-        PreparedStatement stmConsultas = null;
-        ResultSet rsConsultas;
-
-        //Establecemos conexión
-        con = this.getConexion();
-
-        //Impedimos que la confirmación sea automática
-        try {
-            con.setAutoCommit(false);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }
-
-        //Intentamos la consulta SQL
-        try {
-            //Construimos la consulta
-            //Selecionamos el identificador, ambulatorio y especialdiad
-            //que tengan el ambulatorio dado
-            String consulta = "select ci.consulta " +
-                              "from consulta as c1, cita as ci " +
-                              "where c1.ambulatorio = ci.ambulatorio " +
-                                    "and ci.ambulatorio = ? " +
-                              "group by ci.consulta " +
-                              "having count(ci.consulta) <= any(select count(*) from consulta)";
-            //Preparamos la consulta
-            stmConsultas = con.prepareStatement(consulta);
-            //Sustituimos
-            stmConsultas.setInt(1, ambulatorio); //Ambulatorio
-            //Ejecutamos
-            rsConsultas = stmConsultas.executeQuery();
-            //Mientras haya coincidencias
-            while (rsConsultas.next()) {
-                //Se crea una instancia de consulta con los datos de la consulta con el menor número de pacientes de la base de datos
-                menorNumero = new Consulta(rsConsultas.getInt("identificador"), rsConsultas.getInt("ambulatorio"), rsConsultas.getString("especialidad"));
-            }
-
-            //En caso de error se captura la excepción
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-            try {
-                //Como ha fallado deshacemos
-                con.rollback();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-            }
-        } finally {
-            //Finalmente se intentan cerrar cursores
-            try {
-                stmConsultas.close();
-            } catch (SQLException e) {
-                //Si no se puede se imprime el error
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-        try {
-            con.commit();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-        }
-
-        return menorNumero;
-    }
-
     //Permite consultar las consultas existentes en la base de datos
     public java.util.List<Consulta> consultarConsultas(Integer identificador, Integer ambulatorio, String especialidad) {
         //Declaramos variables
@@ -270,5 +198,79 @@ public class DAOConsultas extends AbstractDAO {
         }
         //Se devuelve el resultado (total de consultas de un ambulatorio)
         return consultas;
+    }
+
+    //Permite obtener la consulta con menos citas pendientes
+    public Consulta menorNumeroPacientes(Integer ambulatorio, String tipoCita) {
+        //Declaramos variables
+        Consulta menorNumero = new Consulta();
+        Connection con;
+        PreparedStatement stmConsultas = null;
+        ResultSet rsConsultas;
+
+        //Establecemos conexión
+        con = this.getConexion();
+
+        //Impedimos que la confirmación sea automática
+        try {
+            con.setAutoCommit(false);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+
+        //Intentamos la consulta SQL
+        try {
+            //Construimos la consulta
+            //Selecionamos el identificador, ambulatorio y especialdiad
+            //que tengan el ambulatorio dado
+            String consulta = "select ci.consulta " +
+                              "from consulta as c1, cita as ci " +
+                              "where c1.ambulatorio = ci.ambulatorio " +
+                                    "and ci.ambulatorio = ? " + 
+                                    "and ci.tipo = ? " +
+                              "group by ci.consulta " +
+                              "having count(ci.consulta) <= any(select count(*) from consulta)";
+            //Preparamos la consulta
+            stmConsultas = con.prepareStatement(consulta);
+            //Sustituimos
+            stmConsultas.setInt(1, ambulatorio); //Ambulatorio
+            stmConsultas.setString(2, tipoCita); //Ambulatorio
+            //Ejecutamos
+            rsConsultas = stmConsultas.executeQuery();
+            //Mientras haya coincidencias
+            while (rsConsultas.next()) {
+                //Se crea una instancia de consulta con los datos de la consulta con el menor número de pacientes de la base de datos
+                menorNumero = new Consulta(rsConsultas.getInt("identificador"), rsConsultas.getInt("ambulatorio"), rsConsultas.getString("especialidad"));
+            }
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            try {
+                //Como ha fallado deshacemos
+                con.rollback();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+            }
+        } finally {
+            //Finalmente se intentan cerrar cursores
+            try {
+                stmConsultas.close();
+            } catch (SQLException e) {
+                //Si no se puede se imprime el error
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        try {
+            con.commit();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
+
+        return menorNumero;
     }
 }
