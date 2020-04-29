@@ -93,7 +93,7 @@ public class DAOConsultas extends AbstractDAO {
         }
     }
 
-    //Transaccion que dado un ambulatorio te devuelva la consulta de urgencias del mismo que menos pacientes tiene en espera (fechaHoraFin is null)
+    //Permite obtener la consulta con menos citas pendientes
     public Consulta menorNumeroPacientes(Integer ambulatorio) {
         //Declaramos variables
         Consulta menorNumero = new Consulta();
@@ -117,12 +117,12 @@ public class DAOConsultas extends AbstractDAO {
             //Construimos la consulta
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
-            String consulta = "select u.consulta " +
-                              "from consulta as c1, urgencia as u " +
-                              "where c1.ambulatorio = u.ambulatorio " +
-                                    "and c1.ambulatorio = ? " +
-                              "group by u.consulta " +
-                              "having count(u.consulta) <= any(select count(*) from consulta)";
+            String consulta = "select ci.consulta " +
+                              "from consulta as c1, cita as ci " +
+                              "where c1.ambulatorio = ci.ambulatorio " +
+                                    "and ci.ambulatorio = ? " +
+                              "group by ci.consulta " +
+                              "having count(ci.consulta) <= any(select count(*) from consulta)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
