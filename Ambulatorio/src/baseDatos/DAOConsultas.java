@@ -104,20 +104,25 @@ public class DAOConsultas extends AbstractDAO {
         //Establecemos conexión
         con = this.getConexion();
 
+        //Impedimos que la confirmación sea automática
+        try {
+            con.setAutoCommit(false);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
-            String consulta = "select c1.identificador, c1.ambulatorio, c1.especialidad "
-                    + "from consulta as c1, urgencia as u "
-                    + "where c1.ambulatorio = u.ambulatorio "
-                    + "and c1.identificador = u.consulta "
-                    + "and c1.ambulatorio = ? "
-                    + "and c1.especialidad = 'General' "
-                    + "having count() < count() "
-                    + "group by c1.identificador, c1.ambulatorio, c1.especialidad";
-
+            String consulta = "select u.consulta " +
+                              "from consulta as c1, urgencia as u " +
+                              "where c1.ambulatorio = u.ambulatorio " +
+                                    "and c1.ambulatorio = ? " +
+                              "group by u.consulta " +
+                              "having count(u.consulta) <= any(select count(*) from consulta)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
@@ -132,9 +137,15 @@ public class DAOConsultas extends AbstractDAO {
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
-            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            try {
+                //Como ha fallado deshacemos
+                con.rollback();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+            }
         } finally {
             //Finalmente se intentan cerrar cursores
             try {
@@ -144,7 +155,13 @@ public class DAOConsultas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        //Se devuelve el resultado (lista de consultas)
+        try {
+            con.commit();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
+
         return menorNumero;
     }
 
