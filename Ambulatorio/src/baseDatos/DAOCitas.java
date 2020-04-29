@@ -380,7 +380,7 @@ public class DAOCitas extends AbstractDAO {
 
     //Permite consultar las citas ocupadas entre dos fechas en una consulta
     //La fecha minima siempre será el día posterior a la consulta
-    public ArrayList<Timestamp> citasOcupadas(Ambulatorio ambulatorio, Consulta consulta, Date inicio, Date fin) {
+    public ArrayList<Timestamp> citasOcupadas(Consulta consulta, Date inicio, Date fin) {
 
         //Declaramos variables
         Connection con;
@@ -422,7 +422,7 @@ public class DAOCitas extends AbstractDAO {
             stmCitas.setTimestamp(1, inicioTS);
             stmCitas.setTimestamp(2, finTS);
             stmCitas.setInt(3, consulta.getIdentificador());
-            stmCitas.setInt(4, ambulatorio.getCodigo());
+            stmCitas.setInt(4, consulta.getAmbulatorio());
 
             //Actualizamos
             rsCitas = stmCitas.executeQuery();

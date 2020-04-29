@@ -3,6 +3,7 @@ package gui;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Paciente;
+import aplicacion.clases.Rango;
 import aplicacion.clases.TipoCita;
 
 import java.sql.Date;
@@ -118,16 +119,38 @@ public class ModeloTablaHoras extends AbstractTableModel {
         //Creamos array de horas posibles desde las 9 hasta las 17 
         LocalTime t = LocalTime.of(9, 0);
         ArrayList<LocalTime> a = new ArrayList<>();
-        
+
         while (t.getHour() < 17) {
-            
+
             a.add(t);
             t.plusMinutes(30);
         }
 
-        for (Ambulatorio a : ambulatorios) {
-            
-            ArrayList<Timestamp> ocupadas = fa.ci
+        ArrayList<Timestamp> ocupadas;
+        for (Ambulatorio ambulatorio : ambulatorios) {
+
+            //Obtenemos citas no posibles para el paciente
+            if (pa.getRango() == Rango.DELUXE) {
+                ocupadas = fa.citasOcupadas(fa.menorNumeroPacientes(ambulatorio, tipo), inicio, fin);
+            } else {
+                ocupadas = new ArrayList<>();
+            }
+
+            //Actualizamos lista de horas
+            LocalDate actual = inicio.toLocalDate();
+            while (actual.compareTo(fin.toLocalDate()) != 0) {
+                for (LocalTime hora : a) {
+
+                    Timestamp temp = Timestamp.valueOf(LocalDateTime.of(actual, hora));
+                    if (!ocupadas.contains(temp)) {
+
+                        this.ambulatorios.add(ambulatorio);
+                        horas.add(temp);
+                    }
+
+                }
+                actual.plusDays(1);
+            }
         }
 
         //Notifica a los listeners del cambio
