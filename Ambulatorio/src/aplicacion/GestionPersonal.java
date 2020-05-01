@@ -5,18 +5,13 @@ import baseDatos.FachadaBaseDatos;
 
 public class GestionPersonal {
 
-    FachadaGui fgui;                //Enlace a la facha de la GUI
+    FachadaGui fgui;            //Enlace a la facha de la GUI
     FachadaBaseDatos fbd;       //Enlace a la facha de Base de datos
 
     //Constructor
     public GestionPersonal(FachadaGui fgui, FachadaBaseDatos fbd) {
         this.fgui = fgui;
         this.fbd = fbd;
-    }
-
-    //Permite abrir una nueva ventana de usuarios
-    public void iniciaInterfazUsuario() {
-        fgui.iniciaVista();
     }
 
     //Permite comprobar si el administrador que intenta acceder al programa tiene los credenciales necesarios
@@ -29,5 +24,13 @@ public class GestionPersonal {
         return fbd.obtenerEspecialidad(dni);
     }
 
-   
+    //Permite abrir una nueva ventana de usuarios para autentificarse
+    public void iniciaInterfazUsuario() {
+        fgui.iniciaVista();
+    }
+
+    //Permite generar una ventana para visualizar información de un trabajador
+    public void nuevaVPersonal() {
+        fgui.nuevaVPersonal();
+    }
 }

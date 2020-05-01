@@ -2,8 +2,6 @@ package gui;
 
 import aplicacion.clases.Cita;
 import aplicacion.clases.Receta;
-import aplicacion.clases.Paciente;
-import aplicacion.clases.GrupoSanguineo;
 import java.sql.Date;
 
 public class VRecetar extends javax.swing.JDialog {
@@ -279,8 +277,8 @@ public class VRecetar extends javax.swing.JDialog {
             try {
                 fecha = Date.valueOf(varFechaFin.getText());
                 //De no poder convertir a entero se imprime la excepción
-            } catch (NumberFormatException ex) {
-                fa.muestraExcepcion("El valor introducido para la edad no es válido.");
+            } catch (Exception ex) {
+                fa.muestraExcepcion("El valor introducido como fecha no es válido.");
                 return;
             }
         }

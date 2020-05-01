@@ -369,7 +369,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Permite buscar los libros (al hacer click en el botón)
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        //Buscamos los libros
+        //Buscamos los ambulatorios
         buscarAmbulatorios();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -407,13 +407,13 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Botón Actualizar, crea un nuevo ambulatorio o lo modifica
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
         boolean modificar = false;
         Ambulatorio a;
         //si los campos no están vacíos
         if (!textoCodigo.getText().isEmpty() && !textoNombre.getText().isEmpty() && !textoDireccion.getText().isEmpty()
                 && !textoProvincia.getText().isEmpty() && !textoTelefono.getText().isEmpty() && isNumeric(textoCodigo.getText())
                 && (isNumeric(textoAnoConstruccion.getText()) || textoAnoConstruccion.getText().isEmpty())) {
+            //creamos el ambulatorio
             a = new Ambulatorio(Integer.parseInt(textoCodigo.getText()), textoNombre.getText(), textoDireccion.getText(),
                     textoAnoConstruccion.getText(), textoProvincia.getText(), textoTelefono.getText(),
                     null, 0.0);
@@ -423,11 +423,13 @@ public class VPrincipal extends javax.swing.JFrame {
                     break;
                 }
             }
+            //modificamos o creamos uno nuevo si no está en la tabla
             if (!modificar) {
                 fa.insertarAmbulatorio(a);
             } else {
                 fa.modificarAmbulatorio(a);
             }
+            //habilitamos los botones
             btnActualizar.setEnabled(true);
             btnEliminar.setEnabled(true);
             btnConsultas.setEnabled(true);
@@ -440,7 +442,6 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Botón Sala Urgencias, abre una nueva ventana de urgencias
     private void btnSalaUrgenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalaUrgenciasActionPerformed
-        // TODO add your handling code here:
         //Obtenemos el ambulatorio deseado de la tabla
         ModeloTablaAmbulatorios ma = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
         fa.nuevaVSalaUrgencias(ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()));
@@ -448,7 +449,6 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Menú de consultas, abre una nueva ventana de Enfermedades
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:                                            
         //Obtenemos el ambulatorio deseado de la tabla
         ModeloTablaAmbulatorios ma = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
         fa.nuevaVConsultas(ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo());
@@ -456,13 +456,11 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Botoón Personal, abre una nueva ventana de personal
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
-        // TODO add your handling code here:
         fa.nuevaVPersonal();
     }//GEN-LAST:event_btnPersonalActionPerformed
 
     //Al pulsar sobre un ambulatorio de la tabla, se colocan todos sus datos en los campos de texto 
     private void tablaAmbulatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAmbulatoriosMouseClicked
-        // TODO add your handling code here
         ModeloTablaAmbulatorios m = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
         textoCodigo.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo()));
         textoNombre.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getNombre());
@@ -476,13 +474,11 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Menú de enfermedades, abre una nueva ventana de Enfermedades
     private void menuEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEnfermedadesActionPerformed
-        // TODO add your handling code here:
         fa.nuevaVEnfermedades();
     }//GEN-LAST:event_menuEnfermedadesActionPerformed
 
     //Menú de pacientes, abre una nueva ventana de Pacientes
     private void menuPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPacientesActionPerformed
-        // TODO add your handling code here:
         fa.nuevaVPacientes();
     }//GEN-LAST:event_menuPacientesActionPerformed
 
@@ -541,14 +537,14 @@ public class VPrincipal extends javax.swing.JFrame {
         if (m.getRowCount() > 0) {
             //Se seleciona la primera fila
             tablaAmbulatorios.setRowSelectionInterval(0, 0);
-            //Se habilita el botón de Actualizar y Eliminar el ambulatorio
+            //Se habilitan los botones correspondientes
             btnActualizar.setEnabled(true);
             btnEliminar.setEnabled(true);
             btnConsultas.setEnabled(true);
             btnSalaUrgencias.setEnabled(true);
             btnPersonal.setEnabled(true);
         } else {
-            //En otro caso se deshabilita
+            //En otro caso se deshabilitan
             btnActualizar.setEnabled(false);
             btnEliminar.setEnabled(false);
             btnConsultas.setEnabled(false);

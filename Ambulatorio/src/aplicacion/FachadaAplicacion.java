@@ -3,6 +3,7 @@ package aplicacion;
 import aplicacion.clases.*;
 import gui.VCitasPendientes;
 import gui.VPacientes;
+import gui.VPersonal;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
@@ -10,15 +11,15 @@ import java.sql.Date;
 
 public class FachadaAplicacion {
 
-    gui.FachadaGui fgui;                            // Enlace a la fachada de la GUI
-    baseDatos.FachadaBaseDatos fbd;         // Enlace a la fachada de base de datos
-    GestionAmbulatorios gamb;                   // Enlace a la clase gestión de ambulatorio
-    GestionCitas gcit;                               // Enlace a la clase gestión de citas
-    GestionPacientes gpac;                       // Enlace a la clase gestión de pacientes
-    GestionEnfermedades genf;                  // Enlace a la clase gestión de enfermedades
-    GestionConsultas gcon;                       // Enlace a la clase gestión de consultas
-    GestionRecetas grec;                          // Enlace a la clase gestión de recetas
-    GestionPersonal gadm;              // Enlace a la clase gestión de administradores
+    gui.FachadaGui fgui;               // Enlace a la fachada de la GUI
+    baseDatos.FachadaBaseDatos fbd;    // Enlace a la fachada de base de datos
+    GestionAmbulatorios gamb;          // Enlace a la clase gestión de ambulatorio
+    GestionCitas gcit;                 // Enlace a la clase gestión de citas
+    GestionPacientes gpac;             // Enlace a la clase gestión de pacientes
+    GestionEnfermedades genf;          // Enlace a la clase gestión de enfermedades
+    GestionConsultas gcon;             // Enlace a la clase gestión de consultas
+    GestionRecetas grec;               // Enlace a la clase gestión de recetas
+    GestionPersonal gper;              // Enlace a la clase gestión de administradores
 
     //Constructor
     public FachadaAplicacion() {
@@ -30,7 +31,7 @@ public class FachadaAplicacion {
         genf = new GestionEnfermedades(fgui, fbd);
         gcon = new GestionConsultas(fgui, fbd);
         grec = new GestionRecetas(fgui, fbd);
-        gadm = new GestionPersonal(fgui, fbd);
+        gper = new GestionPersonal(fgui, fbd);
     }
 
     //Main
@@ -48,22 +49,26 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE PERSONAL
 /////////////////////////
-    //Inicia la interfaz de usuario
-    public void iniciaInterfazUsuario() {
-        fgui.iniciaVista();
-    }
-
     //Comprueba si la autentificación es correcta
     public Boolean comprobarAutentificacion(String dni, String constrasena) {
-        return gadm.comprobarAutentificacion(dni, constrasena);
+        return gper.comprobarAutentificacion(dni, constrasena);
     }
-
+    
     //Permite recuperar la especialidad de un personal sanitario
     public String obtenerEspecialidad(String dni) {
         return fbd.obtenerEspecialidad(dni);
     }
+    
+    //Permite abrir una nueva ventana de usuarios para autentificarse
+    public void iniciaInterfazUsuario() {
+        gper.iniciaInterfazUsuario();
+    }
 
-   
+    //Permite generar una ventana para visualizar información de un trabajador
+    public void nuevaVPersonal() {
+        gper.nuevaVPersonal();
+    }
+
 /////////////////////////
 //GESTIÓN DE AMBULATORIOS
 /////////////////////////
@@ -160,9 +165,9 @@ public class FachadaAplicacion {
         gcit.nuevaVSalaUrgencias(ambulatorio);
     }
 
-    //Permite generar una ventana para escoger un paciente al que consultar sus citas pendientes
-    public void nuevaVCitasPendientes(Paciente paciente) {
-        gcit.nuevaVCitasPendientes(paciente);
+    //Permite generar una ventana para consultar las citas pendientes de un médico
+    public void nuevaVCitasPendientes(VPersonal vper, PersonalSanitario personal) {
+        gcit.nuevaVCitasPendientes(vper, personal);
     }
 
 /////////////////////////
@@ -224,13 +229,13 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para visualizar información sobre el historial médico del paciente
-    public void nuevaVHistorialMedico(VPacientes vpac) {
-        gpac.nuevaVHistorialMedico(vpac);
+    public void nuevaVHistorialMedico(VPacientes vpac, Paciente paciente) {
+        gpac.nuevaVHistorialMedico(vpac, paciente);
     }
 
     //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
-    public void nuevaVHistorialRecetas(VPacientes vpac) {
-        gpac.nuevaVHistorialRecetas(vpac);
+    public void nuevaVHistorialRecetas(VPacientes vpac, Paciente paciente) {
+        gpac.nuevaVHistorialRecetas(vpac, paciente);
     }
 
 /////////////////////////

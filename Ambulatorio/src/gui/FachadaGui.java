@@ -3,6 +3,7 @@ package gui;
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Cita;
 import aplicacion.clases.Paciente;
+import aplicacion.clases.PersonalSanitario;
 
 public class FachadaGui {
 
@@ -16,8 +17,31 @@ public class FachadaGui {
         this.vp = new VPrincipal(fa);
     }
 
+/////////////////////////////
+//VENTANAS DE PERSONAL
+/////////////////////////////
+    //Permite abrir una nueva ventana de usuarios para autentificarse
+    public void iniciaVista() {
+        VAutentificacion va;
+
+        va  = new VAutentificacion(vp, true, fa);
+        //abre la ventana
+        vp.setVisible(true);
+        va.setVisible(true);
+    }
+    
+    //Permite generar una ventana para visualizar información de un trabajador
+    public void nuevaVPersonal() {
+        //Declaramos variables
+        VPersonal vP;
+        //Generamos la ventana
+        vP = new VPersonal(vp, true, fa);
+        //Hacemos visible la ventana
+        vP.setVisible(true);
+    }
+    
 ////////////////////////////////
-//VENTANA DE CITAS
+//VENTANAS DE CITAS
 ////////////////////////////////
     //Permite generar una ventana para visualizar información de una cita
     public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
@@ -39,12 +63,12 @@ public class FachadaGui {
         vDH.setVisible(true);
     }
 
-    //Permite generar una ventana para escoger un paciente al que consultar sus citas pendientes
-    public void nuevaVCitasPendientes(Paciente paciente) {
+    //Permite generar una ventana para consultar las citas pendientes de un médico
+    public void nuevaVCitasPendientes(VPersonal vper, PersonalSanitario personal) {
         //Declaramos variables
         VCitasPendientes vCP;
         //Generamos la ventana
-        vCP = new nuevaVCitasPendientes(vp, true, fa, paciente);
+        vCP = new VCitasPendientes(vper, fa, personal);
         //Hacemos visible la ventana
         vCP.setVisible(true);
     }
@@ -70,7 +94,7 @@ public class FachadaGui {
     }
 
 ////////////////////////////////
-//VENTANA DE PACIENTES
+//VENTANAS DE PACIENTES
 ////////////////////////////////
     //Permite generar una ventana para visualizar información de un trabajador
     public void nuevaVPacientes() {
@@ -83,21 +107,21 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para visualizar información sobre el historial médico del paciente
-    public void nuevaVHistorialMedico(VPacientes vpac) {
+    public void nuevaVHistorialMedico(VPacientes vpac, Paciente paciente) {
         //Declaramos variables
         VHistorialMedico vHM;
         //Generamos la ventana
-        vHM = new VHistorialMedico(vpac, true, fa);
+        vHM = new VHistorialMedico(vpac, true, fa, paciente);
         //Hacemos visible la ventana
         vHM.setVisible(true);
     }
 
     //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
-    public void nuevaVHistorialRecetas(VPacientes vpac) {
+    public void nuevaVHistorialRecetas(VPacientes vpac, Paciente paciente) {
         //Declaramos variables
         VHistorialRecetas vHR;
         //Generamos la ventana
-        vHR = new VHistorialRecetas(vpac, true, fa);
+        vHR = new VHistorialRecetas(vpac, true, fa, paciente);
         //Hacemos visible la ventana
         vHR.setVisible(true);
     }
@@ -154,15 +178,6 @@ public class FachadaGui {
 //////////////////////
 //OTRAS VENTANAS
 //////////////////////
-    //Abre la ventana de VAutentificación
-    public void iniciaVista() {
-        VAutentificacion va;
-
-        va  = new VAutentificacion(vp, true, fa);
-        //abre la ventana
-        vp.setVisible(true);
-        va.setVisible(true);
-    }
 
     //Permite iniciar la vista de la aplicación
     public void nuevaVAutentificacion() {
