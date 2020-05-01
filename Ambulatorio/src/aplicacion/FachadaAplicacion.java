@@ -61,7 +61,7 @@ public class FachadaAplicacion {
 
     //Permite abrir una nueva ventana de usuarios para autentificarse
     public void iniciaInterfazUsuario() {
-        gper.iniciaInterfazUsuario();
+        fgui.iniciaVista();
     }
 
     //Permite generar una ventana para visualizar información de un trabajador

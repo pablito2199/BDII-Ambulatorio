@@ -24,11 +24,6 @@ public class GestionPersonal {
         return fbd.obtenerEspecialidad(dni);
     }
 
-    //Permite abrir una nueva ventana de usuarios para autentificarse
-    public void iniciaInterfazUsuario() {
-        fgui.iniciaVista();
-    }
-
     //Permite generar una ventana para visualizar información de un trabajador
     public void nuevaVPersonal() {
         fgui.nuevaVPersonal();

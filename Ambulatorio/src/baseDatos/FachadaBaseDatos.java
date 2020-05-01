@@ -38,7 +38,7 @@ public class FachadaBaseDatos {
             Properties usuario = new Properties();
 
             String gestor = configuracion.getProperty("gestor");
-
+            
             //Establecemos propiedades de usuario y contraseña
             usuario.setProperty("user", configuracion.getProperty("usuario"));
             usuario.setProperty("password", configuracion.getProperty("clave"));
@@ -50,13 +50,13 @@ public class FachadaBaseDatos {
                     usuario);
 
             //Inicializamos los DAOS
-            daoAmbulatorios = new DAOAmbulatorios(conexion, fa);       // Enlace al DAO de Ambulatorios
-            daoCitas = new DAOCitas(conexion, fa);                           // Enlace al DAO de Citas
-            daoPacientes = new DAOPacientes(conexion, fa);               // Enlace al DAO de Pacientes
+            daoAmbulatorios = new DAOAmbulatorios(conexion, fa);    // Enlace al DAO de Ambulatorios
+            daoCitas = new DAOCitas(conexion, fa);                  // Enlace al DAO de Citas
+            daoPacientes = new DAOPacientes(conexion, fa);          // Enlace al DAO de Pacientes
             daoEnfermedades = new DAOEnfermedades(conexion, fa);    // Enlace al DAO de Enfermedades
-            daoConsultas = new DAOConsultas(conexion, fa);               // Enlace al DAO de Consultas
-            daoRecetas = new DAORecetas(conexion, fa);                   // Enlace al DAO de Recetas
-            daoPersonal = new DAOPersonal(conexion, fa);                  // Enlace al DAO de Personal
+            daoConsultas = new DAOConsultas(conexion, fa);          // Enlace al DAO de Consultas
+            daoRecetas = new DAORecetas(conexion, fa);              // Enlace al DAO de Recetas
+            daoPersonal = new DAOPersonal(conexion, fa);            // Enlace al DAO de Personal
             //En caso de error capturamos la excepciones, imprimimos el mensaje y genereramos la ventana de excepción
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
