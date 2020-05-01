@@ -112,9 +112,9 @@ public class VReservarCita extends javax.swing.JDialog {
         tablaHoras.setModel(new ModeloTablaHoras(fa, pa));
         jScrollPane2.setViewportView(tablaHoras);
 
-        txtDesde.setText("aaaa/mm/dd");
+        txtDesde.setText("aaaa-mm-dd");
 
-        txtHasta.setText("aaaa/mm/dd");
+        txtHasta.setText("aaaa-mm-dd");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -91,9 +91,13 @@ public class VCitasPendientes extends javax.swing.JDialog {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        txtDesde.setText("aaaa-mm-dd");
+
         labelDesde.setText("Desde:");
 
         labelHasta.setText("Hasta:");
+
+        txtHasta.setText("aaaa-mm-dd");
 
         labelConsulta.setText("Consulta:");
 
@@ -258,9 +262,15 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
             Date inicio, fin;
 
+            try{
             inicio = Date.valueOf(txtDesde.getText());
             fin = Date.valueOf(txtHasta.getText());
-
+            }
+            catch(Exception e){
+                inicio = null;
+                fin = null;
+            }
+            
             //Vemos si inicio es igual o mayor a fin
             if (!inicio.after(fin)) {
 
@@ -309,10 +319,11 @@ public class VCitasPendientes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private boolean fechasValidas() {
-        if (!txtDesde.getText().matches("([0-2][0-9])|(3[0-1])/(0[0-9])|(1[0-2])/2[0-9]{3}")
-                || !txtHasta.getText().matches("([0-2][0-9])|(3[0-1])/(0[0-9])|(1[0-2])/2[0-9]{3}")) {
-
-            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 01/01/2020.");
+        if (!txtDesde.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
+                || !txtHasta.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
+                || !txtDesde.getText().equals("aaaa-mm-dd")
+                || !txtHasta.getText().equals("aaaa-mm-dd")) {
+            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000/11/22.");
             return false;
         }
         return true;

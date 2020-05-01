@@ -138,6 +138,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txtDesde">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelDesde">
       <Properties>
@@ -150,6 +153,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtHasta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelConsulta">
       <Properties>
