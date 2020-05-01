@@ -18,6 +18,7 @@ import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 import gui.VCitasPendientes;
 import gui.VPacientes;
+import gui.VPersonal;
 
 public class GestionCitas {
 
@@ -68,7 +69,7 @@ public class GestionCitas {
         return fbd.citasPaciente(paciente);
     }
 
-    //Consulta las citas pendientes de atender de un medico
+    //Consulta las citas pendientes de atender de un médico
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return fbd.citasMedico(medico);
     }
@@ -98,8 +99,8 @@ public class GestionCitas {
         fgui.nuevaVSalaUrgencias(ambulatorio);
     }
 
-    //Permite generar una ventana para escoger un paciente al que consultar sus citas pendientes
-    public void nuevaVCitasPendientes(Paciente paciente) {
-        fgui.nuevaVCitasPendientes(paciente);
+    //Permite generar una ventana para consultar las citas pendientes de un médico
+    public void nuevaVCitasPendientes(VPersonal vper, PersonalSanitario personal) {
+        fgui.nuevaVCitasPendientes(vper, personal);
     }
 }
