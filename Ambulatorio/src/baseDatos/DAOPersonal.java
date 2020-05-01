@@ -2,6 +2,7 @@ package baseDatos;
 
 import aplicacion.clases.PersonalAdministrador;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DAOPersonal extends AbstractDAO {
 
@@ -26,9 +27,11 @@ public class DAOPersonal extends AbstractDAO {
         try {
             //Preparamos la sentencia donde se selecciona el id, clave, nombre, dirección, email y tipo de usuario
             //de la tabla de usuarios que tengan como usuario y contraseña los proporcionados por argumentos
-            stmAdministrador = con.prepareStatement("select ambulatorio, personal, contrasena "
+            stmAdministrador = con.prepareStatement(
+                    "select * "
                     + "from personaladministrador "
-                    + "where dni = ? and contrasena = ?");
+                    + "where personal = ? "
+                    + "and contrasena = ?");
             //Sustituimos
             stmAdministrador.setString(1, dni);             //Id del usuario (nombre de usuario)
             stmAdministrador.setString(2, contrasena);      //Clave (contraseña)
@@ -40,7 +43,7 @@ public class DAOPersonal extends AbstractDAO {
                 resultado = new PersonalAdministrador(
                         rsAdministrador.getString("contrasena"),
                         rsAdministrador.getInt("ambulatorio"),
-                        rsAdministrador.getString("dni"));
+                        rsAdministrador.getString("personal"));
             }
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -64,9 +67,9 @@ public class DAOPersonal extends AbstractDAO {
     }
 
     //Permite recuperar la especialidad de un personal sanitario
-    public String obtenerEspecialidad(String dni) {
+    public ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
         //Declaramos variables
-        String resultado = null;
+        ArrayList<String> resultado = new ArrayList<>();
         Connection con;
         PreparedStatement stmPersonal = null;
         ResultSet rsPersonal;
@@ -80,19 +83,21 @@ public class DAOPersonal extends AbstractDAO {
             //de la tabla de usuarios que tengan como usuario y contraseña los proporcionados por argumentos
             stmPersonal = con.prepareStatement(
                     "select especialidad "
-                    + "from personalsanitario "
-                    + "where dni = ?"
+                    + "from especializacionpersonal "
+                    + "where personal = ? "
+                    + "and ambulatorio = ?"
             );
 
             //Sustituimos
             stmPersonal.setString(1, dni);
+            stmPersonal.setInt(2, ambulatorio);
 
             //Ejecutamos
             rsPersonal = stmPersonal.executeQuery();
 
             //Si existe algún resultado (que debe ser único)
-            if (rsPersonal.next()) {
-                resultado = rsPersonal.getString("especialidad");
+            while (rsPersonal.next()) {
+                resultado.add(rsPersonal.getString("especialidad"));
             }
             //En caso de error se captura la excepción
         } catch (SQLException e) {

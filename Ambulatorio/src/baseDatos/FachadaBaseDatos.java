@@ -274,7 +274,7 @@ public class FachadaBaseDatos {
     }
 
     //Permite recuperar la especialidad de un personal sanitario
-    public String obtenerEspecialidad(String dni) {
-        return daoPersonal.obtenerEspecialidad(dni);
+    public  ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
+        return daoPersonal.obtenerEspecialidades(dni, ambulatorio);
     }
 }

@@ -3,7 +3,9 @@ package gui;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
+import aplicacion.clases.TipoCita;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class VCitasPendientes extends javax.swing.JDialog {
 
@@ -30,7 +32,13 @@ public class VCitasPendientes extends javax.swing.JDialog {
         btnNuevaCita.setVisible(false);
 
         //Introducimos tipos de cita
-        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(fa.obtenerEspecialidad(ps.getDNI())));
+        ArrayList<TipoCita> tc = new ArrayList<>();
+        for(String esp : fa.obtenerEspecialidades(ps.getDNI(), ps.getAmbulatorio())){
+            
+            tc.addAll(fa.obtenerTiposDeCita(esp));
+        }
+
+        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(tc);
     }
 
     public VCitasPendientes(VPacientes padre, FachadaAplicacion fa, Paciente pa) {

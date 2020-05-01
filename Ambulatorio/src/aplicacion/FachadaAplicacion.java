@@ -55,8 +55,8 @@ public class FachadaAplicacion {
     }
 
     //Permite recuperar la especialidad de un personal sanitario
-    public String obtenerEspecialidad(String dni) {
-        return fbd.obtenerEspecialidad(dni);
+    public  ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
+        return gper.obtenerEspecialidades(dni, ambulatorio);
     }
 
     //Permite abrir una nueva ventana de usuarios para autentificarse
