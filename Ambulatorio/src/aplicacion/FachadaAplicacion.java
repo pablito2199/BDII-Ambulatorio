@@ -224,13 +224,13 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para visualizar información sobre el historial médico del paciente
-    public void nuevaVHistorialMedico(VPacientes vpac) {
-        gpac.nuevaVHistorialMedico(vpac);
+    public void nuevaVHistorialMedico(VPacientes vpac, Paciente paciente) {
+        gpac.nuevaVHistorialMedico(vpac, paciente);
     }
 
     //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
-    public void nuevaVHistorialRecetas(VPacientes vpac) {
-        gpac.nuevaVHistorialRecetas(vpac);
+    public void nuevaVHistorialRecetas(VPacientes vpac, Paciente paciente) {
+        gpac.nuevaVHistorialRecetas(vpac, paciente);
     }
 
 /////////////////////////

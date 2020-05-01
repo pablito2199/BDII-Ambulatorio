@@ -671,6 +671,10 @@ public class VPacientes extends javax.swing.JDialog {
             btnHistorialRecetas.setEnabled(false);
             return;
         }
+        if(fa.existePaciente(varCIP.getText())){
+            Paciente p = new Paciente(varCIP.getText());
+            fa.nuevaVHistorialMedico(this, p);
+        }
     }//GEN-LAST:event_btnHistorialClinicoActionPerformed
 
     private void btnHistorialRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialRecetasActionPerformed
@@ -684,6 +688,10 @@ public class VPacientes extends javax.swing.JDialog {
             btnHistorialClinico.setEnabled(false);
             btnHistorialRecetas.setEnabled(false);
             return;
+        }
+        if(fa.existePaciente(varCIP.getText())){
+            Paciente p = new Paciente(varCIP.getText());
+            fa.nuevaVHistorialMedico(this, p);
         }
     }//GEN-LAST:event_btnHistorialRecetasActionPerformed
 
