@@ -303,17 +303,9 @@ public class VRecetar extends javax.swing.JDialog {
         //Creamos el modelo de tabla préstamos
         ModeloListaStrings m;
         m = (ModeloListaStrings) listaMedicamentos.getModel();
-        m.setFilas(fa.consultarMedicamentos(varMedicamento.getText());
-        //Si hay coincidencias
-        if (m.getRowCount() > 0) {
-            //Seleccionamos la primera
-            listaMedicamentos.setRowSelectionInterval(0, 0);
-            //Habilitamos la receta
-            btnBorrar.setEnabled(true);
-        } else {
-            //De no haberlas, deshabilitamos el borrado
-            btnBorrar.setEnabled(false);
-        }
+        m.setElementos(fa.consultarMedicamentos(varMedicamento.getText()));
+        //Seleccionamos la primera
+        listaMedicamentos.setSelectedIndex(0);
     }
 
     /**

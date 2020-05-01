@@ -148,10 +148,9 @@ public class DAORecetas extends AbstractDAO {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Medicamento> consultarMedicamentos(String nombre) {
+    public java.util.List<String> consultarMedicamentos(String nombre) {
         //Declaramos variables
-        java.util.List<Medicamento> resultado = new java.util.ArrayList<Medicamento>();
-        Medicamento medicamentoActual;
+        java.util.List<String> resultado = new java.util.ArrayList<String>();
         Connection con;
         PreparedStatement stmMedicamentos = null;
         ResultSet rsMedicamentos;
@@ -172,10 +171,8 @@ public class DAORecetas extends AbstractDAO {
             rsMedicamentos = stmMedicamentos.executeQuery();
             //Mientras haya coincidencias
             while (rsMedicamentos.next()) {
-                //Se crea una instancia de cita con los datos recuperados de la base de datos
-                medicamentoActual = new Medicamento(rsMedicamentos.getString("nombre"));
-                //Y se añade la instancia a la lista de pacientes
-                resultado.add(medicamentoActual);
+                //Y se el resultado a la lista de pacientes
+                resultado.add(rsMedicamentos.getString("nombre"));
             }
         } //En caso de error se captura la excepción
         catch (SQLException e) {

@@ -301,8 +301,9 @@ public class FachadaAplicacion {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Medicamento> consultarMedicamentos(String nombre){
+    public java.util.List<String> consultarMedicamentos(String nombre){
         return grec.consultarMedicamentos(nombre);
+    }
     
     //Permite crear una nueva ventana de recetas
     public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {

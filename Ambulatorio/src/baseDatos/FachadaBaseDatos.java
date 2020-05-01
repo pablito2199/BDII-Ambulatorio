@@ -253,7 +253,7 @@ public class FachadaBaseDatos {
     }
     
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Medicamento> consultarMedicamentos(String nombre){
+    public java.util.List<String> consultarMedicamentos(String nombre){
         return daoRecetas.consultarMedicamentos(nombre);
     }
 
