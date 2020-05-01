@@ -54,7 +54,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         etiquetaDescripcion = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textoDescripcion = new javax.swing.JTextArea();
-        btnBuscarEnfermedad = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
         btnEliminarEnfermedad = new javax.swing.JButton();
@@ -85,12 +85,12 @@ public class VEnfermedades extends javax.swing.JDialog {
         textoDescripcion.setRows(5);
         jScrollPane1.setViewportView(textoDescripcion);
 
-        btnBuscarEnfermedad.setText("Buscar");
-        btnBuscarEnfermedad.setToolTipText("");
-        btnBuscarEnfermedad.setActionCommand("Actualizar");
-        btnBuscarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("");
+        btnBuscar.setActionCommand("Actualizar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarEnfermedadActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -110,7 +110,7 @@ public class VEnfermedades extends javax.swing.JDialog {
                     .addComponent(textoNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnBuscarEnfermedad))
+                        .addComponent(btnBuscar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(etiquetaNombre)
@@ -131,7 +131,7 @@ public class VEnfermedades extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscarEnfermedad))
+                        .addComponent(btnBuscar))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -185,12 +185,12 @@ public class VEnfermedades extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegresar)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnLimpiarEnfermedad)
                         .addComponent(btnAnadirEnfermedad)
-                        .addComponent(btnEliminarEnfermedad)))
+                        .addComponent(btnEliminarEnfermedad))
+                    .addComponent(btnRegresar))
                 .addContainerGap())
         );
 
@@ -285,9 +285,9 @@ public class VEnfermedades extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     //botón de Buscar, busca las enfermedades y las muestra en la lista
-    private void btnBuscarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEnfermedadActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarEnfermedades();
-    }//GEN-LAST:event_btnBuscarEnfermedadActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     //cuando se selecciona un elemento de la lista, los datos se pasan a la parte derecha para consultarse
     private void lstEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstEnfermedadesMouseClicked
@@ -306,7 +306,7 @@ public class VEnfermedades extends javax.swing.JDialog {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnadirEnfermedad;
-    private javax.swing.JButton btnBuscarEnfermedad;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminarEnfermedad;
     private javax.swing.JButton btnLimpiarEnfermedad;
     private javax.swing.JButton btnRegresar;
