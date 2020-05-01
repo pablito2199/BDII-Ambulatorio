@@ -7,7 +7,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     private String cipPaciente;                                    //Paciente actual
 
     /**
-     * 
+     *
      * @param parent
      * @param modal
      * @param fa

@@ -114,7 +114,7 @@ public class ModeloTablaHistorialClinico extends AbstractTableModel {
                 break;
             //Permite recuperar la cantidad del medicamento
             case 4:
-                resultado = citas.get(row).getTipo()  + " - " + citas.get(row).getEspecialidad();
+                resultado = citas.get(row).getTipo() + " - " + citas.get(row).getEspecialidad();
                 break;
         }
         //Devolvemos el valor recuperado

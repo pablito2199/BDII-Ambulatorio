@@ -18,9 +18,9 @@ public class GestionPersonal {
     public Boolean comprobarAutentificacion(String dni, String clave) {
         return fbd.validarAdministrador(dni, clave);
     }
-    
+
     //Permite recuperar la especialidad de un personal sanitario
-    public String obtenerEspecialidad(String dni){
+    public String obtenerEspecialidad(String dni) {
         return fbd.obtenerEspecialidad(dni);
     }
 

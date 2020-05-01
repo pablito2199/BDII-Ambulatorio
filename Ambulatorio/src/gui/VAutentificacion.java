@@ -1,8 +1,3 @@
-/*
- * VAutentificacion.java
- *
- * Created on 16-feb-2011, 17:52:08
- */
 package gui;
 
 public class VAutentificacion extends javax.swing.JDialog {

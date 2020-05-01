@@ -40,7 +40,6 @@ public class Receta {
         this.cantidad = cantidad;
     }
 
-    
     public Receta(Timestamp cita, String paciente, Integer codigo, Date fechaInicio, Date fechaFin, String medicamento, Integer cantidad) {
         this.cita = cita;
         this.paciente = paciente;

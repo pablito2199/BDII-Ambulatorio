@@ -18,6 +18,7 @@ public class VReservarCita extends javax.swing.JDialog {
 
     /**
      * Creates new form VCitas
+     *
      * @param parent
      * @param modal
      * @param fa
@@ -239,9 +240,9 @@ public class VReservarCita extends javax.swing.JDialog {
                     amb.getCodigo(),
                     tipocita.getNombre(),
                     tipocita.getEspecialidad());
-            
+
             fa.insertarCita(cita, pa);
-            
+
             //Salimos
             this.dispose();
 

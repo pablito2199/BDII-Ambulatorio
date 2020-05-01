@@ -9,11 +9,11 @@ public class VDerivarHospital extends javax.swing.JDialog {
     private Cita cita;                                       //Cita
 
     /**
-     * 
+     *
      * @param parent
      * @param modal
      * @param fa
-     * @param cita 
+     * @param cita
      */
     public VDerivarHospital(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Cita cita) {
         super(parent, modal);
@@ -200,12 +200,12 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
     //botón de Confirmar, confirma derivar un paciente al hospital
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     //botón de Regresar, vuelve a la ventana anterior
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        
+
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     //botón de Buscar, busca las enfermedades y las muestra en la lista

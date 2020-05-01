@@ -8,7 +8,7 @@ public class VPersonal extends javax.swing.JDialog {
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
 
     /**
-     * Creates new form VUsuario
+     * Creates new form VPersonal
      *
      * @param parent
      * @param modal
@@ -20,7 +20,7 @@ public class VPersonal extends javax.swing.JDialog {
         this.fa = fa;
         initComponents();
         padre = (VPrincipal) parent;
-        
+
         btnCitas.setEnabled(false);
     }
 

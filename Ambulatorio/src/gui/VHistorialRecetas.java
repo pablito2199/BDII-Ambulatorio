@@ -1,7 +1,6 @@
 package gui;
 
 import aplicacion.clases.Paciente;
-import aplicacion.clases.TipoCita;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,7 +10,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
     private final VPacientes padre;                     //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
     private final Paciente paciente;
-    
+
     /**
      * Creates new form VPaciente
      *
@@ -55,7 +54,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         varNumeroDeReceta = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHistorialRecetas = new javax.swing.JTable();
-        labelRecetar = new javax.swing.JLabel();
+        etiquetaHistorialDeRecetas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de usuarios");
@@ -202,7 +201,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        labelRecetar.setText("HISTORIAL MÉDICO");
+        etiquetaHistorialDeRecetas.setText("HISTORIAL  DE RECETAS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,7 +211,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelRecetar)
+                    .addComponent(etiquetaHistorialDeRecetas)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -220,7 +219,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelRecetar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(etiquetaHistorialDeRecetas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -303,7 +302,6 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         m.setFilas(fa.consultarHistorialReceta(paciente, inicioTS, finTS, Num, varMedicamentos.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-
     /**
      * @param args the command line arguments
      */
@@ -313,6 +311,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel etiquetaDesde;
     private javax.swing.JLabel etiquetaHasta;
+    private javax.swing.JLabel etiquetaHistorialDeRecetas;
     private javax.swing.JLabel etiquetaMedicamento;
     private javax.swing.JLabel etiquetaNumeroDeReceta;
     private javax.swing.JLabel etiquetaResultados;
@@ -320,7 +319,6 @@ public class VHistorialRecetas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelRecetar;
     private javax.swing.JTable tablaHistorialRecetas;
     private javax.swing.JTextField textoTotalResultados;
     private javax.swing.JTextField varDesde;

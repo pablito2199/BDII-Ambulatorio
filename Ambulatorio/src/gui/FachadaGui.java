@@ -29,7 +29,7 @@ public class FachadaGui {
         vp.setVisible(true);
         va.setVisible(true);
     }
-    
+
     //Permite generar una ventana para visualizar información de un trabajador
     public void nuevaVPersonal() {
         //Declaramos variables
@@ -39,7 +39,7 @@ public class FachadaGui {
         //Hacemos visible la ventana
         vP.setVisible(true);
     }
-    
+
 ////////////////////////////////
 //VENTANAS DE CITAS
 ////////////////////////////////
@@ -178,7 +178,6 @@ public class FachadaGui {
 //////////////////////
 //OTRAS VENTANAS
 //////////////////////
-
     //Permite iniciar la vista de la aplicación
     public void nuevaVAutentificacion() {
         //Generamos una ventana de autentificación que permite ingresarse en la base de datos

@@ -832,8 +832,7 @@ public class DAOCitas extends AbstractDAO {
 
             //Borramos
             stmCita.executeUpdate();
-            
-            
+
             //En caso de error se captura la excepción
         } catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje

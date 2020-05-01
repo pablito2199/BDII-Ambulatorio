@@ -173,8 +173,9 @@ public class DAOConsultas extends AbstractDAO {
             stmAmbulatorios = con.prepareStatement(consulta);
             //Sustituimos
             stmAmbulatorios.setInt(1, ambulatorio);
-            if (especialidad != null)
+            if (especialidad != null) {
                 stmAmbulatorios.setString(2, "%" + especialidad + "%");
+            }
 
             //Ejecutamos
             rsAmbulatorios = stmAmbulatorios.executeQuery();

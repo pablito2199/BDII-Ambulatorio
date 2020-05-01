@@ -3,7 +3,6 @@ package gui;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
-import aplicacion.clases.TipoCita;
 import java.sql.Date;
 
 public class VCitasPendientes extends javax.swing.JDialog {
@@ -319,24 +318,24 @@ public class VCitasPendientes extends javax.swing.JDialog {
         //Obtenemos tabla
         ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
 
-        int index= tablaCitas.getSelectedRow();
-        if (index >= 0){
-        
+        int index = tablaCitas.getSelectedRow();
+        if (index >= 0) {
+
             //Borramos cita
             fa.borrarCita(tc.obtenerCita(index));
         }
-        
+
     }//GEN-LAST:event_btnCancelarCitaActionPerformed
 
     private void btnTerminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarCitaActionPerformed
         // TODO add your handling code here:
-        
+
         //Obtenemos tabla
         ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
 
-        int index= tablaCitas.getSelectedRow();
-        if (index >= 0){
-        
+        int index = tablaCitas.getSelectedRow();
+        if (index >= 0) {
+
             //Atendemos cita cita
             fa.atenderCita(tc.obtenerCita(index));
         }
@@ -344,13 +343,13 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
     private void btnDerivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerivarActionPerformed
         // TODO add your handling code here:
-        
+
         //Obtenemos tabla
         ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
 
-        int index= tablaCitas.getSelectedRow();
-        if (index >= 0){
-        
+        int index = tablaCitas.getSelectedRow();
+        if (index >= 0) {
+
             //Derivamos a un hospital
             fa.nuevaVDerivarHospital(tc.obtenerCita(index));
         }
@@ -358,17 +357,17 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
     private void btnRecetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetarActionPerformed
         // TODO add your handling code here:
-        
+
         //Obtenemos tabla
         ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
 
-        int index= tablaCitas.getSelectedRow();
-        if (index >= 0){
-        
+        int index = tablaCitas.getSelectedRow();
+        if (index >= 0) {
+
             //Añadimos receta
             fa.nuevaVRecetar(this, tc.obtenerCita(index));
         }
-        
+
     }//GEN-LAST:event_btnRecetarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

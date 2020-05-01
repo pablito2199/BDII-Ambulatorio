@@ -151,9 +151,9 @@ public class DAOEnfermedades extends AbstractDAO {
             //Preparamos la consulta
             stmEnfermedades = con.prepareStatement(consulta);
             //Sustituimos
-            if (nombre != null)
+            if (nombre != null) {
                 stmEnfermedades.setString(1, "%" + nombre + "%"); //Nombre
-            //Ejecutamos
+            }            //Ejecutamos
             rsEnfermedad = stmEnfermedades.executeQuery();
             //Mientras haya coincidencias
             while (rsEnfermedad.next()) {

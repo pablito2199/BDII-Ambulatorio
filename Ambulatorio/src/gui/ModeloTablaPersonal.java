@@ -3,7 +3,6 @@ package gui;
 import aplicacion.clases.Personal;
 import aplicacion.clases.PersonalSanitario;
 import aplicacion.clases.PersonalNoSanitario;
-import aplicacion.clases.PersonalAdministrador;
 import javax.swing.table.*;
 
 public class ModeloTablaPersonal extends AbstractTableModel {
@@ -98,10 +97,10 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int col) {
         Object resultado = null;
-        
+
         String tipo = personal.get(row) instanceof PersonalSanitario ? "Sanitario" : "No sanitario";
-        String clase = personal.get(row) instanceof PersonalSanitario ? "sanitario" : ((PersonalNoSanitario)personal.get(row)).getClase();
-        
+        String clase = personal.get(row) instanceof PersonalSanitario ? "sanitario" : ((PersonalNoSanitario) personal.get(row)).getClase();
+
         switch (col) {
             //Permite recuperar el ID del usuario
             case 0:

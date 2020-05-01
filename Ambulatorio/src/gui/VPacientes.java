@@ -671,7 +671,7 @@ public class VPacientes extends javax.swing.JDialog {
             btnHistorialRecetas.setEnabled(false);
             return;
         }
-        if(fa.existePaciente(varCIP.getText())){
+        if (fa.existePaciente(varCIP.getText())) {
             Paciente p = new Paciente(varCIP.getText());
             fa.nuevaVHistorialMedico(this, p);
         }
@@ -689,7 +689,7 @@ public class VPacientes extends javax.swing.JDialog {
             btnHistorialRecetas.setEnabled(false);
             return;
         }
-        if(fa.existePaciente(varCIP.getText())){
+        if (fa.existePaciente(varCIP.getText())) {
             Paciente p = new Paciente(varCIP.getText());
             fa.nuevaVHistorialMedico(this, p);
         }

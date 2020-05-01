@@ -134,19 +134,19 @@ public class FachadaBaseDatos {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return daoCitas.citasMedico(medico);
     }
-    
+
     //Consulta la lista tipos de cita buscando por especialidad
-    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
+    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
         return daoCitas.obtenerTiposDeCita(especialidad);
     }
-    
+
     //Consulta la lista citas pendientes del paciente filtrada
-    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin){
+    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin) {
         return daoCitas.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
-    
+
     //Consulta la lista citas pendientes del paciente filtrada
-    public void borrarCita(Cita cita){
+    public void borrarCita(Cita cita) {
         daoCitas.borrarCita(cita);
     }
 
@@ -261,9 +261,9 @@ public class FachadaBaseDatos {
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return daoRecetas.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
     }
-    
+
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<String> consultarMedicamentos(String nombre){
+    public java.util.List<String> consultarMedicamentos(String nombre) {
         return daoRecetas.consultarMedicamentos(nombre);
     }
 
@@ -274,9 +274,9 @@ public class FachadaBaseDatos {
     public Boolean validarAdministrador(String dni, String contrasena) {
         return daoPersonal.validarAdministrador(dni, contrasena);
     }
-    
+
     //Permite recuperar la especialidad de un personal sanitario
-    public String obtenerEspecialidad(String dni){
+    public String obtenerEspecialidad(String dni) {
         return daoPersonal.obtenerEspecialidad(dni);
     }
 }
