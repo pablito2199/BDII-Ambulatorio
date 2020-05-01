@@ -83,21 +83,21 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para visualizar información sobre el historial médico del paciente
-    public void nuevaVHistorialMedico() {
+    public void nuevaVHistorialMedico(VPacientes vpac) {
         //Declaramos variables
         VHistorialMedico vHM;
         //Generamos la ventana
-        vHM = new VHistorialMedico(vp, true, fa);
+        vHM = new VHistorialMedico(vpac, true, fa);
         //Hacemos visible la ventana
         vHM.setVisible(true);
     }
 
     //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
-    public void nuevaVHistorialRecetas() {
+    public void nuevaVHistorialRecetas(VPacientes vpac) {
         //Declaramos variables
         VHistorialRecetas vHR;
         //Generamos la ventana
-        vHR = new VHistorialRecetas(vp, true, fa);
+        vHR = new VHistorialRecetas(vpac, true, fa);
         //Hacemos visible la ventana
         vHR.setVisible(true);
     }

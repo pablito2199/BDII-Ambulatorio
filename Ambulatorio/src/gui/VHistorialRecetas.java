@@ -1,12 +1,9 @@
 package gui;
 
-import aplicacion.clases.Cita;
-
 public class VHistorialRecetas extends javax.swing.JDialog {
 
-    private final VCitasPendientes padre;                           //Enlace a la ventana padre
+    private final VPacientes padre;                     //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
-    private final Cita cita;
 
     /**
      * Creates new form VPaciente
@@ -14,15 +11,13 @@ public class VHistorialRecetas extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param fa
-     * @param cita
      */
     //Constructor de la ventana
-    public VHistorialRecetas(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Cita cita) {
+    public VHistorialRecetas(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
-        padre = (VCitasPendientes) parent;
-        this.cita = cita;
+        padre = (VPacientes) parent;
     }
 
     /**
@@ -233,11 +228,17 @@ public class VHistorialRecetas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-
+        padre.buscarPacientes();
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-
+        SeleccionTipoCita.setSelectedItem(0);
+        textoDesde.setText(null);
+        textoHasta.setText(null);
+        textoMedicamentos.setText(null);
+        textoNumeroDeReceta.setText(null);
+        textoTotalResultados.setText(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
