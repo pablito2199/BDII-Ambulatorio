@@ -112,9 +112,9 @@ public class VReservarCita extends javax.swing.JDialog {
         tablaHoras.setModel(new ModeloTablaHoras(fa, pa));
         jScrollPane2.setViewportView(tablaHoras);
 
-        txtDesde.setText("01/01/2020");
+        txtDesde.setText("aaaa/mm/dd");
 
-        txtHasta.setText("01/01/2020");
+        txtHasta.setText("aaaa/mm/dd");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,10 +273,11 @@ public class VReservarCita extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private boolean fechasValidas() {
-        if (!txtDesde.getText().matches("([0-2][0-9])|(3[0-1])/(0[0-9])|(1[0-2])/2[0-9]{3}")
-                || !txtHasta.getText().matches("([0-2][0-9])|(3[0-1])/(0[0-9])|(1[0-2])/2[0-9]{3}")) {
+        //Nos aseguramos que el formato de fecha es correcto
+        if (!txtDesde.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
+                || !txtHasta.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")) {
 
-            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 01/01/2020.");
+            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000/11/22.");
             return false;
         }
         return true;

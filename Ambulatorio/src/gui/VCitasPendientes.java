@@ -260,15 +260,23 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
             inicio = Date.valueOf(txtDesde.getText());
             fin = Date.valueOf(txtHasta.getText());
-            
+
             //Vemos si inicio es igual o mayor a fin
             if (!inicio.after(fin)) {
 
                 //Obtenemos tabla
                 ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
-                
-                tc.setFilas(fa.obtenerCitas(txtAmbulatorio.getText(), txtConsulta.getText(), inicio, fin));
 
+                //Obtenemos consulta
+                Integer consulta;
+                try {
+                    consulta = Integer.parseInt(txtConsulta.getText());
+                
+                } catch (Exception e) {
+                    consulta = null;
+                }
+
+                tc.setFilas(fa.obtenerCitas(txtAmbulatorio.getText(), consulta, inicio, fin));
 
             } else {
                 fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");

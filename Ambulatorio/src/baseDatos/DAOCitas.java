@@ -764,7 +764,7 @@ public class DAOCitas extends AbstractDAO {
             stmCitas.setString(1, ambulatorio);
             stmCitas.setTimestamp(2, inicioTS);
             stmCitas.setTimestamp(3, finTS);
-            if (!busCons.isBlank()) {
+            if (!busCons.isEmpty()) {
                 stmCitas.setInt(4, consulta);
             }
 
