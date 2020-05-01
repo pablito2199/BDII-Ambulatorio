@@ -124,6 +124,11 @@ public class FachadaAplicacion {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return gcit.citasMedico(medico);
     }
+    
+    //Consulta la lista tipos de cita pertenecientes a una especialidad
+    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
+        return gcit.obtenerTiposDeCita(especialidad);
+    }
 
     //Permite generar una ventana para visualizar información de una cita
     public void nuevaVReservarCita(VCitasPendientes vcit, Ambulatorio ambulatorio, Paciente paciente) {

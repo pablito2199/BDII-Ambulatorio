@@ -662,4 +662,60 @@ public class DAOCitas extends AbstractDAO {
 
         return resultado;
     }
+
+    //Permite consultar la lista tipos de cita pertenecientes a una especialidad
+    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
+
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmTipo = null;
+        ResultSet rsTipo = null;
+        ArrayList<TipoCita> resultado = new ArrayList<>();
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Preparamos la sentencia para obtener las citas pendientes de
+            //todas las consultas donde trabaja un medico
+            stmTipo = con.prepareStatement(
+                    "select ti.* "
+                    + "from tipocita as ti "
+                    + "where ti.especialidad = ?"
+            );
+
+            //Sustituimos
+            stmTipo.setString(1, especialidad);
+
+            //Actualizamos
+            rsTipo = stmTipo.executeQuery();
+
+            //Recogemos valores de resultado
+            while (rsTipo.next()) {
+
+                resultado.add(new TipoCita(
+                        rsTipo.getString("nombre"),
+                        rsTipo.getString("especialidad"),
+                        rsTipo.getString("descripcion")
+                ));
+            }
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente intentamos cerrar cursores
+            try {
+                stmTipo.close();
+            } catch (SQLException e) {
+                //En caso de no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        return resultado;
+    }
 }

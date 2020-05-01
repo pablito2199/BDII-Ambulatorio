@@ -134,6 +134,11 @@ public class FachadaBaseDatos {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return daoCitas.citasMedico(medico);
     }
+    
+    //Consulta la lista tipos de cita pertenecientes a una especialidad
+    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
+        return daoCitas.obtenerTiposDeCita(especialidad);
+    }
 
 //////////////////////
 //DAOPACIENTES
