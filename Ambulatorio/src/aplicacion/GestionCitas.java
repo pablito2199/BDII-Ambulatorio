@@ -79,6 +79,11 @@ public class GestionCitas {
         return fbd.obtenerTiposDeCita(especialidad);
     }
     
+    //Consulta la lista citas pendientes del paciente filtrada
+    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin){
+        return fbd.obtenerCitas(ambulatorio, consulta, inicio, fin);
+    }
+    
     //Permite generar una ventana para visualizar información de una cita
     public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
         fgui.nuevaVReservarCita(vcit, paciente);
