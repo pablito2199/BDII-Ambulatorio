@@ -45,7 +45,6 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         btnBuscar = new javax.swing.JButton();
         etiquetaHasta = new javax.swing.JLabel();
         varHasta = new javax.swing.JTextField();
-        SeleccionTipoCita = new javax.swing.JComboBox<>();
         etiquetaTotalResultados = new javax.swing.JLabel();
         textoTotalResultados = new javax.swing.JTextField();
         etiquetaResultados = new javax.swing.JLabel();
@@ -55,6 +54,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         varNumeroDeReceta = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHistorialRecetas = new javax.swing.JTable();
+        comboBoxTipo = new javax.swing.JComboBox<>(new ModeloComboTipoCita());
         labelRecetar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -117,9 +117,6 @@ public class VHistorialRecetas extends javax.swing.JDialog {
 
         varHasta.setToolTipText("Domicilio");
 
-        SeleccionTipoCita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TipoCita" }));
-        SeleccionTipoCita.setToolTipText("");
-
         etiquetaTotalResultados.setText("Total resultados:");
 
         textoTotalResultados.setEditable(false);
@@ -157,15 +154,12 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                         .addComponent(varNumeroDeReceta))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SeleccionTipoCita, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(etiquetaTotalResultados)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(etiquetaResultados))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(etiquetaTotalResultados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(etiquetaResultados)
+                            .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -185,25 +179,25 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscar)
+                        .addComponent(etiquetaResultados))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(etiquetaDesde)
                             .addComponent(varDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiquetaHasta)
                             .addComponent(varHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SeleccionTipoCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(etiquetaMedicamento)
                             .addComponent(varMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiquetaNumeroDeReceta)
                             .addComponent(varNumeroDeReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBuscar)
-                        .addComponent(etiquetaResultados)))
+                        .addGap(48, 48, 48)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -311,7 +305,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         //Fecha de fin sera a las 00:00 del dia siguiente al especificado
         Timestamp inicioTS = Timestamp.valueOf(minimo);
         Timestamp finTS = Timestamp.valueOf(Fin.toLocalDate().atStartOfDay().plusDays(1));
-        
+
         m.setFilas(fa.consultarHistorialReceta(paciente, inicioTS, finTS, Num, varMedicamentos.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -320,10 +314,10 @@ public class VHistorialRecetas extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> SeleccionTipoCita;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> comboBoxTipo;
     private javax.swing.JLabel etiquetaDesde;
     private javax.swing.JLabel etiquetaHasta;
     private javax.swing.JLabel etiquetaMedicamento;
