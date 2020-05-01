@@ -44,7 +44,7 @@ public class FachadaGui {
 //VENTANAS DE CITAS
 ////////////////////////////////
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(VCitasPendientes vcit, Ambulatorio ambulatorio, Paciente paciente) {
+    public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
         //Declaramos variables
         VReservarCita vRC;
         //Generamos la ventana

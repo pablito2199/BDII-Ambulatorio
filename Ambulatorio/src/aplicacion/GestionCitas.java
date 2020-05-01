@@ -80,8 +80,8 @@ public class GestionCitas {
     }
     
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(VCitasPendientes vcit, Ambulatorio ambulatorio, Paciente paciente) {
-        fgui.nuevaVReservarCita(vcit, ambulatorio, paciente);
+    public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
+        fgui.nuevaVReservarCita(vcit, paciente);
     }
 
     //Permite generar una ventana para escoger un hospital al que derivar la cita o urgencia
