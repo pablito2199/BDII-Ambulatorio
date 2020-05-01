@@ -414,7 +414,12 @@ public class DAOCitas extends AbstractDAO {
                     + "and ci.fechaHoraInicio < ? "
                     + "and ci.fechaHoraFin is null"
                     + "and ci.consulta = ? "
-                    + "and co.ambulatorio = ? "
+                    + "and ci.ambulatorio = ? "
+                    + "and not exists (select u.cita "
+                    + "from urgencia as u "
+                    + "where u.cita = ci.fechaHoraInicio "
+                    + "and ci.consulta = u.consulta "
+                    + "and ci.ambulatorio = u.ambulatorio) "
                     + "order by fechaHoraInicio asc"
             );
 
