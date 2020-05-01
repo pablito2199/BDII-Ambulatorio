@@ -20,11 +20,11 @@ public class FachadaGui {
 //VENTANA DE CITAS
 ////////////////////////////////
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente) {
+    public void nuevaVReservarCita(VCitasPendientes vcit, Ambulatorio ambulatorio, Paciente paciente) {
         //Declaramos variables
         VReservarCita vRC;
         //Generamos la ventana
-        vRC = new VReservarCita(vp, true, fa, ambulatorio, paciente);
+        vRC = new VReservarCita(vcit, true, fa, paciente);
         //Hacemos visible la ventana
         vRC.setVisible(true);
     }
@@ -60,11 +60,11 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para insertar una nueva urgencia del paciente
-    public void nuevaVUrgencias(Paciente paciente) {
+    public void nuevaVUrgencias(VPacientes vpac, Paciente paciente) {
         //Declaramos variables
         VUrgencias vU;
         //Generamos la ventana
-        vU = new VUrgencias(vp, true, fa, paciente);
+        vU = new VUrgencias(vpac, true, fa, paciente);
         //Hacemos visible la ventana
         vU.setVisible(true);
     }

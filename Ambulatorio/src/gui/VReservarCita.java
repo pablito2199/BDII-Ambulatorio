@@ -12,18 +12,18 @@ import java.util.ArrayList;
 public class VReservarCita extends javax.swing.JDialog {
 
     private FachadaAplicacion fa;
-    private VPacientes padre;
+    private VCitasPendientes padre;
     private Paciente pa;
     private Consulta co;
 
     /**
      * Creates new form VCitas
      */
-    public VReservarCita(java.awt.Dialog parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
+    public VReservarCita(java.awt.Frame parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
         super(parent, modal);
         this.fa = fa;
         this.pa = pa;
-        this.padre = (VPacientes) parent;
+        this.padre = (VCitasPendientes) parent;
         initComponents();
 
     }
