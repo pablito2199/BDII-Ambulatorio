@@ -233,11 +233,17 @@ public class VHistorialMedico extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-
+        padre.buscarPacientes();
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-
+        SeleccionTipoCita.setSelectedItem(0);
+        textoDesde.setText(null);
+        textoHasta.setText(null);
+        textoTotalResultados.setText(null);
+        textoCitasNoAsistidas.setText(null);
+        textoCitasAtrasadas.setText(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
