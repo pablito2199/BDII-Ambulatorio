@@ -16,25 +16,15 @@ public class FachadaGui {
         this.vp = new VPrincipal(fa);
     }
 
-    //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPacientes() {
-        //Declaramos variables
-        VPacientes vP;
-        //Generamos la ventana
-        vP = new VPacientes(vp, true, fa);
-        //Hacemos visible la ventana
-        vP.setVisible(true);
-    }
-
 ////////////////////////////////
 //VENTANA DE CITAS
 ////////////////////////////////
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente) {
+    public void nuevaVReservarCita(VCitasPendientes vcit, Ambulatorio ambulatorio, Paciente paciente) {
         //Declaramos variables
         VReservarCita vRC;
         //Generamos la ventana
-        vRC = new VReservarCita(vp, true, fa, ambulatorio, paciente);
+        vRC = new VReservarCita(vcit, true, fa, paciente);
         //Hacemos visible la ventana
         vRC.setVisible(true);
     }
@@ -70,11 +60,11 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para insertar una nueva urgencia del paciente
-    public void nuevaVUrgencias(Paciente paciente) {
+    public void nuevaVUrgencias(VPacientes vpac, Paciente paciente) {
         //Declaramos variables
         VUrgencias vU;
         //Generamos la ventana
-        vU = new VUrgencias(vp, true, fa, paciente);
+        vU = new VUrgencias(vpac, true, fa, paciente);
         //Hacemos visible la ventana
         vU.setVisible(true);
     }
@@ -82,7 +72,7 @@ public class FachadaGui {
 ////////////////////////////////
 //VENTANA DE PACIENTES
 ////////////////////////////////
-    //Permite generar una ventana para visualizar información de un paciente
+    //Permite generar una ventana para visualizar información de un trabajador
     public void nuevaVPacientes() {
         //Declaramos variables
         VPacientes vP;
@@ -93,31 +83,31 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para visualizar información sobre el historial médico del paciente
-    public void nuevaVHistorialMedico() {
+    public void nuevaVHistorialMedico(VPacientes vpac) {
         //Declaramos variables
         VHistorialMedico vHM;
         //Generamos la ventana
-        vHM = new VHistorialMedico(vp, true, fa);
+        vHM = new VHistorialMedico(vpac, true, fa);
         //Hacemos visible la ventana
         vHM.setVisible(true);
     }
 
     //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
-    public void nuevaVHistorialRecetas() {
+    public void nuevaVHistorialRecetas(VPacientes vpac) {
         //Declaramos variables
         VHistorialRecetas vHR;
         //Generamos la ventana
-        vHR = new VHistorialRecetas(vp, true, fa);
+        vHR = new VHistorialRecetas(vpac, true, fa);
         //Hacemos visible la ventana
         vHR.setVisible(true);
     }
 
     //Permite generar una ventana para visualizar la gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
+    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
         //Declaramos variables
         VGestionEnfermedades vGE;
         //Generamos la ventana
-        vGE = new VGestionEnfermedades(vp, true, fa, cip, enfermedades, restoEnfermedades);
+        vGE = new VGestionEnfermedades(vpac, true, fa, cip, enfermedades, restoEnfermedades);
         //Hacemos visible la ventana
         vGE.setVisible(true);
     }
@@ -148,25 +138,15 @@ public class FachadaGui {
         vC.setVisible(true);
     }
 
-    //Permite crear una nueva ventana de consultas
-    public void nuevaVGestionarMedicos() {
-        //Declaramos
-        VGestionarMedicos vGM;
-        //Instanciamos la ventana
-        vGM = new VGestionarMedicos(parent, true, fa);
-        //La hacemos visible
-        vGM.setVisible(true);
-    }
-
 /////////////////////////////
 //VENTANA DE RECETAS
 /////////////////////////////
-    //Permite crear una nueva ventana de préstamos
-    public void nuevaVRecetar() {
+    //Permite crear una nueva ventana de recetas
+    public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
         //Declaramos
         VRecetar vR;
         //Instanciamos la ventana
-        vR = new VRecetar(parent, true, fa);
+        vR = new VRecetar(vcit, true, fa, cita);
         //La hacemos visible
         vR.setVisible(true);
     }
@@ -201,15 +181,5 @@ public class FachadaGui {
 
         va  = new VAviso(vp, true, txtExcepcion);
         va.setVisible(true);
-    }
-
-    //Permite generar una ventana que muestre excepciones
-    public void nuevaVError(String mensajeError) {
-        //Declaramos la ventana
-        VMensaje vM;
-        //Instanciamos
-        vM = new VMensaje(vp, true, mensajeError);
-        //La hacemos visible
-        vM.setVisible(true);
     }
 }

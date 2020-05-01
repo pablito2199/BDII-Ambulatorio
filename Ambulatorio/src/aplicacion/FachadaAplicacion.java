@@ -1,6 +1,8 @@
 package aplicacion;
 
 import aplicacion.clases.*;
+import gui.VCitasPendientes;
+import gui.VPacientes;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
@@ -33,9 +35,13 @@ public class FachadaAplicacion {
 
     //Main
     public static void main(String args[]) {
-        FachadaAplicacion fa;                //Declaramos la variable fachada
-        fa = new FachadaAplicacion();    //La inicializamos
-        fa.iniciarFachadaUsuario();         //Llamamos a la interfaz de usuario
+        FachadaAplicacion fa;               //Declaramos la variable fachada
+        fa = new FachadaAplicacion();       //La inicializamos
+        fa.iniciaInterfazUsuario();         //Llamamos a la interfaz de usuario
+    }
+
+    public void iniciaInterfazUsuario() {
+        fgui.iniciaVista();
     }
 
     //Comprueba si la autentificación es correcta
@@ -116,8 +122,8 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente) {
-        gcit.nuevaVReservarCita(ambulatorio, paciente);
+    public void nuevaVReservarCita(VCitasPendientes vcit, Ambulatorio ambulatorio, Paciente paciente) {
+        gcit.nuevaVReservarCita(vcit, ambulatorio, paciente);
     }
 
     //Permite generar una ventana para escoger un hospital al que derivar la cita o urgencia
@@ -126,8 +132,8 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para insertar una nueva urgencia del paciente
-    public void nuevaVUrgencias(Paciente paciente) {
-        gcit.nuevaVUrgencias(paciente);
+    public void nuevaVUrgencias(VPacientes vpac, Paciente paciente) {
+        gcit.nuevaVUrgencias(vpac, paciente);
     }
 
     //Permite generar una ventana para consultar la lista de urgencias pendientes por antender
@@ -194,8 +200,18 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una nueva ventana de gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(String cip) {
-        gpac.nuevaVGestionEnfermedades(cip, this.obtenerEnfermedadesNoPadecidas(cip, null), this.obtenerEnfermedadesPadecidas(cip, null));
+    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip) {
+        gpac.nuevaVGestionEnfermedades(vpac, cip, this.obtenerEnfermedadesNoPadecidas(cip, null), this.obtenerEnfermedadesPadecidas(cip, null));
+    }
+
+    //Permite generar una ventana para visualizar información sobre el historial médico del paciente
+    public void nuevaVHistorialMedico(VPacientes vpac) {
+        gpac.nuevaVHistorialMedico(vpac);
+    }
+
+    //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
+    public void nuevaVHistorialRecetas(VPacientes vpac) {
+        gpac.nuevaVHistorialRecetas(vpac);
     }
 
 /////////////////////////
@@ -282,5 +298,9 @@ public class FachadaAplicacion {
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Medicamento> consultarMedicamentos(String nombre){
         return grec.consultarMedicamentos(nombre);
+    
+    //Permite crear una nueva ventana de recetas
+    public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
+        grec.nuevaVRecetar(vcit, cita);
     }
 }

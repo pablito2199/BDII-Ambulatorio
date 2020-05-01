@@ -138,7 +138,7 @@
     <Component class="javax.swing.JButton" name="btnIzquierda">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/gui/Desasociar.png"/>
+          <Image iconType="3" name="/gui/flechaI.jpg"/>
         </Property>
       </Properties>
       <Events>
@@ -164,7 +164,7 @@
     <Component class="javax.swing.JButton" name="btnDerecha">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/gui/Asociar.png"/>
+          <Image iconType="3" name="/gui/flechaD.jpg"/>
         </Property>
       </Properties>
       <Events>

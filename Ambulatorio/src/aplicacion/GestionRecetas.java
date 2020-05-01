@@ -1,10 +1,12 @@
 package aplicacion;
 
+import aplicacion.clases.Cita;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Receta;
 import aplicacion.clases.Medicamento;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+import gui.VCitasPendientes;
 
 public class GestionRecetas {
 
@@ -29,5 +31,8 @@ public class GestionRecetas {
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Medicamento> consultarMedicamentos(String nombre){
         return fbd.consultarMedicamentos(nombre);
+    //Permite crear una nueva ventana de recetas
+    public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
+        fgui.nuevaVRecetar(vcit, cita);
     }
 }
