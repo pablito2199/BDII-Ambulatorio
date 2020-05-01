@@ -27,17 +27,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel4" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelRecetar" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPanel2" alignment="0" min="-2" pref="651" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="labelRecetar" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel2" alignment="0" min="-2" pref="651" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,15 +119,24 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="etiquetaMedicamento" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="varMedicamentos" min="-2" pref="315" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="etiquetaNumeroDeReceta" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="varNumeroDeReceta" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="SeleccionTipoCita" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="etiquetaTotalResultados" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="textoTotalResultados" min="-2" pref="72" max="-2" attributes="0"/>
@@ -147,11 +151,11 @@
                               <Group type="102" attributes="0">
                                   <Component id="etiquetaDesde" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="textoDesde" min="-2" pref="189" max="-2" attributes="0"/>
+                                  <Component id="varDesde" min="-2" pref="189" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="etiquetaHasta" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textoHasta" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="varHasta" min="-2" pref="165" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -159,15 +163,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="etiquetaMedicamento" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textoMedicamentos" min="-2" pref="321" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="etiquetaNumeroDeReceta" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textoNumeroDeReceta" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
@@ -181,17 +177,17 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="etiquetaDesde" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textoDesde" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="varDesde" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="etiquetaHasta" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textoHasta" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="varHasta" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="SeleccionTipoCita" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="etiquetaMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textoMedicamentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="varMedicamentos" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="etiquetaNumeroDeReceta" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textoNumeroDeReceta" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="varNumeroDeReceta" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       </Group>
@@ -200,7 +196,9 @@
                           <Component id="etiquetaResultados" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="254" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="273" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="etiquetaTotalResultados" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textoTotalResultados" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -216,7 +214,7 @@
             <Property name="text" type="java.lang.String" value="Desde:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textoDesde">
+        <Component class="javax.swing.JTextField" name="varDesde">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
           </Properties>
@@ -234,7 +232,7 @@
             <Property name="text" type="java.lang.String" value="Hasta:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textoHasta">
+        <Component class="javax.swing.JTextField" name="varHasta">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
           </Properties>
@@ -242,13 +240,11 @@
         <Component class="javax.swing.JComboBox" name="SeleccionTipoCita">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="TipoCita"/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -275,7 +271,7 @@
             <Property name="text" type="java.lang.String" value="Medicamento:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textoMedicamentos">
+        <Component class="javax.swing.JTextField" name="varMedicamentos">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
           </Properties>
@@ -285,11 +281,34 @@
             <Property name="text" type="java.lang.String" value="N&#xfa;mero de receta:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textoNumeroDeReceta">
+        <Component class="javax.swing.JTextField" name="varNumeroDeReceta">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
           </Properties>
         </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="tablaHistorialRecetas">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new ModeloTablaHistorialRecetas()" type="code"/>
+                </Property>
+                <Property name="autoscrolls" type="boolean" value="false"/>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0"/>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="labelRecetar">
