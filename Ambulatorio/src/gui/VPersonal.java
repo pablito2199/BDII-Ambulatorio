@@ -1,6 +1,5 @@
 package gui;
 
-import aplicacion.clases.Personal;
 
 public class VPersonal extends javax.swing.JDialog {
 

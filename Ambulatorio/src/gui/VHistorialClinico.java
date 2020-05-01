@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class VHistorialMedico extends javax.swing.JDialog {
+public class VHistorialClinico extends javax.swing.JDialog {
 
     private final VPacientes padre;                     //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
@@ -21,7 +21,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
      * @param paciente
      */
     //Constructor de la ventana
-    public VHistorialMedico(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, Paciente paciente) {
+    public VHistorialClinico(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, Paciente paciente) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
@@ -136,7 +136,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
 
         etiquetaTotalResultados1.setText("Total resultados:");
 
-        tablaHistorialMedico.setModel(new ModeloTablaHistorialMedico());
+        tablaHistorialMedico.setModel(new ModeloTablaHistorialClinico());
         tablaHistorialMedico.setAutoscrolls(false);
         tablaHistorialMedico.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaHistorialMedico);
@@ -256,8 +256,8 @@ public class VHistorialMedico extends javax.swing.JDialog {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
          //Creamos el modelo de tabla préstamos
-        ModeloTablaHistorialMedico m;
-        m = (ModeloTablaHistorialMedico) tablaHistorialMedico.getModel();
+        ModeloTablaHistorialClinico m;
+        m = (ModeloTablaHistorialClinico) tablaHistorialMedico.getModel();
         java.sql.Date Inicio = null;
         java.sql.Date Fin = null;
         //Fecha de fin de la receta

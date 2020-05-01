@@ -3,12 +3,12 @@ package gui;
 import aplicacion.clases.Cita;
 import javax.swing.table.*;
 
-public class ModeloTablaHistorialMedico extends AbstractTableModel {
+public class ModeloTablaHistorialClinico extends AbstractTableModel {
 
     private java.util.List<Cita> citas;   //Listado de pacientes de la tabla
 
     //Constructor
-    public ModeloTablaHistorialMedico() {
+    public ModeloTablaHistorialClinico() {
         this.citas = new java.util.ArrayList<Cita>();
     }
 
