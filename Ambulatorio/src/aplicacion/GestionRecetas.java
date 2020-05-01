@@ -2,6 +2,7 @@ package aplicacion;
 
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Receta;
+import aplicacion.clases.Medicamento;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
@@ -23,5 +24,10 @@ public class GestionRecetas {
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return fbd.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
+    }
+    
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Medicamento> consultarMedicamentos(String nombre){
+        return fbd.consultarMedicamentos(nombre);
     }
 }

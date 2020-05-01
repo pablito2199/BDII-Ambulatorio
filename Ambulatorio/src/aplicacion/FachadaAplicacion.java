@@ -48,11 +48,7 @@ public class FachadaAplicacion {
         fgui.muestraExcepcion(e);
     }
 
-    //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal() {
-        gadm.nuevaVPersonal();
-    }
-
+   
 /////////////////////////
 //GESTIÓN DE AMBULATORIOS
 /////////////////////////
@@ -281,5 +277,10 @@ public class FachadaAplicacion {
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return grec.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
+    }
+
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Medicamento> consultarMedicamentos(String nombre){
+        return grec.consultarMedicamentos(nombre);
     }
 }

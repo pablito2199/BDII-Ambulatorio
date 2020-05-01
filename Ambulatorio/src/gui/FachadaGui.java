@@ -164,9 +164,9 @@ public class FachadaGui {
     //Permite crear una nueva ventana de préstamos
     public void nuevaVRecetar() {
         //Declaramos
-        VRecetas vR;
+        VRecetar vR;
         //Instanciamos la ventana
-        vR = new VRecetas(parent, true, fa);
+        vR = new VRecetar(parent, true, fa);
         //La hacemos visible
         vR.setVisible(true);
     }

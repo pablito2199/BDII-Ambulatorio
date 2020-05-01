@@ -2,6 +2,7 @@ package baseDatos;
 
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Receta;
+import aplicacion.clases.Medicamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +33,7 @@ public class DAORecetas extends AbstractDAO {
             //Preparamos la consulta SQL para insertar en la tabla de pacientes un nuevo paciente con el id de paciente, nombre
             //clave, dirección, email y tipo de paciente especificados
             stmReceta = con.prepareStatement("insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion, fechaInicio, fechaFin) "
-                    + "values (?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "values (?, ?, ?, ?, ?, ?, current_date, ?)");
             //Sustituimos
             stmReceta.setTimestamp(1, receta.getCita());
             stmReceta.setString(2, receta.getPaciente());
@@ -40,8 +41,7 @@ public class DAORecetas extends AbstractDAO {
             stmReceta.setString(4, receta.getMedicamento());
             stmReceta.setInt(5, receta.getCantidad());
             stmReceta.setString(6, receta.getDescripcion());
-            stmReceta.setDate(7, receta.getFechaInicio());
-            stmReceta.setDate(8, receta.getFechaFin());
+            stmReceta.setDate(7, receta.getFechaFin());
 
             //Actualizamos
             stmReceta.executeUpdate();
@@ -147,4 +147,58 @@ public class DAORecetas extends AbstractDAO {
         return resultado;
     }
 
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<Medicamento> consultarMedicamentos(String nombre) {
+        //Declaramos variables
+        java.util.List<Medicamento> resultado = new java.util.ArrayList<Medicamento>();
+        Medicamento medicamentoActual;
+        Connection con;
+        PreparedStatement stmMedicamentos = null;
+        ResultSet rsMedicamentos;
+
+        //Establecemos conexión
+        con = this.getConexion();
+        
+        //Intentamos la consulta SQL
+        try {
+            //Construimos la consulta
+            String consulta = "select nombre from Medicamento where nombre like ?;";
+            //Preparamos la consulta
+            stmMedicamentos = con.prepareStatement(consulta);
+            //Sustituimos
+            stmMedicamentos.setString(1, "%" + nombre + "%");
+            
+            //Ejecutamos
+            rsMedicamentos = stmMedicamentos.executeQuery();
+            //Mientras haya coincidencias
+            while (rsMedicamentos.next()) {
+                //Se crea una instancia de cita con los datos recuperados de la base de datos
+                medicamentoActual = new Medicamento(rsMedicamentos.getString("nombre"));
+                //Y se añade la instancia a la lista de pacientes
+                resultado.add(medicamentoActual);
+            }
+        } //En caso de error se captura la excepción
+        catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            try {
+                //Como ha fallado deshacemos
+                con.rollback();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+            }
+        } finally {
+            //Finalmente se intentan cerrar cursores
+            try {
+                stmMedicamentos.close();
+            } catch (SQLException e) {
+                //Si no se puede se imprime el error
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        //Se devuelve el resultado (lista de pacientes)
+        return resultado;
+    }   
 }
