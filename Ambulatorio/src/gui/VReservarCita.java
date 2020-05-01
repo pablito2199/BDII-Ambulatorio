@@ -16,14 +16,10 @@ public class VReservarCita extends javax.swing.JDialog {
     private Paciente pa;
     private Consulta co;
 
-   /**
-    * 
-    * @param parent
-    * @param modal
-    * @param fa
-    * @param pa 
-    */
-    public VReservarCita(java.awt.Dialog parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
+    /**
+     * Creates new form VCitas
+     */
+    public VReservarCita(javax.swing.JDialog parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
         super(parent, modal);
         this.fa = fa;
         this.pa = pa;

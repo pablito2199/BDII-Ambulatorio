@@ -54,11 +54,7 @@ public class FachadaAplicacion {
         fgui.muestraExcepcion(e);
     }
 
-    //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal() {
-        gadm.nuevaVPersonal();
-    }
-
+   
 /////////////////////////
 //GESTIÓN DE AMBULATORIOS
 /////////////////////////
@@ -123,6 +119,11 @@ public class FachadaAplicacion {
     //Lista de citas pendientes de todas las consultas donde el medico trabaja
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return gcit.citasMedico(medico);
+    }
+    
+    //Consulta la lista tipos de cita pertenecientes a una especialidad
+    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
+        return gcit.obtenerTiposDeCita(especialidad);
     }
 
     //Permite generar una ventana para visualizar información de una cita
@@ -297,6 +298,11 @@ public class FachadaAplicacion {
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return grec.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
+    }
+
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<String> consultarMedicamentos(String nombre){
+        return grec.consultarMedicamentos(nombre);
     }
     
     //Permite crear una nueva ventana de recetas

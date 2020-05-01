@@ -27,6 +27,11 @@ public class GestionRecetas {
         return fbd.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
     }
     
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<String> consultarMedicamentos(String nombre){
+        return fbd.consultarMedicamentos(nombre);
+    }
+    
     //Permite crear una nueva ventana de recetas
     public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
         fgui.nuevaVRecetar(vcit, cita);

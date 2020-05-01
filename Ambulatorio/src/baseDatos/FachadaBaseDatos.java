@@ -134,6 +134,11 @@ public class FachadaBaseDatos {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return daoCitas.citasMedico(medico);
     }
+    
+    //Consulta la lista tipos de cita pertenecientes a una especialidad
+    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
+        return daoCitas.obtenerTiposDeCita(especialidad);
+    }
 
 //////////////////////
 //DAOPACIENTES
@@ -245,6 +250,11 @@ public class FachadaBaseDatos {
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return daoRecetas.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
+    }
+    
+    //Permite consultar el historial clínico de un paciente
+    public java.util.List<String> consultarMedicamentos(String nombre){
+        return daoRecetas.consultarMedicamentos(nombre);
     }
 
 ////////////////////

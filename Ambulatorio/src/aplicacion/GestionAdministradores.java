@@ -24,8 +24,5 @@ public class GestionAdministradores {
         return fbd.validarAdministrador(dni, clave);
     }
 
-    //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal() {
-        fgui.nuevaVPersonal();
-    }
+   
 }
