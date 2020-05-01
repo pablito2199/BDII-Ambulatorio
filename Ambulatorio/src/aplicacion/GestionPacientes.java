@@ -73,12 +73,12 @@ public class GestionPacientes {
     }
 
     //Permite generar una ventana para visualizar información sobre el historial médico del paciente
-    public void nuevaVHistorialMedico(VPacientes vpac) {
-        fgui.nuevaVHistorialMedico(vpac);
+    public void nuevaVHistorialMedico(VPacientes vpac, Paciente paciente) {
+        fgui.nuevaVHistorialMedico(vpac, paciente);
     }
 
     //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
-    public void nuevaVHistorialRecetas(VPacientes vpac) {
-        fgui.nuevaVHistorialRecetas(vpac);
+    public void nuevaVHistorialRecetas(VPacientes vpac, Paciente paciente) {
+        fgui.nuevaVHistorialRecetas(vpac, paciente);
     }
 }
