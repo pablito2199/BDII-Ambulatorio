@@ -49,28 +49,41 @@ public class VConsultas extends javax.swing.JDialog {
     private void initComponents() {
 
         panelUsuario = new javax.swing.JTabbedPane();
-        panelGeneral = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        etiquetaNumeroConsultasAmbulatorio = new javax.swing.JLabel();
+        textoTotalConsultas = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstConsultas = new javax.swing.JList();
         etiquetaNumeroConsulta = new javax.swing.JLabel();
         textoNumeroConsulta = new javax.swing.JTextField();
         btnBuscarConsultas = new javax.swing.JButton();
-        btnLimpiarConsultas = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lstConsultas = new javax.swing.JList();
+        btnGestionarMedicos = new javax.swing.JButton();
+        etiquetaEspecialidad = new javax.swing.JLabel();
+        seleccionEspecialidades = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
+        btnLimpiarConsultas = new javax.swing.JButton();
         btnAnadirConsultas = new javax.swing.JButton();
         btnEliminarConsultas = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        etiquetaNumeroConsultasAmbulatorio = new javax.swing.JLabel();
-        textoTotalConsultas = new javax.swing.JTextField();
-        btnGestionarMedicos = new javax.swing.JButton();
-        seleccionEspecialidades = new javax.swing.JComboBox<>();
-        etiquetaEspecialidad = new javax.swing.JLabel();
+        etiquetaConsultas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de libros");
         setResizable(false);
 
-        panelGeneral.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        etiquetaNumeroConsultasAmbulatorio.setText("Total:");
+
+        textoTotalConsultas.setEditable(false);
+
+        lstConsultas.setModel(new ModeloListaStrings());
+        lstConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstConsultasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(lstConsultas);
 
         etiquetaNumeroConsulta.setText("Número Consulta:");
 
@@ -83,25 +96,87 @@ public class VConsultas extends javax.swing.JDialog {
             }
         });
 
-        btnLimpiarConsultas.setText("Limpiar");
-        btnLimpiarConsultas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarConsultasActionPerformed(evt);
-            }
-        });
+        btnGestionarMedicos.setText("Gestionar Médicos");
+        btnGestionarMedicos.setToolTipText("");
+        btnGestionarMedicos.setActionCommand("Actualizar");
+        btnGestionarMedicos.setEnabled(false);
 
-        lstConsultas.setModel(new ModeloListaStrings());
-        lstConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lstConsultasMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(lstConsultas);
+        etiquetaEspecialidad.setText("Especialidad");
+
+        seleccionEspecialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(etiquetaNumeroConsultasAmbulatorio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(etiquetaEspecialidad)
+                                .addGap(96, 96, 96))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(textoNumeroConsulta, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(52, 52, 52)
+                                        .addComponent(btnBuscarConsultas)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnGestionarMedicos)))
+                                .addComponent(etiquetaNumeroConsulta)
+                                .addComponent(seleccionEspecialidades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(etiquetaNumeroConsulta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textoNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBuscarConsultas)
+                            .addComponent(btnGestionarMedicos))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(etiquetaEspecialidad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(seleccionEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaNumeroConsultasAmbulatorio)
+                    .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarConsultas.setText("Limpiar");
+        btnLimpiarConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarConsultasActionPerformed(evt);
             }
         });
 
@@ -120,119 +195,61 @@ public class VConsultas extends javax.swing.JDialog {
             }
         });
 
-        etiquetaNumeroConsultasAmbulatorio.setText("Total:");
-
-        textoTotalConsultas.setEditable(false);
-
-        btnGestionarMedicos.setText("Gestionar Médicos");
-        btnGestionarMedicos.setToolTipText("");
-        btnGestionarMedicos.setActionCommand("Actualizar");
-        btnGestionarMedicos.setEnabled(false);
-
-        seleccionEspecialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        etiquetaEspecialidad.setText("Especialidad");
-
-        javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
-        panelGeneral.setLayout(panelGeneralLayout);
-        panelGeneralLayout.setHorizontalGroup(
-            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGeneralLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(btnLimpiarConsultas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAnadirConsultas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminarConsultas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar)
-                        .addContainerGap())
-                    .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelGeneralLayout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(etiquetaNumeroConsultasAmbulatorio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelGeneralLayout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelGeneralLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelGeneralLayout.createSequentialGroup()
-                                        .addComponent(etiquetaNumeroConsulta)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(panelGeneralLayout.createSequentialGroup()
-                                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textoNumeroConsulta)
-                                            .addGroup(panelGeneralLayout.createSequentialGroup()
-                                                .addGap(51, 51, 51)
-                                                .addComponent(btnBuscarConsultas)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnGestionarMedicos)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(seleccionEspecialidades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addContainerGap())))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGeneralLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(etiquetaEspecialidad)
-                                .addGap(121, 121, 121))))))
-            .addGroup(panelGeneralLayout.createSequentialGroup()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        panelGeneralLayout.setVerticalGroup(
-            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGeneralLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGeneralLayout.createSequentialGroup()
-                        .addComponent(etiquetaNumeroConsulta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textoNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBuscarConsultas)
-                            .addComponent(btnGestionarMedicos))
-                        .addGap(18, 18, 18)
-                        .addComponent(etiquetaEspecialidad)
-                        .addGap(5, 5, 5)
-                        .addComponent(seleccionEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 78, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(btnLimpiarConsultas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiquetaNumeroConsultasAmbulatorio)
-                    .addComponent(textoTotalConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpiarConsultas)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnAnadirConsultas)
-                    .addComponent(btnEliminarConsultas))
+                .addComponent(btnAnadirConsultas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEliminarConsultas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                .addComponent(btnRegresar))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnLimpiarConsultas)
+                        .addComponent(btnAnadirConsultas)
+                        .addComponent(btnEliminarConsultas))
+                    .addComponent(btnRegresar))
                 .addContainerGap())
         );
 
-        panelUsuario.addTab("Consultas", panelGeneral);
+        etiquetaConsultas.setText("CONSULTAS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etiquetaConsultas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(358, 358, 358))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(etiquetaConsultas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -319,13 +336,14 @@ public class VConsultas extends javax.swing.JDialog {
     private javax.swing.JButton btnGestionarMedicos;
     private javax.swing.JButton btnLimpiarConsultas;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel etiquetaConsultas;
     private javax.swing.JLabel etiquetaEspecialidad;
     private javax.swing.JLabel etiquetaNumeroConsulta;
     private javax.swing.JLabel etiquetaNumeroConsultasAmbulatorio;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList lstConsultas;
-    private javax.swing.JPanel panelGeneral;
     private javax.swing.JTabbedPane panelUsuario;
     private javax.swing.JComboBox<String> seleccionEspecialidades;
     private javax.swing.JTextField textoNumeroConsulta;
