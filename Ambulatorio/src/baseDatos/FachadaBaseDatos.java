@@ -139,6 +139,11 @@ public class FachadaBaseDatos {
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
         return daoCitas.obtenerTiposDeCita(especialidad);
     }
+    
+    //Consulta la lista citas pendientes del paciente filtrada
+    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin){
+        return daoCitas.obtenerCitas(ambulatorio, consulta, inicio, fin);
+    }
 
 //////////////////////
 //DAOPACIENTES

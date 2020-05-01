@@ -3,6 +3,8 @@ package gui;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
+import aplicacion.clases.TipoCita;
+import java.sql.Date;
 
 public class VCitasPendientes extends javax.swing.JDialog {
 
@@ -24,6 +26,10 @@ public class VCitasPendientes extends javax.swing.JDialog {
         this.ps = ps;
         this.fa = fa;
 
+        //Ocultamos botones
+        btnCancelarCita.setVisible(false);
+        btnNuevaCita.setVisible(false);
+
         //Introducimos tipos de cita
         ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(fa.obtenerEspecialidad(ps.getDNI())));
     }
@@ -33,6 +39,11 @@ public class VCitasPendientes extends javax.swing.JDialog {
         this.padre = padre;
         this.pa = pa;
         this.fa = fa;
+
+        //Ocultamos botones
+        btnRecetar.setVisible(false);
+        btnTerminarCita.setVisible(false);
+        btnDerivar.setVisible(false);
 
         //Introducimos tipos de cita
         ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(null));
@@ -60,7 +71,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         txtAmbulatorio = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaCitas = new javax.swing.JTable();
         btnLimpiar = new javax.swing.JButton();
         btnNuevaCita = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
@@ -93,9 +104,14 @@ public class VCitasPendientes extends javax.swing.JDialog {
         labelAmbulatorio.setText("Ambulatorio:");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new ModeloTablaCitas());
-        jScrollPane1.setViewportView(jTable1);
+        tablaCitas.setModel(new ModeloTablaCitas());
+        jScrollPane1.setViewportView(tablaCitas);
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +128,11 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         btnCancelarCita.setText("Cancelar Cita");
 
@@ -224,6 +245,37 @@ public class VCitasPendientes extends javax.swing.JDialog {
         fa.nuevaVReservarCita(this, pa);
     }//GEN-LAST:event_btnNuevaCitaActionPerformed
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+
+        if (fechasValidas()) {
+
+            Date inicio, fin;
+
+            inicio = Date.valueOf(txtDesde.getText());
+            fin = Date.valueOf(txtHasta.getText());
+            
+            //Vemos si inicio es igual o mayor a fin
+            if (!inicio.after(fin)) {
+
+                //Obtenemos tabla
+                ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
+                
+                tc.setFilas(fa.obtenerCitas(txtAmbulatorio.getText(), txtConsulta.getText(), inicio, fin));
+
+
+            } else {
+                fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelarCita;
@@ -236,15 +288,25 @@ public class VCitasPendientes extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelAmbulatorio;
     private javax.swing.JLabel labelConsulta;
     private javax.swing.JLabel labelDesde;
     private javax.swing.JLabel labelHasta;
     private javax.swing.JLabel labelTipo;
+    private javax.swing.JTable tablaCitas;
     private javax.swing.JTextField txtAmbulatorio;
     private javax.swing.JTextField txtConsulta;
     private javax.swing.JTextField txtDesde;
     private javax.swing.JTextField txtHasta;
     // End of variables declaration//GEN-END:variables
+
+    private boolean fechasValidas() {
+        if (!txtDesde.getText().matches("([0-2][0-9])|(3[0-1])/(0[0-9])|(1[0-2])/2[0-9]{3}")
+                || !txtHasta.getText().matches("([0-2][0-9])|(3[0-1])/(0[0-9])|(1[0-2])/2[0-9]{3}")) {
+
+            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 01/01/2020.");
+            return false;
+        }
+        return true;
+    }
 }

@@ -61,7 +61,7 @@ public class ModeloComboTipoCita implements ComboBoxModel {
     @Override
     public Object getElementAt(int i) {
         if (i < tipos.size() && tipos != null) {
-            return tipos.get(i).getNombre();
+            return tipos.get(i).getNombre() + "-" + tipos.get(i).getEspecialidad();
         } else {
             return null;
         }

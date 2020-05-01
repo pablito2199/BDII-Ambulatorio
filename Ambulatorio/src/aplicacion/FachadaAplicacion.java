@@ -134,6 +134,11 @@ public class FachadaAplicacion {
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
         return gcit.obtenerTiposDeCita(especialidad);
     }
+    
+    //Consulta la lista citas pendientes del paciente filtrada
+    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin){
+        return gcit.obtenerCitas(ambulatorio, consulta, inicio, fin);
+    }
 
     //Permite generar una ventana para visualizar información de una cita
     public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
