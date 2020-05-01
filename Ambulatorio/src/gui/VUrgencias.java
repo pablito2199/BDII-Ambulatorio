@@ -3,6 +3,7 @@ package gui;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Paciente;
+import aplicacion.clases.TipoCita;
 import aplicacion.clases.Urgencia;
 
 import java.sql.Timestamp;
@@ -161,7 +162,7 @@ public class VUrgencias extends javax.swing.JDialog {
                     Integer.parseInt(txtGravedad.getText()),
                     Timestamp.valueOf(LocalDateTime.now()),
                     paciente.getCIP(),
-                    fa.menorNumeroPacientes(a.getCodigo(), "Urgencia").getIdentificador(),
+                    fa.menorNumeroPacientes(a.getCodigo(), TipoCita("Urgencia", "General")).getIdentificador(),
                     a.getCodigo());
 
             fa.insertarUrgencia(u);
@@ -211,5 +212,9 @@ public class VUrgencias extends javax.swing.JDialog {
 
         //Son datos validos
         return true;
+    }
+
+    private TipoCita TipoCita(String urgencia, String general) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
