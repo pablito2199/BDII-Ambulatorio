@@ -48,7 +48,6 @@ public class VConsultas extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelUsuario = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         etiquetaNumeroConsultasAmbulatorio = new javax.swing.JLabel();
         textoTotalConsultas = new javax.swing.JTextField();
@@ -233,16 +232,10 @@ public class VConsultas extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(etiquetaConsultas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(358, 358, 358))
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addComponent(etiquetaConsultas)
@@ -252,8 +245,6 @@ public class VConsultas extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        panelUsuario.getAccessibleContext().setAccessibleName("Libro");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -344,7 +335,6 @@ public class VConsultas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList lstConsultas;
-    private javax.swing.JTabbedPane panelUsuario;
     private javax.swing.JComboBox<String> seleccionEspecialidades;
     private javax.swing.JTextField textoNumeroConsulta;
     private javax.swing.JTextField textoTotalConsultas;
