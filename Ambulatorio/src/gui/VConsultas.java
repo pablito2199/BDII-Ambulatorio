@@ -55,7 +55,7 @@ public class VConsultas extends javax.swing.JDialog {
         lstConsultas = new javax.swing.JList();
         etiquetaNumeroConsulta = new javax.swing.JLabel();
         textoNumeroConsulta = new javax.swing.JTextField();
-        btnBuscarConsultas = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnGestionarMedicos = new javax.swing.JButton();
         etiquetaEspecialidad = new javax.swing.JLabel();
         seleccionEspecialidades = new javax.swing.JComboBox<>();
@@ -86,12 +86,12 @@ public class VConsultas extends javax.swing.JDialog {
 
         etiquetaNumeroConsulta.setText("Número Consulta:");
 
-        btnBuscarConsultas.setText("Buscar");
-        btnBuscarConsultas.setToolTipText("");
-        btnBuscarConsultas.setActionCommand("Actualizar");
-        btnBuscarConsultas.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("");
+        btnBuscar.setActionCommand("Actualizar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarConsultasActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -128,7 +128,7 @@ public class VConsultas extends javax.swing.JDialog {
                                     .addComponent(textoNumeroConsulta, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addGap(52, 52, 52)
-                                        .addComponent(btnBuscarConsultas)
+                                        .addComponent(btnBuscar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnGestionarMedicos)))
                                 .addComponent(etiquetaNumeroConsulta)
@@ -150,7 +150,7 @@ public class VConsultas extends javax.swing.JDialog {
                         .addComponent(textoNumeroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBuscarConsultas)
+                            .addComponent(btnBuscar)
                             .addComponent(btnGestionarMedicos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(etiquetaEspecialidad)
@@ -258,9 +258,9 @@ public class VConsultas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLimpiarConsultasActionPerformed
 
     //botón de Buscar, busca las consultas y las muestra en la lista
-    private void btnBuscarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConsultasActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarConsultas();
-    }//GEN-LAST:event_btnBuscarConsultasActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     //cuando seleccionas un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
     private void lstConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstConsultasMouseClicked
@@ -322,7 +322,7 @@ public class VConsultas extends javax.swing.JDialog {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnadirConsultas;
-    private javax.swing.JButton btnBuscarConsultas;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminarConsultas;
     private javax.swing.JButton btnGestionarMedicos;
     private javax.swing.JButton btnLimpiarConsultas;
