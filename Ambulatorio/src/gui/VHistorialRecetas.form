@@ -127,51 +127,48 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="etiquetaTotalResultados" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="textoTotalResultados" min="-2" pref="72" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="SeleccionTipoCita" alignment="1" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="etiquetaResultados" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="etiquetaDesde" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="textoDesde" min="-2" pref="189" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="etiquetaHasta" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="textoHasta" min="-2" pref="165" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                          <Component id="textoTotalResultados" min="-2" pref="72" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="SeleccionTipoCita" alignment="1" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="etiquetaResultados" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="etiquetaDesde" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="textoDesde" min="-2" pref="189" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="etiquetaHasta" min="-2" max="-2" attributes="0"/>
+                          <Component id="etiquetaMedicamento" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textoHasta" min="-2" pref="165" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="etiquetaCitasNoAsistidas" min="-2" max="-2" attributes="0"/>
+                          <Component id="textoMedicamentos" min="-2" pref="321" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textoCitasNoAsistidas" min="-2" pref="104" max="-2" attributes="0"/>
+                          <Component id="etiquetaNumeroDeReceta" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="etiquetaCitasAtrasadas" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textoCitasAtrasadas" max="32767" attributes="0"/>
+                          <Component id="textoNumeroDeReceta" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="etiquetaTotalResultados1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="551" max="32767" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -179,34 +176,35 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="etiquetaDesde" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textoDesde" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="etiquetaHasta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textoHasta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="SeleccionTipoCita" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="etiquetaDesde" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="textoDesde" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaHasta" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="textoHasta" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="SeleccionTipoCita" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="etiquetaMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="textoMedicamentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="etiquetaNumeroDeReceta" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="textoNumeroDeReceta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="etiquetaResultados" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace pref="254" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="etiquetaResultados" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="290" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="etiquetaTotalResultados" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textoTotalResultados" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="etiquetaCitasNoAsistidas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textoCitasNoAsistidas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="etiquetaCitasAtrasadas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textoCitasAtrasadas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="378" max="32767" attributes="0"/>
-                      <Component id="etiquetaTotalResultados1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -255,9 +253,9 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="etiquetaResultados">
+        <Component class="javax.swing.JLabel" name="etiquetaTotalResultados">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Resultados"/>
+            <Property name="text" type="java.lang.String" value="Total resultados:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoTotalResultados">
@@ -266,31 +264,29 @@
             <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="etiquetaCitasNoAsistidas">
+        <Component class="javax.swing.JLabel" name="etiquetaResultados">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Citas no asistidas:"/>
+            <Property name="text" type="java.lang.String" value="Resultados"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textoCitasNoAsistidas">
+        <Component class="javax.swing.JLabel" name="etiquetaMedicamento">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Medicamento:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="textoMedicamentos">
+          <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textoCitasAtrasadas">
+        <Component class="javax.swing.JLabel" name="etiquetaNumeroDeReceta">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="N&#xfa;mero de receta:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="textoNumeroDeReceta">
+          <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="etiquetaCitasAtrasadas">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Citas atrasadas:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="etiquetaTotalResultados1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Total resultados:"/>
           </Properties>
         </Component>
       </SubComponents>

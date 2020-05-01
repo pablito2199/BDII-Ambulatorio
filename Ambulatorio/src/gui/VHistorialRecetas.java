@@ -2,7 +2,7 @@ package gui;
 
 import aplicacion.clases.Cita;
 
-public class VHistorialMedico extends javax.swing.JDialog {
+public class VHistorialRecetas extends javax.swing.JDialog {
 
     private final VCitasPendientes padre;                           //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
@@ -17,7 +17,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
      * @param cita
      */
     //Constructor de la ventana
-    public VHistorialMedico(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Cita cita) {
+    public VHistorialRecetas(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Cita cita) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
@@ -44,13 +44,13 @@ public class VHistorialMedico extends javax.swing.JDialog {
         etiquetaHasta = new javax.swing.JLabel();
         textoHasta = new javax.swing.JTextField();
         SeleccionTipoCita = new javax.swing.JComboBox<>();
-        etiquetaResultados = new javax.swing.JLabel();
+        etiquetaTotalResultados = new javax.swing.JLabel();
         textoTotalResultados = new javax.swing.JTextField();
-        etiquetaCitasNoAsistidas = new javax.swing.JLabel();
-        textoCitasNoAsistidas = new javax.swing.JTextField();
-        textoCitasAtrasadas = new javax.swing.JTextField();
-        etiquetaCitasAtrasadas = new javax.swing.JLabel();
-        etiquetaTotalResultados1 = new javax.swing.JLabel();
+        etiquetaResultados = new javax.swing.JLabel();
+        etiquetaMedicamento = new javax.swing.JLabel();
+        textoMedicamentos = new javax.swing.JTextField();
+        etiquetaNumeroDeReceta = new javax.swing.JLabel();
+        textoNumeroDeReceta = new javax.swing.JTextField();
         labelRecetar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -115,22 +115,20 @@ public class VHistorialMedico extends javax.swing.JDialog {
 
         SeleccionTipoCita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        etiquetaResultados.setText("Resultados");
+        etiquetaTotalResultados.setText("Total resultados:");
 
         textoTotalResultados.setEditable(false);
         textoTotalResultados.setToolTipText("Domicilio");
 
-        etiquetaCitasNoAsistidas.setText("Citas no asistidas:");
+        etiquetaResultados.setText("Resultados");
 
-        textoCitasNoAsistidas.setEditable(false);
-        textoCitasNoAsistidas.setToolTipText("Domicilio");
+        etiquetaMedicamento.setText("Medicamento:");
 
-        textoCitasAtrasadas.setEditable(false);
-        textoCitasAtrasadas.setToolTipText("Domicilio");
+        textoMedicamentos.setToolTipText("Domicilio");
 
-        etiquetaCitasAtrasadas.setText("Citas atrasadas:");
+        etiquetaNumeroDeReceta.setText("Número de receta:");
 
-        etiquetaTotalResultados1.setText("Total resultados:");
+        textoNumeroDeReceta.setToolTipText("Domicilio");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -140,69 +138,66 @@ public class VHistorialMedico extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(SeleccionTipoCita, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(etiquetaTotalResultados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(SeleccionTipoCita, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(etiquetaResultados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(etiquetaDesde)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(etiquetaHasta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscar))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(etiquetaResultados)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(etiquetaDesde)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(etiquetaHasta)
+                        .addComponent(etiquetaMedicamento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBuscar))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(etiquetaCitasNoAsistidas)
+                        .addComponent(textoMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textoCitasNoAsistidas, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(etiquetaNumeroDeReceta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(etiquetaCitasAtrasadas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textoCitasAtrasadas)))
+                        .addComponent(textoNumeroDeReceta)))
                 .addGap(18, 18, 18))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(etiquetaTotalResultados1)
-                    .addContainerGap(551, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etiquetaDesde)
+                            .addComponent(textoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etiquetaHasta)
+                            .addComponent(textoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SeleccionTipoCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etiquetaMedicamento)
+                            .addComponent(textoMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etiquetaNumeroDeReceta)
+                            .addComponent(textoNumeroDeReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscar)
+                        .addComponent(etiquetaResultados)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiquetaDesde)
-                    .addComponent(textoDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(etiquetaHasta)
-                    .addComponent(textoHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SeleccionTipoCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(etiquetaResultados))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(etiquetaCitasNoAsistidas)
-                    .addComponent(textoCitasNoAsistidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(etiquetaCitasAtrasadas)
-                    .addComponent(textoCitasAtrasadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(etiquetaTotalResultados)
+                    .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(378, Short.MAX_VALUE)
-                    .addComponent(etiquetaTotalResultados1)
-                    .addContainerGap()))
         );
 
         labelRecetar.setText("HISTORIAL MÉDICO");
@@ -258,19 +253,19 @@ public class VHistorialMedico extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel etiquetaCitasAtrasadas;
-    private javax.swing.JLabel etiquetaCitasNoAsistidas;
     private javax.swing.JLabel etiquetaDesde;
     private javax.swing.JLabel etiquetaHasta;
+    private javax.swing.JLabel etiquetaMedicamento;
+    private javax.swing.JLabel etiquetaNumeroDeReceta;
     private javax.swing.JLabel etiquetaResultados;
-    private javax.swing.JLabel etiquetaTotalResultados1;
+    private javax.swing.JLabel etiquetaTotalResultados;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel labelRecetar;
-    private javax.swing.JTextField textoCitasAtrasadas;
-    private javax.swing.JTextField textoCitasNoAsistidas;
     private javax.swing.JTextField textoDesde;
     private javax.swing.JTextField textoHasta;
+    private javax.swing.JTextField textoMedicamentos;
+    private javax.swing.JTextField textoNumeroDeReceta;
     private javax.swing.JTextField textoTotalResultados;
     // End of variables declaration//GEN-END:variables
 
