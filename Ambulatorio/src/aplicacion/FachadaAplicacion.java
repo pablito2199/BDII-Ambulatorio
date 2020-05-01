@@ -18,7 +18,7 @@ public class FachadaAplicacion {
     GestionEnfermedades genf;                  // Enlace a la clase gestión de enfermedades
     GestionConsultas gcon;                       // Enlace a la clase gestión de consultas
     GestionRecetas grec;                          // Enlace a la clase gestión de recetas
-    GestionAdministradores gadm;              // Enlace a la clase gestión de administradores
+    GestionPersonal gadm;              // Enlace a la clase gestión de administradores
 
     //Constructor
     public FachadaAplicacion() {
@@ -30,7 +30,7 @@ public class FachadaAplicacion {
         genf = new GestionEnfermedades(fgui, fbd);
         gcon = new GestionConsultas(fgui, fbd);
         grec = new GestionRecetas(fgui, fbd);
-        gadm = new GestionAdministradores(fgui, fbd);
+        gadm = new GestionPersonal(fgui, fbd);
     }
 
     //Main
@@ -40,6 +40,15 @@ public class FachadaAplicacion {
         fa.iniciaInterfazUsuario();         //Llamamos a la interfaz de usuario
     }
 
+    //Llamada para mostrar una excepción
+    public void muestraExcepcion(String e) {
+        fgui.muestraExcepcion(e);
+    }
+
+/////////////////////////
+//GESTIÓN DE PERSONAL
+/////////////////////////
+    //Inicia la interfaz de usuario
     public void iniciaInterfazUsuario() {
         fgui.iniciaVista();
     }
@@ -49,9 +58,9 @@ public class FachadaAplicacion {
         return gadm.comprobarAutentificacion(dni, constrasena);
     }
 
-    //Llamada para mostrar una excepción
-    public void muestraExcepcion(String e) {
-        fgui.muestraExcepcion(e);
+    //Permite recuperar la especialidad de un personal sanitario
+    public String obtenerEspecialidad(String dni) {
+        return fbd.obtenerEspecialidad(dni);
     }
 
     //Permite generar una ventana para visualizar información de un trabajador
@@ -124,9 +133,9 @@ public class FachadaAplicacion {
     public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
         return gcit.citasMedico(medico);
     }
-    
-    //Consulta la lista tipos de cita pertenecientes a una especialidad
-    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
+
+    //Consulta la lista tipos de cita buscando por especialidad
+    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
         return gcit.obtenerTiposDeCita(especialidad);
     }
 
@@ -303,7 +312,7 @@ public class FachadaAplicacion {
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return grec.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
     }
-    
+
     //Permite crear una nueva ventana de recetas
     public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
         grec.nuevaVRecetar(vcit, cita);

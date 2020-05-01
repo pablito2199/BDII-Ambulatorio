@@ -1,26 +1,39 @@
 package gui;
 
+import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Consulta;
+import aplicacion.clases.PersonalSanitario;
 import java.util.ArrayList;
 
 public class VCitasPendientes extends javax.swing.JDialog {
 
-    private ArrayList<Consulta> consultas;
     private javax.swing.JDialog padre;
+    private FachadaAplicacion fa;
+    private PersonalSanitario ps;
 
     /**
      * Creates new form VCitasPendientes
+     * @param padre
+     * @param fa
+     * @param ps
      */
-    public VCitasPendientes(VPersonal padre, ArrayList<Consulta> consultas) {
+    public VCitasPendientes(VPersonal padre, FachadaAplicacion fa, PersonalSanitario ps) {
         initComponents();
         this.padre = padre;
-        this.consultas = consultas;
-        
-        
+        this.ps = ps;
+        this.fa = fa;
+
+        //Introducimos tipos de cita
+        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(fa.obtenerEspecialidad(ps.getDNI())));
     }
-    public VCitasPendientes(VPacientes padre) {
+
+    public VCitasPendientes(VPacientes padre, FachadaAplicacion fa) {
         initComponents();
         this.padre = padre;
+        this.fa = fa;
+
+        //Introducimos tipos de cita
+        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(null));
     }
 
     /**
@@ -83,6 +96,11 @@ public class VCitasPendientes extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnNuevaCita.setText("Nueva Cita");
 
@@ -183,6 +201,12 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        
+        txtDesde
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

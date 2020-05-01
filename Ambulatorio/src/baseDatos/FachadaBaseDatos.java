@@ -135,7 +135,7 @@ public class FachadaBaseDatos {
         return daoCitas.citasMedico(medico);
     }
     
-    //Consulta la lista tipos de cita pertenecientes a una especialidad
+    //Consulta la lista tipos de cita buscando por especialidad
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
         return daoCitas.obtenerTiposDeCita(especialidad);
     }
@@ -258,5 +258,10 @@ public class FachadaBaseDatos {
     //Permite recuperar un administrador de la base de datos a partir de su id y contraseña
     public Boolean validarAdministrador(String dni, String contrasena) {
         return daoPersonal.validarAdministrador(dni, contrasena);
+    }
+    
+    //Permite recuperar la especialidad de un personal sanitario
+    public String obtenerEspecialidad(String dni){
+        return daoPersonal.obtenerEspecialidad(dni);
     }
 }

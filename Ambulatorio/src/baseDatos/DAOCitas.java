@@ -663,7 +663,7 @@ public class DAOCitas extends AbstractDAO {
         return resultado;
     }
 
-    //Permite consultar la lista tipos de cita pertenecientes a una especialidad
+    //Permite consultar la lista tipos de cita buscando por especialidad
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
 
         //Declaramos variables
@@ -682,11 +682,14 @@ public class DAOCitas extends AbstractDAO {
             stmTipo = con.prepareStatement(
                     "select ti.* "
                     + "from tipocita as ti "
-                    + "where ti.especialidad = ?"
+                    + "where ti.especialidad like ?"
             );
-
+            
+            //Obtenemos string
+            String esp = especialidad == null ? "%%" : "%" + especialidad + "%";
+            
             //Sustituimos
-            stmTipo.setString(1, especialidad);
+            stmTipo.setString(1, esp);
 
             //Actualizamos
             rsTipo = stmTipo.executeQuery();

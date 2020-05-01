@@ -18,6 +18,10 @@ public class VReservarCita extends javax.swing.JDialog {
 
     /**
      * Creates new form VCitas
+     * @param parent
+     * @param modal
+     * @param fa
+     * @param pa
      */
     public VReservarCita(javax.swing.JDialog parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
         super(parent, modal);
@@ -26,6 +30,8 @@ public class VReservarCita extends javax.swing.JDialog {
         this.padre = (VCitasPendientes) parent;
         initComponents();
 
+        //Introducimos tipos de cita
+        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(null));
     }
 
     /**

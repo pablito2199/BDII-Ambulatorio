@@ -73,7 +73,7 @@ public class GestionCitas {
         return fbd.citasMedico(medico);
     }
 
-    //Consulta la lista tipos de cita pertenecientes a una especialidad
+    //Consulta la lista tipos de cita buscando por especialidad
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
         return fbd.obtenerTiposDeCita(especialidad);
     }
