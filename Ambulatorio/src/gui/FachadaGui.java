@@ -16,16 +16,6 @@ public class FachadaGui {
         this.vp = new VPrincipal(fa);
     }
 
-    //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPacientes() {
-        //Declaramos variables
-        VPacientes vP;
-        //Generamos la ventana
-        vP = new VPacientes(vp, true, fa);
-        //Hacemos visible la ventana
-        vP.setVisible(true);
-    }
-
 ////////////////////////////////
 //VENTANA DE CITAS
 ////////////////////////////////
@@ -82,7 +72,7 @@ public class FachadaGui {
 ////////////////////////////////
 //VENTANA DE PACIENTES
 ////////////////////////////////
-    //Permite generar una ventana para visualizar información de un paciente
+    //Permite generar una ventana para visualizar información de un trabajador
     public void nuevaVPacientes() {
         //Declaramos variables
         VPacientes vP;
@@ -152,11 +142,11 @@ public class FachadaGui {
 //VENTANA DE RECETAS
 /////////////////////////////
     //Permite crear una nueva ventana de recetas
-    public void nuevaVRecetar(Cita cita) {
+    public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
         //Declaramos
         VRecetar vR;
         //Instanciamos la ventana
-        vR = new VRecetar(parent, true, fa, cita);
+        vR = new VRecetar(vcit, true, fa, cita);
         //La hacemos visible
         vR.setVisible(true);
     }

@@ -1,6 +1,7 @@
 package aplicacion;
 
 import aplicacion.clases.*;
+import gui.VCitasPendientes;
 import gui.VPacientes;
 
 import java.util.ArrayList;
@@ -289,7 +290,7 @@ public class FachadaAplicacion {
     }
     
     //Permite crear una nueva ventana de recetas
-    public void nuevaVRecetar(Cita cita) {
-        grec.nuevaVRecetar(cita);
+    public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
+        grec.nuevaVRecetar(vcit, cita);
     }
 }

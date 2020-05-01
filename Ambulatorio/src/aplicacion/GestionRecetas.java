@@ -5,6 +5,7 @@ import aplicacion.clases.Paciente;
 import aplicacion.clases.Receta;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+import gui.VCitasPendientes;
 
 public class GestionRecetas {
 
@@ -27,7 +28,7 @@ public class GestionRecetas {
     }
     
     //Permite crear una nueva ventana de recetas
-    public void nuevaVRecetar(Cita cita) {
-        fgui.nuevaVRecetar(cita);
+    public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
+        fgui.nuevaVRecetar(vcit, cita);
     }
 }
