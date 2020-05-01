@@ -71,4 +71,14 @@ public class GestionPacientes {
     public void nuevaVGestionEnfermedades(VPacientes vpac, String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
         fgui.nuevaVGestionEnfermedades(vpac, cip, enfermedades, restoEnfermedades);
     }
+
+    //Permite generar una ventana para visualizar información sobre el historial médico del paciente
+    public void nuevaVHistorialMedico(VPacientes vpac) {
+        fgui.nuevaVHistorialMedico(vpac);
+    }
+
+    //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
+    public void nuevaVHistorialRecetas(VPacientes vpac) {
+        fgui.nuevaVHistorialRecetas(vpac);
+    }
 }

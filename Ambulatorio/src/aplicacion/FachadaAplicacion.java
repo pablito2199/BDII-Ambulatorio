@@ -208,6 +208,16 @@ public class FachadaAplicacion {
         gpac.nuevaVGestionEnfermedades(vpac, cip, this.obtenerEnfermedadesNoPadecidas(cip, null), this.obtenerEnfermedadesPadecidas(cip, null));
     }
 
+    //Permite generar una ventana para visualizar información sobre el historial médico del paciente
+    public void nuevaVHistorialMedico(VPacientes vpac) {
+        gpac.nuevaVHistorialMedico(vpac);
+    }
+
+    //Permite generar una ventana para visualizar información sobre el historial de recetas del paciente
+    public void nuevaVHistorialRecetas(VPacientes vpac) {
+        gpac.nuevaVHistorialRecetas(vpac);
+    }
+
 /////////////////////////
 //GESTIÓN DE ENFERMEDADES
 /////////////////////////

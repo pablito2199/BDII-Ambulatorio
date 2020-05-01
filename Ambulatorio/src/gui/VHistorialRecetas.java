@@ -1,12 +1,9 @@
 package gui;
 
-import aplicacion.clases.Cita;
-
 public class VHistorialRecetas extends javax.swing.JDialog {
 
-    private final VCitasPendientes padre;                           //Enlace a la ventana padre
+    private final VPacientes padre;                     //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
-    private final Cita cita;
 
     /**
      * Creates new form VPaciente
@@ -14,15 +11,13 @@ public class VHistorialRecetas extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param fa
-     * @param cita
      */
     //Constructor de la ventana
-    public VHistorialRecetas(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Cita cita) {
+    public VHistorialRecetas(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
-        padre = (VCitasPendientes) parent;
-        this.cita = cita;
+        padre = (VPacientes) parent;
     }
 
     /**
