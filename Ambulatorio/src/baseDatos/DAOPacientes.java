@@ -197,12 +197,22 @@ public class DAOPacientes extends AbstractDAO {
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
+            if(CIP==null)
+                CIP="";
+            if(DNI==null)
+                DNI="";
+            if(nombre==null)
+                nombre="";
+            if(sexo==null)
+                sexo="";
+            if(grupo==null)
+                grupo="";
             stmPacientes.setString(1, "%" + CIP + "%");
             stmPacientes.setString(2, "%" + DNI + "%");
             stmPacientes.setString(3, "%" + nombre + "%");
             stmPacientes.setInt(4, edad);
             stmPacientes.setString(5, "%" + sexo + "%");
-            stmPacientes.setString(6, "%" + NSS + "%");
+            stmPacientes.setInt(6, NSS);
             stmPacientes.setString(7, "%" + grupo + "%");
 
             //Ejecutamos
@@ -265,8 +275,8 @@ public class DAOPacientes extends AbstractDAO {
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
-            stmPacientes.setString(1, "%" + CIP + "%");
-            stmPacientes.setString(2, "%" + CIP + "%");
+            stmPacientes.setString(1, CIP);
+            stmPacientes.setString(2, CIP);
 
             //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
@@ -375,17 +385,9 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     
+    //////////////////////////////////////////////////////////////
+    //Autor de los siguientes métodos: Pablo Tarrío Otero
     
-    
-    
-    
-    
-    
-    
-    //Autor siguientes métodos: Pablo Tarrío Otero
-    
-
-
     //Permite recuperar las enfermedades no padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
         java.util.List<String> resultado = new java.util.ArrayList<>();

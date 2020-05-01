@@ -2,7 +2,6 @@ package baseDatos;
 
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Receta;
-import aplicacion.clases.Medicamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -165,6 +164,8 @@ public class DAORecetas extends AbstractDAO {
             //Preparamos la consulta
             stmMedicamentos = con.prepareStatement(consulta);
             //Sustituimos
+            if(nombre==null)
+                nombre="";
             stmMedicamentos.setString(1, "%" + nombre + "%");
             
             //Ejecutamos
