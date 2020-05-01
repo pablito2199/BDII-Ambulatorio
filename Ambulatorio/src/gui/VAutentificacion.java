@@ -44,7 +44,6 @@ public class VAutentificacion extends javax.swing.JDialog {
         labelGestionarPacientes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Autentificación de usuarios");
         setModal(true);
         setName("VAutentificacion"); // NOI18N
         setResizable(false);

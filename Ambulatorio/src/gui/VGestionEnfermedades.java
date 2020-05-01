@@ -75,7 +75,6 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestión de libros");
         setResizable(false);
 
         etiquetaGestionarEnfermedades.setText("GESTIONAR ENFERMEDADES");

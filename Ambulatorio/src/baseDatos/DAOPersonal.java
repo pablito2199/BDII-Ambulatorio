@@ -30,7 +30,7 @@ public class DAOPersonal extends AbstractDAO {
                     + "from personaladministrador "
                     + "where dni = ? and contrasena = ?");
             //Sustituimos
-            stmAdministrador.setString(1, dni);  //Id del usuario (nombre de usuario)
+            stmAdministrador.setString(1, dni);             //Id del usuario (nombre de usuario)
             stmAdministrador.setString(2, contrasena);      //Clave (contraseña)
             //Ejecutamos
             rsAdministrador = stmAdministrador.executeQuery();

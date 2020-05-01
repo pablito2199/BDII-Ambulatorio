@@ -8,7 +8,7 @@ import aplicacion.clases.PersonalSanitario;
 public class FachadaGui {
 
     aplicacion.FachadaAplicacion fa;     // Enlace a la fachada de aplicación
-    VPrincipal vp;                              // Enlace a la ventana principal de la aplicación
+    VPrincipal vp;                       // Enlace a la ventana principal de la aplicación
 
     //Constructor
     public FachadaGui(aplicacion.FachadaAplicacion fa) {

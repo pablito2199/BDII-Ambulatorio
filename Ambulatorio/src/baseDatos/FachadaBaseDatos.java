@@ -57,7 +57,6 @@ public class FachadaBaseDatos {
             daoConsultas = new DAOConsultas(conexion, fa);               // Enlace al DAO de Consultas
             daoRecetas = new DAORecetas(conexion, fa);                   // Enlace al DAO de Recetas
             daoPersonal = new DAOPersonal(conexion, fa);                  // Enlace al DAO de Personal
-
             //En caso de error capturamos la excepciones, imprimimos el mensaje y genereramos la ventana de excepción
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
@@ -66,7 +65,6 @@ public class FachadaBaseDatos {
             System.out.println(i.getMessage());
             fa.muestraExcepcion(i.getMessage());
         }
-
     }
 
 ////////////////

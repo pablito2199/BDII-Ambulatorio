@@ -66,7 +66,6 @@ public class VPrincipal extends javax.swing.JFrame {
         menuHospitales = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Biblioteca de Informática");
         setName("vPrincipal"); // NOI18N
         setResizable(false);
 
