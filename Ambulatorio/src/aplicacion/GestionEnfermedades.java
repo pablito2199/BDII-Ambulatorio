@@ -13,6 +13,11 @@ public class GestionEnfermedades {
     FachadaGui fgui;
     FachadaBaseDatos fbd;
 
+    /**
+     * 
+     * @param fgui
+     * @param fbd 
+     */
     public GestionEnfermedades(FachadaGui fgui, FachadaBaseDatos fbd) {
         this.fgui = fgui;
         this.fbd = fbd;

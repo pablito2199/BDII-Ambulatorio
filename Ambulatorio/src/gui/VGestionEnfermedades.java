@@ -1,8 +1,3 @@
-/*
- * VLibro.java
- *
- * Created on 16-feb-2011, 18:17:07
- */
 package gui;
 
 public class VGestionEnfermedades extends javax.swing.JDialog {
@@ -12,8 +7,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     private String cipPaciente;                                    //Paciente actual
 
     /**
-     * Creates new form VLibro
-     *
+     * 
      * @param parent
      * @param modal
      * @param fa
@@ -21,7 +15,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
      * @param enfermedades
      * @param restoEnfermedades
      */
-    //Constructor para un nuevo libro
+    //Constructor para nuevas ventanas de enfermedades asignadas
     public VGestionEnfermedades(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, String cipPaciente, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
         //Instanciamos
         super(parent, modal);
@@ -41,7 +35,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
             btnDerecha.setEnabled(false);
         }
 
-        //crea la lista de enfermedades del paciente
+        //crea la lista de enfermedades registradas del paciente
         ModeloListaStrings mListaE = new ModeloListaStrings();
         lstEnfermedadesPadecidas.setModel(mListaE);
         mListaE.setElementos(enfermedades);
@@ -253,19 +247,22 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     //Botón Limpiar, pone el campo de texto del nombre a nulo
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         textoNombre.setText(null);
-        lstRestoEnfermedades.getModel();
-        lstEnfermedadesPadecidas.getModel();
+        buscarEnfermedadesPadecidas(textoNombre.getText());
+        buscarEnfermedadesNoPadecidas(textoNombre.getText());
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Botón Actualizar, guarda correctamente las enfermedades padecidas y no padecidas por el paciente
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();
+        //actualizamos las enfermedades que padece el paciente
         fa.actualizarEnfermedadesPaciente(cipPaciente, mE.getElementos());
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     //Botón Regresar, vuelve a la ventana anterior, cerrando la ventana actual
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        //Busca los pacientes de la ventana anterior
         padre.buscarPacientes();
+        //Cerramos la ventana actual
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
@@ -295,11 +292,13 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         java.util.List<String> enfermedadesNoPadecidas;
         ModeloListaStrings mListaRE = new ModeloListaStrings();
         lstEnfermedadesPadecidas.setModel(mListaRE);
+        //obtenemos las enfermedades no padecidas por el paciente
         enfermedadesNoPadecidas = fa.obtenerEnfermedadesNoPadecidas(cipPaciente, enfermedad);
         java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
         for (int i = 0; i < enfermedadesNoPadecidas.size(); i++) {
             nombres.add(enfermedadesNoPadecidas.get(i));
         }
+        //actualizamos la lista
         mListaRE.setElementos(nombres);
         if (mListaRE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
@@ -316,11 +315,13 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         java.util.List<String> enfermedadesPadecidas;
         ModeloListaStrings mListaE = new ModeloListaStrings();
         lstEnfermedadesPadecidas.setModel(mListaE);
+        //obtenemos las enfermedades padecidas por el paciente
         enfermedadesPadecidas = fa.obtenerEnfermedadesPadecidas(cipPaciente, enfermedad);
         java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
         for (int i = 0; i < enfermedadesPadecidas.size(); i++) {
             nombres.add(enfermedadesPadecidas.get(i));
         }
+        //actualizamos la lista
         mListaE.setElementos(nombres);
         if (mListaE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
