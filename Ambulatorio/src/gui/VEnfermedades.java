@@ -1,17 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import aplicacion.clases.Enfermedad;
 
 public class VEnfermedades extends javax.swing.JDialog {
 
-    private VPrincipal padre;
-    private aplicacion.FachadaAplicacion fa;
-    private java.util.List<Enfermedad> enfermedades;
+    private VPrincipal padre;                                //Enlace a la ventana padre 
+    private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
+    private java.util.List<Enfermedad> enfermedades;         //Lista de enfermedades
 
+    /**
+     * 
+     * @param parent
+     * @param modal
+     * @param fa
+     * @param restoEnfermedades 
+     */
     public VEnfermedades(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<String> restoEnfermedades) {
         super(parent, modal);
         this.fa = fa;
@@ -207,7 +210,6 @@ public class VEnfermedades extends javax.swing.JDialog {
 
     //botón de Limpiar, pone en blanco cada uno de los huecos para poder añadir nuevas enfermedades, y actualiza la lista
     private void btnLimpiarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarEnfermedadActionPerformed
-        // TODO add your handling code here:
         textoNombre.setText(null);
         textoDescripcion.setText(null);
         //quita la selección actual de la lista
@@ -217,13 +219,11 @@ public class VEnfermedades extends javax.swing.JDialog {
 
     //botón de Buscar, busca las enfermedades y las muestra en la lista
     private void btnBuscarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEnfermedadActionPerformed
-        // TODO add your handling code here:
         buscarEnfermedades();
     }//GEN-LAST:event_btnBuscarEnfermedadActionPerformed
 
     //cuando se selecciona un elemento de la lista, los datos se pasan a la parte derecha para consultarse
     private void lstEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstEnfermedadesMouseClicked
-        // TODO add your handling code here:
         ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
         textoNombre.setText(mListaE.getElementAt(lstEnfermedades.getSelectedIndex()));
         for (Enfermedad e : enfermedades) {
@@ -236,14 +236,14 @@ public class VEnfermedades extends javax.swing.JDialog {
 
     //botón de Regresar, vuelve a la ventana anterior
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        //buscamos los ambulatorios de la ventana padre
         padre.buscarAmbulatorios();
+        //cerramos la ventana actual
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     //botón de Añadir, añade una enfermedad a la base de datos
     private void btnAnadirEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirEnfermedadActionPerformed
-        // TODO add your handling code here:
         if (!textoNombre.getText().isEmpty()) {
             Enfermedad e = new Enfermedad(textoNombre.getText(), textoDescripcion.getText());
             //si la fila está seleccionada, modifica, en caso contrario, añade la enfermedad
@@ -255,6 +255,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         } else {
             fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
         }
+        //actualizamos la lista de enfermedades
         buscarEnfermedades();
         textoNombre.setText(null);
         textoDescripcion.setText(null);
@@ -262,12 +263,13 @@ public class VEnfermedades extends javax.swing.JDialog {
 
     //botón de Eliminar, elimina una enfermedad de la base de datos
     private void btnEliminarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEnfermedadActionPerformed
-        // TODO add your handling code here:
         ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
         String nombre = mListaE.getElementAt(lstEnfermedades.getSelectedIndex());
+        //borramos la enfermedad seleccionada
         fa.borrarEnfermedad(nombre);
         textoNombre.setText(null);
         textoDescripcion.setText(null);
+        //actualizamos la lista de enfermedades
         buscarEnfermedades();
     }//GEN-LAST:event_btnEliminarEnfermedadActionPerformed
 
@@ -296,6 +298,7 @@ public class VEnfermedades extends javax.swing.JDialog {
     public void buscarEnfermedades() {
         ModeloListaStrings mListaE = new ModeloListaStrings();
         lstEnfermedades.setModel(mListaE);
+        //buscamos las enfermedades existentes
         enfermedades = fa.consultarEnfermedades(textoNombre.getText());
         java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
         for (int i = 0; i < enfermedades.size(); i++) {

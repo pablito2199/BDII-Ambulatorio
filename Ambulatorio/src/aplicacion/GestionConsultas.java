@@ -10,6 +10,11 @@ public class GestionConsultas {
     FachadaGui fgui;
     FachadaBaseDatos fbd;
 
+    /**
+     * 
+     * @param fgui
+     * @param fbd 
+     */
     public GestionConsultas(FachadaGui fgui, FachadaBaseDatos fbd) {
         this.fgui = fgui;
         this.fbd = fbd;

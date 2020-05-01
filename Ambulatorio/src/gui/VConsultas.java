@@ -1,18 +1,22 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package gui;
+    package gui;
 
 import aplicacion.clases.Consulta;
 
 public class VConsultas extends javax.swing.JDialog {
 
-    private VPrincipal padre;
-    private aplicacion.FachadaAplicacion fa;
-    private java.util.List<Consulta> consultas;
-    private Integer ambulatorio;
+    private VPrincipal padre;                                //Enlace a la ventana padre 
+    private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
+    private java.util.List<Consulta> consultas;              //Lista de consultas
+    private Integer ambulatorio;                             //Ambulatorio actual
 
+    /**
+     * 
+     * @param parent
+     * @param modal
+     * @param fa
+     * @param restoConsultas
+     * @param ambulatorio 
+     */
     public VConsultas(javax.swing.JFrame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<Integer> restoConsultas, Integer ambulatorio) {
         super(parent, modal);
         this.fa = fa;
@@ -237,9 +241,8 @@ public class VConsultas extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //botón de Limpiar, pone en blanco cada uno de los huecos para poder añadir nuevas consultas, y actualiza la lista
+    //botón de Limpiar, pone en blanco cada uno de los huecos de texto para poder añadir nuevas consultas, y actualiza la lista
     private void btnLimpiarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarConsultasActionPerformed
-        // TODO add your handling code here:
         textoNumeroConsulta.setText(null);
         //quita la selección actual de la lista
         lstConsultas.clearSelection();
@@ -248,7 +251,6 @@ public class VConsultas extends javax.swing.JDialog {
 
     //botón de Buscar, busca las consultas y las muestra en la lista
     private void btnBuscarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConsultasActionPerformed
-        // TODO add your handling code here:
         buscarConsultas();
     }//GEN-LAST:event_btnBuscarConsultasActionPerformed
 
@@ -258,19 +260,24 @@ public class VConsultas extends javax.swing.JDialog {
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
 
+        
+        
         /*SELECCIÓN DE LA ESPECIALIDAD*/
+        
+        
+        
     }//GEN-LAST:event_lstConsultasMouseClicked
 
     //botón de Regresar, vuelve a la ventana principal
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        //busca los ambulatorios en la ventana padre
         padre.buscarAmbulatorios();
+        //cerramos la ventana actual
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     //botón de Añadir, añade una consulta nueva
     private void btnAnadirConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirConsultasActionPerformed
-        // TODO add your handling code here:
         if (!textoNumeroConsulta.getText().isEmpty()) {
             Consulta c = new Consulta(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
             //si la fila está seleccionada, modifica, en caso contrario, añade la enfermedad
@@ -278,6 +285,7 @@ public class VConsultas extends javax.swing.JDialog {
         } else {
             fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
         }
+        //actualizamos la lista de consultas
         buscarConsultas();
         textoNumeroConsulta.setText(null);
         seleccionEspecialidades.setSelectedItem(0);
@@ -285,16 +293,17 @@ public class VConsultas extends javax.swing.JDialog {
 
     //botón de Eliminar, elimina una consulta
     private void btnEliminarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarConsultasActionPerformed
-        // TODO add your handling code here:
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         Integer numero = m.getElementAt(lstConsultas.getSelectedIndex());
 
+        //Intentamos borrar la consulta
         if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()) > 1) {
             fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         } else {
             fa.muestraExcepcion("¡¡No puedes eliminar esta consulta, es la única de la especialidad!!");
         }
 
+        //actualizamos la lista de consultas
         textoNumeroConsulta.setText(null);
         seleccionEspecialidades.setSelectedItem(0);
         buscarConsultas();
@@ -327,6 +336,7 @@ public class VConsultas extends javax.swing.JDialog {
     public void buscarConsultas() {
         ModeloListaIntegers m = new ModeloListaIntegers();
         lstConsultas.setModel(m);
+        //buscamos las consultas existentes
         consultas = fa.consultarConsultas(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         java.util.ArrayList<Integer> numero = new java.util.ArrayList<>();
         for (int i = 0; i < consultas.size(); i++) {

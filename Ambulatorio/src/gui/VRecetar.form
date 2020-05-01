@@ -124,23 +124,23 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="labelReceta" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="labelFechaInicio" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelFechaFin" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="varFechaInicio" pref="199" max="32767" attributes="0"/>
-                                      <Component id="varFechaFin" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labelDescripcion" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane1" min="-2" pref="285" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="labelFechaInicio" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="varCantidad" min="-2" pref="199" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="labelDescripcion" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane1" min="-2" pref="285" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="labelFechaFin" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="varFechaFin" min="-2" pref="199" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -184,7 +184,7 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="varFechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="varCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="labelFechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -221,13 +221,10 @@
             <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="varFechaInicio">
+        <Component class="javax.swing.JTextField" name="varCantidad">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="varFechaInicioActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelDescripcion">
           <Properties>
@@ -259,12 +256,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelFechaFin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha Fin:"/>
+            <Property name="text" type="java.lang.String" value="Cantidad:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelFechaInicio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha Inicio:"/>
+            <Property name="text" type="java.lang.String" value="Fecha Fin:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
