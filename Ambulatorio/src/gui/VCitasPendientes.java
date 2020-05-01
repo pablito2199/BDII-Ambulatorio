@@ -1,18 +1,19 @@
 package gui;
 
 import aplicacion.FachadaAplicacion;
-import aplicacion.clases.Consulta;
+import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
-import java.util.ArrayList;
 
 public class VCitasPendientes extends javax.swing.JDialog {
 
     private javax.swing.JDialog padre;
     private FachadaAplicacion fa;
     private PersonalSanitario ps;
+    private Paciente pa;
 
     /**
      * Creates new form VCitasPendientes
+     *
      * @param padre
      * @param fa
      * @param ps
@@ -27,9 +28,10 @@ public class VCitasPendientes extends javax.swing.JDialog {
         ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(fa.obtenerEspecialidad(ps.getDNI())));
     }
 
-    public VCitasPendientes(VPacientes padre, FachadaAplicacion fa) {
+    public VCitasPendientes(VPacientes padre, FachadaAplicacion fa, Paciente pa) {
         initComponents();
         this.padre = padre;
+        this.pa = pa;
         this.fa = fa;
 
         //Introducimos tipos de cita
@@ -55,7 +57,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         labelTipo = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox<>();
         labelAmbulatorio = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtAmbulatorio = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -103,6 +105,11 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnNuevaCita.setText("Nueva Cita");
+        btnNuevaCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaCitaActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setText("Regresar");
 
@@ -153,7 +160,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(labelAmbulatorio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAmbulatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -181,7 +188,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
                     .addComponent(labelTipo)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelAmbulatorio)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAmbulatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,9 +211,18 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
-        
-        txtDesde
+
+        txtDesde.setText(null);
+        txtHasta.setText(null);
+        txtConsulta.setText(null);
+        txtAmbulatorio.setText(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnNuevaCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCitaActionPerformed
+        // TODO add your handling code here:
+
+        fa.nuevaVReservarCita(this, pa);
+    }//GEN-LAST:event_btnNuevaCitaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -221,12 +237,12 @@ public class VCitasPendientes extends javax.swing.JDialog {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelAmbulatorio;
     private javax.swing.JLabel labelConsulta;
     private javax.swing.JLabel labelDesde;
     private javax.swing.JLabel labelHasta;
     private javax.swing.JLabel labelTipo;
+    private javax.swing.JTextField txtAmbulatorio;
     private javax.swing.JTextField txtConsulta;
     private javax.swing.JTextField txtDesde;
     private javax.swing.JTextField txtHasta;
