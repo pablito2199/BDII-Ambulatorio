@@ -628,7 +628,7 @@ public class VPacientes extends javax.swing.JDialog {
 
     private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
         ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
-        fa.nuevaVGestionEnfermedades(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
+        fa.nuevaVGestionEnfermedades(this, m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
     }//GEN-LAST:event_btnEnfermedadesActionPerformed
 
     private void btnSolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCitaActionPerformed

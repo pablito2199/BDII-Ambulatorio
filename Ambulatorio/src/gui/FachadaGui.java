@@ -113,11 +113,11 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para visualizar la gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
+    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
         //Declaramos variables
         VGestionEnfermedades vGE;
         //Generamos la ventana
-        vGE = new VGestionEnfermedades(vp, true, fa, cip, enfermedades, restoEnfermedades);
+        vGE = new VGestionEnfermedades(vpac, true, fa, cip, enfermedades, restoEnfermedades);
         //Hacemos visible la ventana
         vGE.setVisible(true);
     }
@@ -148,25 +148,15 @@ public class FachadaGui {
         vC.setVisible(true);
     }
 
-    //Permite crear una nueva ventana de consultas
-    public void nuevaVGestionarMedicos() {
-        //Declaramos
-        VGestionarMedicos vGM;
-        //Instanciamos la ventana
-        vGM = new VGestionarMedicos(parent, true, fa);
-        //La hacemos visible
-        vGM.setVisible(true);
-    }
-
 /////////////////////////////
 //VENTANA DE RECETAS
 /////////////////////////////
-    //Permite crear una nueva ventana de préstamos
-    public void nuevaVRecetar() {
+    //Permite crear una nueva ventana de recetas
+    public void nuevaVRecetar(Cita cita) {
         //Declaramos
-        VRecetas vR;
+        VRecetar vR;
         //Instanciamos la ventana
-        vR = new VRecetas(parent, true, fa);
+        vR = new VRecetar(parent, true, fa, cita);
         //La hacemos visible
         vR.setVisible(true);
     }
@@ -201,15 +191,5 @@ public class FachadaGui {
 
         va  = new VAviso(vp, true, txtExcepcion);
         va.setVisible(true);
-    }
-
-    //Permite generar una ventana que muestre excepciones
-    public void nuevaVError(String mensajeError) {
-        //Declaramos la ventana
-        VMensaje vM;
-        //Instanciamos
-        vM = new VMensaje(vp, true, mensajeError);
-        //La hacemos visible
-        vM.setVisible(true);
     }
 }

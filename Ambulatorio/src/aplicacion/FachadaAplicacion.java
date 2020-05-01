@@ -1,6 +1,7 @@
 package aplicacion;
 
 import aplicacion.clases.*;
+import gui.VPacientes;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
@@ -33,9 +34,13 @@ public class FachadaAplicacion {
 
     //Main
     public static void main(String args[]) {
-        FachadaAplicacion fa;                //Declaramos la variable fachada
-        fa = new FachadaAplicacion();    //La inicializamos
-        fa.iniciarFachadaUsuario();         //Llamamos a la interfaz de usuario
+        FachadaAplicacion fa;               //Declaramos la variable fachada
+        fa = new FachadaAplicacion();       //La inicializamos
+        fa.iniciaInterfazUsuario();         //Llamamos a la interfaz de usuario
+    }
+
+    public void iniciaInterfazUsuario() {
+        fgui.iniciaVista();
     }
 
     //Comprueba si la autentificación es correcta
@@ -198,8 +203,8 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una nueva ventana de gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(String cip) {
-        gpac.nuevaVGestionEnfermedades(cip, this.obtenerEnfermedadesNoPadecidas(cip, null), this.obtenerEnfermedadesPadecidas(cip, null));
+    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip) {
+        gpac.nuevaVGestionEnfermedades(vpac, cip, this.obtenerEnfermedadesNoPadecidas(cip, null), this.obtenerEnfermedadesPadecidas(cip, null));
     }
 
 /////////////////////////
@@ -281,5 +286,10 @@ public class FachadaAplicacion {
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return grec.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
+    }
+    
+    //Permite crear una nueva ventana de recetas
+    public void nuevaVRecetar(Cita cita) {
+        grec.nuevaVRecetar(cita);
     }
 }

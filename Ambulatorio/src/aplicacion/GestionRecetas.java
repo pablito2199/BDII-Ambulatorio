@@ -1,5 +1,6 @@
 package aplicacion;
 
+import aplicacion.clases.Cita;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Receta;
 import gui.FachadaGui;
@@ -23,5 +24,10 @@ public class GestionRecetas {
     //Permite consultar el historial clínico de un paciente
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
         return fbd.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
+    }
+    
+    //Permite crear una nueva ventana de recetas
+    public void nuevaVRecetar(Cita cita) {
+        fgui.nuevaVRecetar(cita);
     }
 }

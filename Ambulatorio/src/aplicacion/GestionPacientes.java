@@ -5,6 +5,7 @@ import aplicacion.clases.Cita;
 import aplicacion.clases.TipoCita;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+import gui.VPacientes;
 
 public class GestionPacientes {
 
@@ -67,7 +68,7 @@ public class GestionPacientes {
     }
 
     //Permite generar una nueva ventana de gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
-        fgui.nuevaVGestionEnfermedades(cip, enfermedades, restoEnfermedades);
+    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
+        fgui.nuevaVGestionEnfermedades(vpac, cip, enfermedades, restoEnfermedades);
     }
 }
