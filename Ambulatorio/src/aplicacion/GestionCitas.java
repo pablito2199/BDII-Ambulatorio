@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+import gui.VCitasPendientes;
+import gui.VPacientes;
 
 public class GestionCitas {
 
@@ -72,8 +74,8 @@ public class GestionCitas {
     }
 
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente) {
-        fgui.nuevaVReservarCita(ambulatorio, paciente);
+    public void nuevaVReservarCita(VCitasPendientes vcit, Ambulatorio ambulatorio, Paciente paciente) {
+        fgui.nuevaVReservarCita(vcit, ambulatorio, paciente);
     }
 
     //Permite generar una ventana para escoger un hospital al que derivar la cita o urgencia
@@ -82,8 +84,8 @@ public class GestionCitas {
     }
 
     //Permite generar una ventana para insertar una nueva urgencia del paciente
-    public void nuevaVUrgencias(Paciente paciente) {
-        fgui.nuevaVUrgencias(paciente);
+    public void nuevaVUrgencias(VPacientes vpac, Paciente paciente) {
+        fgui.nuevaVUrgencias(vpac, paciente);
     }
 
     //Permite generar una ventana para consultar la lista de urgencias pendientes por antender

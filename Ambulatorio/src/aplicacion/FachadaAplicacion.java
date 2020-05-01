@@ -126,8 +126,8 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(Ambulatorio ambulatorio, Paciente paciente) {
-        gcit.nuevaVReservarCita(ambulatorio, paciente);
+    public void nuevaVReservarCita(VCitasPendientes vcit, Ambulatorio ambulatorio, Paciente paciente) {
+        gcit.nuevaVReservarCita(vcit, ambulatorio, paciente);
     }
 
     //Permite generar una ventana para escoger un hospital al que derivar la cita o urgencia
@@ -136,8 +136,8 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para insertar una nueva urgencia del paciente
-    public void nuevaVUrgencias(Paciente paciente) {
-        gcit.nuevaVUrgencias(paciente);
+    public void nuevaVUrgencias(VPacientes vpac, Paciente paciente) {
+        gcit.nuevaVUrgencias(vpac, paciente);
     }
 
     //Permite generar una ventana para consultar la lista de urgencias pendientes por antender
