@@ -275,10 +275,8 @@ public class DAOPacientes extends AbstractDAO {
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
-            if(CIP==null)
-                CIP="";
-            stmPacientes.setString(1, "%" + CIP + "%");
-            stmPacientes.setString(2, "%" + CIP + "%");
+            stmPacientes.setString(1, CIP);
+            stmPacientes.setString(2, CIP);
 
             //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
