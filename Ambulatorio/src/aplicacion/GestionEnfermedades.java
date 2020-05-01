@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package aplicacion;
 
 import aplicacion.clases.Enfermedad;
@@ -14,9 +10,9 @@ public class GestionEnfermedades {
     FachadaBaseDatos fbd;
 
     /**
-     * 
+     *
      * @param fgui
-     * @param fbd 
+     * @param fbd
      */
     public GestionEnfermedades(FachadaGui fgui, FachadaBaseDatos fbd) {
         this.fgui = fgui;

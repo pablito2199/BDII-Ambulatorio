@@ -1,6 +1,5 @@
 package gui;
 
-import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Urgencia;
 import javax.swing.table.*;
 

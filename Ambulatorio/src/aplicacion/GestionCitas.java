@@ -75,20 +75,20 @@ public class GestionCitas {
     }
 
     //Consulta la lista tipos de cita buscando por especialidad
-    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad){
+    public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
         return fbd.obtenerTiposDeCita(especialidad);
     }
-    
+
     //Consulta la lista citas pendientes del paciente filtrada
-    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin){
+    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin) {
         return fbd.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
-    
+
     //Consulta la lista citas pendientes del paciente filtrada
-    public void borrarCita(Cita cita){
+    public void borrarCita(Cita cita) {
         fbd.borrarCita(cita);
     }
-    
+
     //Permite generar una ventana para visualizar información de una cita
     public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
         fgui.nuevaVReservarCita(vcit, paciente);

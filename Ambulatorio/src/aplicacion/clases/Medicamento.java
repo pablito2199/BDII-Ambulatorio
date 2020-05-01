@@ -7,19 +7,17 @@ public class Medicamento {
 
     //Constructor
     public Medicamento(String nombre, String prospecto) {
-        this.nombre=nombre;
-        this. prospecto=prospecto;
+        this.nombre = nombre;
+        this.prospecto = prospecto;
     }
 
     //Constructor para búsquedas en Recetas
     public Medicamento(String nombre) {
         this.nombre = nombre;
-        prospecto = "No disponible en estos momentos"; 
+        prospecto = "No disponible en estos momentos";
     }
-    
-    
-    //Setters y Getters
 
+    //Setters y Getters
     public String getNombre() {
         return nombre;
     }

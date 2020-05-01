@@ -18,15 +18,10 @@ public class GestionPersonal {
     public Boolean comprobarAutentificacion(String dni, String clave) {
         return fbd.validarAdministrador(dni, clave);
     }
-    
-    //Permite recuperar la especialidad de un personal sanitario
-    public String obtenerEspecialidad(String dni){
-        return fbd.obtenerEspecialidad(dni);
-    }
 
-    //Permite abrir una nueva ventana de usuarios para autentificarse
-    public void iniciaInterfazUsuario() {
-        fgui.iniciaVista();
+    //Permite recuperar la especialidad de un personal sanitario
+    public String obtenerEspecialidad(String dni) {
+        return fbd.obtenerEspecialidad(dni);
     }
 
     //Permite generar una ventana para visualizar información de un trabajador

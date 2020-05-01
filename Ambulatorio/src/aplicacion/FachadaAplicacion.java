@@ -53,15 +53,15 @@ public class FachadaAplicacion {
     public Boolean comprobarAutentificacion(String dni, String constrasena) {
         return gper.comprobarAutentificacion(dni, constrasena);
     }
-    
+
     //Permite recuperar la especialidad de un personal sanitario
     public String obtenerEspecialidad(String dni) {
         return fbd.obtenerEspecialidad(dni);
     }
-    
+
     //Permite abrir una nueva ventana de usuarios para autentificarse
     public void iniciaInterfazUsuario() {
-        gper.iniciaInterfazUsuario();
+        fgui.iniciaVista();
     }
 
     //Permite generar una ventana para visualizar información de un trabajador
@@ -139,14 +139,14 @@ public class FachadaAplicacion {
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
         return gcit.obtenerTiposDeCita(especialidad);
     }
-    
+
     //Consulta la lista citas pendientes del paciente filtrada
-    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin){
+    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin) {
         return gcit.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
-    
+
     //Consulta la lista citas pendientes del paciente filtrada
-    public void borrarCita(Cita cita){
+    public void borrarCita(Cita cita) {
         gcit.borrarCita(cita);
     }
 
@@ -325,10 +325,10 @@ public class FachadaAplicacion {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<String> consultarMedicamentos(String nombre){
+    public java.util.List<String> consultarMedicamentos(String nombre) {
         return grec.consultarMedicamentos(nombre);
     }
-    
+
     //Permite crear una nueva ventana de recetas
     public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
         grec.nuevaVRecetar(vcit, cita);

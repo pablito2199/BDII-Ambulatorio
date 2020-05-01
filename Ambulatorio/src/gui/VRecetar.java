@@ -59,7 +59,6 @@ public class VRecetar extends javax.swing.JDialog {
         labelRecetar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestión de usuarios");
         setResizable(false);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -246,8 +245,8 @@ public class VRecetar extends javax.swing.JDialog {
     //Función que permite guardar el usuario en la base de datos
     private void btnRecetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetarActionPerformed
         //Comprobarmos que no haya ningún campo obligatorio sin cubrir
-        if (varFechaFin.getText().isEmpty() || varCantidad.getText().isEmpty() || 
-                varDescripcion.getText().isEmpty() || listaMedicamentos.getSelectedIndex()==-1) {
+        if (varFechaFin.getText().isEmpty() || varCantidad.getText().isEmpty()
+                || varDescripcion.getText().isEmpty() || listaMedicamentos.getSelectedIndex() == -1) {
             //Si lo hay activamos el aviso
             fa.muestraExcepcion("Necesitas rellenar todos los campos antes de poder recetar");
             //Regresamos
@@ -283,7 +282,7 @@ public class VRecetar extends javax.swing.JDialog {
             }
         }
         //Instanciamos la receta
-        Receta r = new Receta(cita.getFechaHoraInicio(), cita.getPaciente(), cita.getConsulta(),  cita.getAmbulatorio(), 
+        Receta r = new Receta(cita.getFechaHoraInicio(), cita.getPaciente(), cita.getConsulta(), cita.getAmbulatorio(),
                 varDescripcion.getText(), fecha, varMedicamento.getText(), cantidad);
         fa.insertarReceta(r);
         //Finalmente regresamos a citas

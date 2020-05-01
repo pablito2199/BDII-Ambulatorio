@@ -123,7 +123,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
         this.ambulatorios.clear();
         this.consultas.clear();
         this.horas.clear();
-        
+
         //Creamos array de horas posibles desde las 9 hasta las 17 
         LocalTime t = LocalTime.of(9, 0);
         ArrayList<LocalTime> arr = new ArrayList<>();
@@ -173,7 +173,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
     public Timestamp obtenerFechaHora(int i) {
         return this.horas.get(i);
     }
-    
+
     //Permite recuperar la Consulta especificada
     public Consulta obtenerConsulta(Ambulatorio ambulatorio) {
         return this.consultas.get(ambulatorio);

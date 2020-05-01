@@ -40,7 +40,6 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Biblioteca de Inform&#xe1;tica"/>
     <Property name="name" type="java.lang.String" value="vPrincipal" noResource="true"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>

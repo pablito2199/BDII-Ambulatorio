@@ -156,7 +156,7 @@ public class DAORecetas extends AbstractDAO {
 
         //Establecemos conexión
         con = this.getConexion();
-        
+
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
@@ -164,10 +164,11 @@ public class DAORecetas extends AbstractDAO {
             //Preparamos la consulta
             stmMedicamentos = con.prepareStatement(consulta);
             //Sustituimos
-            if(nombre==null)
-                nombre="";
+            if (nombre == null) {
+                nombre = "";
+            }
             stmMedicamentos.setString(1, "%" + nombre + "%");
-            
+
             //Ejecutamos
             rsMedicamentos = stmMedicamentos.executeQuery();
             //Mientras haya coincidencias
@@ -198,5 +199,5 @@ public class DAORecetas extends AbstractDAO {
         }
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
-    }   
+    }
 }

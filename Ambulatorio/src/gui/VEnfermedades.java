@@ -9,11 +9,11 @@ public class VEnfermedades extends javax.swing.JDialog {
     private java.util.List<Enfermedad> enfermedades;         //Lista de enfermedades
 
     /**
-     * 
+     *
      * @param parent
      * @param modal
      * @param fa
-     * @param restoEnfermedades 
+     * @param restoEnfermedades
      */
     public VEnfermedades(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<String> restoEnfermedades) {
         super(parent, modal);
@@ -63,7 +63,6 @@ public class VEnfermedades extends javax.swing.JDialog {
         etiquetaEnfermedades = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestión de libros");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

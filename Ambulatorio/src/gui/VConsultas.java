@@ -1,4 +1,4 @@
-    package gui;
+package gui;
 
 import aplicacion.clases.Consulta;
 
@@ -10,12 +10,12 @@ public class VConsultas extends javax.swing.JDialog {
     private Integer ambulatorio;                             //Ambulatorio actual
 
     /**
-     * 
+     *
      * @param parent
      * @param modal
      * @param fa
      * @param restoConsultas
-     * @param ambulatorio 
+     * @param ambulatorio
      */
     public VConsultas(javax.swing.JFrame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<Integer> restoConsultas, Integer ambulatorio) {
         super(parent, modal);
@@ -67,7 +67,6 @@ public class VConsultas extends javax.swing.JDialog {
         etiquetaConsultas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestión de libros");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -268,12 +267,7 @@ public class VConsultas extends javax.swing.JDialog {
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
 
-        
-        
         /*SELECCIÓN DE LA ESPECIALIDAD*/
-        
-        
-        
     }//GEN-LAST:event_lstConsultasMouseClicked
 
     //botón de Regresar, vuelve a la ventana principal
