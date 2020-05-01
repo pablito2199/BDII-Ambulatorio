@@ -84,6 +84,11 @@ public class GestionCitas {
         return fbd.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
     
+    //Consulta la lista citas pendientes del paciente filtrada
+    public void borrarCita(Cita cita){
+        fbd.borrarCita(cita);
+    }
+    
     //Permite generar una ventana para visualizar información de una cita
     public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
         fgui.nuevaVReservarCita(vcit, paciente);

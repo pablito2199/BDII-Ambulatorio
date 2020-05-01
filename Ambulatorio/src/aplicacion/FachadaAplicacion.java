@@ -144,6 +144,11 @@ public class FachadaAplicacion {
     public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin){
         return gcit.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
+    
+    //Consulta la lista citas pendientes del paciente filtrada
+    public void borrarCita(Cita cita){
+        gcit.borrarCita(cita);
+    }
 
     //Permite generar una ventana para visualizar información de una cita
     public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {

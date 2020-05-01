@@ -238,21 +238,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar Cita"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarCitaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRecetar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Recetar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRecetarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDerivar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Derivar al Hospital"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDerivarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTerminarCita">
       <Properties>
         <Property name="text" type="java.lang.String" value="Terminar Cita"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTerminarCitaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

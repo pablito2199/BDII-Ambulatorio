@@ -139,12 +139,32 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnCancelarCita.setText("Cancelar Cita");
+        btnCancelarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarCitaActionPerformed(evt);
+            }
+        });
 
         btnRecetar.setText("Recetar");
+        btnRecetar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecetarActionPerformed(evt);
+            }
+        });
 
         btnDerivar.setText("Derivar al Hospital");
+        btnDerivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDerivarActionPerformed(evt);
+            }
+        });
 
         btnTerminarCita.setText("Terminar Cita");
+        btnTerminarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarCitaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -262,15 +282,14 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
             Date inicio, fin;
 
-            try{
-            inicio = Date.valueOf(txtDesde.getText());
-            fin = Date.valueOf(txtHasta.getText());
-            }
-            catch(Exception e){
+            try {
+                inicio = Date.valueOf(txtDesde.getText());
+                fin = Date.valueOf(txtHasta.getText());
+            } catch (Exception e) {
                 inicio = null;
                 fin = null;
             }
-            
+
             //Vemos si inicio es igual o mayor a fin
             if (!inicio.after(fin)) {
 
@@ -281,7 +300,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
                 Integer consulta;
                 try {
                     consulta = Integer.parseInt(txtConsulta.getText());
-                
+
                 } catch (Exception e) {
                     consulta = null;
                 }
@@ -293,6 +312,64 @@ public class VCitasPendientes extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnCancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCitaActionPerformed
+        // TODO add your handling code here:
+
+        //Obtenemos tabla
+        ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
+
+        int index= tablaCitas.getSelectedRow();
+        if (index >= 0){
+        
+            //Borramos cita
+            fa.borrarCita(tc.obtenerCita(index));
+        }
+        
+    }//GEN-LAST:event_btnCancelarCitaActionPerformed
+
+    private void btnTerminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarCitaActionPerformed
+        // TODO add your handling code here:
+        
+        //Obtenemos tabla
+        ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
+
+        int index= tablaCitas.getSelectedRow();
+        if (index >= 0){
+        
+            //Atendemos cita cita
+            fa.atenderCita(tc.obtenerCita(index));
+        }
+    }//GEN-LAST:event_btnTerminarCitaActionPerformed
+
+    private void btnDerivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerivarActionPerformed
+        // TODO add your handling code here:
+        
+        //Obtenemos tabla
+        ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
+
+        int index= tablaCitas.getSelectedRow();
+        if (index >= 0){
+        
+            //Derivamos a un hospital
+            fa.nuevaVDerivarHospital(tc.obtenerCita(index));
+        }
+    }//GEN-LAST:event_btnDerivarActionPerformed
+
+    private void btnRecetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetarActionPerformed
+        // TODO add your handling code here:
+        
+        //Obtenemos tabla
+        ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
+
+        int index= tablaCitas.getSelectedRow();
+        if (index >= 0){
+        
+            //Añadimos receta
+            fa.nuevaVRecetar(this, tc.obtenerCita(index));
+        }
+        
+    }//GEN-LAST:event_btnRecetarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -319,10 +396,10 @@ public class VCitasPendientes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private boolean fechasValidas() {
-        if (!txtDesde.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
-                || !txtHasta.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
-                || !txtDesde.getText().equals("aaaa-mm-dd")
-                || !txtHasta.getText().equals("aaaa-mm-dd")) {
+        if ((!txtDesde.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
+                || !txtHasta.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])"))
+                && (!txtDesde.getText().equals("aaaa-mm-dd")
+                || !txtHasta.getText().equals("aaaa-mm-dd"))) {
             fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000/11/22.");
             return false;
         }

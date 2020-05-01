@@ -144,6 +144,11 @@ public class FachadaBaseDatos {
     public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin){
         return daoCitas.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
+    
+    //Consulta la lista citas pendientes del paciente filtrada
+    public void borrarCita(Cita cita){
+        daoCitas.borrarCita(cita);
+    }
 
 //////////////////////
 //DAOPACIENTES

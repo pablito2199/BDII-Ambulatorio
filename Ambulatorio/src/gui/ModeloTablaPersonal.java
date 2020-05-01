@@ -1,11 +1,14 @@
 package gui;
 
-import aplicacion.clases.Administrador;
+import aplicacion.clases.Personal;
+import aplicacion.clases.PersonalSanitario;
+import aplicacion.clases.PersonalNoSanitario;
+import aplicacion.clases.PersonalAdministrador;
 import javax.swing.table.*;
 
 public class ModeloTablaPersonal extends AbstractTableModel {
 
-    private java.util.List<Administrador> personal;   //Listado del personal de la tabla
+    private java.util.List<Personal> personal;   //Listado del personal de la tabla
 
     //Constructor
     public ModeloTablaPersonal() {
@@ -15,7 +18,7 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     //Permite recuperar el número de columnas
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
 
     //Permite recuperar el número de filas
@@ -73,9 +76,9 @@ public class ModeloTablaPersonal extends AbstractTableModel {
                 break;
             //La clase es un String
             case 3:
-                clase = java.lang.Integer.class;
+                clase = java.lang.String.class;
                 break;
-            //El teléfono es un Integer
+            //El teléfono es un String
             case 4:
                 clase = java.lang.String.class;
                 break;
@@ -95,6 +98,10 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int col) {
         Object resultado = null;
+        
+        String tipo = personal.get(row) instanceof PersonalSanitario ? "Sanitario" : "No sanitario";
+        String clase = personal.get(row) instanceof PersonalSanitario ? "sanitario" : ((PersonalNoSanitario)personal.get(row)).getClase();
+        
         switch (col) {
             //Permite recuperar el ID del usuario
             case 0:
@@ -104,20 +111,17 @@ public class ModeloTablaPersonal extends AbstractTableModel {
             case 1:
                 resultado = personal.get(row).getNombre();
                 break;
-            //Permite recuperar el email
+            //Permite recuperar el tipo
             case 2:
-                resultado = personal.get(row).getRango();
+                resultado = tipo;
                 break;
-            //Permite recuperar el tipo del usuario (Administrador o normal)
+            //Permite recuperar la clase del trabajador
             case 3:
-                resultado = personal.get(row).getEdad();
+                resultado = clase;
                 break;
-            //Permite recuperar la edad del usuario
+            //Permite recuperar el telefono
             case 4:
-                resultado = personal.get(row).getSexo();
-                break;
-            case 5:
-                resultado = personal.get(row).getGrupo();
+                resultado = personal.get(row).getTelefono();
                 break;
         }
         //Devolvemos el valor recuperado
@@ -125,14 +129,14 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     }
 
     //Permite sobreescribir las filas de la tabla
-    public void setFilas(java.util.List<Paciente> personal) {
+    public void setFilas(java.util.List<Personal> personal) {
         this.personal = personal;
         //Notifica a los listeners del cambio
         fireTableDataChanged();
     }
 
     //Permite recuperar un usuario determinado
-    public Paciente obtenerPaciente(int i) {
+    public Personal obtenerPersonal(int i) {
         return this.personal.get(i);
     }
 

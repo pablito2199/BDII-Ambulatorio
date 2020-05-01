@@ -430,7 +430,7 @@ public class DAOCitas extends AbstractDAO {
             stmCitas.setInt(3, consulta.getIdentificador());
             stmCitas.setInt(4, consulta.getAmbulatorio());
 
-            //Actualizamos
+            //Obtenemos resultado
             rsCitas = stmCitas.executeQuery();
 
             //Recogemos valores de resultado
@@ -487,7 +487,7 @@ public class DAOCitas extends AbstractDAO {
             //Sustituimos
             stmUrgencias.setInt(1, ambulatorio.getCodigo());
 
-            //Actualizamos
+            //Obtenemos resultado
             rsUrgencias = stmUrgencias.executeQuery();
 
             //Recogemos valores de resultado
@@ -557,7 +557,7 @@ public class DAOCitas extends AbstractDAO {
             //Sustituimos
             stmCitas.setString(1, paciente.getCIP());
 
-            //Actualizamos
+            //Obtenemos resultado
             rsCitas = stmCitas.executeQuery();
 
             //Recogemos valores de resultado
@@ -629,7 +629,7 @@ public class DAOCitas extends AbstractDAO {
             stmCitas.setInt(1, medico.getAmbulatorio());
             stmCitas.setString(2, medico.getDNI());
 
-            //Actualizamos
+            //Obtenemos resultado
             rsCitas = stmCitas.executeQuery();
 
             //Recogemos valores de resultado
@@ -691,7 +691,7 @@ public class DAOCitas extends AbstractDAO {
             //Sustituimos
             stmTipo.setString(1, esp);
 
-            //Actualizamos
+            //Obtenemos resultado
             rsTipo = stmTipo.executeQuery();
 
             //Recogemos valores de resultado
@@ -800,5 +800,53 @@ public class DAOCitas extends AbstractDAO {
         }
 
         return resultado;
+    }
+
+    //Permite consultar la lista citas pendientes del paciente filtrada
+    public void borrarCita(Cita cita) {
+
+        //Declaramos variables
+        Connection con;
+        PreparedStatement stmCita = null;
+
+        //Establecemos conexión
+        con = super.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Preparamos la sentencia para obtener las citas pendientes de
+            //todas las consultas donde trabaja un medico
+            stmCita = con.prepareStatement(
+                    "delete from cita"
+                    + "where fechaHoraInicio = ? "
+                    + "and paciente = ? "
+                    + "and consulta = ? "
+                    + "and ambulatorio = ?"
+            );
+
+            //Sustituimos
+            stmCita.setTimestamp(1, cita.getFechaHoraInicio());
+            stmCita.setString(2, cita.getPaciente());
+            stmCita.setInt(3, cita.getConsulta());
+            stmCita.setInt(4, cita.getAmbulatorio());
+
+            //Borramos
+            stmCita.executeUpdate();
+            
+            
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente intentamos cerrar cursores
+            try {
+                stmCita.close();
+            } catch (SQLException e) {
+                //En caso de no poder se notifica de ello
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
     }
 }

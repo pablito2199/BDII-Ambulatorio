@@ -1,5 +1,6 @@
 package gui;
 
+import aplicacion.clases.PersonalSanitario;
 
 public class VPersonal extends javax.swing.JDialog {
 
@@ -19,8 +20,8 @@ public class VPersonal extends javax.swing.JDialog {
         this.fa = fa;
         initComponents();
         padre = (VPrincipal) parent;
-        //Hacemos invisible el aviso de que hay campos obligatorios sin cubrir
-        btnEliminar.setEnabled(false);
+        
+        btnCitas.setEnabled(false);
     }
 
     /**
@@ -353,6 +354,7 @@ public class VPersonal extends javax.swing.JDialog {
         textoSueldo.setText(null);
         btnAdmin.setEnabled(false);
         btnSanitario.setEnabled(false);
+        btnCitas.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Botón Buscar, busca el personal del ambulatorio
@@ -363,6 +365,19 @@ public class VPersonal extends javax.swing.JDialog {
     //Función que permite recoger los datos de un trabajador con un click en la tabla de personal
     private void tablaPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPersonalMouseClicked
 
+        //Obtenemos tabla
+        ModeloTablaPersonal tp = ((ModeloTablaPersonal) tablaPersonal.getModel());
+
+        int index = tablaPersonal.getSelectedRow();
+        if (index >= 0) {
+
+            //Comprobamos si es personal sanitario
+            if (tp.obtenerPersonal(index) instanceof PersonalSanitario) {
+
+                //Permitimos acceder a las citas
+                btnCitas.setEnabled(true);
+            }
+        }
     }//GEN-LAST:event_tablaPersonalMouseClicked
 
     //Botón Citas, abre la ventana de citas del médico

@@ -1,6 +1,6 @@
 package baseDatos;
 
-import aplicacion.clases.Administrador;
+import aplicacion.clases.PersonalAdministrador;
 import java.sql.*;
 
 public class DAOPersonal extends AbstractDAO {
@@ -14,7 +14,7 @@ public class DAOPersonal extends AbstractDAO {
     //Permite recuperar un usuario de la base de datos a partir de su dni y contraseña
     public Boolean validarAdministrador(String dni, String contrasena) {
         //Declaramos variables
-        Administrador resultado = null;
+        PersonalAdministrador resultado = null;
         Connection con;
         PreparedStatement stmAdministrador = null;
         ResultSet rsAdministrador;
@@ -37,8 +37,10 @@ public class DAOPersonal extends AbstractDAO {
             //Si existe algún resultado (que debe ser único)
             if (rsAdministrador.next()) {
                 //Generamos una instancia de usuario con los datos recuperados
-                resultado = new Administrador(rsAdministrador.getInt("ambulatorio"), rsAdministrador.getString("dni"),
-                        rsAdministrador.getString("contrasena"));
+                resultado = new PersonalAdministrador(
+                        rsAdministrador.getString("contrasena"),
+                        rsAdministrador.getInt("ambulatorio"),
+                        rsAdministrador.getString("dni"));
             }
             //En caso de error se captura la excepción
         } catch (SQLException e) {
