@@ -22,7 +22,7 @@ public class VRecetar extends javax.swing.JDialog {
      * @param cita
      */
     //Constructor de la ventana
-    public VRecetar(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Cita cita) {
+    public VRecetar(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, Cita cita) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
