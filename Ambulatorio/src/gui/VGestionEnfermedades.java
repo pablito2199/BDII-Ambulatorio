@@ -98,7 +98,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
 
         jLabel10.setText("GESTIONAR ENFERMEDADES");
 
-        btnIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Desasociar.png"))); // NOI18N
+        btnIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaI.jpg"))); // NOI18N
         btnIzquierda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIzquierdaActionPerformed(evt);
@@ -108,7 +108,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         lstEnfermedadesPadecidas.setModel(new ModeloListaStrings());
         jScrollPane3.setViewportView(lstEnfermedadesPadecidas);
 
-        btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/Asociar.png"))); // NOI18N
+        btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaD.jpg"))); // NOI18N
         btnDerecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDerechaActionPerformed(evt);
