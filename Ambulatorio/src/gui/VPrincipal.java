@@ -410,32 +410,19 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Botón Actualizar, crea un nuevo ambulatorio o lo modifica
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        boolean modificar = false;
-        Ambulatorio a;
         //si los campos no están vacíos
         if (!textoNombre.getText().isEmpty() || !textoDireccion.getText().isEmpty()
                 || !textoProvincia.getText().isEmpty() || !textoTelefono.getText().isEmpty()
                 || (isNumeric(textoAnoConstruccion.getText()) || textoAnoConstruccion.getText().isEmpty())) {
             //creamos el ambulatorio
-            a = new Ambulatorio(textoNombre.getText(), textoDireccion.getText(),
-                    textoAnoConstruccion.getText(), textoProvincia.getText(), textoTelefono.getText(),
-                    null);
-            
-            
-            for (Ambulatorio amb : fa.obtenerAmbulatorios(null, null, null)) {
-                if (amb.getCodigo().equals(a.getCodigo())) {
-                    modificar = true;
-                    break;
-                }
-            }
-            
-
-
+            Ambulatorio a = new Ambulatorio(textoNombre.getText(), textoDireccion.getText(),
+                    textoAnoConstruccion.getText(), textoProvincia.getText(), textoTelefono.getText(), null);
             //modificamos o creamos uno nuevo si no está en la tabla
-            if (!modificar) {
-                fa.insertarAmbulatorio(a);
-            } else {
+            if (fa.consultarAmbulatorioActual(textoNombre.getText(), textoProvincia.getText()) != null) {
+                a.setCodigo(Integer.parseInt(textoCodigo.getText()));
                 fa.modificarAmbulatorio(a);
+            } else {
+                fa.insertarAmbulatorio(a);
             }
             //habilitamos los botones
             btnActualizar.setEnabled(true);

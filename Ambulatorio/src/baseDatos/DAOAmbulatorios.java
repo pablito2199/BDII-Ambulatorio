@@ -105,10 +105,10 @@ public class DAOAmbulatorios extends AbstractDAO {
         try {
             //Preparamos la sentencia para actualizar los datos del ambulatorio con la id especificada
             stmAmbulatorio = con.prepareStatement("update ambulatorio "
-                    + "set  nombre = ? "
-                    + "direccionPostal = ? "
-                    + "provincia = ? "
-                    + "anoConstruccion = ? "
+                    + "set nombre = ?, "
+                    + "direccionPostal = ?, "
+                    + "provincia = ?, "
+                    + "anoConstruccion = ?, "
                     + "telefono = ? "
                     + "where codigoAmbulatorio = ?");
             //Actualizamos
@@ -117,7 +117,6 @@ public class DAOAmbulatorios extends AbstractDAO {
             stmAmbulatorio.setString(3, ambulatorio.getProvincia());
             stmAmbulatorio.setString(4, ambulatorio.getAnoConstruccion());
             stmAmbulatorio.setString(5, ambulatorio.getTelefono());
-
             stmAmbulatorio.setInt(6, ambulatorio.getCodigo());
             //NOTA: El codigo del ambulatorio no se pueden modificar
 
@@ -314,6 +313,42 @@ public class DAOAmbulatorios extends AbstractDAO {
             this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
         //Se devuelve el resultado (lista de ambulatorios)
+        return resultado;
+    }
+    
+    //Permite recuperar los datos del ambulatorio con el nombre y provincia correspondientes
+    public Ambulatorio consultarAmbulatorioActual(String nombre, String provincia) {
+        //Declaramos variables
+        Ambulatorio resultado = null;
+        Ambulatorio ambulatorioActual;
+        Connection con;
+        PreparedStatement stmAmbulatorio = null;
+        ResultSet rsAmbulatorio;
+
+        //Establecemos conexión
+        con = this.getConexion();
+
+        //cuenta el número de prestamos cuya diferencia de días es mayor o igual a 30 con respecto al día de hoy
+        String consulta = "select nombre, provincia "
+                + "from ambulatorio "
+                + "where nombre = ? "
+                + "and provincia = ?";
+
+        try {
+            stmAmbulatorio = con.prepareStatement(consulta);
+            stmAmbulatorio.setString(1, nombre);
+            stmAmbulatorio.setString(2, provincia);
+            rsAmbulatorio = stmAmbulatorio.executeQuery();
+            rsAmbulatorio.next();
+            resultado = new Ambulatorio(rsAmbulatorio.getString("nombre"), rsAmbulatorio.getString("provincia"));
+        } catch (SQLException e) {
+        } finally {
+            try {
+                stmAmbulatorio.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
         return resultado;
     }
 }

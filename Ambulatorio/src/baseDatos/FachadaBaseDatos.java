@@ -88,8 +88,13 @@ public class FachadaBaseDatos {
     }
 
     //Permite consultar los ambulatorios de la red
-    public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia) {
-        return daoAmbulatorios.consultarAmbulatorios(nombre, codigo, Provincia);
+    public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String provincia) {
+        return daoAmbulatorios.consultarAmbulatorios(nombre, codigo, provincia);
+    }
+    
+    //Permite recuperar los datos del ambulatorio con el nombre y provincia correspondientes
+    public Ambulatorio consultarAmbulatorioActual(String nombre, String provincia) {
+        return daoAmbulatorios.consultarAmbulatorioActual(nombre, provincia);
     }
 
 ///////////////

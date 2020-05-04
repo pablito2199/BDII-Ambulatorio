@@ -42,6 +42,11 @@ public class Ambulatorio {
         this.telefono = telefono;
         this.antiguedad = antiguedad;
     }
+    
+    public Ambulatorio(String nombre, String provincia) {
+        this.nombre = nombre;
+        this.provincia = provincia;
+    }
 
     //Getters y Setters
     public Integer getCodigo() {
