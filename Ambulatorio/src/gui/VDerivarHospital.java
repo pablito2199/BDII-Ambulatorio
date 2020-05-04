@@ -219,7 +219,8 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
     //botón de Confirmar, confirma derivar un paciente al hospital
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-
+        
+        
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     //botón de Regresar, vuelve a la ventana anterior

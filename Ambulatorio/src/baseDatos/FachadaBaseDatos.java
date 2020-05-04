@@ -20,6 +20,7 @@ public class FachadaBaseDatos {
     private DAOConsultas daoConsultas;          // Enlace al DAO de Consultas
     private DAORecetas daoRecetas;              // Enlace al DAO de Recetas
     private DAOPersonal daoPersonal;            // Enlace al DAO de Personal
+    private DAOHospitales daoHospitales;        // Enlace al DAO de Hospitales
 
     //Contructor
     public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
@@ -38,7 +39,7 @@ public class FachadaBaseDatos {
             Properties usuario = new Properties();
 
             String gestor = configuracion.getProperty("gestor");
-            
+
             //Establecemos propiedades de usuario y contraseña
             usuario.setProperty("user", configuracion.getProperty("usuario"));
             usuario.setProperty("password", configuracion.getProperty("clave"));
@@ -57,6 +58,7 @@ public class FachadaBaseDatos {
             daoConsultas = new DAOConsultas(conexion, fa);          // Enlace al DAO de Consultas
             daoRecetas = new DAORecetas(conexion, fa);              // Enlace al DAO de Recetas
             daoPersonal = new DAOPersonal(conexion, fa);            // Enlace al DAO de Personal
+            daoHospitales = new DAOHospitales(conexion, fa);        // Enlace al DAO de Hospitales
             //En caso de error capturamos la excepciones, imprimimos el mensaje y genereramos la ventana de excepción
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
@@ -274,7 +276,15 @@ public class FachadaBaseDatos {
     }
 
     //Permite recuperar la especialidad de un personal sanitario
-    public  ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
+    public ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
         return daoPersonal.obtenerEspecialidades(dni, ambulatorio);
+    }
+
+////////////////////
+//DAOHOSPITALES
+////////////////////
+    //Inserta un nuevo ambulatorio en la base de datos
+    public ArrayList<Hospital> consultarHospital(String nombre, String provincia, Integer codigo, Float distancia) {
+        return daoHospitales.consultarHospital(nombre, provincia, codigo, distancia);
     }
 }
