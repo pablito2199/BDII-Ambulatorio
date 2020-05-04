@@ -125,16 +125,18 @@
                               <Component id="textoProvincia" min="-2" pref="248" max="-2" attributes="0"/>
                               <Component id="textoNombre" alignment="0" min="-2" pref="248" max="-2" attributes="0"/>
                               <Component id="textoCodigo" alignment="0" min="-2" pref="248" max="-2" attributes="0"/>
-                              <Component id="textoTelefono" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="textoFondos" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="textoAnoConstruccion" alignment="0" pref="99" max="32767" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="textoFondos" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="textoAnoConstruccion" alignment="0" pref="99" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="etiquetaAntiguedad" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="textoAntiguedad" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="etiquetaAntiguedad" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="textoAntiguedad" min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Component id="textoTelefono" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
