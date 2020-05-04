@@ -73,8 +73,6 @@ public class VPacientes extends javax.swing.JDialog {
         varFechaNacimiento = new javax.swing.JTextField();
         labelTelefono = new javax.swing.JLabel();
         varTelefono = new javax.swing.JTextField();
-        labelRango = new javax.swing.JLabel();
-        varRango = new javax.swing.JTextField();
         btnBuscarUsuario = new javax.swing.JButton();
         labelGestionarPacientes = new javax.swing.JLabel();
 
@@ -261,40 +259,20 @@ public class VPacientes extends javax.swing.JDialog {
         labelDNI.setText("DNI:");
 
         varSexo.setToolTipText("Edad del usuario");
-        varSexo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                varSexoActionPerformed(evt);
-            }
-        });
 
         varGrupoSanguineo.setToolTipText("Edad del usuario");
-        varGrupoSanguineo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                varGrupoSanguineoActionPerformed(evt);
-            }
-        });
 
         labelGrupoSanguineo.setText("GS:");
 
         labelEdad.setText("Edad:");
 
         varEdad.setToolTipText("Edad del usuario");
-        varEdad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                varEdadActionPerformed(evt);
-            }
-        });
 
         varCIP.setToolTipText("Nombre de usuario");
 
         labelNacionalidad.setText("Nacionalidad:");
 
         varNacionalidad.setToolTipText("Nombre de usuario");
-        varNacionalidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                varNacionalidadActionPerformed(evt);
-            }
-        });
 
         labelFechaNacimiento.setText("Fecha Nacimiento:");
 
@@ -303,10 +281,6 @@ public class VPacientes extends javax.swing.JDialog {
         labelTelefono.setText("Telefono:");
 
         varTelefono.setToolTipText("Nombre de usuario");
-
-        labelRango.setText("Rango:");
-
-        varRango.setToolTipText("Nombre del usuario");
 
         btnBuscarUsuario.setText("Buscar");
         btnBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -338,10 +312,6 @@ public class VPacientes extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(varTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(labelRango)
-                                .addGap(18, 18, 18)
-                                .addComponent(varRango, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnBuscarUsuario))
                             .addComponent(varDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -413,8 +383,6 @@ public class VPacientes extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTelefono)
                     .addComponent(varTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelRango)
-                    .addComponent(varRango, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarUsuario))
                 .addGap(15, 15, 15))
         );
@@ -477,7 +445,6 @@ public class VPacientes extends javax.swing.JDialog {
         varFechaNacimiento.setText(null);
         varDireccion.setText(null);
         varTelefono.setText(null);
-        varRango.setText(null);
         //Actualizamos la tabla
         buscarPacientes();
     }//GEN-LAST:event_btnBorrarActionPerformed
@@ -501,63 +468,42 @@ public class VPacientes extends javax.swing.JDialog {
         varFechaNacimiento.setText(null);
         varDireccion.setText(null);
         varTelefono.setText(null);
-        varRango.setText(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Función que permite guardar el usuario en la base de datos
     private void btnActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPacienteActionPerformed
         //Comprobarmos que no haya ningún campo obligatorio sin cubrir
         if (varCIP.getText().isEmpty() || varDNI.getText().isEmpty() || varNSS.getText().isEmpty() || varNombre.getText().isEmpty()
-                || varSexo.getText().isEmpty() || varEdad.getText().isEmpty() || varGrupoSanguineo.getText().isEmpty() || varNacionalidad.getText().isEmpty()
+                || varSexo.getText().isEmpty() || varGrupoSanguineo.getText().isEmpty() || varNacionalidad.getText().isEmpty()
                 || varFechaNacimiento.getText().isEmpty() || varDireccion.getText().isEmpty() || varTelefono.getText().isEmpty()) {
             //Si lo hay activamos el aviso
             fa.muestraExcepcion("Necesitas rellenar todos los campos antes de poder actualizar");
             //Regresamos
             return;
-        } else if (!varRango.getText().isEmpty()) {
-            //Si se ha cubierto un campo que no se debe
-            fa.muestraExcepcion("No se puede modificar el campo Rango");
-            //Regresamos
+        }
+        if (GrupoSanguineo.getTipo(varGrupoSanguineo.getText()) == null) {
+            fa.muestraExcepcion("El valor introducido para el grupo sanguíneo no es válido");
             return;
         }
-        //Para edad
-        //declaramos un integer a null
-        Integer edad = null;
-        //Si se ha introducido una edad en el campo
-        if (!varSexo.getText().isEmpty()) {
-            //Intentamos convertirla a entero
-            try {
-                edad = Integer.parseInt(varSexo.getText());
-                //Si al hacerlo la edad es negativa imprimimos el error
-                if (edad < 0) {
-                    fa.muestraExcepcion("La edad debe ser un número positivo.");
-                    return;
-                }
-                //De no poder convertir a entero se imprime la excepción
-            } catch (NumberFormatException ex) {
-                fa.muestraExcepcion("El valor introducido para la edad no es válido.");
-                return;
-            }
-        }
-        //Si ya existe el ID actualiza
         if (fa.existePaciente(varCIP.getText())) {
             //Instanciamos el usuario con los datos proporcionados
             Paciente u = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(),
-                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()),
+                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.getTipo(varGrupoSanguineo.getText()),
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Actualizamos la base de datos
             fa.modificarPaciente(u);
             //De no existir se crea uno nuevo
         } else {
+            //LA EDAD NO SE TIENE EN CUENTA PUESTO QUE ES UN CALCULADO
             //Instanciamos el usuario
             Paciente p = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(),
-                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.valueOf(varGrupoSanguineo.getText()),
+                    Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.getTipo(varGrupoSanguineo.getText()),
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Lo insertamos en la base de datos
             fa.insertarPaciente(p);
         }
         //Finalmente buscamos otra vez pacientes
-        buscarPacientes();
+        rebuscarPacientes();
     }//GEN-LAST:event_btnActualizarPacienteActionPerformed
 
     //Función que permite buscar el/los usuario(s) una vez hecho click en el botón buscar
@@ -578,12 +524,11 @@ public class VPacientes extends javax.swing.JDialog {
         varDNI.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDNI());
         varSexo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getSexo());
         varEdad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getEdad().toString());
-        varGrupoSanguineo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getGrupo().toString());
+        varGrupoSanguineo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getGrupo().getTipo());
         varNacionalidad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNacionalidad());
         varFechaNacimiento.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getFechaNacimiento().toString());
         varDireccion.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDireccion());
         varTelefono.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getTelefono());
-        varRango.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getRango().toString());
         //Activamos los botones
         btnEnfermedades.setEnabled(true);
         btnNuevaUrgencia.setEnabled(true);
@@ -592,22 +537,6 @@ public class VPacientes extends javax.swing.JDialog {
         btnHistorialClinico.setEnabled(true);
         btnHistorialRecetas.setEnabled(true);
     }//GEN-LAST:event_tablaPacientesMouseClicked
-
-    private void varSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varSexoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_varSexoActionPerformed
-
-    private void varGrupoSanguineoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varGrupoSanguineoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_varGrupoSanguineoActionPerformed
-
-    private void varEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varEdadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_varEdadActionPerformed
-
-    private void varNacionalidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varNacionalidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_varNacionalidadActionPerformed
 
     private void btnNuevaUrgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaUrgenciaActionPerformed
         if (varCIP.getText().isEmpty()) {
@@ -698,7 +627,7 @@ public class VPacientes extends javax.swing.JDialog {
         //Creamos el modelo de tabla préstamos
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
-        
+
         Integer NSS = 0, edad = 0;
         //Setteamos las filas con el resultado de la búsqueda
         if (!varNSS.getText().isEmpty()) {
@@ -715,9 +644,9 @@ public class VPacientes extends javax.swing.JDialog {
                 fa.muestraExcepcion("El valor introducido para el NSS (Número de la Seguridad Social) no es válido.");
                 return;
             }
+        } else {
+            NSS = null;
         }
-        else
-            NSS=null;
         if (!varEdad.getText().isEmpty()) {
             //Intentamos convertirla a entero
             try {
@@ -732,9 +661,9 @@ public class VPacientes extends javax.swing.JDialog {
                 fa.muestraExcepcion("El valor introducido para la edad no es válido.");
                 return;
             }
+        } else {
+            edad = null;
         }
-        else
-            edad=null;
         m.setFilas(fa.consultarPacientes(varCIP.getText(), varDNI.getText(), varNombre.getText(),
                 edad, varSexo.getText(), NSS, varGrupoSanguineo.getText()));
         //Si hay coincidencias
@@ -743,6 +672,63 @@ public class VPacientes extends javax.swing.JDialog {
             tablaPacientes.setRowSelectionInterval(0, 0);
             //Habilitamos el borrado
             btnBorrar.setEnabled(true);
+            //Obtenemos todos los datos del usuario (fila) en el que se hizo click y los metemos en los campos
+            varCIP.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
+            varNSS.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNSS().toString());
+            varNombre.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNombre());
+            varDNI.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDNI());
+            varSexo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getSexo());
+            varEdad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getEdad().toString());
+            varGrupoSanguineo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getGrupo().getTipo());
+            varNacionalidad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNacionalidad());
+            varFechaNacimiento.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getFechaNacimiento().toString());
+            varDireccion.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDireccion());
+            varTelefono.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getTelefono());
+            //Activamos los botones
+            btnEnfermedades.setEnabled(true);
+            btnNuevaUrgencia.setEnabled(true);
+            btnSolicitarCita.setEnabled(true);
+            btnCitasPendientes.setEnabled(true);
+            btnHistorialClinico.setEnabled(true);
+            btnHistorialRecetas.setEnabled(true);
+        } else {
+            //De no haberlas, deshabilitamos el borrado
+            btnBorrar.setEnabled(false);
+        }
+    }
+
+    //Función que permite buscar un usuario en la base de datos
+    public void rebuscarPacientes() {
+        //Creamos el modelo de tabla préstamos
+        ModeloTablaPacientes m;
+        m = (ModeloTablaPacientes) tablaPacientes.getModel();
+
+       m.setFilas(fa.consultarPacientes("", "", "", null, "", null, ""));
+        //Si hay coincidencias
+        if (m.getRowCount() > 0) {
+            //Seleccionamos la primera
+            tablaPacientes.setRowSelectionInterval(0, 0);
+            //Habilitamos el borrado
+            btnBorrar.setEnabled(true);
+            //Obtenemos todos los datos del usuario (fila) en el que se hizo click y los metemos en los campos
+            varCIP.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
+            varNSS.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNSS().toString());
+            varNombre.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNombre());
+            varDNI.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDNI());
+            varSexo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getSexo());
+            varEdad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getEdad().toString());
+            varGrupoSanguineo.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getGrupo().getTipo());
+            varNacionalidad.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNacionalidad());
+            varFechaNacimiento.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getFechaNacimiento().toString());
+            varDireccion.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getDireccion());
+            varTelefono.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getTelefono());
+            //Activamos los botones
+            btnEnfermedades.setEnabled(true);
+            btnNuevaUrgencia.setEnabled(true);
+            btnSolicitarCita.setEnabled(true);
+            btnCitasPendientes.setEnabled(true);
+            btnHistorialClinico.setEnabled(true);
+            btnHistorialRecetas.setEnabled(true);
         } else {
             //De no haberlas, deshabilitamos el borrado
             btnBorrar.setEnabled(false);
@@ -778,7 +764,6 @@ public class VPacientes extends javax.swing.JDialog {
     private javax.swing.JLabel labelNSS;
     private javax.swing.JLabel labelNacionalidad;
     private javax.swing.JLabel labelNombre;
-    private javax.swing.JLabel labelRango;
     private javax.swing.JLabel labelSexo;
     private javax.swing.JLabel labelTelefono;
     private javax.swing.JTable tablaPacientes;
@@ -791,7 +776,6 @@ public class VPacientes extends javax.swing.JDialog {
     private javax.swing.JTextField varNSS;
     private javax.swing.JTextField varNacionalidad;
     private javax.swing.JTextField varNombre;
-    private javax.swing.JTextField varRango;
     private javax.swing.JTextField varSexo;
     private javax.swing.JTextField varTelefono;
     // End of variables declaration//GEN-END:variables

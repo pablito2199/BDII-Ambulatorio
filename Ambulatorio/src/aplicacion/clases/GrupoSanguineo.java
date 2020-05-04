@@ -4,7 +4,7 @@ public enum GrupoSanguineo {
 
     NZERO("0-"), PZERO("0+"), NA("A-"), PA("A+"), NB("B-"), PB("B+"), NAB("AB-"), PAB("AB+");
 
-    private String tipo;
+    private final String tipo;
 
     private GrupoSanguineo(String tipo) {
         this.tipo = tipo;
@@ -25,9 +25,6 @@ public enum GrupoSanguineo {
             case "0-":
                 temp = NZERO;
                 break;
-            case "0+":
-                temp = PZERO;
-                break;
             case "A-":
                 temp = NA;
                 break;
@@ -45,6 +42,9 @@ public enum GrupoSanguineo {
                 break;
             case "AB+":
                 temp = PAB;
+                break;
+            case "0+":
+                temp = PZERO;
                 break;
         }
 

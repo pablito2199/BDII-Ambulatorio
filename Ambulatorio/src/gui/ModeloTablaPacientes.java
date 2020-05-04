@@ -132,7 +132,7 @@ public class ModeloTablaPacientes extends AbstractTableModel {
                 resultado = pacientes.get(row).getSexo();
                 break;
             case 5:
-                resultado = pacientes.get(row).getGrupo();
+                resultado = pacientes.get(row).getGrupo().getTipo();
                 break;
         }
         //Devolvemos el valor recuperado

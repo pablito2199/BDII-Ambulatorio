@@ -29,7 +29,7 @@ public class DAOPacientes extends AbstractDAO {
 
         //Establecemos conexión
         con = super.getConexion();
-
+        
         //Intentamos la consulta SQL
         try {
             //Preparamos la consulta SQL para insertar en la tabla de pacientes un nuevo paciente con el id de paciente, nombre
@@ -120,8 +120,8 @@ public class DAOPacientes extends AbstractDAO {
                     + "fechaNacimiento = ?, "
                     + "sexo = ?, "
                     + "grupoSanguineo = ?, "
-                    + "nacionalidad = ? "
-                    + "direccion = ? "
+                    + "nacionalidad = ?, "
+                    + "direccion = ?, "
                     + "telefono = ? "
                     + "where cip = ?");
             //Actualizamos
@@ -172,14 +172,14 @@ public class DAOPacientes extends AbstractDAO {
         try {
             //Construimos la consulta compleja que requiere de varias instrucciones sql
             String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad, "
-                    + "sexo, grupoSanguineo, nacionalidad, direccion, telefono, numSeguridadSocial "
+                    + "sexo, grupoSanguineo, nacionalidad, direccion, telefono, numSeguridadSocial, rango  "
                     + "from paciente "
                     + "natural JOIN " //Unimos resultados
                     + "(select distinct cip, SUM(distinct soborno) as totalSobornado, COUNT(distinct soborno) as numSobornos, "
                     //Calculamos el rango
                     + "CASE "
                     + "WHEN SUM(distinct soborno)>500 THEN 'deluxe' "
-                    + "WHEN COUNT(distinct cip)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
+                    + "WHEN COUNT(distinct cip)>5 and SUM(distinct soborno)>=50 THEN 'premium' "
                     + "ELSE 'base' "
                     + "END as rango "
                     + "from paciente full outer JOIN urgencia ON paciente=cip "
@@ -190,12 +190,12 @@ public class DAOPacientes extends AbstractDAO {
                     + "and dni like ? "
                     + "and nombre like ? "
                     + "and sexo like ? "
-                    + "and grupoSanguineo = ?";
+                    + "and grupoSanguineo like ? ";
                     if (edad != null)
                         consulta +="and EXTRACT(YEAR FROM age(CURRENT_DATE, FechaNacimiento)) = ? ";
                     if (NSS != null)
                         consulta +="and numSeguridadSocial = ? ";
-
+                    consulta += " order by nombre";
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
@@ -204,23 +204,21 @@ public class DAOPacientes extends AbstractDAO {
             stmPacientes.setString(3, "%"+nombre+"%");
             stmPacientes.setString(4, "%"+sexo+"%");
             stmPacientes.setString(5, "%"+grupo+"%");
-            if (edad != null) {
-                stmPacientes.setInt(6, edad);
-            }
-            else if (edad != null && NSS != null) {
+            if (edad != null && NSS != null) {
                 stmPacientes.setInt(6, edad);
                 stmPacientes.setInt(7, NSS);
+            }
+            else if (edad != null) {
+                stmPacientes.setInt(6, edad);
             }
             else if (NSS != null) {
                 stmPacientes.setInt(6, NSS);
             }
 
-//Ejecutamos
+            //Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
             //Mientras haya coincidencias
-            System.out.println("Esperando resultado!!");
             while (rsPacientes.next()) {
-                System.out.println("Hay resultado!!");
                 //Se crea una instancia de paciente con los datos recuperados de la base de datos
                 pacienteActual = new Paciente(rsPacientes.getString("cip"),
                         rsPacientes.getString("dni"),

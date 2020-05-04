@@ -300,10 +300,6 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="varTelefono" min="-2" pref="207" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                  <Component id="labelRango" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="varRango" min="-2" pref="169" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="btnBuscarUsuario" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -394,8 +390,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="varTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelRango" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="varRango" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBuscarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -458,17 +452,11 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Edad del usuario"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="varSexoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="varGrupoSanguineo">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Edad del usuario"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="varGrupoSanguineoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelGrupoSanguineo">
           <Properties>
@@ -484,9 +472,6 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Edad del usuario"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="varEdadActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="varCIP">
           <Properties>
@@ -502,9 +487,6 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="varNacionalidadActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelFechaNacimiento">
           <Properties>
@@ -524,16 +506,6 @@
         <Component class="javax.swing.JTextField" name="varTelefono">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="labelRango">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Rango:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="varRango">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre del usuario"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscarUsuario">
