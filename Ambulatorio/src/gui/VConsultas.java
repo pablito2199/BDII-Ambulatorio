@@ -32,6 +32,8 @@ public class VConsultas extends javax.swing.JDialog {
         if (m.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstConsultas.setSelectedIndex(0);
+            textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
+            textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, null).toString());
             //activa el botón de Eliminar
             btnEliminarConsultas.setEnabled(true);
         } else {

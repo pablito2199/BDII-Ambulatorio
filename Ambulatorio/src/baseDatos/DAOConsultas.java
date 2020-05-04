@@ -103,6 +103,7 @@ public class DAOConsultas extends AbstractDAO {
         PreparedStatement stmConsultas = null;
         ResultSet rsConsultas;//Variable para buscar por codigo
         String id = identificador == null ? "" : "and identificador = ?";
+        String esp = especialidad == null ? "" : "and especialidad = ?";
 
         //Establecemos conexión
         con = this.getConexion();
@@ -115,16 +116,20 @@ public class DAOConsultas extends AbstractDAO {
             String consulta = "select identificador, ambulatorio, especialidad "
                     + "from consulta "
                     + "where ambulatorio = ? "
-                    + "and especialidad = ? "
+                    + esp
                     + id;
 
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
-            stmConsultas.setInt(1, ambulatorio); //Identificador
-            stmConsultas.setString(2, especialidad); //Ambulatorio
-            if (identificador != null) {
-                stmConsultas.setInt(3, identificador);
+            stmConsultas.setInt(1, ambulatorio); //Ambulatorio
+            if (especialidad != null) {
+                stmConsultas.setString(2, especialidad); //Especialidad
+            } else if (especialidad != null && identificador != null) {
+                stmConsultas.setString(2, especialidad); //Especialidad
+                stmConsultas.setInt(2, identificador); //Identificador
+            } else if (identificador != null) {
+                stmConsultas.setInt(2, identificador); //Identificador
             }
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
@@ -161,6 +166,7 @@ public class DAOConsultas extends AbstractDAO {
         Connection con;
         PreparedStatement stmAmbulatorios = null;
         ResultSet rsAmbulatorios;
+        String esp = especialidad == null ? "" : "and especialidad like ?";
 
         //Establecemos conexión
         con = this.getConexion();
@@ -168,12 +174,13 @@ public class DAOConsultas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            String consulta = "select COUNT(distinct identificador) from consulta as consultas "
+            String consulta = "select COUNT(distinct identificador) as consultas "
+                    + "from consulta "
                     + "where ambulatorio = ? "
-                    + "and especialidad like ? "
-                    + "group by ambulatorio";
+                    + esp;
             //Preparamos la consulta
             stmAmbulatorios = con.prepareStatement(consulta);
+            
             //Sustituimos
             stmAmbulatorios.setInt(1, ambulatorio);
             if (especialidad != null) {
@@ -182,12 +189,9 @@ public class DAOConsultas extends AbstractDAO {
 
             //Ejecutamos
             rsAmbulatorios = stmAmbulatorios.executeQuery();
+            rsAmbulatorios.next();
 
-            //Mientras haya coincidencias
-            if (rsAmbulatorios.next()) {
-                //Se crea una instancia de ambulatorio con los datos recuperados de la base de datos
-                consultas = rsAmbulatorios.getInt("consultas");
-            }
+            consultas = rsAmbulatorios.getInt("consultas");
         } //En caso de error se captura la excepción
         catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
