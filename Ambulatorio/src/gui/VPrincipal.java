@@ -121,6 +121,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnAsociados.setEnabled(false);
 
         btnSalaUrgencias.setText("Sala Urgencias");
+        btnSalaUrgencias.setEnabled(false);
         btnSalaUrgencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalaUrgenciasActionPerformed(evt);
@@ -409,9 +410,9 @@ public class VPrincipal extends javax.swing.JFrame {
         boolean modificar = false;
         Ambulatorio a;
         //si los campos no están vacíos
-        if (!textoCodigo.getText().isEmpty() && !textoNombre.getText().isEmpty() && !textoDireccion.getText().isEmpty()
-                && !textoProvincia.getText().isEmpty() && !textoTelefono.getText().isEmpty() && isNumeric(textoCodigo.getText())
-                && (isNumeric(textoAnoConstruccion.getText()) || textoAnoConstruccion.getText().isEmpty())) {
+        if (!textoCodigo.getText().isEmpty() || !textoNombre.getText().isEmpty() || !textoDireccion.getText().isEmpty()
+                || !textoProvincia.getText().isEmpty() || !textoTelefono.getText().isEmpty() || isNumeric(textoCodigo.getText())
+                || (isNumeric(textoAnoConstruccion.getText()) || textoAnoConstruccion.getText().isEmpty())) {
             //creamos el ambulatorio
             a = new Ambulatorio(Integer.parseInt(textoCodigo.getText()), textoNombre.getText(), textoDireccion.getText(),
                     textoAnoConstruccion.getText(), textoProvincia.getText(), textoTelefono.getText(),
