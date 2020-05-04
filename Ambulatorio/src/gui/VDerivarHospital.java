@@ -230,7 +230,9 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
     //botón de Regresar, vuelve a la ventana anterior
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        
         this.dispose();
+        
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
