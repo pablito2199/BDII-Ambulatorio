@@ -453,8 +453,8 @@ public class VPacientes extends javax.swing.JDialog {
 
     //Función que permite salir de la ventana de usuario
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        padre.setVisible(false);
-        //Buscamos libros
+        padre.setVisible(true);
+        //Buscamos ambulatorios
         padre.buscarAmbulatorios();
         //Y destruimos esta ventana
         this.dispose();
@@ -698,6 +698,7 @@ public class VPacientes extends javax.swing.JDialog {
         //Creamos el modelo de tabla préstamos
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
+        
         Integer NSS = 0, edad = 0;
         //Setteamos las filas con el resultado de la búsqueda
         if (!varNSS.getText().isEmpty()) {
@@ -715,6 +716,8 @@ public class VPacientes extends javax.swing.JDialog {
                 return;
             }
         }
+        else
+            NSS=null;
         if (!varEdad.getText().isEmpty()) {
             //Intentamos convertirla a entero
             try {
@@ -730,6 +733,8 @@ public class VPacientes extends javax.swing.JDialog {
                 return;
             }
         }
+        else
+            edad=null;
         m.setFilas(fa.consultarPacientes(varCIP.getText(), varDNI.getText(), varNombre.getText(),
                 edad, varSexo.getText(), NSS, varGrupoSanguineo.getText()));
         //Si hay coincidencias
