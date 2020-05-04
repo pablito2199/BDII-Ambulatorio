@@ -539,87 +539,35 @@ public class VPacientes extends javax.swing.JDialog {
     }//GEN-LAST:event_tablaPacientesMouseClicked
 
     private void btnNuevaUrgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaUrgenciaActionPerformed
-        if (varCIP.getText().isEmpty()) {
-            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
-            //Desactivamos los botones
-            btnEnfermedades.setEnabled(false);
-            btnNuevaUrgencia.setEnabled(false);
-            btnSolicitarCita.setEnabled(false);
-            btnCitasPendientes.setEnabled(false);
-            btnHistorialClinico.setEnabled(false);
-            btnHistorialRecetas.setEnabled(false);
-            return;
-        }
-
+        rebuscarPacientes();
     }//GEN-LAST:event_btnNuevaUrgenciaActionPerformed
 
     private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
         ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
-        fa.nuevaVGestionEnfermedades(this, m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
+        fa.nuevaVGestionEnfermedades(this, m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());        
+        rebuscarPacientes();
     }//GEN-LAST:event_btnEnfermedadesActionPerformed
 
     private void btnSolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCitaActionPerformed
-        if (varCIP.getText().isEmpty()) {
-            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
-            //Desactivamos los botones
-            btnEnfermedades.setEnabled(false);
-            btnNuevaUrgencia.setEnabled(false);
-            btnSolicitarCita.setEnabled(false);
-            btnCitasPendientes.setEnabled(false);
-            btnHistorialClinico.setEnabled(false);
-            btnHistorialRecetas.setEnabled(false);
-            return;
-        }
+        rebuscarPacientes();
     }//GEN-LAST:event_btnSolicitarCitaActionPerformed
 
     private void btnCitasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasPendientesActionPerformed
-        if (varCIP.getText().isEmpty()) {
-            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
-            //Desactivamos los botones
-            btnEnfermedades.setEnabled(false);
-            btnNuevaUrgencia.setEnabled(false);
-            btnSolicitarCita.setEnabled(false);
-            btnCitasPendientes.setEnabled(false);
-            btnHistorialClinico.setEnabled(false);
-            btnHistorialRecetas.setEnabled(false);
-            return;
-        }
+        rebuscarPacientes();
     }//GEN-LAST:event_btnCitasPendientesActionPerformed
 
     private void btnHistorialClinicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialClinicoActionPerformed
-        if (varCIP.getText().isEmpty()) {
-            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
-            //Desactivamos los botones
-            btnEnfermedades.setEnabled(false);
-            btnNuevaUrgencia.setEnabled(false);
-            btnSolicitarCita.setEnabled(false);
-            btnCitasPendientes.setEnabled(false);
-            btnHistorialClinico.setEnabled(false);
-            btnHistorialRecetas.setEnabled(false);
-            return;
-        }
-        if (fa.existePaciente(varCIP.getText())) {
-            Paciente p = new Paciente(varCIP.getText());
-            fa.nuevaVHistorialMedico(this, p);
-        }
+        ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
+        Paciente p = new Paciente(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
+        fa.nuevaVHistorialMedico(this, p);
+        rebuscarPacientes();
     }//GEN-LAST:event_btnHistorialClinicoActionPerformed
 
     private void btnHistorialRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialRecetasActionPerformed
-        if (varCIP.getText().isEmpty()) {
-            fa.muestraExcepcion("Usuario no válido. Introduzca un CIP");
-            //Desactivamos los botones
-            btnEnfermedades.setEnabled(false);
-            btnNuevaUrgencia.setEnabled(false);
-            btnSolicitarCita.setEnabled(false);
-            btnCitasPendientes.setEnabled(false);
-            btnHistorialClinico.setEnabled(false);
-            btnHistorialRecetas.setEnabled(false);
-            return;
-        }
-        if (fa.existePaciente(varCIP.getText())) {
-            Paciente p = new Paciente(varCIP.getText());
-            fa.nuevaVHistorialMedico(this, p);
-        }
+        ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
+        Paciente p = new Paciente(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
+        fa.nuevaVHistorialRecetas(this, p);
+        rebuscarPacientes();
     }//GEN-LAST:event_btnHistorialRecetasActionPerformed
 
     //Función que permite buscar un usuario en la base de datos

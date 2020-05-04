@@ -1,6 +1,7 @@
 package gui;
 
 import aplicacion.clases.Paciente;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -46,7 +47,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         etiquetaHasta = new javax.swing.JLabel();
         varHasta = new javax.swing.JTextField();
         etiquetaTotalResultados = new javax.swing.JLabel();
-        textoTotalResultados = new javax.swing.JTextField();
+        varTotal = new javax.swing.JTextField();
         etiquetaResultados = new javax.swing.JLabel();
         etiquetaMedicamento = new javax.swing.JLabel();
         varMedicamentos = new javax.swing.JTextField();
@@ -117,8 +118,8 @@ public class VHistorialRecetas extends javax.swing.JDialog {
 
         etiquetaTotalResultados.setText("Total resultados:");
 
-        textoTotalResultados.setEditable(false);
-        textoTotalResultados.setToolTipText("Domicilio");
+        varTotal.setEditable(false);
+        varTotal.setToolTipText("Domicilio");
 
         etiquetaResultados.setText("Resultados");
 
@@ -148,7 +149,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(etiquetaTotalResultados)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(varTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(etiquetaResultados)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(etiquetaDesde)
@@ -196,7 +197,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaTotalResultados)
-                    .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(varTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -239,37 +240,14 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         varHasta.setText(null);
         varMedicamentos.setText(null);
         varNumeroDeReceta.setText(null);
-        textoTotalResultados.setText(null);
+        varTotal.setText(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         //Creamos el modelo de tabla préstamos
         ModeloTablaHistorialRecetas m;
         m = (ModeloTablaHistorialRecetas) tablaHistorialRecetas.getModel();
-        java.sql.Date Inicio = null;
-        java.sql.Date Fin = null;
         Integer Num = 0;
-        //Fecha de fin de la receta
-        if (!varHasta.getText().isEmpty()) {
-            //Intentamos convertirla a Date
-            try {
-                Fin = java.sql.Date.valueOf(varHasta.getText());
-                //De no poder convertir a entero se imprime la excepción
-            } catch (Exception ex) {
-                fa.muestraExcepcion("El valor introducido como fecha de incio de la receta no es válido.");
-                return;
-            }
-        }
-        if (!varDesde.getText().isEmpty()) {
-            //Intentamos convertirla a Date
-            try {
-                Inicio = java.sql.Date.valueOf(varDesde.getText());
-                //De no poder convertir a entero se imprime la excepción
-            } catch (Exception ex) {
-                fa.muestraExcepcion("El valor introducido como fecha de fin de la receta no es válido.");
-                return;
-            }
-        }
         if (!varNumeroDeReceta.getText().isEmpty()) {
             //Intentamos convertir el numero de la receta a entero
             try {
@@ -285,20 +263,24 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 return;
             }
         }
-        //ahora converitmos a TimeStamp
-        //Comprobamos la fecha de incio
-        LocalDateTime minimo = LocalDate.now().plusDays(1).atStartOfDay();
-        LocalDateTime inicioLDT = Inicio.toLocalDate().atStartOfDay();
-
-        if (minimo.compareTo(inicioLDT) < 0) {
-            minimo = inicioLDT;
+        Date inicio, fin;
+        try {
+            inicio = Date.valueOf(varDesde.getText());
+            fin = Date.valueOf(varHasta.getText());
+        } catch (Exception e) {
+            fa.muestraExcepcion("Las fechas introducidas no son válidas.");
+            return;
         }
-        //Recogemos la fecha en un Timestamp
-        //Fecha de fin sera a las 00:00 del dia siguiente al especificado
-        Timestamp inicioTS = Timestamp.valueOf(minimo);
-        Timestamp finTS = Timestamp.valueOf(Fin.toLocalDate().atStartOfDay().plusDays(1));
+        //Vemos si inicio es igual o mayor a fin
+        if (!inicio.after(fin)) {
+            //Pasamos las fechas a timestamp
+            Timestamp inicioTS = inicio == null ? Timestamp.valueOf(LocalDateTime.now()) : Timestamp.valueOf(inicio.toLocalDate().atStartOfDay());
+            Timestamp finTS = fin == null ? Timestamp.valueOf(LocalDateTime.now().plusYears(1)) : Timestamp.valueOf(fin.toLocalDate().plusDays(1).atStartOfDay());
 
-        m.setFilas(fa.consultarHistorialReceta(paciente, inicioTS, finTS, Num, varMedicamentos.getText()));
+            m.setFilas(fa.consultarHistorialReceta(paciente, inicioTS, finTS, Num, varMedicamentos.getText()));
+            varTotal.setText(String.valueOf(m.getRowCount()));
+
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -319,11 +301,11 @@ public class VHistorialRecetas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaHistorialRecetas;
-    private javax.swing.JTextField textoTotalResultados;
     private javax.swing.JTextField varDesde;
     private javax.swing.JTextField varHasta;
     private javax.swing.JTextField varMedicamentos;
     private javax.swing.JTextField varNumeroDeReceta;
+    private javax.swing.JTextField varTotal;
     // End of variables declaration//GEN-END:variables
 
 }
