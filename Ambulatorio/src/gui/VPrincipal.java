@@ -531,25 +531,29 @@ public class VPrincipal extends javax.swing.JFrame {
         //Creamos el modelo de tabla de ambulatorios
         ModeloTablaAmbulatorios m;
         m = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
-        //Tomamos las filas que regresa la función de búsqueda y por tanto cumplan el criterio
-        m.setFilas(fa.obtenerAmbulatorios(textoNombre.getText(), Integer.parseInt(textoCodigo.getText()), textoProvincia.getText()));
-        //Si hay algún resultado
-        if (m.getRowCount() > 0) {
-            //Se seleciona la primera fila
-            tablaAmbulatorios.setRowSelectionInterval(0, 0);
-            //Se habilitan los botones correspondientes
-            btnActualizar.setEnabled(true);
-            btnEliminar.setEnabled(true);
-            btnConsultas.setEnabled(true);
-            btnSalaUrgencias.setEnabled(true);
-            btnPersonal.setEnabled(true);
-        } else {
-            //En otro caso se deshabilitan
-            btnActualizar.setEnabled(false);
-            btnEliminar.setEnabled(false);
-            btnConsultas.setEnabled(false);
-            btnSalaUrgencias.setEnabled(false);
-            btnPersonal.setEnabled(false);
+
+        if (isNumeric(textoCodigo.getText())) {
+
+            //Tomamos las filas que regresa la función de búsqueda y por tanto cumplan el criterio
+            m.setFilas(fa.obtenerAmbulatorios(textoNombre.getText(), Integer.parseInt(textoCodigo.getText()), textoProvincia.getText()));
+            //Si hay algún resultado
+            if (m.getRowCount() > 0) {
+                //Se seleciona la primera fila
+                tablaAmbulatorios.setRowSelectionInterval(0, 0);
+                //Se habilitan los botones correspondientes
+                btnActualizar.setEnabled(true);
+                btnEliminar.setEnabled(true);
+                btnConsultas.setEnabled(true);
+                btnSalaUrgencias.setEnabled(true);
+                btnPersonal.setEnabled(true);
+            } else {
+                //En otro caso se deshabilitan
+                btnActualizar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                btnConsultas.setEnabled(false);
+                btnSalaUrgencias.setEnabled(false);
+                btnPersonal.setEnabled(false);
+            }
         }
     }
 
