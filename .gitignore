@@ -11,3 +11,5 @@ Ambulatorio/baseDatos.properties
 *.properties
 Ambulatorio/baseDatos.properties
 *.properties
+/Ambulatorio/dist/
+Ambulatorio/baseDatos.properties

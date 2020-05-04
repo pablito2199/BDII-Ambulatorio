@@ -20,6 +20,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         this.fa = fa;
         initComponents();
         padre = (VPrincipal) parent;
+        padre.setVisible(false);
 
         //obtiene la lista de consultas para mostrarlas por pantalla
         ModeloListaStrings mListaE = new ModeloListaStrings();
@@ -31,6 +32,9 @@ public class VEnfermedades extends javax.swing.JDialog {
             lstEnfermedades.setSelectedIndex(0);
             //activa el botón de Eliminar
             btnEliminarEnfermedad.setEnabled(true);
+            //ponemos los datos seleccionados en la parte derecha
+            textoNombre.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getNombre());
+            textoDescripcion.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getDescripcion());
         } else {
             btnEliminarEnfermedad.setEnabled(false);
         }
@@ -237,18 +241,28 @@ public class VEnfermedades extends javax.swing.JDialog {
 
     //botón de Limpiar, pone en blanco cada uno de los huecos para poder añadir nuevas enfermedades, y actualiza la lista
     private void btnLimpiarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarEnfermedadActionPerformed
+        ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
+        buscarEnfermedades();
+        //campos de texto en blanco
         textoNombre.setText(null);
         textoDescripcion.setText(null);
         //quita la selección actual de la lista
         lstEnfermedades.clearSelection();
-        buscarEnfermedades();
+        if (mListaE.getSize() > 0) {
+            //selecciona el primer elemento de la lista automáticamente
+            lstEnfermedades.setSelectedIndex(0);
+            //activa el botón de Eliminar
+            btnEliminarEnfermedad.setEnabled(true);
+        } else {
+            btnEliminarEnfermedad.setEnabled(false);
+        }
     }//GEN-LAST:event_btnLimpiarEnfermedadActionPerformed
 
     //botón de Añadir, añade una enfermedad a la base de datos
     private void btnActualizarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEnfermedadActionPerformed
         if (!textoNombre.getText().isEmpty()) {
             Enfermedad e = new Enfermedad(textoNombre.getText(), textoDescripcion.getText());
-            //si la fila está seleccionada, modifica, en caso contrario, añade la enfermedad
+            //si existe la enfermedad modifica, si no, añade
             if (fa.consultarEnfermedadActual(textoNombre.getText()) != null) {
                 fa.modificarEnfermedad(e);//no se va poder modificar nombre de la enfermedad
             } else {
@@ -261,11 +275,6 @@ public class VEnfermedades extends javax.swing.JDialog {
         textoDescripcion.setText(null);
         //actualizamos la lista de enfermedades
         buscarEnfermedades();
-        ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
-        if (mListaE.getSize() > 0) {
-            textoNombre.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getNombre());
-            textoDescripcion.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getDescripcion());
-        }
     }//GEN-LAST:event_btnActualizarEnfermedadActionPerformed
 
     //botón de Eliminar, elimina una enfermedad de la base de datos
@@ -282,6 +291,7 @@ public class VEnfermedades extends javax.swing.JDialog {
 
     //botón de Regresar, vuelve a la ventana anterior
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        padre.setVisible(true);
         //buscamos los ambulatorios de la ventana padre
         padre.buscarAmbulatorios();
         //cerramos la ventana actual
@@ -291,11 +301,6 @@ public class VEnfermedades extends javax.swing.JDialog {
     //botón de Buscar, busca las enfermedades y las muestra en la lista
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarEnfermedades();
-        ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
-        if (mListaE.getSize() > 0) {
-            textoNombre.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getNombre());
-            textoDescripcion.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getDescripcion());
-        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     //cuando se selecciona un elemento de la lista, los datos se pasan a la parte derecha para consultarse
@@ -345,6 +350,8 @@ public class VEnfermedades extends javax.swing.JDialog {
             lstEnfermedades.setSelectedIndex(0);
             //activa el botón de Eliminar
             btnEliminarEnfermedad.setEnabled(true);
+            textoNombre.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getNombre());
+            textoDescripcion.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getDescripcion());
         } else {
             btnEliminarEnfermedad.setEnabled(false);
         }
