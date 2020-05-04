@@ -253,7 +253,6 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         btnActualizar.setText("Actualizar");
-        btnActualizar.setEnabled(false);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
@@ -414,19 +413,24 @@ public class VPrincipal extends javax.swing.JFrame {
         boolean modificar = false;
         Ambulatorio a;
         //si los campos no están vacíos
-        if (!textoCodigo.getText().isEmpty() || !textoNombre.getText().isEmpty() || !textoDireccion.getText().isEmpty()
-                || !textoProvincia.getText().isEmpty() || !textoTelefono.getText().isEmpty() || isNumeric(textoCodigo.getText())
+        if (!textoNombre.getText().isEmpty() || !textoDireccion.getText().isEmpty()
+                || !textoProvincia.getText().isEmpty() || !textoTelefono.getText().isEmpty()
                 || (isNumeric(textoAnoConstruccion.getText()) || textoAnoConstruccion.getText().isEmpty())) {
             //creamos el ambulatorio
-            a = new Ambulatorio(Integer.parseInt(textoCodigo.getText()), textoNombre.getText(), textoDireccion.getText(),
+            a = new Ambulatorio(textoNombre.getText(), textoDireccion.getText(),
                     textoAnoConstruccion.getText(), textoProvincia.getText(), textoTelefono.getText(),
-                    null, 0.0);
+                    null);
+            
+            
             for (Ambulatorio amb : fa.obtenerAmbulatorios(null, null, null)) {
                 if (amb.getCodigo().equals(a.getCodigo())) {
                     modificar = true;
                     break;
                 }
             }
+            
+
+
             //modificamos o creamos uno nuevo si no está en la tabla
             if (!modificar) {
                 fa.insertarAmbulatorio(a);
@@ -439,6 +443,16 @@ public class VPrincipal extends javax.swing.JFrame {
             btnConsultas.setEnabled(true);
             btnSalaUrgencias.setEnabled(true);
             btnPersonal.setEnabled(true);
+            //campos de texto en blanco para buscar
+            textoAnoConstruccion.setText(null);
+            textoAntiguedad.setText(null);
+            textoCodigo.setText(null);
+            textoDireccion.setText(null);
+            textoNombre.setText(null);
+            textoProvincia.setText(null);
+            textoTelefono.setText(null);
+            textoFondos.setText(null);
+            buscarAmbulatorios();
         } else {
             fa.muestraExcepcion("!Debes rellenar todos los campos obligatorios!");
         }
@@ -476,10 +490,12 @@ public class VPrincipal extends javax.swing.JFrame {
         textoFondos.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getIngresos()));
     }//GEN-LAST:event_tablaAmbulatoriosMouseClicked
 
+    //menú Enfermedades, abre la ventana de Enfermedades
     private void menuEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEnfermedadesMouseClicked
         fa.nuevaVEnfermedades();
     }//GEN-LAST:event_menuEnfermedadesMouseClicked
 
+    //menú Pacientes, abre la ventana de Pacientes
     private void menuPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPacientesMouseClicked
         fa.nuevaVPacientes();
     }//GEN-LAST:event_menuPacientesMouseClicked
