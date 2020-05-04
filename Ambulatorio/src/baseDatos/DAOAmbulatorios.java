@@ -36,7 +36,7 @@ public class DAOAmbulatorios extends AbstractDAO {
             stmAmbulatorio.setString(1, ambulatorio.getNombre());
             stmAmbulatorio.setString(2, ambulatorio.getDireccion());
             stmAmbulatorio.setString(3, ambulatorio.getAnoConstruccion());
-            stmAmbulatorio.setString(4, ambulatorio.getProvicia());
+            stmAmbulatorio.setString(4, ambulatorio.getProvincia());
             stmAmbulatorio.setString(5, ambulatorio.getTelefono());
 
             //Actualizamos
@@ -114,7 +114,7 @@ public class DAOAmbulatorios extends AbstractDAO {
             //Actualizamos
             stmAmbulatorio.setString(1, ambulatorio.getNombre());
             stmAmbulatorio.setString(2, ambulatorio.getDireccion());
-            stmAmbulatorio.setString(3, ambulatorio.getProvicia());
+            stmAmbulatorio.setString(3, ambulatorio.getProvincia());
             stmAmbulatorio.setString(4, ambulatorio.getAnoConstruccion());
             stmAmbulatorio.setString(5, ambulatorio.getTelefono());
 

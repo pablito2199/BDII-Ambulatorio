@@ -172,7 +172,7 @@ public class DAOPacientes extends AbstractDAO {
         try {
             //Construimos la consulta compleja que requiere de varias instrucciones sql
             String consulta = "select cip, dni, nombre, FechaNacimiento, EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) as edad, "
-                    + "sexo, grupoSanguineo, nacionalidad, direccion, telefono "
+                    + "sexo, grupoSanguineo, nacionalidad, direccion, telefono, numSeguridadSocial "
                     + "from paciente "
                     + "natural JOIN " //Unimos resultados
                     + "(select distinct cip, SUM(distinct soborno) as totalSobornado, COUNT(distinct soborno) as numSobornos, "
@@ -181,49 +181,56 @@ public class DAOPacientes extends AbstractDAO {
                     + "WHEN SUM(distinct soborno)>500 THEN 'deluxe' "
                     + "WHEN COUNT(distinct cip)>5 and SUM(distinct soborno)>=50  THEN 'premium' "
                     + "ELSE 'base' "
-                    + "END  as rango "
+                    + "END as rango "
                     + "from paciente full outer JOIN urgencia ON paciente=cip "
                     + "group by cip "
                     + "order by cip, totalSobornado DESC) as rango "
                     //Criterios de la búsqueda
                     + "where cip like ? "
-                    + "and dni like ?"
-                    + "and nombre like ?"
-                    + "and EXTRACT(YEAR FROM age(current_date, FechaNacimiento)) = ?"
-                    + "and sexo like ?"
-                    + "and NSS like ?"
-                    + "and grupoSanguineo like ?";
+                    + "and dni like ? "
+                    + "and nombre like ? "
+                    + "and sexo like ? "
+                    + "and grupoSanguineo = ?"
+                    + edad != null ? "" : "and EXTRACT(YEAR FROM age(CURRENT_DATE, FechaNacimiento)) = ? "
+                    + NSS != null ? "" : "and numSeguridadSocial = ? ";
 
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
-            if (CIP == null) {
-                CIP = "";
+            if (CIP != null) {
+                CIP = "%"+CIP+"%";
             }
-            if (DNI == null) {
-                DNI = "";
+            if (DNI != null) {
+                DNI = "%"+DNI+"%";
             }
-            if (nombre == null) {
-                nombre = "";
+            if (nombre != null) {
+                nombre = "%"+nombre+"%";
             }
-            if (sexo == null) {
-                sexo = "";
+            if (sexo != null) {
+                sexo = "%"+sexo+"%";
             }
-            if (grupo == null) {
-                grupo = "";
+            stmPacientes.setString(1, CIP);
+            stmPacientes.setString(2, DNI);
+            stmPacientes.setString(3, nombre);
+            stmPacientes.setString(4, sexo);
+            stmPacientes.setString(5, grupo);
+             if (edad != null) {
+                stmPacientes.setInt(6, edad);
+             }
+             else if (edad != null && NSS != null) {
+                stmPacientes.setInt(6, edad);
+                stmPacientes.setInt(7, NSS);
             }
-            stmPacientes.setString(1, "%" + CIP + "%");
-            stmPacientes.setString(2, "%" + DNI + "%");
-            stmPacientes.setString(3, "%" + nombre + "%");
-            stmPacientes.setInt(4, edad);
-            stmPacientes.setString(5, "%" + sexo + "%");
-            stmPacientes.setInt(6, NSS);
-            stmPacientes.setString(7, "%" + grupo + "%");
+             else if (NSS != null) {
+                stmPacientes.setInt(6, NSS);
+            }
 
-            //Ejecutamos
+//Ejecutamos
             rsPacientes = stmPacientes.executeQuery();
             //Mientras haya coincidencias
+            System.out.println("Esperando resultado!!");
             while (rsPacientes.next()) {
+                System.out.println("Hay resultado!!");
                 //Se crea una instancia de paciente con los datos recuperados de la base de datos
                 pacienteActual = new Paciente(rsPacientes.getString("cip"),
                         rsPacientes.getString("dni"),

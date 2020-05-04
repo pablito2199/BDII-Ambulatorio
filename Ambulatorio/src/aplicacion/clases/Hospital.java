@@ -7,14 +7,16 @@ public class Hospital {
     private String direccion;
     private String telefono;
     private String provincia;
+    private Float distancia;
 
     //Constructor
-    public Hospital(Integer codigo, String nombre, String direccion, String telefono, String provincia) {
+    public Hospital(Integer codigo, String nombre, String direccion, String telefono, String provincia, Float distancia) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.provincia = provincia;
+        this.distancia = distancia;
     }
 
     //Getters y Setters
@@ -57,6 +59,15 @@ public class Hospital {
     public void setProvincia(String provincia) {
         this.provincia = provincia;
     }
+
+    public Float getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(Float distancia) {
+        this.distancia = distancia;
+    }
+    
 
     @Override
     public boolean equals(Object obj) {

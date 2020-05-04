@@ -20,6 +20,7 @@ public class FachadaAplicacion {
     GestionConsultas gcon;             // Enlace a la clase gestión de consultas
     GestionRecetas grec;               // Enlace a la clase gestión de recetas
     GestionPersonal gper;              // Enlace a la clase gestión de administradores
+    GestionHospitales ghos;            // Enlace a la clase gestión de hospitales
 
     //Constructor
     public FachadaAplicacion() {
@@ -32,6 +33,7 @@ public class FachadaAplicacion {
         gcon = new GestionConsultas(fgui, fbd);
         grec = new GestionRecetas(fgui, fbd);
         gper = new GestionPersonal(fgui, fbd);
+        ghos = new GestionHospitales(fgui, fbd);
     }
 
     //Main
@@ -55,7 +57,7 @@ public class FachadaAplicacion {
     }
 
     //Permite recuperar la especialidad de un personal sanitario
-    public  ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
+    public ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
         return gper.obtenerEspecialidades(dni, ambulatorio);
     }
 
@@ -312,7 +314,7 @@ public class FachadaAplicacion {
     public void nuevaVConsultas(Integer ambulatorio) {
         java.util.ArrayList<Integer> consultas = new java.util.ArrayList<>();
         for (Consulta c : this.consultarConsultas(null, ambulatorio, null)) {
-            
+
             consultas.add(c.getIdentificador());
         }
         gcon.nuevaVConsultas(consultas, ambulatorio);
@@ -338,5 +340,13 @@ public class FachadaAplicacion {
     //Permite crear una nueva ventana de recetas
     public void nuevaVRecetar(VCitasPendientes vcit, Cita cita) {
         grec.nuevaVRecetar(vcit, cita);
+    }
+
+/////////////////////////
+//GESTIÓN DE HOSPITALES
+/////////////////////////
+    //Permite consultar un hospital asociado con el ambulatorio
+    public ArrayList<Hospital> consultarHospitalAsociado(Integer ambulatorio, String nombre, String provincia, Integer codigo, Float distancia) {
+        return ghos.consultarHospitalAsociado(ambulatorio, nombre, provincia, codigo, distancia);
     }
 }

@@ -1,15 +1,15 @@
 package gui;
 
-import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.Hospital;
 import javax.swing.table.*;
 
-public class ModeloTablaAmbulatorios extends AbstractTableModel {
+public class ModeloTablaHospitales extends AbstractTableModel {
 
-    private java.util.List<Ambulatorio> ambulatorios;       //Listado de ambulatorios de la tabla
+    private java.util.List<Hospital> hospitales;       //Listado de ambulatorios de la tabla
 
     //Constructor
-    public ModeloTablaAmbulatorios() {
-        this.ambulatorios = new java.util.ArrayList<>();
+    public ModeloTablaHospitales() {
+        this.hospitales = new java.util.ArrayList<>();
     }
 
     //Permite obtener el número de columnas
@@ -21,7 +21,7 @@ public class ModeloTablaAmbulatorios extends AbstractTableModel {
     //Permite obtener el número de filas de la tabla
     @Override
     public int getRowCount() {
-        return ambulatorios.size();
+        return hospitales.size();
     }
 
     //Permite obtener el nombre de las columnas de la tabla
@@ -41,9 +41,9 @@ public class ModeloTablaAmbulatorios extends AbstractTableModel {
             case 2:
                 nombre = "Provincia";
                 break;
-            //La cuarta el teléfono
+            //La cuarta a distancia
             case 3:
-                nombre = "Teléfono";
+                nombre = "Distancia";
                 break;
             //La quinta el año de publicación
         }
@@ -68,9 +68,9 @@ public class ModeloTablaAmbulatorios extends AbstractTableModel {
             case 2:
                 clase = java.lang.String.class;
                 break;
-            //El teléfono es un String  
+            //La distancia es un Float
             case 3:
-                clase = java.lang.String.class;
+                clase = java.lang.Float.class;
                 break;
         }
         //Regresamos la clase
@@ -89,21 +89,21 @@ public class ModeloTablaAmbulatorios extends AbstractTableModel {
     public Object getValueAt(int row, int col) {
         Object resultado = null;
         switch (col) {
-            //En la primera columna recuperamos el código del ambulatorio
+            //En la primera columna recuperamos el código del hospital
             case 0:
-                resultado = ambulatorios.get(row).getCodigo();
+                resultado = hospitales.get(row).getCodigo();
                 break;
-            //Recuperamos el nombre del ambulatorio
+            //Recuperamos el nombre del hospital
             case 1:
-                resultado = ambulatorios.get(row).getNombre();
+                resultado = hospitales.get(row).getNombre();
                 break;
-            //Recuperamos la provincia del ambulatorio
+            //Recuperamos la provincia del hospital
             case 2:
-                resultado = ambulatorios.get(row).getProvincia();
+                resultado = hospitales.get(row).getProvincia();
                 break;
-            //Recuperamos el teleéfono del ambulatorio
+            //Recuperamos el teleéfono del hospital
             case 3:
-                resultado = ambulatorios.get(row).getTelefono();
+                resultado = hospitales.get(row).getDistancia();
                 break;
         }
         //Devolvemos el resultado
@@ -111,14 +111,14 @@ public class ModeloTablaAmbulatorios extends AbstractTableModel {
     }
 
     //Permite cambiar las filas de la tabla
-    public void setFilas(java.util.List<Ambulatorio> ambulatorios) {
-        this.ambulatorios = ambulatorios;
+    public void setFilas(java.util.List<Hospital> hospitales) {
+        this.hospitales = hospitales;
         //Notifica a los listeners del cambio
         fireTableDataChanged();
     }
 
     //Permite recuperar el ambulatorio especificado
-    public Ambulatorio obtenerAmbulatorio(int i) {
-        return this.ambulatorios.get(i);
+    public Hospital obtenerHospital(int i) {
+        return this.hospitales.get(i);
     }
 }
