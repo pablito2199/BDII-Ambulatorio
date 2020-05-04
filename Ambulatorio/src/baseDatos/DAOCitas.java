@@ -256,7 +256,7 @@ public class DAOCitas extends AbstractDAO {
         try {
             //Preparamos la sentencia para insertar una fecha de finalización
             stmCita = con.prepareStatement(
-                    "update from cita "
+                    "update cita "
                     + "set fechaHoraFin = CURRENT_TIMESTAMP "
                     + "where fechaHoraInicio = ? "
                     + "and consulta = ? "
