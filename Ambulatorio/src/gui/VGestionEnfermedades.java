@@ -295,7 +295,6 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     //Botón Regresar, vuelve a la ventana anterior, cerrando la ventana actual
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         //Busca los pacientes de la ventana anterior
-        padre.buscarPacientes();
         //Cerramos la ventana actual
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
