@@ -1,6 +1,5 @@
 package aplicacion;
 
-import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Hospital;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
@@ -16,8 +15,8 @@ public class GestionHospitales {
         this.fbd = fbd;
     }
 
-    //Inserta un nuevo ambulatorio en la base de datos
-    public ArrayList<Hospital> consultarHospital(String nombre, String provincia, Integer codigo, Float distancia) {
-        return fbd.consultarHospital(nombre, provincia, codigo, distancia);
+    //Permite consultar un hospital asociado con el ambulatorio
+    public ArrayList<Hospital> consultarHospitalAsociado(Integer ambulatorio, String nombre, String provincia, Integer codigo, Float distancia) {
+        return fbd.consultarHospitalAsociado(ambulatorio, nombre, provincia, codigo, distancia);
     }
 }

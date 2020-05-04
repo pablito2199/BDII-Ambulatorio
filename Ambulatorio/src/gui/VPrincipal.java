@@ -469,7 +469,7 @@ public class VPrincipal extends javax.swing.JFrame {
         textoCodigo.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo()));
         textoNombre.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getNombre());
         textoDireccion.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getDireccion());
-        textoProvincia.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getProvicia());
+        textoProvincia.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getProvincia());
         textoTelefono.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getTelefono());
         textoAnoConstruccion.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getAnoConstruccion());
         textoAntiguedad.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getAntiguedad());

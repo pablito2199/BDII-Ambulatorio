@@ -1,6 +1,8 @@
 package gui;
 
 import aplicacion.clases.Cita;
+import aplicacion.clases.Hospital;
+import java.util.ArrayList;
 
 public class VDerivarHospital extends javax.swing.JDialog {
 
@@ -44,7 +46,7 @@ public class VDerivarHospital extends javax.swing.JDialog {
         etiquetaCodigo1 = new javax.swing.JLabel();
         textoDistancia = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaHospitales = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
@@ -72,18 +74,8 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
         etiquetaCodigo1.setText("Distancia:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaHospitales.setModel(new ModeloTablaHospitales());
+        jScrollPane1.setViewportView(tablaHospitales);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -219,16 +211,50 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
     //botón de Confirmar, confirma derivar un paciente al hospital
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        
-        
+
+        //Comprobamos que esta seleccionada una fila
+        int index = tablaHospitales.getSelectedRow();
+        if (index >= 0) {
+
+            //Obtenemos tabla
+            ModeloTablaHospitales th = (ModeloTablaHospitales) tablaHospitales.getModel();
+
+            //Derivamos
+            fa.derivarHospital(th.obtenerHospital(index), cita);
+        }
+
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     //botón de Regresar, vuelve a la ventana anterior
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        //Obtenemos valores
+        Integer codigo;
+        Float distancia;
+        try {
+            codigo = Integer.parseInt(textoCodigo.getText());
+        } catch (Exception e) {
+            codigo = null;
+        }
+        try {
+            distancia = Float.parseFloat(textoDistancia.getText());
+        } catch (Exception e) {
+            distancia = null;
+        }
+
+        //Obtenemos tabla
+        ModeloTablaHospitales th = (ModeloTablaHospitales) tablaHospitales.getModel();
+
+        //Insertamos valores
+        th.setFilas(fa.consultarHospitalAsociado(cita.getAmbulatorio(),
+                textoNombre.getText(),
+                textoProvincia.getText(),
+                codigo,
+                distancia));
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -245,8 +271,8 @@ public class VDerivarHospital extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTabbedPane panelEnfermedad;
+    private javax.swing.JTable tablaHospitales;
     private javax.swing.JTextField textoCodigo;
     private javax.swing.JTextField textoDistancia;
     private javax.swing.JTextField textoNombre;

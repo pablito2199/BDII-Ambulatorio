@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Hospital;
 import java.util.ArrayList;
 
@@ -19,8 +18,8 @@ public class DAOHospitales extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    //Permite insertar un nuevo ambulatorio en la base de datos
-    public ArrayList<Hospital> consultarHospital(String nombre, String provincia, Integer codigo, Float distancia) {
+    //Permite consultar un hospital asociado con el ambulatorio
+    public ArrayList<Hospital> consultarHospitalAsociado(Integer ambulatorio, String nombre, String provincia, Integer codigo, Float distancia) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmHospital = null;
@@ -31,33 +30,36 @@ public class DAOHospitales extends AbstractDAO {
         con = super.getConexion();
 
         //Obtenemos strings de codigo y distancia
-        String codH = codigo == null ? "" : "and codigo = ? ";
-        String disH = distancia == null ? "" : "and distancia <= ? ";
+        String codH = codigo == null ? "" : "and ho.codigo = ? ";
+        String disH = distancia == null ? "" : "and aso.distancia <= ? ";
 
         //Intentamos la consulta SQL
         try {
             //Preparamos la consulta SQL para insertar en la tabla de ambulatorios un nuevo ambulatorio con el id de ambulatorio, nombre
             //clave, dirección, email y tipo de ambulatorio especificados
             stmHospital = con.prepareStatement(
-                    "select * "
-                    + "from hospital "
-                    + "where nombre like ? "
-                    + "and provincia like = ? "
+                    "select ho.*, aso.distancia "
+                    + "from hospital as ho, asociar as aso"
+                    + "where ho.nombre like ? "
+                    + "and ho.provincia like = ? "
+                    + "and ho.codigo = aso.hospital "
+                    + "and aso.ambulatorio = ? "
                     + codH
                     + disH
             );
             //Sustituimos
-            stmHospital.setString(1, nombre);
-            stmHospital.setString(2, provincia);
+            stmHospital.setString(1, "%" + nombre + "%");
+            stmHospital.setString(2, "%" + provincia + "%");
+            stmHospital.setInt(3, ambulatorio);
             boolean cd = codigo == null;
             boolean dt = distancia == null;
             if (cd && !dt) {
-                stmHospital.setFloat(3, distancia);
-            } else if (!cd && dt) {
-                stmHospital.setInt(3, codigo);
-            } else if (!cd && !dt) {
-                stmHospital.setInt(3, codigo);
                 stmHospital.setFloat(4, distancia);
+            } else if (!cd && dt) {
+                stmHospital.setInt(4, codigo);
+            } else if (!cd && !dt) {
+                stmHospital.setInt(4, codigo);
+                stmHospital.setFloat(5, distancia);
             }
 
             //Ejecutamos
@@ -71,7 +73,8 @@ public class DAOHospitales extends AbstractDAO {
                         rsHospital.getString("nombre"),
                         rsHospital.getString("direccion"),
                         rsHospital.getString("telefono"),
-                        rsHospital.getString("provincia")
+                        rsHospital.getString("provincia"),
+                        rsHospital.getFloat("distancia")
                 ));
             }
 

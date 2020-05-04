@@ -6,29 +6,29 @@ public class Ambulatorio {
     private String nombre;
     private String direccion;
     private String anoConstruccion;
-    private String provicia;
+    private String provincia;
     private String telefono;
     private String antiguedad;
     private Double ingresos;
 
     //Constructor
-    public Ambulatorio(Integer codigo, String nombre, String direccion, String anoConstruccion, String provicia, String telefono, String antiguedad, Double ingresos) {
+    public Ambulatorio(Integer codigo, String nombre, String direccion, String anoConstruccion, String provincia, String telefono, String antiguedad, Double ingresos) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
         this.anoConstruccion = anoConstruccion;
-        this.provicia = provicia;
+        this.provincia = provincia;
         this.telefono = telefono;
         this.antiguedad = antiguedad;
         this.ingresos = ingresos;
     }
 
-    public Ambulatorio(Integer codigo, String nombre, String direccion, String anoConstruccion, String provicia, String telefono, String antiguedad) {
+    public Ambulatorio(Integer codigo, String nombre, String direccion, String anoConstruccion, String provincia, String telefono, String antiguedad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
         this.anoConstruccion = anoConstruccion;
-        this.provicia = provicia;
+        this.provincia = provincia;
         this.telefono = telefono;
         this.antiguedad = antiguedad;
         this.ingresos = 0.0;
@@ -67,12 +67,12 @@ public class Ambulatorio {
         this.anoConstruccion = anoConstruccion;
     }
 
-    public String getProvicia() {
-        return provicia;
+    public String getProvincia() {
+        return provincia;
     }
 
-    public void setProvicia(String provicia) {
-        this.provicia = provicia;
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
     public String getTelefono() {

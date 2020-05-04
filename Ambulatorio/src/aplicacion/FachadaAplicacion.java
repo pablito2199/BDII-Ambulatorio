@@ -340,8 +340,8 @@ public class FachadaAplicacion {
 /////////////////////////
 //GESTIÓN DE HOSPITALES
 /////////////////////////
-    //Inserta un nuevo ambulatorio en la base de datos
-    public ArrayList<Hospital> consultarHospital(String nombre, String provincia, Integer codigo, Float distancia) {
-        return ghos.consultarHospital(nombre, provincia, codigo, distancia);
+    //Permite consultar un hospital asociado con el ambulatorio
+    public ArrayList<Hospital> consultarHospitalAsociado(Integer ambulatorio, String nombre, String provincia, Integer codigo, Float distancia) {
+        return ghos.consultarHospitalAsociado(ambulatorio, nombre, provincia, codigo, distancia);
     }
 }
