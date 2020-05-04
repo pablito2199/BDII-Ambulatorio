@@ -256,6 +256,11 @@ public class FachadaAplicacion {
         return genf.consultarEnfermedades(nombre);
     }
 
+    //Permite recuperar los datos de la enfermedad con el nombre correspondiente
+    public Enfermedad consultarEnfermedadActual(String nombre) {
+        return genf.consultarEnfermedadActual(nombre);
+    }
+
     //Permite modificar los datos de una enfermedad en la base de datos
     public void modificarEnfermedad(Enfermedad enfermedad) {
         genf.modificarEnfermedad(enfermedad);
@@ -269,7 +274,7 @@ public class FachadaAplicacion {
     //Permite crear una nueva ventana de enfermedades
     public void nuevaVEnfermedades() {
         java.util.ArrayList<String> enfermedades = new java.util.ArrayList<>();
-        for (Enfermedad e : this.consultarEnfermedades(null)) {
+        for (Enfermedad e : this.consultarEnfermedades("")) {
             enfermedades.add(e.getNombre());
         }
         genf.nuevaVEnfermedades(enfermedades);

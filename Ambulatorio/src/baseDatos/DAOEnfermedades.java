@@ -146,14 +146,14 @@ public class DAOEnfermedades extends AbstractDAO {
             //Selecionamos el la descripción
             //que tengan el nombre dado
             String consulta = "select nombre, descripcion "
+                    + "from enfermedad "
                     + "where nombre like ? ";
 
             //Preparamos la consulta
             stmEnfermedades = con.prepareStatement(consulta);
             //Sustituimos
-            if (nombre != null) {
-                stmEnfermedades.setString(1, "%" + nombre + "%"); //Nombre
-            }            //Ejecutamos
+            stmEnfermedades.setString(1, "%" + nombre + "%"); //Nombre
+            //Ejecutamos
             rsEnfermedad = stmEnfermedades.executeQuery();
             //Mientras haya coincidencias
             while (rsEnfermedad.next()) {
@@ -178,6 +178,40 @@ public class DAOEnfermedades extends AbstractDAO {
             }
         }
         //Se devuelve el resultado (lista de pacientes)
+        return resultado;
+    }
+    
+    //Permite recuperar los datos de la enfermedad con el nombre correspondiente
+    public Enfermedad consultarEnfermedadActual(String nombre) {
+        //Declaramos variables
+        Enfermedad resultado = null;
+        Enfermedad enfermedadActual;
+        Connection con;
+        PreparedStatement stmEnfermedades = null;
+        ResultSet rsEnfermedad;
+
+        //Establecemos conexión
+        con = this.getConexion();
+
+        //cuenta el número de prestamos cuya diferencia de días es mayor o igual a 30 con respecto al día de hoy
+        String consulta = "select nombre, descripcion "
+                + "from enfermedad "
+                + "where nombre = ?";
+
+        try {
+            stmEnfermedades = con.prepareStatement(consulta);
+            stmEnfermedades.setString(1, nombre);
+            rsEnfermedad = stmEnfermedades.executeQuery();
+            rsEnfermedad.next();
+            resultado = new Enfermedad(rsEnfermedad.getString("nombre"), rsEnfermedad.getString("descripcion"));
+        } catch (SQLException e) {
+        } finally {
+            try {
+                stmEnfermedades.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
         return resultado;
     }
 }
