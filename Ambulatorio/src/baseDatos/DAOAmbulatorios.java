@@ -143,7 +143,7 @@ public class DAOAmbulatorios extends AbstractDAO {
     //Permite buscar ambulatorios por su codigo, provincia y/o nombre de ambulatorio
     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia) {
         //Declaramos variables
-        java.util.List<Ambulatorio> resultado = new java.util.ArrayList<Ambulatorio>();
+        java.util.List<Ambulatorio> resultado = new java.util.ArrayList<>();
         Ambulatorio ambulatorioActual;
         Connection con;
         PreparedStatement stmAmbulatorios = null;
@@ -195,6 +195,9 @@ public class DAOAmbulatorios extends AbstractDAO {
             stmAmbulatorios.setString(4, "%" + Provincia + "%");
         
          */
+        //Variable para buscar por codigo
+        String codAmb = codigo == null ? "" : "and codigoAmbulatorio = ? ";
+
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
@@ -203,18 +206,20 @@ public class DAOAmbulatorios extends AbstractDAO {
                     //la diferencia de las fechas. Luego lo reconvertimos de nuevo a varchar.
                     + "CAST ( EXTRACT(YEAR FROM age(current_date, TO_DATE(anoConstruccion, 'YYYY'))) as varchar(4)) as antiguedad "
                     + "from ambulatorio "
-                    + "where codigoAmbulatorio = ? "
-                    + "and nombre like ? "
+                    + "where nombre like ? "
                     + "and provincia like ? "
+                    + codAmb
                     //Ordenamos alfabéticamente por nombre
                     + "order by nombre ASC";
 
             //Preparamos la consulta
             stmAmbulatorios = con.prepareStatement(consulta);
             //Sustituimos
-            stmAmbulatorios.setInt(1, codigo);
-            stmAmbulatorios.setString(2, "%" + nombre + "%");
-            stmAmbulatorios.setString(3, "%" + Provincia + "%");
+            stmAmbulatorios.setString(1, "%" + nombre + "%");
+            stmAmbulatorios.setString(2, "%" + Provincia + "%");
+            if (codigo != null) {
+                stmAmbulatorios.setInt(3, codigo);
+            }
 
             //Ejecutamos
             rsAmbulatorios = stmAmbulatorios.executeQuery();
