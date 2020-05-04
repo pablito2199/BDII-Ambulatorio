@@ -554,6 +554,14 @@ public class VPrincipal extends javax.swing.JFrame {
             btnConsultas.setEnabled(true);
             btnSalaUrgencias.setEnabled(true);
             btnPersonal.setEnabled(true);
+            textoCodigo.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo()));
+            textoNombre.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getNombre());
+            textoDireccion.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getDireccion());
+            textoProvincia.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getProvincia());
+            textoTelefono.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getTelefono());
+            textoAnoConstruccion.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getAnoConstruccion());
+            textoAntiguedad.setText(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getAntiguedad());
+            textoFondos.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getIngresos()));
         } else {
             //En otro caso se deshabilitan
             btnActualizar.setEnabled(false);

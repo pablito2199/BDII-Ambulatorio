@@ -210,7 +210,7 @@ public class DAOAmbulatorios extends AbstractDAO {
                     + "and provincia like ? "
                     + codAmb
                     //Ordenamos alfabéticamente por nombre
-                    + "order by nombre ASC";
+                    + "order by codigoAmbulatorio ASC";
 
             //Preparamos la consulta
             stmAmbulatorios = con.prepareStatement(consulta);

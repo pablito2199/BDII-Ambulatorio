@@ -147,7 +147,8 @@ public class DAOEnfermedades extends AbstractDAO {
             //que tengan el nombre dado
             String consulta = "select nombre, descripcion "
                     + "from enfermedad "
-                    + "where nombre like ? ";
+                    + "where nombre like ? "
+                    + "order by nombre ASC";
 
             //Preparamos la consulta
             stmEnfermedades = con.prepareStatement(consulta);
