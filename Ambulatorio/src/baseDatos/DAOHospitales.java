@@ -30,7 +30,7 @@ public class DAOHospitales extends AbstractDAO {
         con = super.getConexion();
 
         //Obtenemos strings de codigo y distancia
-        String codH = codigo == null ? "" : "and ho.codigo = ? ";
+        String codH = codigo == null ? "" : "and hos.codigoHospital = ? ";
         String disH = distancia == null ? "" : "and aso.distancia <= ? ";
 
         //Intentamos la consulta SQL
@@ -38,11 +38,11 @@ public class DAOHospitales extends AbstractDAO {
             //Preparamos la consulta SQL para insertar en la tabla de ambulatorios un nuevo ambulatorio con el id de ambulatorio, nombre
             //clave, dirección, email y tipo de ambulatorio especificados
             stmHospital = con.prepareStatement(
-                    "select ho.*, aso.distancia "
-                    + "from hospital as ho, asociar as aso"
-                    + "where ho.nombre like ? "
-                    + "and ho.provincia like = ? "
-                    + "and ho.codigo = aso.hospital "
+                    "select hos.*, aso.distancia "
+                    + "from hospital as hos, asociado as aso "
+                    + "where hos.nombre like ? "
+                    + "and hos.provincia like ? "
+                    + "and hos.codigoHospital = aso.hospital "
                     + "and aso.ambulatorio = ? "
                     + codH
                     + disH
@@ -69,7 +69,7 @@ public class DAOHospitales extends AbstractDAO {
             while (rsHospital.next()) {
 
                 resultado.add(new Hospital(
-                        rsHospital.getInt("codigo"),
+                        rsHospital.getInt("codigoHospital"),
                         rsHospital.getString("nombre"),
                         rsHospital.getString("direccion"),
                         rsHospital.getString("telefono"),

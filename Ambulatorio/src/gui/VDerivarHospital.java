@@ -221,6 +221,9 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
             //Derivamos
             fa.derivarHospital(th.obtenerHospital(index), cita);
+        
+            //Cerramos
+            this.dispose();
         }
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
