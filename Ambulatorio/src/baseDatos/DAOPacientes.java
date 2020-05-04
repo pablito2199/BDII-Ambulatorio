@@ -190,38 +190,28 @@ public class DAOPacientes extends AbstractDAO {
                     + "and dni like ? "
                     + "and nombre like ? "
                     + "and sexo like ? "
-                    + "and grupoSanguineo = ?"
-                    + edad != null ? "" : "and EXTRACT(YEAR FROM age(CURRENT_DATE, FechaNacimiento)) = ? "
-                    + NSS != null ? "" : "and numSeguridadSocial = ? ";
+                    + "and grupoSanguineo = ?";
+                    if (edad != null)
+                        consulta +="and EXTRACT(YEAR FROM age(CURRENT_DATE, FechaNacimiento)) = ? ";
+                    if (NSS != null)
+                        consulta +="and numSeguridadSocial = ? ";
 
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
-            if (CIP != null) {
-                CIP = "%"+CIP+"%";
-            }
-            if (DNI != null) {
-                DNI = "%"+DNI+"%";
-            }
-            if (nombre != null) {
-                nombre = "%"+nombre+"%";
-            }
-            if (sexo != null) {
-                sexo = "%"+sexo+"%";
-            }
-            stmPacientes.setString(1, CIP);
-            stmPacientes.setString(2, DNI);
-            stmPacientes.setString(3, nombre);
-            stmPacientes.setString(4, sexo);
-            stmPacientes.setString(5, grupo);
-             if (edad != null) {
+            stmPacientes.setString(1, "%"+CIP+"%");
+            stmPacientes.setString(2, "%"+DNI+"%");
+            stmPacientes.setString(3, "%"+nombre+"%");
+            stmPacientes.setString(4, "%"+sexo+"%");
+            stmPacientes.setString(5, "%"+grupo+"%");
+            if (edad != null) {
                 stmPacientes.setInt(6, edad);
-             }
-             else if (edad != null && NSS != null) {
+            }
+            else if (edad != null && NSS != null) {
                 stmPacientes.setInt(6, edad);
                 stmPacientes.setInt(7, NSS);
             }
-             else if (NSS != null) {
+            else if (NSS != null) {
                 stmPacientes.setInt(6, NSS);
             }
 

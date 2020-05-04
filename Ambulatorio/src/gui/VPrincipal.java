@@ -538,7 +538,7 @@ public class VPrincipal extends javax.swing.JFrame {
         Integer codigo;
         try {
             codigo = Integer.parseInt(textoCodigo.getText());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             codigo = null;
         }
 
