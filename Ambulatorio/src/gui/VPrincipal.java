@@ -306,28 +306,31 @@ public class VPrincipal extends javax.swing.JFrame {
         etiquetaNombreProyecto.setText("RED DE AMBULATORIOS");
 
         menuMedicamentos.setText("Medicamentos");
+        menuMedicamentos.setEnabled(false);
         jMenuBar3.add(menuMedicamentos);
 
         menuEnfermedades.setText("Enfermedades");
-        menuEnfermedades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEnfermedadesActionPerformed(evt);
+        menuEnfermedades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuEnfermedadesMouseClicked(evt);
             }
         });
         jMenuBar3.add(menuEnfermedades);
 
         menuPacientes.setText("Pacientes");
-        menuPacientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPacientesActionPerformed(evt);
+        menuPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuPacientesMouseClicked(evt);
             }
         });
         jMenuBar3.add(menuPacientes);
 
         menuEspecialidades.setText("Especialidades");
+        menuEspecialidades.setEnabled(false);
         jMenuBar3.add(menuEspecialidades);
 
         menuHospitales.setText("Hospitales");
+        menuHospitales.setEnabled(false);
         jMenuBar3.add(menuHospitales);
 
         setJMenuBar(jMenuBar3);
@@ -473,15 +476,13 @@ public class VPrincipal extends javax.swing.JFrame {
         textoFondos.setText(String.valueOf(m.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getIngresos()));
     }//GEN-LAST:event_tablaAmbulatoriosMouseClicked
 
-    //Menú de enfermedades, abre una nueva ventana de Enfermedades
-    private void menuEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEnfermedadesActionPerformed
+    private void menuEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEnfermedadesMouseClicked
         fa.nuevaVEnfermedades();
-    }//GEN-LAST:event_menuEnfermedadesActionPerformed
+    }//GEN-LAST:event_menuEnfermedadesMouseClicked
 
-    //Menú de pacientes, abre una nueva ventana de Pacientes
-    private void menuPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPacientesActionPerformed
+    private void menuPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPacientesMouseClicked
         fa.nuevaVPacientes();
-    }//GEN-LAST:event_menuPacientesActionPerformed
+    }//GEN-LAST:event_menuPacientesMouseClicked
 
     /**
      * @param args the command line arguments
