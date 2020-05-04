@@ -83,7 +83,7 @@ public class DAOCitas extends AbstractDAO {
 
                     //Preparamos la consulta SQL para actualizar la cita
                     stmCita = con.prepareStatement(
-                            "update from cita "
+                            "update cita "
                             + "set paciente = ?,"
                             + "tipo = ?,"
                             + "especialidad = ? "
@@ -308,8 +308,8 @@ public class DAOCitas extends AbstractDAO {
             //Preparamos la sentencia para insertar una fecha de
             //finalización en la cita
             stmDerivarHospital = con.prepareStatement(
-                    "update from cita "
-                    + "set fechaHoraFin = CURRENT_TIMESTAMP"
+                    "update cita "
+                    + "set fechaHoraFin = CURRENT_TIMESTAMP "
                     + "where fechaHoraInicio = ? "
                     + "and consulta = ? "
                     + "and ambulatorio = ? "
@@ -412,14 +412,14 @@ public class DAOCitas extends AbstractDAO {
                     + "from cita as ci "
                     + "where ci.fechaHoraInicio > ? "
                     + "and ci.fechaHoraInicio < ? "
-                    + "and ci.fechaHoraFin is null"
+                    + "and ci.fechaHoraFin is null "
                     + "and ci.consulta = ? "
                     + "and ci.ambulatorio = ? "
                     + "and not exists (select u.cita "
                     + "from urgencia as u "
                     + "where u.cita = ci.fechaHoraInicio "
                     + "and ci.consulta = u.consulta "
-                    + "and ci.ambulatorio = u.ambulatorio"
+                    + "and ci.ambulatorio = u.ambulatorio "
                     + "and ci.paciente = u.paciente) "
                     + "order by fechaHoraInicio asc"
             );
@@ -609,7 +609,7 @@ public class DAOCitas extends AbstractDAO {
             //todas las consultas donde trabaja un medico
             stmCitas = con.prepareStatement(
                     "select ci.* "
-                    + "from cita as ci, consulta as co, pertenecer as p"
+                    + "from cita as ci, consulta as co, pertenecer as p "
                     + "where ci.fechaHoraFin is null "
                     + "and ci.consulta = co.identificador "
                     + "and ci.ambulatorio = co.ambulatorio "
@@ -817,7 +817,7 @@ public class DAOCitas extends AbstractDAO {
             //Preparamos la sentencia para obtener las citas pendientes de
             //todas las consultas donde trabaja un medico
             stmCita = con.prepareStatement(
-                    "delete from cita"
+                    "delete from cita "
                     + "where fechaHoraInicio = ? "
                     + "and paciente = ? "
                     + "and consulta = ? "

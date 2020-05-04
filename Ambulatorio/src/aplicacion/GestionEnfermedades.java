@@ -29,6 +29,11 @@ public class GestionEnfermedades {
         return fbd.consultarEnfermedades(nombre);
     }
 
+    //Permite recuperar los datos de la enfermedad con el nombre correspondiente
+    public Enfermedad consultarEnfermedadActual(String nombre) {
+        return fbd.consultarEnfermedadActual(nombre);
+    }
+
     //Permite modificar los datos de una enfermedad en la base de datos
     public void modificarEnfermedad(Enfermedad enfermedad) {
         fbd.modificarEnfermedad(enfermedad);

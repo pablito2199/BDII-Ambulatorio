@@ -211,6 +211,11 @@ public class FachadaBaseDatos {
         return daoEnfermedades.consultarEnfermedades(nombre);
     }
 
+    //Permite recuperar los datos de la enfermedad con el nombre correspondiente
+    public Enfermedad consultarEnfermedadActual(String nombre) {
+        return daoEnfermedades.consultarEnfermedadActual(nombre);
+    }
+
     //Permite modificar los datos de una enfermedad de la base de datos
     public void modificarEnfermedad(Enfermedad enfermedad) {
         daoEnfermedades.modificarEnfermedad(enfermedad);
