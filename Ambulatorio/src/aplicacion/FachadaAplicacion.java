@@ -307,6 +307,7 @@ public class FachadaAplicacion {
     public void nuevaVConsultas(Integer ambulatorio) {
         java.util.ArrayList<Integer> consultas = new java.util.ArrayList<>();
         for (Consulta c : this.consultarConsultas(null, ambulatorio, null)) {
+            
             consultas.add(c.getIdentificador());
         }
         gcon.nuevaVConsultas(consultas, ambulatorio);

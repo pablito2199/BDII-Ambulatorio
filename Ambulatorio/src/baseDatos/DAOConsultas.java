@@ -101,7 +101,8 @@ public class DAOConsultas extends AbstractDAO {
         Consulta consultaActual;
         Connection con;
         PreparedStatement stmConsultas = null;
-        ResultSet rsConsultas;
+        ResultSet rsConsultas;//Variable para buscar por codigo
+        String id = identificador == null ? "" : "identificador = ? ";
 
         //Establecemos conexión
         con = this.getConexion();
@@ -113,14 +114,17 @@ public class DAOConsultas extends AbstractDAO {
             //que tengan el identificador dado
             String consulta = "select identificador, ambulatorio, especialidad "
                     + "from consulta "
-                    + "where identificador = ? "
+                    + "where " 
+                    + id
                     + " and ambulatorio = ? "
                     + "and especialidad = ?";
 
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
-            stmConsultas.setInt(1, identificador); //Identificador
+            if (identificador != null) {
+                stmConsultas.setInt(1, identificador); //Identificador
+            }
             stmConsultas.setInt(2, ambulatorio); //Ambulatorio
             stmConsultas.setString(3, especialidad); //Especialidad
             //Ejecutamos
