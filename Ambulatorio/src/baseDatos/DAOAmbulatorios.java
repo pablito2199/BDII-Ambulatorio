@@ -141,7 +141,7 @@ public class DAOAmbulatorios extends AbstractDAO {
     }
 
     //Permite buscar ambulatorios por su codigo, provincia y/o nombre de ambulatorio
-    public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String Provincia) {
+    public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String provincia) {
         //Declaramos variables
         java.util.List<Ambulatorio> resultado = new java.util.ArrayList<>();
         Ambulatorio ambulatorioActual;
@@ -216,7 +216,7 @@ public class DAOAmbulatorios extends AbstractDAO {
             stmAmbulatorios = con.prepareStatement(consulta);
             //Sustituimos
             stmAmbulatorios.setString(1, "%" + nombre + "%");
-            stmAmbulatorios.setString(2, "%" + Provincia + "%");
+            stmAmbulatorios.setString(2, "%" + provincia + "%");
             if (codigo != null) {
                 stmAmbulatorios.setInt(3, codigo);
             }
@@ -239,18 +239,18 @@ public class DAOAmbulatorios extends AbstractDAO {
                 //Para cada ambulatorio
                 try {
                     //Calculamos los ingresos que ha tenido ese ambulatorio
-                    subconsulta = "(select SUM(cantidad) from subvencion full join donativo "
-                            + "using (codigoIngreso,ambulatorio,fecha,cantidad) "
+                    subconsulta = "select SUM(cantidad) as ingresos "
+                            + "from subvencion full join donativo "
+                            + "using(codigoIngreso,ambulatorio,fecha,cantidad) "
                             //Filtramos por aquellas donaciones realizadas el último año
-                            + "where ambulatorio = ? and and EXTRACT(YEAR FROM age(current_date, fecha))<=1"
-                            + "group by ambulatorio) as ingresos ";
+                            + "where ambulatorio = ? "
+                            + "and EXTRACT(YEAR FROM AGE(CURRENT_DATE, fecha)) <= 1 "
+                            + "group by ambulatorio";
 
                     //Preparamos la consulta
-                    stmIngresos = con.prepareStatement(consulta);
+                    stmIngresos = con.prepareStatement(subconsulta);
                     //Sustituimos
-                    stmIngresos.setInt(1, codigo);
-                    stmIngresos.setString(2, "%" + nombre + "%");
-                    stmIngresos.setString(3, "%" + Provincia + "%");
+                    stmIngresos.setInt(1, ambulatorioActual.getCodigo());
 
                     //Ejecutamos
                     rsIngresos = stmIngresos.executeQuery();
@@ -258,7 +258,7 @@ public class DAOAmbulatorios extends AbstractDAO {
                     //Si hay coincidencias
                     if (rsIngresos.next()) {
                         //Si tiene ingresos los recogemos
-                        ambulatorioActual.setIngresos(rsAmbulatorios.getDouble("ingresos"));
+                        ambulatorioActual.setIngresos(rsIngresos.getDouble("ingresos"));
                     }
 
                 } //En caso de error se captura la excepción
@@ -276,7 +276,7 @@ public class DAOAmbulatorios extends AbstractDAO {
                 } finally {
                     //Finalmente se intentan cerrar cursores
                     try {
-                        stmAmbulatorios.close();
+                        stmIngresos.close();
                     } catch (SQLException e) {
                         //Si no se puede se imprime el error
                         System.out.println("Imposible cerrar cursores");
