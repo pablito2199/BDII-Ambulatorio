@@ -387,6 +387,7 @@ public class VPacientes extends javax.swing.JDialog {
                 .addGap(15, 15, 15))
         );
 
+        labelGestionarPacientes.setForeground(new java.awt.Color(0, 0, 255));
         labelGestionarPacientes.setText("GESTIONAR PACIENTES");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

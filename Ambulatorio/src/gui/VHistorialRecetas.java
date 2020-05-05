@@ -201,6 +201,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        etiquetaHistorialDeRecetas.setForeground(new java.awt.Color(0, 0, 255));
         etiquetaHistorialDeRecetas.setText("HISTORIAL  DE RECETAS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

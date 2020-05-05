@@ -73,6 +73,7 @@ public class VAutentificacion extends javax.swing.JDialog {
 
         textoContrasena.setText("a");
 
+        labelGestionarPacientes.setForeground(new java.awt.Color(0, 0, 255));
         labelGestionarPacientes.setText("AUTENTIFICACIÓN");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

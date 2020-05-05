@@ -77,6 +77,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        etiquetaGestionarEnfermedades.setForeground(new java.awt.Color(0, 0, 255));
         etiquetaGestionarEnfermedades.setText("GESTIONAR ENFERMEDADES");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

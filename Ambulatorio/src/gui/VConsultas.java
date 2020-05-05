@@ -221,6 +221,7 @@ public class VConsultas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        etiquetaConsultas.setForeground(new java.awt.Color(0, 51, 255));
         etiquetaConsultas.setText("CONSULTAS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

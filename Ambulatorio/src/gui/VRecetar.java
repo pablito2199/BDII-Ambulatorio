@@ -206,6 +206,7 @@ public class VRecetar extends javax.swing.JDialog {
                 .addGap(21, 21, 21))
         );
 
+        labelRecetar.setForeground(new java.awt.Color(0, 0, 255));
         labelRecetar.setText("RECETAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

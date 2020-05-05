@@ -302,6 +302,7 @@ public class VPrincipal extends javax.swing.JFrame {
         );
 
         etiquetaNombreProyecto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        etiquetaNombreProyecto.setForeground(new java.awt.Color(0, 0, 255));
         etiquetaNombreProyecto.setText("RED DE AMBULATORIOS");
 
         menuMedicamentos.setText("Medicamentos");

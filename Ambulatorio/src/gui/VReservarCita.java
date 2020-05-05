@@ -84,12 +84,6 @@ public class VReservarCita extends javax.swing.JDialog {
 
         labelTipo.setText("Tipo:");
 
-        comboTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTipoActionPerformed(evt);
-            }
-        });
-
         labelDesde.setText("Desde:");
 
         labelHasta.setText("Hasta:");
@@ -289,10 +283,6 @@ public class VReservarCita extends javax.swing.JDialog {
             fa.muestraExcepcion("¡No se ha seleccionado una hora!");
         }
     }//GEN-LAST:event_btnReservarActionPerformed
-
-    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboTipoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

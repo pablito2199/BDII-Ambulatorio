@@ -167,6 +167,7 @@ public class VDerivarHospital extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        etiquetaDerivarAlHospital.setForeground(new java.awt.Color(0, 0, 255));
         etiquetaDerivarAlHospital.setText("DERIVAR AL HOSPITAL");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -197,6 +197,7 @@ public class VEnfermedades extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        etiquetaEnfermedades.setForeground(new java.awt.Color(0, 0, 255));
         etiquetaEnfermedades.setText("ENFERMEDADES");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

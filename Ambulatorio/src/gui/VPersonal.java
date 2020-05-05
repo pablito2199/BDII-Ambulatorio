@@ -299,6 +299,7 @@ public class VPersonal extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        etiquetaVentanaPersonal.setForeground(new java.awt.Color(0, 0, 255));
         etiquetaVentanaPersonal.setText("PERSONAL");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
