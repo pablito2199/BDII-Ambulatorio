@@ -14,10 +14,9 @@ public class VConsultas extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param fa
-     * @param restoConsultas
      * @param ambulatorio
      */
-    public VConsultas(javax.swing.JFrame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<Integer> restoConsultas, Integer ambulatorio) {
+    public VConsultas(javax.swing.JFrame parent, boolean modal, aplicacion.FachadaAplicacion fa, Integer ambulatorio) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
@@ -26,8 +25,6 @@ public class VConsultas extends javax.swing.JDialog {
 
         //obtiene la lista de consultas para mostrarlas por pantalla
         ModeloListaIntegers m = new ModeloListaIntegers();
-        lstConsultas.setModel(m);
-        m.setElementos(restoConsultas);
         consultas = fa.consultarConsultas(null, ambulatorio, null);
         if (m.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
@@ -102,8 +99,6 @@ public class VConsultas extends javax.swing.JDialog {
         btnGestionarMedicos.setEnabled(false);
 
         etiquetaEspecialidad.setText("Especialidad");
-
-        seleccionEspecialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

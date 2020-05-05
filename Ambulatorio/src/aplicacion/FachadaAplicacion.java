@@ -237,7 +237,7 @@ public class FachadaAplicacion {
 
     //Permite generar una nueva ventana de gestión de enfermedades de un paciente
     public void nuevaVGestionEnfermedades(VPacientes vpac, String cip) {
-        gpac.nuevaVGestionEnfermedades(vpac, cip, this.obtenerEnfermedadesNoPadecidas(cip, null), this.obtenerEnfermedadesPadecidas(cip, null));
+        gpac.nuevaVGestionEnfermedades(vpac, cip);
     }
 
     //Permite generar una ventana para visualizar información sobre el historial médico del paciente
@@ -280,11 +280,7 @@ public class FachadaAplicacion {
 
     //Permite crear una nueva ventana de enfermedades
     public void nuevaVEnfermedades() {
-        java.util.ArrayList<String> enfermedades = new java.util.ArrayList<>();
-        for (Enfermedad e : this.consultarEnfermedades("")) {
-            enfermedades.add(e.getNombre());
-        }
-        genf.nuevaVEnfermedades(enfermedades);
+        genf.nuevaVEnfermedades();
     }
 
 /////////////////////////
@@ -317,12 +313,7 @@ public class FachadaAplicacion {
 
     //Permite crear una nueva ventana de consultas
     public void nuevaVConsultas(Integer ambulatorio) {
-        java.util.ArrayList<Integer> consultas = new java.util.ArrayList<>();
-        for (Consulta c : this.consultarConsultas(null, ambulatorio, null)) {
-
-            consultas.add(c.getIdentificador());
-        }
-        gcon.nuevaVConsultas(consultas, ambulatorio);
+        gcon.nuevaVConsultas(ambulatorio);
     }
 
 /////////////////////////

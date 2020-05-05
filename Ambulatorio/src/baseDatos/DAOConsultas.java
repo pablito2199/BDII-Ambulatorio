@@ -63,6 +63,7 @@ public class DAOConsultas extends AbstractDAO {
         //Declaramos variables
         Connection con;
         PreparedStatement stmConsulta = null;
+        String esp = especialidad == null ? "" : "and especialidad = ?";
 
         //Establecemos conexión
         con = super.getConexion();
@@ -70,11 +71,13 @@ public class DAOConsultas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Preparamos la sentencia para borrar de la tabla de consultas aquel con el identificador especificado por argumentos
-            stmConsulta = con.prepareStatement("delete from consulta where identificador = ? and ambulatorio = ? and especialidad = ?");
+            stmConsulta = con.prepareStatement("delete from consulta where identificador = ? and ambulatorio = ? " + esp);
             //Sustituimos
             stmConsulta.setInt(1, identificador);  //identificador de la consulta
             stmConsulta.setInt(2, ambulatorio);  //ambulatorio de la consulta
-            stmConsulta.setString(3, especialidad);  //especialidad de la consulta
+            if (especialidad != null) {
+                stmConsulta.setString(3, especialidad);  //especialidad de la consulta
+            }
             //Actualizamos
             stmConsulta.executeUpdate();
 
@@ -166,7 +169,7 @@ public class DAOConsultas extends AbstractDAO {
         Connection con;
         PreparedStatement stmAmbulatorios = null;
         ResultSet rsAmbulatorios;
-        String esp = especialidad == null ? "" : "and especialidad like ?";
+        String esp = especialidad == null ? "" : "and especialidad = ?";
 
         //Establecemos conexión
         con = this.getConexion();

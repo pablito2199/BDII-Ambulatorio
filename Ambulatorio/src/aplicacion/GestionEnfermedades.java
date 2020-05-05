@@ -45,7 +45,7 @@ public class GestionEnfermedades {
     }
 
     //Permite crear una nueva ventana de enfermedades
-    public void nuevaVEnfermedades(java.util.List<String> enfermedades) {
-        fgui.nuevaVEnfermedades(enfermedades);
+    public void nuevaVEnfermedades() {
+        fgui.nuevaVEnfermedades();
     }
 }

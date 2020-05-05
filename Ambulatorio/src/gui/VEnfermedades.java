@@ -13,9 +13,8 @@ public class VEnfermedades extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param fa
-     * @param restoEnfermedades
      */
-    public VEnfermedades(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<String> restoEnfermedades) {
+    public VEnfermedades(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
@@ -24,8 +23,6 @@ public class VEnfermedades extends javax.swing.JDialog {
 
         //obtiene la lista de consultas para mostrarlas por pantalla
         ModeloListaStrings mListaE = new ModeloListaStrings();
-        lstEnfermedades.setModel(mListaE);
-        mListaE.setElementos(restoEnfermedades);
         enfermedades = fa.consultarEnfermedades(textoNombre.getText());
         if (mListaE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente

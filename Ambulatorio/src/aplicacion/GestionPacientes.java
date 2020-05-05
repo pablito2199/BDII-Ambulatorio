@@ -68,8 +68,8 @@ public class GestionPacientes {
     }
 
     //Permite generar una nueva ventana de gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
-        fgui.nuevaVGestionEnfermedades(vpac, cip, enfermedades, restoEnfermedades);
+    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip) {
+        fgui.nuevaVGestionEnfermedades(vpac, cip);
     }
 
     //Permite generar una ventana para visualizar información sobre el historial médico del paciente

@@ -127,11 +127,11 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para visualizar la gestión de enfermedades de un paciente
-    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
+    public void nuevaVGestionEnfermedades(VPacientes vpac, String cip) {
         //Declaramos variables
         VGestionEnfermedades vGE;
         //Generamos la ventana
-        vGE = new VGestionEnfermedades(vpac, true, fa, cip, enfermedades, restoEnfermedades);
+        vGE = new VGestionEnfermedades(vpac, true, fa, cip);
         //Hacemos visible la ventana
         vGE.setVisible(true);
     }
@@ -140,11 +140,11 @@ public class FachadaGui {
 //VENTANA DE ENFERMEDADES
 /////////////////////////////
     //Permite crear una nueva ventana de enfermedades
-    public void nuevaVEnfermedades(java.util.List<String> enfermedades) {
+    public void nuevaVEnfermedades() {
         //Declaramos
         VEnfermedades vE;
         //Instanciamos la ventana
-        vE = new VEnfermedades(vp, true, fa, enfermedades);
+        vE = new VEnfermedades(vp, true, fa);
         //La hacemos visible
         vE.setVisible(true);
     }
@@ -153,11 +153,11 @@ public class FachadaGui {
 //VENTANA DE CONSULTAS
 /////////////////////////////
     //Permite crear una nueva ventana de consultas
-    public void nuevaVConsultas(java.util.List<Integer> consultas, Integer ambulatorio) {
+    public void nuevaVConsultas(Integer ambulatorio) {
         //Declaramos
         VConsultas vC;
         //Instanciamos la ventana
-        vC = new VConsultas(vp, true, fa, consultas, ambulatorio);
+        vC = new VConsultas(vp, true, fa, ambulatorio);
         //La hacemos visible
         vC.setVisible(true);
     }

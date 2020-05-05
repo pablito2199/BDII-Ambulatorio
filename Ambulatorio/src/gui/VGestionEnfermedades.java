@@ -5,6 +5,8 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     private final VPacientes padre;                                //Enlace a la ventana padre 
     private final aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
     private String cipPaciente;                                    //Paciente actual
+    private java.util.List<String> enfermedadesP;                  //Enfermedades padecidas
+    private java.util.List<String> enfermedadesNP;                 //Enfermedades no padecidas
 
     /**
      *
@@ -12,11 +14,9 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
      * @param modal
      * @param fa
      * @param cipPaciente
-     * @param enfermedades
-     * @param restoEnfermedades
      */
     //Constructor para nuevas ventanas de enfermedades asignadas
-    public VGestionEnfermedades(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, String cipPaciente, java.util.List<String> enfermedades, java.util.List<String> restoEnfermedades) {
+    public VGestionEnfermedades(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, String cipPaciente) {
         //Instanciamos
         super(parent, modal);
         this.fa = fa;
@@ -24,21 +24,23 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         padre = (VPacientes) parent;
         this.cipPaciente = cipPaciente;
 
+        enfermedadesNP = fa.obtenerEnfermedadesNoPadecidas(cipPaciente, "");
         //lista de enfermedades no registradas al paciente
         ModeloListaStrings mListaRE = new ModeloListaStrings();
         lstRestoEnfermedades.setModel(mListaRE);
-        mListaRE.setElementos(restoEnfermedades);
+        mListaRE.setElementos(enfermedadesNP);
         if (mListaRE.getSize() > 0) {
             lstRestoEnfermedades.setSelectedIndex(0);
             btnDerecha.setEnabled(true);
         } else {
             btnDerecha.setEnabled(false);
         }
-
+        
+        enfermedadesP = fa.obtenerEnfermedadesPadecidas(cipPaciente, "");
         //crea la lista de enfermedades registradas del paciente
         ModeloListaStrings mListaE = new ModeloListaStrings();
         lstEnfermedadesPadecidas.setModel(mListaE);
-        mListaE.setElementos(enfermedades);
+        mListaE.setElementos(enfermedadesP);
         if (mListaE.getSize() > 0) {
             lstEnfermedadesPadecidas.setSelectedIndex(0);
             btnIzquierda.setEnabled(true);
@@ -354,8 +356,8 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         //obtenemos las enfermedades padecidas por el paciente
         enfermedadesPadecidas = fa.obtenerEnfermedadesPadecidas(cipPaciente, enfermedad);
         java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
-        for (int i = 0; i < enfermedadesPadecidas.size(); i++) {
-            nombres.add(enfermedadesPadecidas.get(i));
+        for (String e : enfermedadesPadecidas) {
+            nombres.add(e);
         }
         //actualizamos la lista
         mListaE.setElementos(nombres);
