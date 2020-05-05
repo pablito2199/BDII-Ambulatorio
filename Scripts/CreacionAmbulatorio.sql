@@ -12,7 +12,7 @@ create table ambulatorio (
         year
         from
             CURRENT_DATE
-    ),
+    ) CHECK (CAST(anoConstruccion as INT) <= extract(year from CURRENT_DATE)),
     provincia varchar(40) NOT NULL,
     telefono char(9) NOT NULL,
     primary key (codigoAmbulatorio),
