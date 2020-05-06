@@ -7,12 +7,13 @@ import aplicacion.clases.Consulta;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.TipoCita;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class VReservarCita extends javax.swing.JDialog {
 
     private FachadaAplicacion fa;
-    private VCitasPendientes padre;
+    private VPacientes padre;
     private Paciente pa;
     private Consulta co;
 
@@ -24,15 +25,21 @@ public class VReservarCita extends javax.swing.JDialog {
      * @param fa
      * @param pa
      */
-    public VReservarCita(javax.swing.JDialog parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
+    public VReservarCita(VPacientes parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
         super(parent, modal);
         this.fa = fa;
         this.pa = pa;
-        this.padre = (VCitasPendientes) parent;
+        this.padre = parent;
         initComponents();
 
         //Introducimos tipos de cita
-        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(null));
+        comboTipo.removeAllItems();
+        for (TipoCita tipo : fa.obtenerTiposDeCita(null)) {
+
+            if (!tipo.getNombre().equals("Urgencia") || !tipo.getEspecialidad().equals("General")) {
+                comboTipo.addItem(tipo.getNombre() + "-" + tipo.getEspecialidad());
+            }
+        }
     }
 
     /**
@@ -50,7 +57,7 @@ public class VReservarCita extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHoras = new javax.swing.JTable();
         labelTipo = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>(new ModeloComboTipoCita());
+        comboTipo = new javax.swing.JComboBox<>();
         labelDesde = new javax.swing.JLabel();
         labelHasta = new javax.swing.JLabel();
         txtDesde = new javax.swing.JTextField();
@@ -238,17 +245,28 @@ public class VReservarCita extends javax.swing.JDialog {
             inicio = Date.valueOf(txtDesde.getText());
             fin = Date.valueOf(txtHasta.getText());
 
-            //Vemos si inicio es igual o mayor a fin
-            if (!inicio.after(fin)) {
+            //Comprobamos que se busque a partir del dia de hoy
+            if (!inicio.toLocalDate().isAfter(LocalDate.now())) //Vemos si inicio es igual o mayor a fin
+            {
+                if (!inicio.after(fin)) {
 
-                //Obtenemos tabla
-                ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());
+                    //Comprobamos que la fecha no sea mayor a 3 dias
+                    if (inicio.toLocalDate().plusDays(3).isAfter(fin.toLocalDate())) {
+                        fin = Date.valueOf(inicio.toLocalDate().plusDays(3));
+                    }
 
-                //Pasamos ambulatorios a la tabla
-                th.setFilas(amb, (TipoCita) comboTipo.getSelectedItem(), inicio, fin);
+                    //Obtenemos tabla
+                    ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());
 
+                    //Pasamos ambulatorios a la tabla
+                    String[] tipo = ((String) comboTipo.getSelectedItem()).split("-");
+                    th.setFilas(amb, new TipoCita(tipo[0], tipo[1], ""), inicio, fin);
+
+                } else {
+                    fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+                }
             } else {
-                fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+                fa.muestraExcepcion("¡La fecha de inicio es anterior a la actual!");
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -257,8 +275,8 @@ public class VReservarCita extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         //No se ha seleccionado fila
-        int index;
-        if ((index = tablaHoras.getSelectedRow()) >= 0) {
+        int index = tablaHoras.getSelectedRow();
+        if (index >= 0) {
 
             //Obtenemos modelo
             ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());
@@ -306,10 +324,10 @@ public class VReservarCita extends javax.swing.JDialog {
 
     private boolean fechasValidas() {
         //Nos aseguramos que el formato de fecha es correcto
-        if (!txtDesde.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
-                || !txtHasta.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")) {
+        if (!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
+                || !txtHasta.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")) {
 
-            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000/11/22.");
+            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000-11-22.");
             return false;
         }
         return true;
