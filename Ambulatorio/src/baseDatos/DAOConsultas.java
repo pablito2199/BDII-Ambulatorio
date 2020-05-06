@@ -243,9 +243,9 @@ public class DAOConsultas extends AbstractDAO {
                                     "and c1.especialidad = ? " +
                                "group by c1.identificador, c1.ambulatorio, c1.especialidad " +
                                "having count(ci.*) <= any(select count(*) " +
-"                                                         from consulta as c2 " +
-"                                                         where c2.ambulatorio = c1.ambulatorio " +
-"                                                         and c2.especialidad = c1.especialidad)";
+                                                          "from consulta as c2 " +
+                                                          "where c2.ambulatorio = c1.ambulatorio " +
+                                                          "and c2.especialidad = c1.especialidad)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
