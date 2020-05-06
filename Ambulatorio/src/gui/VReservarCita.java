@@ -83,6 +83,7 @@ public class VReservarCita extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Reservar cita");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

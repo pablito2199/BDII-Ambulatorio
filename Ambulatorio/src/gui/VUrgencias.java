@@ -8,6 +8,7 @@ import aplicacion.clases.Urgencia;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class VUrgencias extends javax.swing.JDialog {
 
@@ -52,6 +53,7 @@ public class VUrgencias extends javax.swing.JDialog {
         btnConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Urgencias");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -181,7 +183,7 @@ public class VUrgencias extends javax.swing.JDialog {
         //Obtenemos modelo
         ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
 
-        //Buscamos ambulatorio
+        //Buscamos ambulatorios
         tau.setFilas(fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, null));
 
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -202,13 +204,14 @@ public class VUrgencias extends javax.swing.JDialog {
                     Integer.parseInt(txtGravedad.getText()),
                     Timestamp.valueOf(LocalDateTime.now()),
                     paciente.getCIP(),
-                    fa.menorNumeroPacientes(a.getCodigo(), TipoCita("Urgencia", "General")).getIdentificador(),
+                    fa.menorNumeroPacientes(a.getCodigo(), new TipoCita("Urgencia", "General", "")).getIdentificador(),
                     a.getCodigo());
 
             fa.insertarUrgencia(u);
 
             //Añadimos urgencia al ambulatorio
             this.dispose();
+
         }
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
@@ -240,7 +243,7 @@ public class VUrgencias extends javax.swing.JDialog {
     private boolean datosValidos() {
 
         //Comprobamos si los campos de Soborno y Gravedad tienen valores no validos
-        if (!(txtSoborno.getText().matches("\\d+\\.?\\d{1,2}") && txtGravedad.getText().matches("\\d|10"))) {
+        if (!(txtSoborno.getText().matches("\\d+(\\.\\d{1,2})?") && txtGravedad.getText().matches("[1-9]|10"))) {
 
             fa.muestraExcepcion("!Los campos de soborno y gravedad contienen valores no validos!");
             return false;
@@ -254,9 +257,5 @@ public class VUrgencias extends javax.swing.JDialog {
 
         //Son datos validos
         return true;
-    }
-
-    private TipoCita TipoCita(String urgencia, String general) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
