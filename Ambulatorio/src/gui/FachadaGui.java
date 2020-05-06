@@ -68,7 +68,7 @@ public class FachadaGui {
         //Declaramos variables
         VCitasPendientes vCP;
         //Generamos la ventana
-        vCP = new VCitasPendientes(vper, fa, personal);
+        vCP = new VCitasPendientes(vper, true, fa, personal);
         //Hacemos visible la ventana
         vCP.setVisible(true);
     }
@@ -78,7 +78,7 @@ public class FachadaGui {
         //Declaramos variables
         VCitasPendientes vCP;
         //Generamos la ventana
-        vCP = new VCitasPendientes(vpac, fa, paciente);
+        vCP = new VCitasPendientes(vpac, true, fa, paciente);
         //Hacemos visible la ventana
         vCP.setVisible(true);
     }

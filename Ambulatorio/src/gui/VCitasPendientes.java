@@ -21,7 +21,8 @@ public class VCitasPendientes extends javax.swing.JDialog {
      * @param fa
      * @param ps
      */
-    public VCitasPendientes(VPersonal padre, FachadaAplicacion fa, PersonalSanitario ps) {
+    public VCitasPendientes(VPersonal padre, boolean modal, FachadaAplicacion fa, PersonalSanitario ps) {
+        super(padre, modal);
         initComponents();
         this.padre = padre;
         this.ps = ps;
@@ -29,18 +30,10 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
         //Ocultamos botones
         btnCancelarCita.setVisible(false);
-
-        //Introducimos tipos de cita
-        ArrayList<TipoCita> tc = new ArrayList<>();
-        for(String esp : fa.obtenerEspecialidades(ps.getDNI(), ps.getAmbulatorio())){
-            
-            tc.addAll(fa.obtenerTiposDeCita(esp));
-        }
-
-        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(tc);
     }
 
-    public VCitasPendientes(VPacientes padre, FachadaAplicacion fa, Paciente pa) {
+    public VCitasPendientes(VPacientes padre, boolean modal, FachadaAplicacion fa, Paciente pa) {
+        super(padre, modal);
         initComponents();
         this.padre = padre;
         this.pa = pa;
@@ -50,9 +43,6 @@ public class VCitasPendientes extends javax.swing.JDialog {
         btnRecetar.setVisible(false);
         btnTerminarCita.setVisible(false);
         btnDerivar.setVisible(false);
-
-        //Introducimos tipos de cita
-        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(null));
     }
 
     /**
@@ -76,8 +66,6 @@ public class VCitasPendientes extends javax.swing.JDialog {
         txtHasta = new javax.swing.JTextField();
         labelConsulta = new javax.swing.JLabel();
         txtConsulta = new javax.swing.JTextField();
-        labelTipo = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>();
         labelAmbulatorio = new javax.swing.JLabel();
         txtAmbulatorio = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
@@ -157,10 +145,6 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
         labelConsulta.setText("Consulta:");
 
-        labelTipo.setText("Tipo:");
-
-        comboTipo.setModel(new ModeloComboTipoCita());
-
         labelAmbulatorio.setText("Ambulatorio:");
 
         btnBuscar.setText("Buscar");
@@ -201,36 +185,35 @@ public class VCitasPendientes extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelDesde)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelHasta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelConsulta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelTipo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelAmbulatorio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtAmbulatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnRecetar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTerminarCita)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDerivar)))
+                        .addComponent(btnDerivar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(labelDesde)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelHasta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelConsulta))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(labelAmbulatorio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtAmbulatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -246,8 +229,6 @@ public class VCitasPendientes extends javax.swing.JDialog {
                     .addComponent(txtConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelTipo)
-                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelAmbulatorio)
                     .addComponent(txtAmbulatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
@@ -288,8 +269,8 @@ public class VCitasPendientes extends javax.swing.JDialog {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
 
-        txtDesde.setText(null);
-        txtHasta.setText(null);
+        txtDesde.setText("aaaa-mm-dd");
+        txtHasta.setText("aaaa-mm-dd");
         txtConsulta.setText(null);
         txtAmbulatorio.setText(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
@@ -310,31 +291,33 @@ public class VCitasPendientes extends javax.swing.JDialog {
             try {
                 inicio = Date.valueOf(txtDesde.getText());
                 fin = Date.valueOf(txtHasta.getText());
+
+                //Vemos si inicio es igual o mayor a fin
+                if (inicio.after(fin)) {
+
+                    fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+                    return; //Cancelamos en caso de que lo sea
+                }
+
             } catch (Exception e) {
                 inicio = null;
                 fin = null;
             }
 
-            //Vemos si inicio es igual o mayor a fin
-            if (!inicio.after(fin)) {
+            //Obtenemos tabla
+            ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
 
-                //Obtenemos tabla
-                ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
+            //Obtenemos consulta
+            Integer consulta;
+            try {
+                consulta = Integer.parseInt(txtConsulta.getText());
 
-                //Obtenemos consulta
-                Integer consulta;
-                try {
-                    consulta = Integer.parseInt(txtConsulta.getText());
-
-                } catch (Exception e) {
-                    consulta = null;
-                }
-
-                tc.setFilas(fa.obtenerCitas(txtAmbulatorio.getText(), consulta, inicio, fin));
-
-            } else {
-                fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+            } catch (Exception e) {
+                consulta = null;
             }
+
+            tc.setFilas(fa.obtenerCitas(txtAmbulatorio.getText(), consulta, inicio, fin));
+
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -404,7 +387,6 @@ public class VCitasPendientes extends javax.swing.JDialog {
     private javax.swing.JButton btnRecetar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTerminarCita;
-    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -413,7 +395,6 @@ public class VCitasPendientes extends javax.swing.JDialog {
     private javax.swing.JLabel labelConsulta;
     private javax.swing.JLabel labelDesde;
     private javax.swing.JLabel labelHasta;
-    private javax.swing.JLabel labelTipo;
     private javax.swing.JTable tablaCitas;
     private javax.swing.JTextField txtAmbulatorio;
     private javax.swing.JTextField txtConsulta;
@@ -422,11 +403,11 @@ public class VCitasPendientes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private boolean fechasValidas() {
-        if ((!txtDesde.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
-                || !txtHasta.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])"))
+        if ((!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
+                || !txtHasta.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))"))
                 && (!txtDesde.getText().equals("aaaa-mm-dd")
                 || !txtHasta.getText().equals("aaaa-mm-dd"))) {
-            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000/11/22.");
+            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000-11-22.");
             return false;
         }
         return true;

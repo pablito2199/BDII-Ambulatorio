@@ -32,7 +32,12 @@ public class VReservarCita extends javax.swing.JDialog {
         initComponents();
 
         //Introducimos tipos de cita
-        ((ModeloComboTipoCita) comboTipo.getModel()).setTipos(fa.obtenerTiposDeCita(null));
+        comboTipo.removeAllItems();
+        for (TipoCita tipo : fa.obtenerTiposDeCita(null)) {
+            
+            if(!tipo.getNombre().equals("Urgencia") || !tipo.getEspecialidad().equals("General"))
+            comboTipo.addItem(tipo.getNombre() + "-" + tipo.getEspecialidad());
+        }
     }
 
     /**
@@ -50,7 +55,7 @@ public class VReservarCita extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHoras = new javax.swing.JTable();
         labelTipo = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>(new ModeloComboTipoCita());
+        comboTipo = new javax.swing.JComboBox<>();
         labelDesde = new javax.swing.JLabel();
         labelHasta = new javax.swing.JLabel();
         txtDesde = new javax.swing.JTextField();
@@ -245,7 +250,8 @@ public class VReservarCita extends javax.swing.JDialog {
                 ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());
 
                 //Pasamos ambulatorios a la tabla
-                th.setFilas(amb, (TipoCita) comboTipo.getSelectedItem(), inicio, fin);
+                String[] tipo = ((String)comboTipo.getSelectedItem()).split("-");
+                th.setFilas(amb, new TipoCita(tipo[0], tipo[1], ""), inicio, fin);
 
             } else {
                 fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
@@ -306,8 +312,8 @@ public class VReservarCita extends javax.swing.JDialog {
 
     private boolean fechasValidas() {
         //Nos aseguramos que el formato de fecha es correcto
-        if (!txtDesde.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")
-                || !txtHasta.getText().matches("2[0-9]{3}-(0[0-9])|(1[0-2])-([0-2][0-9])|(3[0-1])")) {
+        if (!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
+                || !txtHasta.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")) {
 
             fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000/11/22.");
             return false;
