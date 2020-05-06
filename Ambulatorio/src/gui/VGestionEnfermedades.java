@@ -255,8 +255,10 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     private void btnDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerechaActionPerformed
         ModeloListaStrings mRE = (ModeloListaStrings) lstRestoEnfermedades.getModel();
         ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();
-        mE.nuevoElemento(mRE.getElementAt(lstRestoEnfermedades.getSelectedIndex()));
-        mRE.borrarElemento(lstRestoEnfermedades.getSelectedIndex());
+        enfermedadesP.add(mRE.getElementAt(lstRestoEnfermedades.getSelectedIndex()));
+        enfermedadesNP.remove(lstRestoEnfermedades.getSelectedIndex());
+        mE.setElementos(enfermedadesP);
+        mRE.setElementos(enfermedadesNP);
         if (mRE.getSize() == 0) {
             btnDerecha.setEnabled(false);
         } else {
@@ -270,8 +272,10 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     private void btnIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzquierdaActionPerformed
         ModeloListaStrings mRE = (ModeloListaStrings) lstRestoEnfermedades.getModel();
         ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();
-        mRE.nuevoElemento(mE.getElementAt(lstEnfermedadesPadecidas.getSelectedIndex()));
-        mE.borrarElemento(lstEnfermedadesPadecidas.getSelectedIndex());
+        enfermedadesNP.add(mE.getElementAt(lstEnfermedadesPadecidas.getSelectedIndex()));
+        enfermedadesP.remove(lstEnfermedadesPadecidas.getSelectedIndex());
+        mE.setElementos(enfermedadesP);
+        mRE.setElementos(enfermedadesNP);
         if (mE.getSize() == 0) {
             btnIzquierda.setEnabled(false);
         } else {
