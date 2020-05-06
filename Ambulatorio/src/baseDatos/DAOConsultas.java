@@ -236,16 +236,20 @@ public class DAOConsultas extends AbstractDAO {
             //Construimos la consulta
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
-            String consulta = "select c1.* " +
-                              "from consulta as c1, cita as ci " +
-                              "where ci.ambulatorio = c1.ambulatorio " +
-                                    "and c1.ambulatorio = ? " +
-                                    "and c1.especialidad = ? " +
-                              "group by c1.identificador, c1.ambulatorio, c1.especialidad " +
-                              "having count(ci.*) <= any(select count(*) " +
-                                                          "from consulta as c2 " +
-                                                          "where c2.ambulatorio = c1.ambulatorio " +
-                                                          "and c2.especialidad = c1.especialidad)";
+            String consulta = "select co.* "
+                    + "from consulta as co, cita as ci "
+                    + "where co.especialidad like 'General' "
+                    + "and co.ambulatorio = 2 "
+                    + "and co.identificador = ci.consulta "
+                    + "and co.ambulatorio = ci.ambulatorio "
+                    + "group by co.ambulatorio, co.identificador "
+                    + "having count(*) <= all (select count(*) "
+                    + "				from consulta as co2, cita as ci2 "
+                    + "				where co2.especialidad = co.especialidad "
+                    + "				and co2.ambulatorio = co.ambulatorio "
+                    + "				and co2.identificador = ci2.consulta "
+                    + "				and co2.ambulatorio = ci2.ambulatorio "
+                    + "				group by co2.ambulatorio, co2.identificador)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
