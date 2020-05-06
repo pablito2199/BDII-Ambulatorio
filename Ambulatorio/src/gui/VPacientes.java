@@ -447,7 +447,7 @@ public class VPacientes extends javax.swing.JDialog {
         varDireccion.setText(null);
         varTelefono.setText(null);
         //Actualizamos la tabla
-        buscarPacientes();
+       buscarPacientes();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     //Función que permite limpiar los campos y la tabla para prepara la inserción de un nuevo usuario

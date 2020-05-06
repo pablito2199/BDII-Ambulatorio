@@ -142,6 +142,14 @@ public class DAORecetas extends AbstractDAO {
             System.out.println(ex.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
+        //Pedimos que vuelva a hacer los commits automáticamente
+        try {
+            //Impedimos que se la confirmación sea automática
+            con.setAutoCommit(true);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
     }

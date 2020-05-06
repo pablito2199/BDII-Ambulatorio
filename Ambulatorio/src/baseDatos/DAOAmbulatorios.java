@@ -154,12 +154,12 @@ public class DAOAmbulatorios extends AbstractDAO {
         //Establecemos conexión
         con = this.getConexion();
 
-        //Impedimos que se la confirmación sea automática
         try {
+            //Impedimos que se la confirmación sea automática
             con.setAutoCommit(false);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
 
         //Como el resto de consultas se pueden hacer en una única sentencia SQL pero
@@ -183,16 +183,7 @@ public class DAOAmbulatorios extends AbstractDAO {
                     + "and nombre like ? "
                     + "and provincia like ? "
                     //Ordenamos alfabéticamente por nombre
-                    + "order by nombre ASC"; 
-
-            //Preparamos la consulta
-            stmAmbulatorios = con.prepareStatement(consulta);
-            //Sustituimos
-            stmAmbulatorios.setInt(1, codigo);
-            stmAmbulatorios.setInt(2, codigo);
-            stmAmbulatorios.setString(3, "%" + nombre + "%");
-            stmAmbulatorios.setString(4, "%" + Provincia + "%");
-        
+                    + "order by nombre ASC";
          */
         //Variable para buscar por codigo
         String codAmb = codigo == null ? "" : "and codigoAmbulatorio = ? ";
@@ -312,10 +303,18 @@ public class DAOAmbulatorios extends AbstractDAO {
             System.out.println(ex.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
+        //Pedimos que vuelva a hacer los commits automáticamente
+        try {
+            //Impedimos que se la confirmación sea automática
+            con.setAutoCommit(true);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
         //Se devuelve el resultado (lista de ambulatorios)
         return resultado;
     }
-    
+
     //Permite recuperar los datos del ambulatorio con el nombre y provincia correspondientes
     public Ambulatorio consultarAmbulatorioActual(String nombre, String provincia) {
         //Declaramos variables
