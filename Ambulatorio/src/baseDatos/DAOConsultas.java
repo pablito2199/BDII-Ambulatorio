@@ -1,7 +1,6 @@
 package baseDatos;
 
 import aplicacion.clases.Consulta;
-import aplicacion.clases.TipoCita;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -214,7 +213,7 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
+    public Consulta menorNumeroPacientes(Integer ambulatorio, String especialidad) {
         //Declaramos variables
         Consulta menorNumero = new Consulta();
         Connection con;
@@ -237,19 +236,21 @@ public class DAOConsultas extends AbstractDAO {
             //Construimos la consulta
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
-            String consulta = "select c1.* "
-                    + "from consulta as c1, cita as ci"
-                    + "where c1.ambulatorio = ? "
-                    + "and ci.ambulatorio = c1.ambulatorio "
-                    + "and c1.especialidad = ? "
-                    + "having count(*) <= any(select count(*) from consulta as c2"
-                    + "where c2.ambulatorio = c1.ambulatorio "
-                    + "and c2.especialidad = c1.especialidad ";
+            String consulta = "select c1.* " +
+                              "from consulta as c1, cita as ci " +
+                              "where ci.ambulatorio = c1.ambulatorio " +
+                                    "and c1.ambulatorio = ? " +
+                                    "and c1.especialidad = ? " +
+                               "group by c1.identificador, c1.ambulatorio, c1.especialidad " +
+                               "having count(ci.*) <= any(select count(*) " +
+"                                                         from consulta as c2 " +
+"                                                         where c2.ambulatorio = c1.ambulatorio " +
+"                                                         and c2.especialidad = c1.especialidad)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
-            stmConsultas.setInt(1, ambulatorio); //Ambulatorio
-            stmConsultas.setString(2, tipoCita.getEspecialidad()); //Especialidad
+            stmConsultas.setInt(1, ambulatorio);     //Ambulatorio
+            stmConsultas.setString(2, especialidad); //Especialidad
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias

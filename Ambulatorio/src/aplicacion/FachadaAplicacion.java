@@ -319,8 +319,8 @@ public class FachadaAplicacion {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
-        return gcon.menorNumeroPacientes(ambulatorio, tipoCita);
+    public Consulta menorNumeroPacientes(Integer ambulatorio, String especialidad) {
+        return gcon.menorNumeroPacientes(ambulatorio, especialidad);
     }
 
     //Permite crear una nueva ventana de consultas
