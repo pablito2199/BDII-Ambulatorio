@@ -57,7 +57,6 @@ public class VPrincipal extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        etiquetaNombreProyecto = new javax.swing.JLabel();
         jMenuBar3 = new javax.swing.JMenuBar();
         menuMedicamentos = new javax.swing.JMenu();
         menuEnfermedades = new javax.swing.JMenu();
@@ -66,6 +65,7 @@ public class VPrincipal extends javax.swing.JFrame {
         menuHospitales = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("RED DE AMBULATORIOS");
         setName("vPrincipal"); // NOI18N
         setResizable(false);
 
@@ -301,10 +301,6 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        etiquetaNombreProyecto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        etiquetaNombreProyecto.setForeground(new java.awt.Color(0, 0, 255));
-        etiquetaNombreProyecto.setText("RED DE AMBULATORIOS");
-
         menuMedicamentos.setText("Medicamentos");
         menuMedicamentos.setEnabled(false);
         jMenuBar3.add(menuMedicamentos);
@@ -341,19 +337,15 @@ public class VPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(etiquetaNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(etiquetaNombreProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -510,7 +502,6 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel etiquetaCodigo;
     private javax.swing.JLabel etiquetaDireccion;
     private javax.swing.JLabel etiquetaFondos;
-    private javax.swing.JLabel etiquetaNombreProyecto;
     private javax.swing.JLabel etiquetaProvincia;
     private javax.swing.JLabel etiquetaTelefono;
     private javax.swing.JLabel etiquetaTitulo;
