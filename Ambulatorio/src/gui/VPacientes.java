@@ -74,8 +74,8 @@ public class VPacientes extends javax.swing.JDialog {
         labelTelefono = new javax.swing.JLabel();
         varTelefono = new javax.swing.JTextField();
         btnBuscarUsuario = new javax.swing.JButton();
-        labelGestionarPacientes = new javax.swing.JLabel();
 
+        setTitle("Pacientes");
         setResizable(false);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -132,7 +132,7 @@ public class VPacientes extends javax.swing.JDialog {
                     .addComponent(btnActualizarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -180,7 +180,7 @@ public class VPacientes extends javax.swing.JDialog {
             }
         });
 
-        btnHistorialClinico.setText("Historial Clinico");
+        btnHistorialClinico.setText("Historial Médico");
         btnHistorialClinico.setEnabled(false);
         btnHistorialClinico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +240,7 @@ public class VPacientes extends javax.swing.JDialog {
 
         labelCIP.setText("CIP:");
 
-        varNombre.setToolTipText("Nombre de usuario");
+        varNombre.setToolTipText("Nombre del paciente");
 
         labelNombre.setText("Nombre:");
 
@@ -248,39 +248,39 @@ public class VPacientes extends javax.swing.JDialog {
 
         labelDireccion.setText("Direccion:");
 
-        varDireccion.setToolTipText("Domicilio");
+        varDireccion.setToolTipText("Dirección Postal");
 
-        varDNI.setToolTipText("Correo electrónico");
+        varDNI.setToolTipText("Documento Nacional de Identidad");
 
-        varNSS.setToolTipText("Nombre del usuario");
+        varNSS.setToolTipText("Número de la Seguridad Social");
 
         labelNSS.setText("NSS:");
 
         labelDNI.setText("DNI:");
 
-        varSexo.setToolTipText("Edad del usuario");
+        varSexo.setToolTipText("Sexo");
 
-        varGrupoSanguineo.setToolTipText("Edad del usuario");
+        varGrupoSanguineo.setToolTipText("Grupo Sanguíneo");
 
         labelGrupoSanguineo.setText("GS:");
 
         labelEdad.setText("Edad:");
 
-        varEdad.setToolTipText("Edad del usuario");
+        varEdad.setToolTipText("Edad del paciente");
 
-        varCIP.setToolTipText("Nombre de usuario");
+        varCIP.setToolTipText("Código de Identificación Personal");
 
         labelNacionalidad.setText("Nacionalidad:");
 
-        varNacionalidad.setToolTipText("Nombre de usuario");
+        varNacionalidad.setToolTipText("Nacionalidad");
 
         labelFechaNacimiento.setText("Fecha Nacimiento:");
 
-        varFechaNacimiento.setToolTipText("Nombre del usuario");
+        varFechaNacimiento.setToolTipText("Fecha de Nacimiento");
 
         labelTelefono.setText("Telefono:");
 
-        varTelefono.setToolTipText("Nombre de usuario");
+        varTelefono.setToolTipText("Teléfono");
 
         btnBuscarUsuario.setText("Buscar");
         btnBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -387,9 +387,6 @@ public class VPacientes extends javax.swing.JDialog {
                 .addGap(15, 15, 15))
         );
 
-        labelGestionarPacientes.setForeground(new java.awt.Color(0, 0, 255));
-        labelGestionarPacientes.setText("GESTIONAR PACIENTES");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -397,7 +394,6 @@ public class VPacientes extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelGestionarPacientes)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -406,15 +402,13 @@ public class VPacientes extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(labelGestionarPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(23, 23, 23)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -546,10 +540,8 @@ public class VPacientes extends javax.swing.JDialog {
         //Comprobamos que se selecciona a un paciente
         int index = tablaPacientes.getSelectedRow();
         if(index >= 0){
-            
             fa.nuevaVUrgencias(this, tp.obtenerPaciente(index));
         }
-        
         rebuscarPacientes();
     }//GEN-LAST:event_btnNuevaUrgenciaActionPerformed
 
@@ -738,7 +730,6 @@ public class VPacientes extends javax.swing.JDialog {
     private javax.swing.JLabel labelDireccion;
     private javax.swing.JLabel labelEdad;
     private javax.swing.JLabel labelFechaNacimiento;
-    private javax.swing.JLabel labelGestionarPacientes;
     private javax.swing.JLabel labelGrupoSanguineo;
     private javax.swing.JLabel labelNSS;
     private javax.swing.JLabel labelNacionalidad;

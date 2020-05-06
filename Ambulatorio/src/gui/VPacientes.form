@@ -2,6 +2,7 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
+    <Property name="title" type="java.lang.String" value="Pacientes"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -26,7 +27,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="labelGestionarPacientes" min="-2" max="-2" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
                   <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
@@ -38,15 +38,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Component id="labelGestionarPacientes" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -249,7 +247,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnHistorialClinico">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Historial Clinico"/>
+            <Property name="text" type="java.lang.String" value="Historial M&#xe9;dico"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -405,7 +403,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varNombre">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Nombre del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelNombre">
@@ -425,17 +423,17 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varDireccion">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
+            <Property name="toolTipText" type="java.lang.String" value="Direcci&#xf3;n Postal"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varDNI">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Correo electr&#xf3;nico"/>
+            <Property name="toolTipText" type="java.lang.String" value="Documento Nacional de Identidad"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varNSS">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre del usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de la Seguridad Social"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelNSS">
@@ -450,12 +448,12 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varSexo">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Edad del usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Sexo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varGrupoSanguineo">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Edad del usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Grupo Sangu&#xed;neo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelGrupoSanguineo">
@@ -470,12 +468,12 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varEdad">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Edad del usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Edad del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varCIP">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="C&#xf3;digo de Identificaci&#xf3;n Personal"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelNacionalidad">
@@ -485,7 +483,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varNacionalidad">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Nacionalidad"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelFechaNacimiento">
@@ -495,7 +493,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varFechaNacimiento">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre del usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Fecha de Nacimiento"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelTelefono">
@@ -505,7 +503,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varTelefono">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Tel&#xe9;fono"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscarUsuario">
@@ -518,13 +516,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="labelGestionarPacientes">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="0" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="GESTIONAR PACIENTES"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

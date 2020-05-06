@@ -63,9 +63,9 @@ public class VConsultas extends javax.swing.JDialog {
         btnLimpiarConsultas = new javax.swing.JButton();
         btnAnadirConsultas = new javax.swing.JButton();
         btnEliminarConsultas = new javax.swing.JButton();
-        etiquetaConsultas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consultas");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -216,9 +216,6 @@ public class VConsultas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        etiquetaConsultas.setForeground(new java.awt.Color(0, 51, 255));
-        etiquetaConsultas.setText("CONSULTAS");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -227,16 +224,13 @@ public class VConsultas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(etiquetaConsultas))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(etiquetaConsultas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +311,6 @@ public class VConsultas extends javax.swing.JDialog {
     private javax.swing.JButton btnGestionarMedicos;
     private javax.swing.JButton btnLimpiarConsultas;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel etiquetaConsultas;
     private javax.swing.JLabel etiquetaEspecialidad;
     private javax.swing.JLabel etiquetaNumeroConsulta;
     private javax.swing.JLabel etiquetaNumeroConsultasAmbulatorio;
