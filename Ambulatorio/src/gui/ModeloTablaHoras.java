@@ -140,7 +140,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
         for (Ambulatorio ambulatorio : ambulatorios) {
 
             //Obtenemos citas no posibles para el paciente
-            consultas.put(ambulatorio, fa.menorNumeroPacientes(ambulatorio.getCodigo(), tipocita));
+            consultas.put(ambulatorio, fa.menorNumeroPacientes(ambulatorio.getCodigo(), tipocita.getEspecialidad()));
             ocupadas = fa.citasOcupadas(pa, consultas.get(ambulatorio), inicio, fin);
 
             //Actualizamos lista de horas

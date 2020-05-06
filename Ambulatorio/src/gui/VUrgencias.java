@@ -205,7 +205,7 @@ public class VUrgencias extends javax.swing.JDialog {
                     Integer.parseInt(txtGravedad.getText()),
                     Timestamp.valueOf(LocalDateTime.now()),
                     paciente.getCIP(),
-                    fa.menorNumeroPacientes(a.getCodigo(), new TipoCita("Urgencia", "General", "")).getIdentificador(),
+                    fa.menorNumeroPacientes(a.getCodigo(), "General").getIdentificador(),
                     a.getCodigo());
 
             fa.insertarUrgencia(u);
