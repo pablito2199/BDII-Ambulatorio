@@ -53,6 +53,7 @@ public class VUrgencias extends javax.swing.JDialog {
         btnConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Urgencias");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

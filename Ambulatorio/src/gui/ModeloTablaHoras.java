@@ -128,7 +128,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
         LocalTime t = LocalTime.of(9, 0);
         ArrayList<LocalTime> arr = new ArrayList<>();
 
-        while (t.getHour() < 13) {
+        while (t.isBefore(LocalTime.of(13, 0))) {
 
             arr.add(t);
             t.plusMinutes(30);

@@ -86,6 +86,8 @@ public class VCitasPendientes extends javax.swing.JDialog {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        setTitle("Citas pendientes");
+
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnRegresar.setText("Regresar");

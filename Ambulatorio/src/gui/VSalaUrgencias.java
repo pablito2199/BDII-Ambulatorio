@@ -46,6 +46,7 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         btnDerivar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Sala de urgencias");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

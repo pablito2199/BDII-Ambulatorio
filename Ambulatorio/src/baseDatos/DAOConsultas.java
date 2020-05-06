@@ -238,12 +238,13 @@ public class DAOConsultas extends AbstractDAO {
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
             String consulta = "select c1.* "
-                    + "from consulta as c1 "
+                    + "from consulta as c1, cita as ci"
                     + "where c1.ambulatorio = ? "
+                    + "and ci.ambulatorio = c1.ambulatorio "
                     + "and c1.especialidad = ? "
                     + "having count(*) <= any(select count(*) from consulta as c2"
-                    + "where c1.ambulatorio = ? "
-                    + "and c1.especialidad = ? ";
+                    + "where c2.ambulatorio = c1.ambulatorio "
+                    + "and c2.especialidad = c1.especialidad ";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
