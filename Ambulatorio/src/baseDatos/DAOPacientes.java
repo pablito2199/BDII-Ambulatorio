@@ -29,7 +29,7 @@ public class DAOPacientes extends AbstractDAO {
 
         //Establecemos conexión
         con = super.getConexion();
-        
+
         //Intentamos la consulta SQL
         try {
             //Preparamos la consulta SQL para insertar en la tabla de pacientes un nuevo paciente con el id de paciente, nombre
@@ -191,27 +191,27 @@ public class DAOPacientes extends AbstractDAO {
                     + "and nombre like ? "
                     + "and sexo like ? "
                     + "and grupoSanguineo like ? ";
-                    if (edad != null)
-                        consulta +="and EXTRACT(YEAR FROM age(CURRENT_DATE, FechaNacimiento)) = ? ";
-                    if (NSS != null)
-                        consulta +="and numSeguridadSocial = ? ";
-                    consulta += " order by nombre";
+            if (edad != null) {
+                consulta += "and EXTRACT(YEAR FROM age(CURRENT_DATE, FechaNacimiento)) = ? ";
+            }
+            if (NSS != null) {
+                consulta += "and numSeguridadSocial = ? ";
+            }
+            consulta += " order by nombre";
             //Preparamos la consulta
             stmPacientes = con.prepareStatement(consulta);
             //Sustituimos
-            stmPacientes.setString(1, "%"+CIP+"%");
-            stmPacientes.setString(2, "%"+DNI+"%");
-            stmPacientes.setString(3, "%"+nombre+"%");
-            stmPacientes.setString(4, "%"+sexo+"%");
-            stmPacientes.setString(5, "%"+grupo+"%");
+            stmPacientes.setString(1, "%" + CIP + "%");
+            stmPacientes.setString(2, "%" + DNI + "%");
+            stmPacientes.setString(3, "%" + nombre + "%");
+            stmPacientes.setString(4, "%" + sexo + "%");
+            stmPacientes.setString(5, "%" + grupo + "%");
             if (edad != null && NSS != null) {
                 stmPacientes.setInt(6, edad);
                 stmPacientes.setInt(7, NSS);
-            }
-            else if (edad != null) {
+            } else if (edad != null) {
                 stmPacientes.setInt(6, edad);
-            }
-            else if (NSS != null) {
+            } else if (NSS != null) {
                 stmPacientes.setInt(6, NSS);
             }
 
@@ -304,7 +304,7 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Date fechaInicio, java.sql.Date fechaFin) {
         //Declaramos variables
         java.util.List<Cita> resultado = new java.util.ArrayList<Cita>();
         Cita citaActual;
@@ -313,30 +313,40 @@ public class DAOPacientes extends AbstractDAO {
         ResultSet rsHistorial;
         //Establecemos conexión
         con = this.getConexion();
-        //Impedimos que se la confirmación sea automática
-        try {
-            con.setAutoCommit(false);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }
-
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
             String consulta = "select fechaHoraInicio, fechaHoraFin, paciente, consulta, ambulatorio, tipo, especialidad "
-                    + "from cita where paciente = ? and tipo = ? and especialidad = ? and fechaHoraFin-fechaHoraInicio>=0 "
-                    + "and fechaHoraFin <= ? and fechaHoraInicio >= ?;";
+                    + "from cita where paciente = ? "
+                    + "and tipo like ? and especialidad like ? "
+                    + "and fechaHoraFin >= fechaHoraInicio ";
+            if (fechaInicio != null) {
+                consulta += "and fechaHoraFin <= CAST(? AS TIMESTAMP) ";
+            }
+            if (fechaFin != null) {
+                consulta += "and fechaHoraInicio >= CAST(? AS TIMESTAMP) ";
+            }
+            if (fechaFin != null && fechaInicio != null) {
+                consulta += "and ?<=?;";
+            }
 
             //Preparamos la consulta
             stmHistorial = con.prepareStatement(consulta);
             //Sustituimos
             stmHistorial.setString(1, paciente.getCIP());
-            stmHistorial.setString(2, tipoCita.getNombre());
-            stmHistorial.setString(3, tipoCita.getEspecialidad());
-            stmHistorial.setTimestamp(4, fechaFin);
-            stmHistorial.setTimestamp(5, fechaInicio);
+            stmHistorial.setString(2, "%" + tipoCita.getNombre() + "%");
+            stmHistorial.setString(3, "%" + tipoCita.getEspecialidad() + "%");
 
+            if (fechaInicio != null) {
+                stmHistorial.setDate(4, fechaFin);
+            }
+            if (fechaFin != null) {
+                stmHistorial.setDate(5, fechaInicio);
+            }
+            if (fechaFin != null && fechaInicio != null) {
+                stmHistorial.setDate(6, fechaInicio);
+                stmHistorial.setDate(7, fechaFin);
+            }
             //Ejecutamos
             rsHistorial = stmHistorial.executeQuery();
             //Mientras haya coincidencias
@@ -357,13 +367,6 @@ public class DAOPacientes extends AbstractDAO {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-            try {
-                //Como ha fallado deshacemos
-                con.rollback();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-            }
         } finally {
             //Finalmente se intentan cerrar cursores
             try {
@@ -372,21 +375,6 @@ public class DAOPacientes extends AbstractDAO {
                 //Si no se puede se imprime el error
                 System.out.println("Imposible cerrar cursores");
             }
-        }
-        try {
-            //Confirmamos
-            con.commit();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-        }
-        //Pedimos que vuelva a hacer los commits automáticamente
-        try {
-            //Impedimos que se la confirmación sea automática
-            con.setAutoCommit(true);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
         }
         //Se devuelve el resultado (lista de pacientes)
         return resultado;
@@ -451,7 +439,7 @@ public class DAOPacientes extends AbstractDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-        } 
+        }
         //Pedimos que vuelva a hacer los commits automáticamente
         try {
             //Impedimos que se la confirmación sea automática
@@ -459,7 +447,7 @@ public class DAOPacientes extends AbstractDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-        }    
+        }
         return resultado;
     }
 

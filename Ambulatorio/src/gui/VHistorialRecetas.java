@@ -56,7 +56,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         tablaHistorialRecetas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Historial médico");
+        setTitle("Historial recetas");
         setResizable(false);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -257,24 +257,16 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 return;
             }
         }
-        Date inicio, fin;
+        Timestamp inicioTS, finTS;
         try {
-            inicio = Date.valueOf(varDesde.getText());
-            fin = Date.valueOf(varHasta.getText());
+            inicioTS = Timestamp.valueOf(varDesde.getText());
+            finTS = Timestamp.valueOf(varHasta.getText());
         } catch (Exception e) {
             fa.muestraExcepcion("Las fechas introducidas no son válidas.");
             return;
         }
-        //Vemos si inicio es igual o mayor a fin
-        if (!inicio.after(fin)) {
-            //Pasamos las fechas a timestamp
-            Timestamp inicioTS = inicio == null ? Timestamp.valueOf(LocalDateTime.now()) : Timestamp.valueOf(inicio.toLocalDate().atStartOfDay());
-            Timestamp finTS = fin == null ? Timestamp.valueOf(LocalDateTime.now().plusYears(1)) : Timestamp.valueOf(fin.toLocalDate().plusDays(1).atStartOfDay());
-
-            m.setFilas(fa.consultarHistorialReceta(paciente, inicioTS, finTS, Num, varMedicamentos.getText()));
-            varTotal.setText(String.valueOf(m.getRowCount()));
-
-        }
+        m.setFilas(fa.consultarHistorialReceta(paciente, inicioTS, finTS, Num, varMedicamentos.getText()));
+        varTotal.setText(String.valueOf(m.getRowCount()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**

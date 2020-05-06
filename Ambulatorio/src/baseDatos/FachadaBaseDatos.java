@@ -181,7 +181,7 @@ public class FachadaBaseDatos {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin) {
+    public java.util.List<Cita> consultarHistorialClinico(Paciente paciente, TipoCita tipoCita, java.sql.Date fechaInicio, java.sql.Date fechaFin) {
         return daoPacientes.consultarHistorialClinico(paciente, tipoCita, fechaInicio, fechaFin);
     }
 
