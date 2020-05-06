@@ -283,7 +283,7 @@ public class FachadaBaseDatos {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
+    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Date fechaInicio, java.sql.Date fechaFin, Integer codigoReceta, String medicamento) {
         return daoRecetas.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
     }
 

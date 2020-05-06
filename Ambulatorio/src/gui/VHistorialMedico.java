@@ -275,8 +275,12 @@ public class VHistorialMedico extends javax.swing.JDialog {
              tipocita = new TipoCita(tipo[0], tipo[1], "");
         }
         m.setFilas(fa.consultarHistorialClinico(paciente, tipocita, Inicio, Fin));
+        int noAtendidas=0;
         varTotalResultados.setText(String.valueOf(m.getRowCount()));
-
+        for(int i=0; i<m.getRowCount(); i++)
+            if(m.getValueAt(0, 1) == null)
+                noAtendidas++;
+        varCitasNoAsistidas.setText(String.valueOf(noAtendidas));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**

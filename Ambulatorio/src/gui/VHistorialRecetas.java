@@ -257,15 +257,30 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 return;
             }
         }
-        Timestamp inicioTS, finTS;
-        try {
-            inicioTS = Timestamp.valueOf(varDesde.getText());
-            finTS = Timestamp.valueOf(varHasta.getText());
-        } catch (Exception e) {
-            fa.muestraExcepcion("Las fechas introducidas no son válidas.");
-            return;
+        java.sql.Date Inicio = null;
+        java.sql.Date Fin = null;
+        //Fecha de fin de la receta
+        if (!varHasta.getText().isEmpty()) {
+            //Intentamos convertirla a Date
+            try {
+                Fin = java.sql.Date.valueOf(varHasta.getText());
+                //De no poder convertir a entero se imprime la excepción
+            } catch (Exception ex) {
+                fa.muestraExcepcion("El valor introducido como fecha de incio no es válido.");
+                return;
+            }
         }
-        m.setFilas(fa.consultarHistorialReceta(paciente, inicioTS, finTS, Num, varMedicamentos.getText()));
+        if (!varDesde.getText().isEmpty()) {
+            //Intentamos convertirla a Date
+            try {
+                Inicio = java.sql.Date.valueOf(varDesde.getText());
+                //De no poder convertir a entero se imprime la excepción
+            } catch (Exception ex) {
+                fa.muestraExcepcion("El valor introducido como fecha de fin no es válido.");
+                return;
+            }
+        }
+        m.setFilas(fa.consultarHistorialReceta(paciente, Inicio, Fin, Num, varMedicamentos.getText()));
         varTotal.setText(String.valueOf(m.getRowCount()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
