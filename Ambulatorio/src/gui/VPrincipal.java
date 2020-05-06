@@ -319,6 +319,9 @@ public class VPrincipal extends javax.swing.JFrame {
 
         menuEnfermedades.setText("Enfermedades");
         menuEnfermedades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                menuEnfermedadesMouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuEnfermedadesMouseClicked(evt);
             }
@@ -327,6 +330,9 @@ public class VPrincipal extends javax.swing.JFrame {
 
         menuPacientes.setText("Pacientes");
         menuPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                menuPacientesMouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuPacientesMouseClicked(evt);
             }
@@ -493,6 +499,14 @@ public class VPrincipal extends javax.swing.JFrame {
     private void menuPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPacientesMouseClicked
         fa.nuevaVPacientes();
     }//GEN-LAST:event_menuPacientesMouseClicked
+
+    private void menuEnfermedadesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEnfermedadesMouseReleased
+        fa.nuevaVEnfermedades();
+    }//GEN-LAST:event_menuEnfermedadesMouseReleased
+
+    private void menuPacientesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPacientesMouseReleased
+        fa.nuevaVPacientes();
+    }//GEN-LAST:event_menuPacientesMouseReleased
 
     /**
      * @param args the command line arguments

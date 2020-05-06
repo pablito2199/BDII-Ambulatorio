@@ -15,6 +15,7 @@
             <Property name="text" type="java.lang.String" value="Enfermedades"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuEnfermedadesMouseReleased"/>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuEnfermedadesMouseClicked"/>
           </Events>
         </Menu>
@@ -23,6 +24,7 @@
             <Property name="text" type="java.lang.String" value="Pacientes"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuPacientesMouseReleased"/>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuPacientesMouseClicked"/>
           </Events>
         </Menu>
