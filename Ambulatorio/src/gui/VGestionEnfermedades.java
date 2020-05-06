@@ -332,9 +332,9 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
             //selecciona el primer elemento de la lista automáticamente
             lstRestoEnfermedades.setSelectedIndex(0);
             //activa el botón de Eliminar
-            btnIzquierda.setEnabled(true);
+            btnDerecha.setEnabled(true);
         } else {
-            btnIzquierda.setEnabled(false);
+            btnDerecha.setEnabled(false);
         }
     }
 
@@ -351,9 +351,9 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
             //selecciona el primer elemento de la lista automáticamente
             lstEnfermedadesPadecidas.setSelectedIndex(0);
             //activa el botón de Eliminar
-            btnDerecha.setEnabled(true);
+            btnIzquierda.setEnabled(true);
         } else {
-            btnDerecha.setEnabled(false);
+            btnIzquierda.setEnabled(false);
         }
     }
 }
