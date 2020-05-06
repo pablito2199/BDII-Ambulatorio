@@ -417,7 +417,8 @@ public class DAOPacientes extends AbstractDAO {
                     + "from enfermedad e "
                     + "where not exists (select * "
                     + "		  from tenerenfermedad el "
-                    + "		  where el.paciente = ? and el.enfermedad = e.nombre and e.nombre like ?)");
+                    + "		  where el.paciente = ? and el.enfermedad = e.nombre and e.nombre like ?) "
+                    + "order by nombre ASC");
             stmEnfermedades.setString(1, cip); //CIP
             stmEnfermedades.setString(2, "%" + enfermedad + "%"); //Enfermedad
             rsEnfermedades = stmEnfermedades.executeQuery();

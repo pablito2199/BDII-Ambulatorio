@@ -294,9 +294,8 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
 
     //Botón Actualizar, guarda correctamente las enfermedades padecidas y no padecidas por el paciente
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();
         //actualizamos las enfermedades que padece el paciente
-        fa.actualizarEnfermedadesPaciente(cipPaciente, mE.getElementos());
+        fa.actualizarEnfermedadesPaciente(cipPaciente, enfermedadesP);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     //Botón Regresar, vuelve a la ventana anterior, cerrando la ventana actual
@@ -333,18 +332,14 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     public void buscarEnfermedadesNoPadecidas(String enfermedad) {
         java.util.List<String> enfermedadesNoPadecidas;
         ModeloListaStrings mListaRE = new ModeloListaStrings();
-        lstEnfermedadesPadecidas.setModel(mListaRE);
+        lstRestoEnfermedades.setModel(mListaRE);
         //obtenemos las enfermedades no padecidas por el paciente
-        enfermedadesNoPadecidas = fa.obtenerEnfermedadesNoPadecidas(cipPaciente, enfermedad);
-        java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
-        for (int i = 0; i < enfermedadesNoPadecidas.size(); i++) {
-            nombres.add(enfermedadesNoPadecidas.get(i));
-        }
+        enfermedadesNoPadecidas = fa.obtenerEnfermedadesNoActualizadas(enfermedadesP, enfermedad);
         //actualizamos la lista
-        mListaRE.setElementos(nombres);
+        mListaRE.setElementos(enfermedadesNoPadecidas);
         if (mListaRE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
-            lstEnfermedadesPadecidas.setSelectedIndex(0);
+            lstRestoEnfermedades.setSelectedIndex(0);
             //activa el botón de Eliminar
             btnIzquierda.setEnabled(true);
         } else {
@@ -352,19 +347,15 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         }
     }
 
-    //busca las enfermedades no padecidas en la lista
+    //busca las enfermedades padecidas en la lista
     public void buscarEnfermedadesPadecidas(String enfermedad) {
         java.util.List<String> enfermedadesPadecidas;
         ModeloListaStrings mListaE = new ModeloListaStrings();
         lstEnfermedadesPadecidas.setModel(mListaE);
         //obtenemos las enfermedades padecidas por el paciente
-        enfermedadesPadecidas = fa.obtenerEnfermedadesPadecidas(cipPaciente, enfermedad);
-        java.util.ArrayList<String> nombres = new java.util.ArrayList<>();
-        for (String e : enfermedadesPadecidas) {
-            nombres.add(e);
-        }
+        enfermedadesPadecidas = fa.obtenerEnfermedadesNoActualizadas(enfermedadesNP, enfermedad);
         //actualizamos la lista
-        mListaE.setElementos(nombres);
+        mListaE.setElementos(enfermedadesPadecidas);
         if (mListaE.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstEnfermedadesPadecidas.setSelectedIndex(0);

@@ -3,7 +3,6 @@ package gui;
 import aplicacion.clases.Paciente;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class VHistorialRecetas extends javax.swing.JDialog {

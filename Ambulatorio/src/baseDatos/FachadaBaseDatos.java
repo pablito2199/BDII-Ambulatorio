@@ -233,6 +233,11 @@ public class FachadaBaseDatos {
         daoEnfermedades.borrarEnfermedad(nombre);
     }
 
+    //Permite consultar las enfermedades existentes sin actualizar una lista
+    public java.util.List<String> obtenerEnfermedadesNoActualizadas(java.util.List<String> enfermedades, String enfermedad) {
+        return daoEnfermedades.obtenerEnfermedadesNoActualizadas(enfermedades, enfermedad);
+    }
+
 ////////////////////
 //DAOCONSULTAS
 ////////////////////
