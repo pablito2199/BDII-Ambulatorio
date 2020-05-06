@@ -131,7 +131,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
         while (t.isBefore(LocalTime.of(13, 0))) {
 
             arr.add(t);
-            t.plusMinutes(30);
+            t = t.plusMinutes(30);
         }
         
         //Comprobamos que la fecha de fin no sea mas de 
