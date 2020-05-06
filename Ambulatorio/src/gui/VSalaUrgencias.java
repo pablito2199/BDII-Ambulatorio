@@ -169,12 +169,15 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         //Obtenemos modelo
         ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
 
-        //Atendemos la urgencia
-        fa.atenderCita(tu.obtenerUrgencia());
+        //Atendemos urgencia en caso de que exista alguna
+        if (tu.getRowCount() > 0) {
 
-        //Contamos urgencias
-        labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
+            //Atendemos la urgencia
+            fa.atenderCita(tu.obtenerUrgencia());
 
+            //Contamos urgencias
+            labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
+        }
     }//GEN-LAST:event_btnAtenderActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -191,15 +194,21 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         //Obtenemos modelo
         ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
 
-        //Quitamos urgencia
-        Urgencia u = tu.obtenerUrgencia();
+        //Derivamos urgencia en caso de que exista alguna
+        if (tu.getRowCount() > 0) {
 
-        //Contamos urgencias
-        labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
+            //Quitamos urgencia
+            Urgencia u = tu.obtenerUrgencia();
 
-        //Derivamos la urgencia
-        fa.nuevaVDerivarHospital(u);
+            //Contamos urgencias
+            labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
 
+            //Derivamos la urgencia
+            fa.nuevaVDerivarHospital(u);
+
+            //Recuperamos urgencias en caso de que se cancelase la operacion
+            tu.setFilas(fa.urgenciasPendientes(ambulatorio));
+        }
     }//GEN-LAST:event_btnDerivarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

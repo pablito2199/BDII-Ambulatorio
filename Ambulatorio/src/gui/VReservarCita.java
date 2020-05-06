@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class VReservarCita extends javax.swing.JDialog {
 
     private FachadaAplicacion fa;
-    private VCitasPendientes padre;
+    private VPacientes padre;
     private Paciente pa;
     private Consulta co;
 
@@ -24,11 +24,11 @@ public class VReservarCita extends javax.swing.JDialog {
      * @param fa
      * @param pa
      */
-    public VReservarCita(javax.swing.JDialog parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
+    public VReservarCita(VPacientes parent, boolean modal, FachadaAplicacion fa, Paciente pa) {
         super(parent, modal);
         this.fa = fa;
         this.pa = pa;
-        this.padre = (VCitasPendientes) parent;
+        this.padre = parent;
         initComponents();
 
         //Introducimos tipos de cita
@@ -257,8 +257,8 @@ public class VReservarCita extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         //No se ha seleccionado fila
-        int index;
-        if ((index = tablaHoras.getSelectedRow()) >= 0) {
+        int index = tablaHoras.getSelectedRow();
+        if (index >= 0) {
 
             //Obtenemos modelo
             ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());

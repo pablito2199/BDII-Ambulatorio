@@ -44,7 +44,7 @@ public class FachadaGui {
 //VENTANAS DE CITAS
 ////////////////////////////////
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
+    public void nuevaVReservarCita(VPacientes vcit, Paciente paciente) {
         //Declaramos variables
         VReservarCita vRC;
         //Generamos la ventana
@@ -69,6 +69,16 @@ public class FachadaGui {
         VCitasPendientes vCP;
         //Generamos la ventana
         vCP = new VCitasPendientes(vper, fa, personal);
+        //Hacemos visible la ventana
+        vCP.setVisible(true);
+    }
+    
+    //Permite generar una ventana para consultar las citas pendientes de un paciente
+    public void nuevaVCitasPendientes(VPacientes vpac, Paciente paciente) {
+        //Declaramos variables
+        VCitasPendientes vCP;
+        //Generamos la ventana
+        vCP = new VCitasPendientes(vpac, fa, paciente);
         //Hacemos visible la ventana
         vCP.setVisible(true);
     }

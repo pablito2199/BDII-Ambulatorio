@@ -447,7 +447,7 @@ public class VPacientes extends javax.swing.JDialog {
         varDireccion.setText(null);
         varTelefono.setText(null);
         //Actualizamos la tabla
-       buscarPacientes();
+        buscarPacientes();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     //Función que permite limpiar los campos y la tabla para prepara la inserción de un nuevo usuario
@@ -540,20 +540,50 @@ public class VPacientes extends javax.swing.JDialog {
     }//GEN-LAST:event_tablaPacientesMouseClicked
 
     private void btnNuevaUrgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaUrgenciaActionPerformed
+        //Obtenemos tabla
+        ModeloTablaPacientes tp = (ModeloTablaPacientes) tablaPacientes.getModel();
+
+        //Comprobamos que se selecciona a un paciente
+        int index = tablaPacientes.getSelectedRow();
+        if(index >= 0){
+            
+            fa.nuevaVUrgencias(this, tp.obtenerPaciente(index));
+        }
+        
         rebuscarPacientes();
     }//GEN-LAST:event_btnNuevaUrgenciaActionPerformed
 
     private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
         ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
-        fa.nuevaVGestionEnfermedades(this, m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP()); 
+        fa.nuevaVGestionEnfermedades(this, m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
         rebuscarPacientes();
     }//GEN-LAST:event_btnEnfermedadesActionPerformed
 
     private void btnSolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCitaActionPerformed
+        //Obtenemos tabla
+        ModeloTablaPacientes tp = (ModeloTablaPacientes) tablaPacientes.getModel();
+
+        //Comprobamos que se selecciona a un paciente
+        int index = tablaPacientes.getSelectedRow();
+        if (index >= 0) {
+
+            fa.nuevaVReservarCita(this, tp.obtenerPaciente(index));
+        }
+
         rebuscarPacientes();
     }//GEN-LAST:event_btnSolicitarCitaActionPerformed
 
     private void btnCitasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasPendientesActionPerformed
+        //Obtenemos tabla
+        ModeloTablaPacientes tp = (ModeloTablaPacientes) tablaPacientes.getModel();
+
+        //Comprobamos que se selecciona a un paciente
+        int index = tablaPacientes.getSelectedRow();
+        if (index >= 0) {
+
+            fa.nuevaVCitasPendientes(this, tp.obtenerPaciente(index));
+        }
+
         rebuscarPacientes();
     }//GEN-LAST:event_btnCitasPendientesActionPerformed
 
@@ -652,7 +682,7 @@ public class VPacientes extends javax.swing.JDialog {
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
 
-       m.setFilas(fa.consultarPacientes("", "", "", null, "", null, ""));
+        m.setFilas(fa.consultarPacientes("", "", "", null, "", null, ""));
         //Si hay coincidencias
         if (m.getRowCount() > 0) {
             //Seleccionamos la primera
