@@ -325,7 +325,11 @@ public class FachadaAplicacion {
 
     //Permite crear una nueva ventana de consultas
     public void nuevaVConsultas(Integer ambulatorio) {
-        gcon.nuevaVConsultas(ambulatorio);
+        java.util.List<Integer> restoConsultas = new java.util.ArrayList<>();
+        for (Consulta c : this.consultarConsultas(null, ambulatorio, null)) {
+            restoConsultas.add(c.getIdentificador());
+        }
+        gcon.nuevaVConsultas(ambulatorio, restoConsultas);
     }
     
 ////////////////////

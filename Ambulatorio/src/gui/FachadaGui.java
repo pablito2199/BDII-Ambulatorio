@@ -163,11 +163,11 @@ public class FachadaGui {
 //VENTANA DE CONSULTAS
 /////////////////////////////
     //Permite crear una nueva ventana de consultas
-    public void nuevaVConsultas(Integer ambulatorio) {
+    public void nuevaVConsultas(Integer ambulatorio, java.util.List<Integer> restoConsultas) {
         //Declaramos
         VConsultas vC;
         //Instanciamos la ventana
-        vC = new VConsultas(vp, true, fa, ambulatorio);
+        vC = new VConsultas(vp, true, fa, ambulatorio, restoConsultas);
         //La hacemos visible
         vC.setVisible(true);
     }

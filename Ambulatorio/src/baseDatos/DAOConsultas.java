@@ -104,9 +104,9 @@ public class DAOConsultas extends AbstractDAO {
         Connection con;
         PreparedStatement stmConsultas = null;
         ResultSet rsConsultas;//Variable para buscar por codigo
-        String id = identificador == null ? "" : "and identificador = ?";
-        String esp = especialidad == null ? "" : "and especialidad = ?";
-
+        String esp = especialidad == null ? "" : "and especialidad = ? ";
+        String id = identificador == null ? "" : "and identificador = ? ";
+        
         //Establecemos conexión
         con = this.getConexion();
 
@@ -119,20 +119,22 @@ public class DAOConsultas extends AbstractDAO {
                     + "from consulta "
                     + "where ambulatorio = ? "
                     + esp
-                    + id;
+                    + id
+                    + "order by identificador ASC";
 
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
             stmConsultas.setInt(1, ambulatorio); //Ambulatorio
-            if (especialidad != null) {
+            if (especialidad != null && identificador != null) {
                 stmConsultas.setString(2, especialidad); //Especialidad
-            } else if (especialidad != null && identificador != null) {
+                stmConsultas.setInt(3, identificador); //Identificador
+            } else if (especialidad != null) {
                 stmConsultas.setString(2, especialidad); //Especialidad
-                stmConsultas.setInt(2, identificador); //Identificador
             } else if (identificador != null) {
                 stmConsultas.setInt(2, identificador); //Identificador
             }
+            
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias
@@ -186,7 +188,7 @@ public class DAOConsultas extends AbstractDAO {
             //Sustituimos
             stmAmbulatorios.setInt(1, ambulatorio);
             if (especialidad != null) {
-                stmAmbulatorios.setString(2, "%" + especialidad + "%");
+                stmAmbulatorios.setString(2, especialidad);
             }
 
             //Ejecutamos

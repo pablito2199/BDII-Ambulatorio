@@ -46,7 +46,7 @@ public class GestionConsultas {
     }
 
     //Permite crear una nueva ventana de consultas
-    public void nuevaVConsultas(Integer ambulatorio) {
-        fgui.nuevaVConsultas(ambulatorio);
+    public void nuevaVConsultas(Integer ambulatorio, java.util.List<Integer> restoConsultas) {
+        fgui.nuevaVConsultas(ambulatorio, restoConsultas);
     }
 }
