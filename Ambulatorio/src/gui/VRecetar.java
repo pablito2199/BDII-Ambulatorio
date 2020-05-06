@@ -56,9 +56,9 @@ public class VRecetar extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
         listaMedicamentos = new javax.swing.JList<>();
-        labelRecetar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Historial de recetas");
         setResizable(false);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -206,32 +206,25 @@ public class VRecetar extends javax.swing.JDialog {
                 .addGap(21, 21, 21))
         );
 
-        labelRecetar.setForeground(new java.awt.Color(0, 0, 255));
-        labelRecetar.setText("RECETAR");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelRecetar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelRecetar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,7 +247,6 @@ public class VRecetar extends javax.swing.JDialog {
             return;
         }
         Integer cantidad = 0;
-        java.sql.Date fecha = null;
         //Comprobamos que los valores introducidos sean correctos
         if (!varCantidad.getText().isEmpty()) {
             //Intentamos convertir el NSS a entero
@@ -271,20 +263,22 @@ public class VRecetar extends javax.swing.JDialog {
                 return;
             }
         }
-        //Lo mismo para la fecha de fin de la receta
+        java.sql.Date Inicio = null;
+        java.sql.Date Fin = null;
+        //Fecha de fin de la receta
         if (!varFechaFin.getText().isEmpty()) {
             //Intentamos convertirla a Date
             try {
-                fecha = Date.valueOf(varFechaFin.getText());
+                Fin = java.sql.Date.valueOf(varFechaFin.getText());
                 //De no poder convertir a entero se imprime la excepción
             } catch (Exception ex) {
-                fa.muestraExcepcion("El valor introducido como fecha no es válido.");
+                fa.muestraExcepcion("El valor introducido como fecha de fin del tratamiento no es válido.");
                 return;
             }
         }
         //Instanciamos la receta
         Receta r = new Receta(cita.getFechaHoraInicio(), cita.getPaciente(), cita.getConsulta(), cita.getAmbulatorio(),
-                varDescripcion.getText(), fecha, varMedicamento.getText(), cantidad);
+                varDescripcion.getText(), Fin, varMedicamento.getText(), cantidad);
         fa.insertarReceta(r);
         //Finalmente regresamos a citas
         this.dispose();
@@ -324,7 +318,6 @@ public class VRecetar extends javax.swing.JDialog {
     private javax.swing.JLabel labelMEDICAMENTO;
     private javax.swing.JLabel labelMedicamento;
     private javax.swing.JLabel labelReceta;
-    private javax.swing.JLabel labelRecetar;
     private javax.swing.JList<String> listaMedicamentos;
     private javax.swing.JTextField varCantidad;
     private javax.swing.JTextArea varDescripcion;

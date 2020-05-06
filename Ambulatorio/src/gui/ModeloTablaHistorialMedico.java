@@ -98,21 +98,21 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
         switch (col) {
             //Permite recuperar fecha inicio
             case 0:
-                resultado = citas.get(row).getFechaHoraInicio().getTime();
+                resultado = citas.get(row).getFechaHoraInicio();
                 break;
             //Permite recuperar fecha fin
             case 1:
-                resultado = citas.get(row).getFechaHoraFin().getTime();
+                resultado = citas.get(row).getFechaHoraFin();
                 break;
-            //Permite recuperar número (código) receta
+            //Permite recuperar el código del ambulatorio
             case 2:
                 resultado = citas.get(row).getAmbulatorio();
                 break;
-            //Permite recuperar el nombre del medicamento recetado
+            //Permite recuperar el código de la consulta
             case 3:
                 resultado = citas.get(row).getConsulta();
                 break;
-            //Permite recuperar la cantidad del medicamento
+            //Permite recuperar el tipo de cita
             case 4:
                 resultado = citas.get(row).getTipo() + " - " + citas.get(row).getEspecialidad();
                 break;

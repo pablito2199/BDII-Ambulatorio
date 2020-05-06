@@ -62,7 +62,7 @@ public class DAORecetas extends AbstractDAO {
     }
 
     //Permite consultar el historial clínico de un paciente
-    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Timestamp fechaInicio, java.sql.Timestamp fechaFin, Integer codigoReceta, String medicamento) {
+    public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Date fechaInicio, java.sql.Date fechaFin, Integer codigoReceta, String medicamento) {
         //Declaramos variables
         java.util.List<Receta> resultado = new java.util.ArrayList<Receta>();
         Receta recetaActual;
@@ -84,21 +84,37 @@ public class DAORecetas extends AbstractDAO {
         try {
             //Construimos la consulta
             String consulta = "select cita, fechaHoraInicio, fechaHoraFin, paciente, codigoReceta, medicamento, cantidad "
-                    + "from receta where paciente = ? "
+                    + "from receta natural join cita where paciente = ? "
                     + "and codigoReceta = ? "
                     + "and medicamento = ? "
-                    + "and fechaHoraFin-fechaHoraInicio>=0 "
-                    + "and fechaHoraFin <= ? "
-                    + "and fechaHoraInicio >= ?;";
+                    + "and fechaHoraFin>=fechaHoraInicio ";
+            if (fechaInicio != null) {
+                consulta += "and fechaHoraFin <= CAST(? AS TIMESTAMP) ";
+            }
+            if (fechaFin != null) {
+                consulta += "and fechaHoraInicio >= CAST(? AS TIMESTAMP) ";
+            }
+            if (fechaFin != null && fechaInicio != null) {
+                consulta += "and ?<=?;";
+            }
+
             //Preparamos la consulta
             stmHistorial = con.prepareStatement(consulta);
             //Sustituimos
             stmHistorial.setString(1, paciente.getCIP());
             stmHistorial.setInt(2, codigoReceta);
             stmHistorial.setString(3, medicamento);
-            stmHistorial.setTimestamp(4, fechaFin);
-            stmHistorial.setTimestamp(5, fechaInicio);
-
+             if (fechaInicio != null) {
+                stmHistorial.setDate(4, fechaFin);
+            }
+            if (fechaFin != null) {
+                stmHistorial.setDate(5, fechaInicio);
+            }
+            if (fechaFin != null && fechaInicio != null) {
+                stmHistorial.setDate(6, fechaInicio);
+                stmHistorial.setDate(7, fechaFin);
+            }
+            
             //Ejecutamos
             rsHistorial = stmHistorial.executeQuery();
             //Mientras haya coincidencias
