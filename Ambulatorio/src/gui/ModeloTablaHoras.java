@@ -18,7 +18,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
 
     private FachadaAplicacion fa;
     private Paciente pa;
-    private java.util.List<Ambulatorio> ambulatorios; //Listado de ambulatorios de la tabla
+    private ArrayList<Ambulatorio> ambulatorios; //Listado de ambulatorios de la tabla
     private HashMap<Ambulatorio, Consulta> consultas; //Listado de consultas con menos pacientes recogidas en la tabla
     private java.util.List<Timestamp> horas; //Listado de horas disponibles
 
@@ -133,34 +133,49 @@ public class ModeloTablaHoras extends AbstractTableModel {
             arr.add(t);
             t = t.plusMinutes(30);
         }
-        
-        //Comprobamos que la fecha de fin no sea mas de 
 
+        //Creamos lista de ambulatorios auxiliar
+        ArrayList<Ambulatorio> ambTemp = new ArrayList<>();
+        ambTemp.addAll(ambulatorios);
+
+        //Comprobamos que la fecha de fin no sea mas de 
         ArrayList<Timestamp> ocupadas;
         for (Ambulatorio ambulatorio : ambulatorios) {
 
-            //Obtenemos citas no posibles para el paciente
-            consultas.put(ambulatorio, fa.menorNumeroPacientes(ambulatorio.getCodigo(), tipocita.getEspecialidad()));
-            ocupadas = fa.citasOcupadas(pa, consultas.get(ambulatorio), inicio, fin);
+            //Comprobamos si el ambulatorio tiene este tipo de cita
+            Consulta co = fa.menorNumeroPacientes(ambulatorio.getCodigo(), tipocita.getEspecialidad());
+            if (co != null) {
 
-            //Actualizamos lista de horas
-            LocalDate actual = inicio.toLocalDate();
-            while (!actual.isAfter(fin.toLocalDate())) {
+                //Obtenemos citas no posibles para el paciente
+                consultas.put(ambulatorio, co);
+                ocupadas = fa.citasOcupadas(pa, consultas.get(ambulatorio), inicio, fin);
 
-                //Añadimos Timestamp del dia y la hora si no esta ocupada
-                for (LocalTime hora : arr) {
+                //Actualizamos lista de horas
+                LocalDate actual = inicio.toLocalDate();
+                while (!actual.isAfter(fin.toLocalDate())) {
 
-                    Timestamp temp = Timestamp.valueOf(LocalDateTime.of(actual, hora));
-                    if (!ocupadas.contains(temp)) {
+                    //Añadimos Timestamp del dia y la hora si no esta ocupada
+                    for (LocalTime hora : arr) {
 
-                        this.ambulatorios.add(ambulatorio);
-                        horas.add(temp);
+                        Timestamp temp = Timestamp.valueOf(LocalDateTime.of(actual, hora));
+                        if (!ocupadas.contains(temp)) {
+
+                            this.ambulatorios.add(ambulatorio);
+                            horas.add(temp);
+                        }
+
                     }
-
+                    actual.plusDays(1);
                 }
-                actual.plusDays(1);
+            } else {
+
+                //Quitamos ambulatorio
+                ambTemp.remove(ambulatorio);
             }
         }
+        //Restablecemos array de ambulatorios
+        ambulatorios.clear();
+        ambulatorios.addAll(ambTemp);
 
         //Notifica a los listeners del cambio
         fireTableDataChanged();
