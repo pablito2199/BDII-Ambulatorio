@@ -360,9 +360,9 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
             //selecciona el primer elemento de la lista automáticamente
             lstEnfermedadesPadecidas.setSelectedIndex(0);
             //activa el botón de Eliminar
-            btnIzquierda.setEnabled(true);
+            btnDerecha.setEnabled(true);
         } else {
-            btnIzquierda.setEnabled(false);
+            btnDerecha.setEnabled(false);
         }
     }
 }
