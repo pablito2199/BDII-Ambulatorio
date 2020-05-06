@@ -7,6 +7,7 @@ import aplicacion.clases.Consulta;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.TipoCita;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class VReservarCita extends javax.swing.JDialog {
@@ -34,9 +35,10 @@ public class VReservarCita extends javax.swing.JDialog {
         //Introducimos tipos de cita
         comboTipo.removeAllItems();
         for (TipoCita tipo : fa.obtenerTiposDeCita(null)) {
-            
-            if(!tipo.getNombre().equals("Urgencia") || !tipo.getEspecialidad().equals("General"))
-            comboTipo.addItem(tipo.getNombre() + "-" + tipo.getEspecialidad());
+
+            if (!tipo.getNombre().equals("Urgencia") || !tipo.getEspecialidad().equals("General")) {
+                comboTipo.addItem(tipo.getNombre() + "-" + tipo.getEspecialidad());
+            }
         }
     }
 
@@ -243,18 +245,28 @@ public class VReservarCita extends javax.swing.JDialog {
             inicio = Date.valueOf(txtDesde.getText());
             fin = Date.valueOf(txtHasta.getText());
 
-            //Vemos si inicio es igual o mayor a fin
-            if (!inicio.after(fin)) {
+            //Comprobamos que se busque a partir del dia de hoy
+            if (!inicio.toLocalDate().isAfter(LocalDate.now())) //Vemos si inicio es igual o mayor a fin
+            {
+                if (!inicio.after(fin)) {
 
-                //Obtenemos tabla
-                ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());
+                    //Comprobamos que la fecha no sea mayor a 3 dias
+                    if (inicio.toLocalDate().plusDays(3).isAfter(fin.toLocalDate())) {
+                        fin = Date.valueOf(inicio.toLocalDate().plusDays(3));
+                    }
 
-                //Pasamos ambulatorios a la tabla
-                String[] tipo = ((String)comboTipo.getSelectedItem()).split("-");
-                th.setFilas(amb, new TipoCita(tipo[0], tipo[1], ""), inicio, fin);
+                    //Obtenemos tabla
+                    ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());
 
+                    //Pasamos ambulatorios a la tabla
+                    String[] tipo = ((String) comboTipo.getSelectedItem()).split("-");
+                    th.setFilas(amb, new TipoCita(tipo[0], tipo[1], ""), inicio, fin);
+
+                } else {
+                    fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+                }
             } else {
-                fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+                fa.muestraExcepcion("¡La fecha de inicio es anterior a la actual!");
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -315,7 +327,7 @@ public class VReservarCita extends javax.swing.JDialog {
         if (!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
                 || !txtHasta.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")) {
 
-            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000/11/22.");
+            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000-11-22.");
             return false;
         }
         return true;
