@@ -468,7 +468,7 @@ public class DAOPacientes extends AbstractDAO {
         try {
             stmEnfermedades = con.prepareStatement("select enfermedad "
                     + "from tenerenfermedad "
-                    + "where paciente = ? and enfermedad like ?"
+                    + "where paciente = ? and enfermedad like ? "
                     + "order by enfermedad ASC");
             stmEnfermedades.setString(1, cip); //CIP
             stmEnfermedades.setString(2, "%" + enfermedad + "%"); //Enfermedad

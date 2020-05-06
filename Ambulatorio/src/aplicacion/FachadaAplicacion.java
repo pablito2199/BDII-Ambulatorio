@@ -18,6 +18,7 @@ public class FachadaAplicacion {
     GestionPacientes gpac;             // Enlace a la clase gestión de pacientes
     GestionEnfermedades genf;          // Enlace a la clase gestión de enfermedades
     GestionConsultas gcon;             // Enlace a la clase gestión de consultas
+    GestionEspecialidades gesp;          // Enlace a la clase gestión de especialidades
     GestionRecetas grec;               // Enlace a la clase gestión de recetas
     GestionPersonal gper;              // Enlace a la clase gestión de administradores
     GestionHospitales ghos;            // Enlace a la clase gestión de hospitales
@@ -31,6 +32,7 @@ public class FachadaAplicacion {
         gpac = new GestionPacientes(fgui, fbd);
         genf = new GestionEnfermedades(fgui, fbd);
         gcon = new GestionConsultas(fgui, fbd);
+        gesp = new GestionEspecialidades(fgui, fbd);
         grec = new GestionRecetas(fgui, fbd);
         gper = new GestionPersonal(fgui, fbd);
         ghos = new GestionHospitales(fgui, fbd);
@@ -314,6 +316,14 @@ public class FachadaAplicacion {
     //Permite crear una nueva ventana de consultas
     public void nuevaVConsultas(Integer ambulatorio) {
         gcon.nuevaVConsultas(ambulatorio);
+    }
+    
+////////////////////
+//DAOESPECIALIDADES
+//////////////////// 
+    //Permite consultar las consultas existentes en la base de datos
+    public java.util.List<Especialidad> consultarEspecialidades() {
+        return gesp.consultarEspecialidades();
     }
 
 /////////////////////////

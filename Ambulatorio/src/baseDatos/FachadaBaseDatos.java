@@ -18,6 +18,7 @@ public class FachadaBaseDatos {
     private DAOPacientes daoPacientes;          // Enlace al DAO de Pacientes
     private DAOEnfermedades daoEnfermedades;    // Enlace al DAO de Enfermedades
     private DAOConsultas daoConsultas;          // Enlace al DAO de Consultas
+    private DAOEspecialidades daoEspecialidades;// Enlace al DAO de Especialidades
     private DAORecetas daoRecetas;              // Enlace al DAO de Recetas
     private DAOPersonal daoPersonal;            // Enlace al DAO de Personal
     private DAOHospitales daoHospitales;        // Enlace al DAO de Hospitales
@@ -56,6 +57,7 @@ public class FachadaBaseDatos {
             daoPacientes = new DAOPacientes(conexion, fa);          // Enlace al DAO de Pacientes
             daoEnfermedades = new DAOEnfermedades(conexion, fa);    // Enlace al DAO de Enfermedades
             daoConsultas = new DAOConsultas(conexion, fa);          // Enlace al DAO de Consultas
+            daoEspecialidades = new DAOEspecialidades(conexion, fa);// Enlace al DAO de Especialidades
             daoRecetas = new DAORecetas(conexion, fa);              // Enlace al DAO de Recetas
             daoPersonal = new DAOPersonal(conexion, fa);            // Enlace al DAO de Personal
             daoHospitales = new DAOHospitales(conexion, fa);        // Enlace al DAO de Hospitales
@@ -257,6 +259,14 @@ public class FachadaBaseDatos {
     //Permite obtener la consulta con menos citas pendientes
     public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
         return daoConsultas.menorNumeroPacientes(ambulatorio, tipoCita);
+    }
+    
+////////////////////
+//DAOESPECIALIDADES
+//////////////////// 
+    //Permite consultar las consultas existentes en la base de datos
+    public java.util.List<Especialidad> consultarEspecialidades() {
+        return daoEspecialidades.consultarEspecialidades();
     }
 
 ////////////////////
