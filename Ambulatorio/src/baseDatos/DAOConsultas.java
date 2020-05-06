@@ -236,10 +236,11 @@ public class DAOConsultas extends AbstractDAO {
             //Construimos la consulta
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
-            String consulta = "select co.* "
+            String consulta
+                    = "select co.* "
                     + "from consulta as co, cita as ci "
-                    + "where co.especialidad like 'General' "
-                    + "and co.ambulatorio = 2 "
+                    + "where co.especialidad = ? "
+                    + "and co.ambulatorio = ? "
                     + "and co.identificador = ci.consulta "
                     + "and co.ambulatorio = ci.ambulatorio "
                     + "group by co.ambulatorio, co.identificador "
@@ -253,14 +254,16 @@ public class DAOConsultas extends AbstractDAO {
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
-            stmConsultas.setInt(1, ambulatorio);     //Ambulatorio
-            stmConsultas.setString(2, especialidad); //Especialidad
+            stmConsultas.setString(1, especialidad); //Especialidad
+            stmConsultas.setInt(2, ambulatorio);     //Ambulatorio
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias
             while (rsConsultas.next()) {
                 //Se crea una instancia de consulta con los datos de la consulta con el menor número de pacientes de la base de datos
-                menorNumero = new Consulta(rsConsultas.getInt("identificador"), rsConsultas.getInt("ambulatorio"), rsConsultas.getString("especialidad"));
+                menorNumero = new Consulta(rsConsultas.getInt("identificador"),
+                        rsConsultas.getInt("ambulatorio"),
+                        rsConsultas.getString("especialidad"));
             }
 
             //En caso de error se captura la excepción
