@@ -406,8 +406,8 @@ public class VCitasPendientes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private boolean fechasValidas() {
-        if ((!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
-                || !txtHasta.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))"))
+        if ((!txtDesde.getText().matches("[1-2][0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
+                || !txtHasta.getText().matches("[1-2][0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))"))
                 && (!txtDesde.getText().equals("aaaa-mm-dd")
                 || !txtHasta.getText().equals("aaaa-mm-dd"))) {
             fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000-11-22.");

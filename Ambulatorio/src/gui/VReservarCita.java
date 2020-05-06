@@ -254,7 +254,7 @@ public class VReservarCita extends javax.swing.JDialog {
             fin = Date.valueOf(txtHasta.getText());
 
             //Comprobamos que se busque a partir del dia de hoy
-            if (!inicio.toLocalDate().isAfter(LocalDate.now())) //Vemos si inicio es igual o mayor a fin
+            if (!LocalDate.now().isAfter(inicio.toLocalDate())) //Vemos si inicio es igual o mayor a la actual
             {
                 if (!inicio.after(fin)) {
 
