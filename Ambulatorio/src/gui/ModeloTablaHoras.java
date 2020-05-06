@@ -128,11 +128,13 @@ public class ModeloTablaHoras extends AbstractTableModel {
         LocalTime t = LocalTime.of(9, 0);
         ArrayList<LocalTime> arr = new ArrayList<>();
 
-        while (t.getHour() < 17) {
+        while (t.getHour() < 13) {
 
             arr.add(t);
             t.plusMinutes(30);
         }
+        
+        //Comprobamos que la fecha de fin no sea mas de 
 
         ArrayList<Timestamp> ocupadas;
         for (Ambulatorio ambulatorio : ambulatorios) {

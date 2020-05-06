@@ -143,6 +143,9 @@ public class DAOCitas extends AbstractDAO {
             //Finalmente intentamos cerrar los cursores
             try {
 
+                //Activamos de nuevo autocommit
+                con.setAutoCommit(true);
+                
                 stmCita.close();
             } catch (SQLException e) {
                 //De no poder se notifica de ello
@@ -235,6 +238,9 @@ public class DAOCitas extends AbstractDAO {
             //Finalmente intentamos cerrar los cursores
             try {
 
+                //Activamos de nuevo autocommit
+                con.setAutoCommit(true);
+                
                 stmUrgencia.close();
             } catch (SQLException e) {
                 //De no poder se notifica de ello
@@ -370,6 +376,10 @@ public class DAOCitas extends AbstractDAO {
         } finally {
             //Finalmente intentamos cerrar cursores
             try {
+                
+                //Activamos de nuevo autocommit
+                con.setAutoCommit(true);
+                
                 stmDerivarHospital.close();
             } catch (SQLException e) {
                 //En caso de no poder se notifica de ello
@@ -750,10 +760,10 @@ public class DAOCitas extends AbstractDAO {
                     + "from cita as ci, consulta as co, ambulatorio as am "
                     + "where ci.consulta = co.identificador "
                     + "and co.ambulatorio = ci.ambulatorio "
-                    + "and co.ambulatorio = am.codigo "
+                    + "and co.ambulatorio = am.codigoAmbulatorio "
                     + "and am.nombre like ? "
-                    + "and ci.fechaInicioCita > ? "
-                    + "and ci.fechaInicioCita < ? "
+                    + "and ci.fechaHoraInicio > ? "
+                    + "and ci.fechaHoraInicio < ? "
                     + busCons
             );
 

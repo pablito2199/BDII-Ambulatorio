@@ -160,7 +160,7 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
+    public void nuevaVReservarCita(VPacientes vcit, Paciente paciente) {
         gcit.nuevaVReservarCita(vcit, paciente);
     }
 
@@ -182,6 +182,11 @@ public class FachadaAplicacion {
     //Permite generar una ventana para consultar las citas pendientes de un médico
     public void nuevaVCitasPendientes(VPersonal vper, PersonalSanitario personal) {
         gcit.nuevaVCitasPendientes(vper, personal);
+    }
+    
+    //Permite generar una ventana para consultar las citas pendientes de un paciente
+    public void nuevaVCitasPendientes(VPacientes vpac, Paciente paciente) {
+        gcit.nuevaVCitasPendientes(vpac, paciente);
     }
 
 /////////////////////////

@@ -90,7 +90,7 @@ public class GestionCitas {
     }
 
     //Permite generar una ventana para visualizar información de una cita
-    public void nuevaVReservarCita(VCitasPendientes vcit, Paciente paciente) {
+    public void nuevaVReservarCita(VPacientes vcit, Paciente paciente) {
         fgui.nuevaVReservarCita(vcit, paciente);
     }
 
@@ -112,5 +112,10 @@ public class GestionCitas {
     //Permite generar una ventana para consultar las citas pendientes de un médico
     public void nuevaVCitasPendientes(VPersonal vper, PersonalSanitario personal) {
         fgui.nuevaVCitasPendientes(vper, personal);
+    }
+    
+    //Permite generar una ventana para consultar las citas pendientes de un paciente
+    public void nuevaVCitasPendientes(VPacientes vpac, Paciente paciente) {
+        fgui.nuevaVCitasPendientes(vpac, paciente);
     }
 }
