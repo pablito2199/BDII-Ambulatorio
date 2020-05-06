@@ -399,6 +399,8 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Botón Limpiar, pone todos los campos de texto en blanco, y hace más fácil la inserción de un nuevo ambulatorio
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        ModeloTablaAmbulatorios ma = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
+        ma.setFilas(new java.util.ArrayList<>());
         textoAnoConstruccion.setText(null);
         textoAntiguedad.setText(null);
         textoCodigo.setText(null);

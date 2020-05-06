@@ -280,6 +280,11 @@ public class FachadaAplicacion {
         genf.borrarEnfermedad(nombre);
     }
 
+    //Permite consultar las enfermedades existentes sin actualizar una lista
+    public java.util.List<String> obtenerEnfermedadesNoActualizadas(java.util.List<String> enfermedades, String enfermedad) {
+        return genf.obtenerEnfermedadesNoActualizadas(enfermedades, enfermedad);
+    }
+
     //Permite crear una nueva ventana de enfermedades
     public void nuevaVEnfermedades() {
         genf.nuevaVEnfermedades();

@@ -240,20 +240,10 @@ public class VEnfermedades extends javax.swing.JDialog {
     //botón de Limpiar, pone en blanco cada uno de los huecos para poder añadir nuevas enfermedades, y actualiza la lista
     private void btnLimpiarEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarEnfermedadActionPerformed
         ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
-        buscarEnfermedades();
+        mListaE.setElementos(new java.util.ArrayList<>());
         //campos de texto en blanco
         textoNombre.setText(null);
         textoDescripcion.setText(null);
-        //quita la selección actual de la lista
-        lstEnfermedades.clearSelection();
-        if (mListaE.getSize() > 0) {
-            //selecciona el primer elemento de la lista automáticamente
-            lstEnfermedades.setSelectedIndex(0);
-            //activa el botón de Eliminar
-            btnEliminarEnfermedad.setEnabled(true);
-        } else {
-            btnEliminarEnfermedad.setEnabled(false);
-        }
     }//GEN-LAST:event_btnLimpiarEnfermedadActionPerformed
 
     //botón de Añadir, añade una enfermedad a la base de datos

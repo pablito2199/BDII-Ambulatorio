@@ -248,10 +248,9 @@ public class VConsultas extends javax.swing.JDialog {
 
     //botón de Limpiar, pone en blanco cada uno de los huecos de texto para poder añadir nuevas consultas, y actualiza la lista
     private void btnLimpiarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarConsultasActionPerformed
+        ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
+        m.setElementos(new java.util.ArrayList<>());
         textoNumeroConsulta.setText(null);
-        //quita la selección actual de la lista
-        lstConsultas.clearSelection();
-        buscarConsultas();
     }//GEN-LAST:event_btnLimpiarConsultasActionPerformed
 
     //botón de Buscar, busca las consultas y las muestra en la lista
@@ -261,7 +260,6 @@ public class VConsultas extends javax.swing.JDialog {
 
     //cuando seleccionas un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
     private void lstConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstConsultasMouseClicked
-        // TODO add your handling code here:
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
 
