@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/AINHO/Desktop/Practicas%202ºC/BDII/BDII-Ambulatorio/Ambulatorio/src/aplicacion/GestionEnfermedades.java</file>
-            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/gui/VPacientes.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/gui/VUrgencias.java</file>
             <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/gui/VReservarCita.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/baseDatos/DAOConsultas.java</file>
             <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/gui/ModeloTablaHoras.java</file>
-            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/gui/VSalaUrgencias.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/aplicacion/FachadaAplicacion.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/baseDatos/DAOCitas.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/gui/VCitasPendientes.java</file>
         </group>
     </open-files>
 </project-private>

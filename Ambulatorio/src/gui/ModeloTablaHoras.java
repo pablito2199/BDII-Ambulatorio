@@ -142,13 +142,13 @@ public class ModeloTablaHoras extends AbstractTableModel {
         ArrayList<Timestamp> ocupadas;
         for (Ambulatorio ambulatorio : ambulatorios) {
 
-            //Comprobamos si el ambulatorio tiene este tipo de cita
+            //Comprobamos si la consulta devuelve resultado (tiene el tipo de cita especificado)
             Consulta co = fa.menorNumeroPacientes(ambulatorio.getCodigo(), tipocita.getEspecialidad());
-            if (co != null) {
+            if (co.getIdentificador() != null) {
 
                 //Obtenemos citas no posibles para el paciente
                 consultas.put(ambulatorio, co);
-                ocupadas = fa.citasOcupadas(pa, consultas.get(ambulatorio), inicio, fin);
+                ocupadas = fa.citasOcupadas(pa, co, inicio, fin);
 
                 //Actualizamos lista de horas
                 LocalDate actual = inicio.toLocalDate();
@@ -165,7 +165,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
                         }
 
                     }
-                    actual.plusDays(1);
+                    actual = actual.plusDays(1);
                 }
             } else {
 
