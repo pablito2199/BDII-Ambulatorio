@@ -56,7 +56,6 @@ public class VHistorialClinico extends javax.swing.JDialog {
         etiquetaTotalResultados1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHistorialMedico = new javax.swing.JTable();
-        comboBoxTipo = new javax.swing.JComboBox<>(new ModeloComboTipoCita());
         etiquetaHistorialMedico = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -169,8 +168,7 @@ public class VHistorialClinico extends javax.swing.JDialog {
                                 .addComponent(textoCitasAtrasadas, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(193, 193, 193)
                         .addComponent(etiquetaDesde)
                         .addGap(18, 18, 18)
                         .addComponent(varDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,13 +186,12 @@ public class VHistorialClinico extends javax.swing.JDialog {
                         .addGap(47, 47, 47)
                         .addComponent(btnBuscar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(etiquetaDesde)
                             .addComponent(varDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiquetaHasta)
-                            .addComponent(varHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(varHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(etiquetaResultados)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -245,7 +242,6 @@ public class VHistorialClinico extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        comboBoxTipo.setSelectedItem(0);
         varDesde.setText(null);
         varHasta.setText(null);
         textoTotalResultados.setText(null);
@@ -293,9 +289,7 @@ public class VHistorialClinico extends javax.swing.JDialog {
         Timestamp inicioTS = Timestamp.valueOf(minimo);
         Timestamp finTS = Timestamp.valueOf(Fin.toLocalDate().atStartOfDay().plusDays(1));
 
-        //Auxiliar
-        TipoCita tipocita = (TipoCita) comboBoxTipo.getSelectedItem();
-
+        TipoCita tipocita = new TipoCita("","","");
         m.setFilas(fa.consultarHistorialClinico(paciente, tipocita, inicioTS, finTS));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -306,7 +300,6 @@ public class VHistorialClinico extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> comboBoxTipo;
     private javax.swing.JLabel etiquetaCitasAtrasadas;
     private javax.swing.JLabel etiquetaCitasNoAsistidas;
     private javax.swing.JLabel etiquetaDesde;
