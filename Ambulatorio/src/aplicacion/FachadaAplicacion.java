@@ -319,13 +319,17 @@ public class FachadaAplicacion {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
-        return gcon.menorNumeroPacientes(ambulatorio, tipoCita);
+    public Consulta menorNumeroPacientes(Integer ambulatorio, String especialidad) {
+        return gcon.menorNumeroPacientes(ambulatorio, especialidad);
     }
 
     //Permite crear una nueva ventana de consultas
     public void nuevaVConsultas(Integer ambulatorio) {
-        gcon.nuevaVConsultas(ambulatorio);
+        java.util.List<Integer> restoConsultas = new java.util.ArrayList<>();
+        for (Consulta c : this.consultarConsultas(null, ambulatorio, null)) {
+            restoConsultas.add(c.getIdentificador());
+        }
+        gcon.nuevaVConsultas(ambulatorio, restoConsultas);
     }
     
 ////////////////////

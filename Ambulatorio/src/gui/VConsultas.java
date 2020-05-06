@@ -1,6 +1,7 @@
 package gui;
 
 import aplicacion.clases.Consulta;
+import aplicacion.clases.Especialidad;
 
 public class VConsultas extends javax.swing.JDialog {
 
@@ -8,15 +9,16 @@ public class VConsultas extends javax.swing.JDialog {
     private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
     private java.util.List<Consulta> consultas;              //Lista de consultas
     private Integer ambulatorio;                             //Ambulatorio actual
-
+    
     /**
      *
      * @param parent
      * @param modal
      * @param fa
      * @param ambulatorio
+     * @param restoConsultas
      */
-    public VConsultas(javax.swing.JFrame parent, boolean modal, aplicacion.FachadaAplicacion fa, Integer ambulatorio) {
+    public VConsultas(javax.swing.JFrame parent, boolean modal, aplicacion.FachadaAplicacion fa, Integer ambulatorio, java.util.List<Integer> restoConsultas) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
@@ -26,6 +28,8 @@ public class VConsultas extends javax.swing.JDialog {
         //obtiene la lista de consultas para mostrarlas por pantalla
         ModeloListaIntegers m = new ModeloListaIntegers();
         consultas = fa.consultarConsultas(null, ambulatorio, null);
+        lstConsultas.setModel(m);
+        m.setElementos(restoConsultas);
         if (m.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstConsultas.setSelectedIndex(0);
@@ -35,6 +39,12 @@ public class VConsultas extends javax.swing.JDialog {
             btnEliminarConsultas.setEnabled(true);
         } else {
             btnEliminarConsultas.setEnabled(false);
+        }
+        
+        //Introducimos especialidades
+        seleccionEspecialidades.removeAllItems();
+        for (Especialidad especialidad : fa.consultarEspecialidades()) {
+            seleccionEspecialidades.addItem(especialidad.getNombre());
         }
     }
 
@@ -256,8 +266,7 @@ public class VConsultas extends javax.swing.JDialog {
     private void lstConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstConsultasMouseClicked
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
-
-        /*SELECCIÓN DE LA ESPECIALIDAD*/
+        seleccionEspecialidades.setSelectedItem(fa.consultarConsultas(m.getElementAt(lstConsultas.getSelectedIndex()), ambulatorio, null).get(0).getEspecialidad());
     }//GEN-LAST:event_lstConsultasMouseClicked
 
     //botón de Regresar, vuelve a la ventana principal
@@ -280,7 +289,6 @@ public class VConsultas extends javax.swing.JDialog {
         //actualizamos la lista de consultas
         buscarConsultas();
         textoNumeroConsulta.setText(null);
-        seleccionEspecialidades.setSelectedItem(0);
     }//GEN-LAST:event_btnAnadirConsultasActionPerformed
 
     //botón de Eliminar, elimina una consulta
@@ -297,7 +305,6 @@ public class VConsultas extends javax.swing.JDialog {
 
         //actualizamos la lista de consultas
         textoNumeroConsulta.setText(null);
-        seleccionEspecialidades.setSelectedItem(0);
         buscarConsultas();
     }//GEN-LAST:event_btnEliminarConsultasActionPerformed
 
@@ -327,8 +334,12 @@ public class VConsultas extends javax.swing.JDialog {
     public void buscarConsultas() {
         ModeloListaIntegers m = new ModeloListaIntegers();
         lstConsultas.setModel(m);
+        Integer id = null;
         //buscamos las consultas existentes
-        consultas = fa.consultarConsultas(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
+        if(!textoNumeroConsulta.getText().equals("")) {
+            id = Integer.parseInt(textoNumeroConsulta.getText());
+        }
+        consultas = fa.consultarConsultas(id, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         java.util.ArrayList<Integer> numero = new java.util.ArrayList<>();
         for (int i = 0; i < consultas.size(); i++) {
             numero.add(consultas.get(i).getIdentificador());
@@ -342,5 +353,6 @@ public class VConsultas extends javax.swing.JDialog {
         } else {
             btnEliminarConsultas.setEnabled(false);
         }
+        textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()).toString());
     }
 }

@@ -1,7 +1,6 @@
 package baseDatos;
 
 import aplicacion.clases.Consulta;
-import aplicacion.clases.TipoCita;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -105,9 +104,9 @@ public class DAOConsultas extends AbstractDAO {
         Connection con;
         PreparedStatement stmConsultas = null;
         ResultSet rsConsultas;//Variable para buscar por codigo
-        String id = identificador == null ? "" : "and identificador = ?";
-        String esp = especialidad == null ? "" : "and especialidad = ?";
-
+        String esp = especialidad == null ? "" : "and especialidad = ? ";
+        String id = identificador == null ? "" : "and identificador = ? ";
+        
         //Establecemos conexión
         con = this.getConexion();
 
@@ -120,20 +119,22 @@ public class DAOConsultas extends AbstractDAO {
                     + "from consulta "
                     + "where ambulatorio = ? "
                     + esp
-                    + id;
+                    + id
+                    + "order by identificador ASC";
 
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
             stmConsultas.setInt(1, ambulatorio); //Ambulatorio
-            if (especialidad != null) {
+            if (especialidad != null && identificador != null) {
                 stmConsultas.setString(2, especialidad); //Especialidad
-            } else if (especialidad != null && identificador != null) {
+                stmConsultas.setInt(3, identificador); //Identificador
+            } else if (especialidad != null) {
                 stmConsultas.setString(2, especialidad); //Especialidad
-                stmConsultas.setInt(2, identificador); //Identificador
             } else if (identificador != null) {
                 stmConsultas.setInt(2, identificador); //Identificador
             }
+            
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias
@@ -187,7 +188,7 @@ public class DAOConsultas extends AbstractDAO {
             //Sustituimos
             stmAmbulatorios.setInt(1, ambulatorio);
             if (especialidad != null) {
-                stmAmbulatorios.setString(2, "%" + especialidad + "%");
+                stmAmbulatorios.setString(2, especialidad);
             }
 
             //Ejecutamos
@@ -214,7 +215,7 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
+    public Consulta menorNumeroPacientes(Integer ambulatorio, String especialidad) {
         //Declaramos variables
         Consulta menorNumero = new Consulta();
         Connection con;
@@ -237,25 +238,34 @@ public class DAOConsultas extends AbstractDAO {
             //Construimos la consulta
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
-            String consulta = "select c1.* "
-                    + "from consulta as c1, cita as ci"
-                    + "where c1.ambulatorio = ? "
-                    + "and ci.ambulatorio = c1.ambulatorio "
-                    + "and c1.especialidad = ? "
-                    + "having count(*) <= any(select count(*) from consulta as c2"
-                    + "where c2.ambulatorio = c1.ambulatorio "
-                    + "and c2.especialidad = c1.especialidad ";
+            String consulta
+                    = "select co.* "
+                    + "from consulta as co, cita as ci "
+                    + "where co.especialidad = ? "
+                    + "and co.ambulatorio = ? "
+                    + "and co.identificador = ci.consulta "
+                    + "and co.ambulatorio = ci.ambulatorio "
+                    + "group by co.ambulatorio, co.identificador "
+                    + "having count(*) <= all (select count(*) "
+                    + "				from consulta as co2, cita as ci2 "
+                    + "				where co2.especialidad = co.especialidad "
+                    + "				and co2.ambulatorio = co.ambulatorio "
+                    + "				and co2.identificador = ci2.consulta "
+                    + "				and co2.ambulatorio = ci2.ambulatorio "
+                    + "				group by co2.ambulatorio, co2.identificador)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
-            stmConsultas.setInt(1, ambulatorio); //Ambulatorio
-            stmConsultas.setString(2, tipoCita.getEspecialidad()); //Especialidad
+            stmConsultas.setString(1, especialidad); //Especialidad
+            stmConsultas.setInt(2, ambulatorio);     //Ambulatorio
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
             //Mientras haya coincidencias
             while (rsConsultas.next()) {
                 //Se crea una instancia de consulta con los datos de la consulta con el menor número de pacientes de la base de datos
-                menorNumero = new Consulta(rsConsultas.getInt("identificador"), rsConsultas.getInt("ambulatorio"), rsConsultas.getString("especialidad"));
+                menorNumero = new Consulta(rsConsultas.getInt("identificador"),
+                        rsConsultas.getInt("ambulatorio"),
+                        rsConsultas.getString("especialidad"));
             }
 
             //En caso de error se captura la excepción

@@ -41,12 +41,12 @@ public class GestionConsultas {
     }
 
     //Permite obtener la consulta con menos citas pendientes
-    public Consulta menorNumeroPacientes(Integer ambulatorio, TipoCita tipoCita) {
-        return fbd.menorNumeroPacientes(ambulatorio, tipoCita);
+    public Consulta menorNumeroPacientes(Integer ambulatorio, String especialidad) {
+        return fbd.menorNumeroPacientes(ambulatorio, especialidad);
     }
 
     //Permite crear una nueva ventana de consultas
-    public void nuevaVConsultas(Integer ambulatorio) {
-        fgui.nuevaVConsultas(ambulatorio);
+    public void nuevaVConsultas(Integer ambulatorio, java.util.List<Integer> restoConsultas) {
+        fgui.nuevaVConsultas(ambulatorio, restoConsultas);
     }
 }
