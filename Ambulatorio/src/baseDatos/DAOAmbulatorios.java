@@ -206,7 +206,8 @@ public class DAOAmbulatorios extends AbstractDAO {
             stmAmbulatorios = con.prepareStatement(consulta);
             //Sustituimos
             stmAmbulatorios.setString(1, "%" + nombre + "%");
-            stmAmbulatorios.setString(2, "%" + provincia + "%");
+            String provinciaAux = provincia == null ? "" : provincia;
+            stmAmbulatorios.setString(2, "%" + provinciaAux + "%");
             if (codigo != null) {
                 stmAmbulatorios.setInt(3, codigo);
             }
