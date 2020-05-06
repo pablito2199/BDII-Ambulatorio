@@ -51,6 +51,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaID.setText("ID:");
 
         textoID.setText("00000000A");
+        textoID.setToolTipText("Nombre de usuario");
 
         etiquetaConstrasena.setText("Contraseña:");
 
@@ -72,6 +73,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaFallo.setText("Usuario o Contraseña incorrecto/a");
 
         textoContrasena.setText("a");
+        textoContrasena.setToolTipText("Contraseña");
 
         labelGestionarPacientes.setForeground(new java.awt.Color(0, 0, 255));
         labelGestionarPacientes.setText("AUTENTIFICACIÓN");

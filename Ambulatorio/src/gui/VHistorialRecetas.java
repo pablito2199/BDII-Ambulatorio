@@ -54,9 +54,9 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         varNumeroDeReceta = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHistorialRecetas = new javax.swing.JTable();
-        etiquetaHistorialDeRecetas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Historial médico");
         setResizable(false);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -200,9 +200,6 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        etiquetaHistorialDeRecetas.setForeground(new java.awt.Color(0, 0, 255));
-        etiquetaHistorialDeRecetas.setText("HISTORIAL  DE RECETAS");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,20 +208,17 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(etiquetaHistorialDeRecetas)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(etiquetaHistorialDeRecetas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -292,7 +286,6 @@ public class VHistorialRecetas extends javax.swing.JDialog {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel etiquetaDesde;
     private javax.swing.JLabel etiquetaHasta;
-    private javax.swing.JLabel etiquetaHistorialDeRecetas;
     private javax.swing.JLabel etiquetaMedicamento;
     private javax.swing.JLabel etiquetaNumeroDeReceta;
     private javax.swing.JLabel etiquetaResultados;

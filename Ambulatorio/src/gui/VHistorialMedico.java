@@ -1,12 +1,14 @@
 package gui;
 
+import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.Cita;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.TipoCita;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class VHistorialClinico extends javax.swing.JDialog {
+public class VHistorialMedico extends javax.swing.JDialog {
 
     private final VPacientes padre;                     //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
@@ -21,12 +23,21 @@ public class VHistorialClinico extends javax.swing.JDialog {
      * @param paciente
      */
     //Constructor de la ventana
-    public VHistorialClinico(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, Paciente paciente) {
+    public VHistorialMedico(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, Paciente paciente) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
         padre = (VPacientes) parent;
         this.paciente = paciente;
+        
+        //Introducimos tipos de cita
+        comboTipo.removeAllItems();
+        for (TipoCita tipo : fa.obtenerTiposDeCita(null)) {
+
+            if (!tipo.getNombre().equals("Urgencia") || !tipo.getEspecialidad().equals("General")) {
+                comboTipo.addItem(tipo.getNombre() + "-" + tipo.getEspecialidad());
+            }
+        }
     }
 
     /**
@@ -38,6 +49,7 @@ public class VHistorialClinico extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        comboTipo1 = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
@@ -54,9 +66,10 @@ public class VHistorialClinico extends javax.swing.JDialog {
         textoCitasAtrasadas = new javax.swing.JTextField();
         etiquetaCitasAtrasadas = new javax.swing.JLabel();
         etiquetaTotalResultados1 = new javax.swing.JLabel();
+        comboTipo = new javax.swing.JComboBox<>();
+        comboTipo2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHistorialMedico = new javax.swing.JTable();
-        etiquetaHistorialMedico = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -84,7 +97,7 @@ public class VHistorialClinico extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnLimpiar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 508, Short.MAX_VALUE)
                 .addComponent(btnRegresar)
                 .addContainerGap())
         );
@@ -134,7 +147,7 @@ public class VHistorialClinico extends javax.swing.JDialog {
 
         etiquetaTotalResultados1.setText("Total resultados:");
 
-        tablaHistorialMedico.setModel(new gui.ModeloTablaHistorialClinico());
+        tablaHistorialMedico.setModel(new gui.ModeloTablaHistorialMedico());
         tablaHistorialMedico.setAutoscrolls(false);
         tablaHistorialMedico.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaHistorialMedico);
@@ -143,11 +156,11 @@ public class VHistorialClinico extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(etiquetaTotalResultados1)
                             .addComponent(etiquetaResultados))
@@ -167,16 +180,23 @@ public class VHistorialClinico extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(textoCitasAtrasadas, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(etiquetaDesde)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
+                        .addComponent(etiquetaDesde)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(varDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
                         .addComponent(etiquetaHasta)
                         .addGap(18, 18, 18)
                         .addComponent(varHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(246, 246, 246)
+                    .addComponent(comboTipo2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(247, 247, 247)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,17 +206,18 @@ public class VHistorialClinico extends javax.swing.JDialog {
                         .addGap(47, 47, 47)
                         .addComponent(btnBuscar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(etiquetaDesde)
                             .addComponent(varDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiquetaHasta)
-                            .addComponent(varHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(varHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(etiquetaResultados)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoTotalResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(etiquetaCitasNoAsistidas)
@@ -205,9 +226,12 @@ public class VHistorialClinico extends javax.swing.JDialog {
                     .addComponent(textoCitasAtrasadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(etiquetaTotalResultados1))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(187, 187, 187)
+                    .addComponent(comboTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(187, Short.MAX_VALUE)))
         );
-
-        etiquetaHistorialMedico.setText("HISTORIAL MÉDICO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,22 +239,19 @@ public class VHistorialClinico extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(etiquetaHistorialMedico)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(etiquetaHistorialMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -251,8 +272,8 @@ public class VHistorialClinico extends javax.swing.JDialog {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         //Creamos el modelo de tabla préstamos
-        ModeloTablaHistorialClinico m;
-        m = (ModeloTablaHistorialClinico) tablaHistorialMedico.getModel();
+        ModeloTablaHistorialMedico m;
+        m = (ModeloTablaHistorialMedico) tablaHistorialMedico.getModel();
         java.sql.Date Inicio = null;
         java.sql.Date Fin = null;
         //Fecha de fin de la receta
@@ -284,13 +305,26 @@ public class VHistorialClinico extends javax.swing.JDialog {
         if (minimo.compareTo(inicioLDT) < 0) {
             minimo = inicioLDT;
         }
-        //Recogemos la fecha en un Timestamp
-        //Fecha de fin sera a las 00:00 del dia siguiente al especificado
-        Timestamp inicioTS = Timestamp.valueOf(minimo);
-        Timestamp finTS = Timestamp.valueOf(Fin.toLocalDate().atStartOfDay().plusDays(1));
 
-        TipoCita tipocita = new TipoCita("","","");
-        m.setFilas(fa.consultarHistorialClinico(paciente, tipocita, inicioTS, finTS));
+        //No se ha seleccionado fila
+        int index = tablaHistorialMedico.getSelectedRow();
+        if (index >= 0) {
+            //Obtenemos modelo
+            ModeloTablaHistorialMedico th = ((ModeloTablaHistorialMedico) tablaHistorialMedico.getModel());
+            //Recogemos la fecha en un Timestamp
+            //Fecha de fin sera a las 00:00 del dia siguiente al especificado
+            Timestamp inicioTS = Timestamp.valueOf(minimo);
+            Timestamp finTS = Timestamp.valueOf(Fin.toLocalDate().atStartOfDay().plusDays(1));
+            //Auxiliar
+            TipoCita tipocita = (TipoCita) comboTipo.getSelectedItem();
+            m.setFilas(fa.consultarHistorialClinico(paciente, tipocita, inicioTS, finTS));
+            //Salimos
+            this.dispose();
+
+        } else {
+            fa.muestraExcepcion("¡No se ha seleccionado una hora!");
+        }
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -300,11 +334,13 @@ public class VHistorialClinico extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> comboTipo;
+    private javax.swing.JComboBox<String> comboTipo1;
+    private javax.swing.JComboBox<String> comboTipo2;
     private javax.swing.JLabel etiquetaCitasAtrasadas;
     private javax.swing.JLabel etiquetaCitasNoAsistidas;
     private javax.swing.JLabel etiquetaDesde;
     private javax.swing.JLabel etiquetaHasta;
-    private javax.swing.JLabel etiquetaHistorialMedico;
     private javax.swing.JLabel etiquetaResultados;
     private javax.swing.JLabel etiquetaTotalResultados1;
     private javax.swing.JPanel jPanel2;
