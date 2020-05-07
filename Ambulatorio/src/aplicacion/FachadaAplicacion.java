@@ -68,6 +68,11 @@ public class FachadaAplicacion {
         return gper.obtenerEspecialidades(dni, ambulatorio);
     }
 
+    //Permite buscar personal sanitario por su dni y nombre
+    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre) {
+        return gper.consultarPersonal(dni, nombre);
+    }
+
     //Permite abrir una nueva ventana de usuarios para autentificarse
     public void iniciaInterfazUsuario() {
         fgui.iniciaVista();

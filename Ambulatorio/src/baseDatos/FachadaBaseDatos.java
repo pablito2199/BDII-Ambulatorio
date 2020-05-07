@@ -305,6 +305,11 @@ public class FachadaBaseDatos {
         return daoPersonal.obtenerEspecialidades(dni, ambulatorio);
     }
 
+    //Permite buscar personal sanitario por su dni y nombre
+    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre) {
+        return daoPersonal.consultarPersonal(dni, nombre);
+    }
+
 ////////////////////
 //DAOHOSPITALES
 ////////////////////

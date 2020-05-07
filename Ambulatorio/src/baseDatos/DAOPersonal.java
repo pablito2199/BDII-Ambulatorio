@@ -1,6 +1,7 @@
 package baseDatos;
 
 import aplicacion.clases.PersonalAdministrador;
+import aplicacion.clases.PersonalSanitario;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -110,6 +111,69 @@ public class DAOPersonal extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        return resultado;
+    }
+
+    //Permite buscar personal sanitario por su dni y nombre
+    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre) {
+        //Declaramos variables
+        java.util.List<PersonalSanitario> resultado = new java.util.ArrayList<PersonalSanitario>();
+        PersonalSanitario personalActual;
+        Connection con;
+        PreparedStatement stmPersonal = null;
+        ResultSet rsPersonal;
+
+        //Establecemos conexión
+        con = this.getConexion();
+
+        //Intentamos la consulta SQL
+        try {
+            //Construimos la consulta
+            //Selecionamos el la descripción
+            //que tengan el nombre dado
+            String consulta = "select ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo, "
+                    + "CAST ( EXTRACT(YEAR FROM age(current_date, TO_DATE(fechaIncorporacion, 'YYYY'))) as varchar(4)) as antiguedad "
+                    + "from personalSanitario "
+                    + "where nombre like ? "
+                    +       "and dni like ? "
+                    + "order by nombre ASC";
+
+            //Preparamos la consulta
+            stmPersonal = con.prepareStatement(consulta);
+            //Sustituimos
+            stmPersonal.setString(1, "%" + nombre + "%"); //Nombre
+            stmPersonal.setString(2, "%" + dni + "%"); //Nombre
+            //Ejecutamos
+            rsPersonal = stmPersonal.executeQuery();
+            //Mientras haya coincidencias
+            while (rsPersonal.next()) {
+                //Se crea una instancia de enfermedad con los datos recuperados de la base de datos
+                personalActual = new PersonalSanitario(
+                        rsPersonal.getInt("ambulatorio"), 
+                        rsPersonal.getString("dni"), 
+                        rsPersonal.getString("nombre"),
+                        rsPersonal.getDate("fechaIncorporacion"),
+                        rsPersonal.getString("telefono"),
+                        rsPersonal.getFloat("sueldo"));
+                //Y se añade la instancia a la lista de enfermedades
+                resultado.add(personalActual);
+            }
+
+            //En caso de error se captura la excepción
+        } catch (SQLException e) {
+            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            //Finalmente se intentan cerrar cursores
+            try {
+                stmPersonal.close();
+            } catch (SQLException e) {
+                //Si no se puede se imprime el error
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        //Se devuelve el resultado (lista de pacientes)
         return resultado;
     }
 }

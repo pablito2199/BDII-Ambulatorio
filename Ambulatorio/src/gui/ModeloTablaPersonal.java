@@ -1,13 +1,11 @@
 package gui;
 
-import aplicacion.clases.Personal;
 import aplicacion.clases.PersonalSanitario;
-import aplicacion.clases.PersonalNoSanitario;
 import javax.swing.table.*;
 
 public class ModeloTablaPersonal extends AbstractTableModel {
 
-    private java.util.List<Personal> personal;   //Listado del personal de la tabla
+    private java.util.List<PersonalSanitario> personal;   //Listado del personal de la tabla
 
     //Constructor
     public ModeloTablaPersonal() {
@@ -98,9 +96,6 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     public Object getValueAt(int row, int col) {
         Object resultado = null;
 
-        String tipo = personal.get(row) instanceof PersonalSanitario ? "Sanitario" : "No sanitario";
-        String clase = personal.get(row) instanceof PersonalSanitario ? "sanitario" : ((PersonalNoSanitario) personal.get(row)).getClase();
-
         switch (col) {
             //Permite recuperar el ID del usuario
             case 0:
@@ -112,11 +107,11 @@ public class ModeloTablaPersonal extends AbstractTableModel {
                 break;
             //Permite recuperar el tipo
             case 2:
-                resultado = tipo;
+                resultado = "Sanitario";
                 break;
             //Permite recuperar la clase del trabajador
             case 3:
-                resultado = clase;
+                resultado = "Sanitario";
                 break;
             //Permite recuperar el telefono
             case 4:
@@ -128,14 +123,14 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     }
 
     //Permite sobreescribir las filas de la tabla
-    public void setFilas(java.util.List<Personal> personal) {
+    public void setFilas(java.util.List<PersonalSanitario> personal) {
         this.personal = personal;
         //Notifica a los listeners del cambio
         fireTableDataChanged();
     }
 
     //Permite recuperar un usuario determinado
-    public Personal obtenerPersonal(int i) {
+    public PersonalSanitario obtenerPersonal(int i) {
         return this.personal.get(i);
     }
 

@@ -60,9 +60,9 @@ public class VPersonal extends javax.swing.JDialog {
         etiquetaSueldo = new javax.swing.JLabel();
         textoSueldo = new javax.swing.JTextField();
         etiquetaContrasena = new javax.swing.JLabel();
-        textoContrasena = new javax.swing.JTextField();
         btnAdmin = new javax.swing.JToggleButton();
         btnSanitario = new javax.swing.JToggleButton();
+        textoContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Personal");
@@ -94,6 +94,7 @@ public class VPersonal extends javax.swing.JDialog {
         btnEspecialidades.setEnabled(false);
 
         btnCitas.setText("Citas");
+        btnCitas.setEnabled(false);
         btnCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCitasActionPerformed(evt);
@@ -205,13 +206,12 @@ public class VPersonal extends javax.swing.JDialog {
 
         etiquetaContrasena.setText("Contraseña:");
 
-        textoContrasena.setToolTipText("Nombre de usuario");
-
         btnAdmin.setText("Admin");
         btnAdmin.setEnabled(false);
 
         btnSanitario.setText("Sanitario");
-        btnSanitario.setEnabled(false);
+
+        textoContrasena.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -294,8 +294,8 @@ public class VPersonal extends javax.swing.JDialog {
                     .addComponent(etiquetaClase)
                     .addComponent(textoClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(etiquetaContrasena)
-                    .addComponent(textoContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                    .addComponent(btnBuscar)
+                    .addComponent(textoContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -336,6 +336,10 @@ public class VPersonal extends javax.swing.JDialog {
 
     //Botón Limpiar, pone todos los campos de texto en blanco
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        //Creamos el modelo de tabla personal
+        ModeloTablaPersonal m = (ModeloTablaPersonal) tablaPersonal.getModel();
+        //Metemos un array vacío como las filas
+        m.setFilas(new java.util.ArrayList<>());
         textoAntiguedad.setText(null);
         textoClase.setText(null);
         textoContrasena.setText(null);
@@ -351,7 +355,7 @@ public class VPersonal extends javax.swing.JDialog {
 
     //Botón Buscar, busca el personal del ambulatorio
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        buscarPersonal();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     //Función que permite recoger los datos de un trabajador con un click en la tabla de personal
@@ -374,7 +378,7 @@ public class VPersonal extends javax.swing.JDialog {
 
     //Botón Citas, abre la ventana de citas del médico
     private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnCitasActionPerformed
 
     /**
@@ -405,11 +409,36 @@ public class VPersonal extends javax.swing.JDialog {
     private javax.swing.JTable tablaPersonal;
     private javax.swing.JTextField textoAntiguedad;
     private javax.swing.JTextField textoClase;
-    private javax.swing.JTextField textoContrasena;
+    private javax.swing.JPasswordField textoContrasena;
     private javax.swing.JTextField textoDNI;
     private javax.swing.JTextField textoFechaIncorporacion;
     private javax.swing.JTextField textoNombre;
     private javax.swing.JTextField textoSueldo;
     private javax.swing.JTextField textoTelefono;
     // End of variables declaration//GEN-END:variables
+    
+    //Función que permite buscar un trabajador en la base de datos
+    public void buscarPersonal() {
+        //Creamos el modelo de tabla personal
+        ModeloTablaPersonal  m = (ModeloTablaPersonal) tablaPersonal.getModel();
+        m.setFilas(fa.consultarPersonal(textoDNI.getText(), textoNombre.getText()));
+        //Si hay coincidencias
+        if (m.getRowCount() > 0) {
+            //Seleccionamos la primera
+            tablaPersonal.setRowSelectionInterval(0, 0);
+            //Obtenemos todos los datos del trabajador (fila) en el que se hizo click y los metemos en los campos
+            textoDNI.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getDNI());
+            textoNombre.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getNombre());
+            textoAntiguedad.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getDNI());
+            textoClase.setText(tablaPersonal.getValueAt(tablaPersonal.getSelectedRow(), 3).toString());
+            textoFechaIncorporacion.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getFechaIncorporacion().toString());
+            textoTelefono.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getTelefono());
+            textoSueldo.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getSueldo().toString());
+            //Habilitamos el botón de citas
+            btnCitas.setEnabled(true);
+        } else {
+            //De no haberlas, deshabilitamos el botón de citas
+            btnCitas.setEnabled(false);
+        }
+    }
 }

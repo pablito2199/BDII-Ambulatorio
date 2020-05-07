@@ -1,5 +1,7 @@
 package aplicacion;
 
+import aplicacion.clases.Personal;
+import aplicacion.clases.PersonalSanitario;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 import java.util.ArrayList;
@@ -29,6 +31,11 @@ public class GestionPersonal {
     //Permite recuperar la especialidad de un personal sanitario
     public ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
         return fbd.obtenerEspecialidades(dni, ambulatorio);
+    }
+
+    //Permite buscar personal sanitario por su dni y nombre
+    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre) {
+        return fbd.consultarPersonal(dni, nombre);
     }
 
     //Permite generar una ventana para visualizar información de un trabajador
