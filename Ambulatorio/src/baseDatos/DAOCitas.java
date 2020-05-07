@@ -558,7 +558,6 @@ public class DAOCitas extends AbstractDAO {
             finTS = Timestamp.valueOf(fin.toLocalDate().plusDays(1).atStartOfDay());
         }
         //Consulta
-
         String lineaConsulta = consulta == null ? "" : "and ci.consulta = ? ";
 
         //Intentamos la consulta SQL
@@ -631,7 +630,7 @@ public class DAOCitas extends AbstractDAO {
     }
 
     //Permite consultar la lista de citas pendientes de atender de un paciente
-    public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
+    public ArrayList<Cita> citasMedico(PersonalSanitario medico, String ambulatorio, Date inicio, Date fin) {
 
         //Declaramos variables
         Connection con;
@@ -642,32 +641,52 @@ public class DAOCitas extends AbstractDAO {
         //Establecemos conexión
         con = super.getConexion();
 
+        //Ajustamos las lineas de la consulta para ajustarnos a los argumentos
+        String lineaHoras = "";
+        Timestamp inicioTS = null;
+        Timestamp finTS = null;
+        //Horas
+        if (inicio != null && fin != null) {
+            lineaHoras = "and ci.fechaHoraInicio > ? and ci.fechaHoraInicio < ? ";
+
+            //Establecemos timestamps
+            inicioTS = Timestamp.valueOf(inicio.toLocalDate().atStartOfDay());
+            finTS = Timestamp.valueOf(fin.toLocalDate().plusDays(1).atStartOfDay());
+        }
+
         //Intentamos la consulta SQL
         try {
             //Preparamos la sentencia para obtener las citas pendientes de
             //todas las consultas donde trabaja un medico
             stmCitas = con.prepareStatement(
                     "select ci.* "
-                    + "from cita as ci, consulta as co, pertenecer as p "
-                    + "where ci.fechaHoraFin is null "
-                    + "and ci.consulta = co.identificador "
-                    + "and ci.ambulatorio = co.ambulatorio "
-                    + "and p.ambulatorioPersonal = ? "
-                    + "and p.ambulatorioPersonal = co.ambulatorio "
-                    + "and p.personal = ? "
-                    + "and p.consulta = co.identificador "
-                    + "and co.especialidad in "
-                    + "(select ep.especialidad "
-                    + "from especializacionpersonal as ep "
-                    + "where ep.personal = p.personal "
-                    + "and ep.ambulatorio = p.ambulatorioPersonal) "
+                    + "from cita as ci, ambulatorio as am, personalsanitario as pe, consulta as co "
+                    + "where fechaHoraFin is null "
+                    + "and am.codigoAmbulatorio = co.ambulatorio "
+                    + "and am.codigoAmbulatorio = pe.ambulatorio "
+                    + "and co.identificador = ci.consulta "
+                    + "and co.ambulatorio = ci.ambulatorio "
+                    + "and co.especialidad in (select ep.especialidad "
+                    + "						from especializacionpersonal as ep "
+                    + "						where ep.personal = pe.dni "
+                    + "					  	and not ep.especialidad = 'General') "
+                    + "and am.nombre like ? "
+                    + "and pe.dni = ? "
+                    + lineaHoras
                     + "order by ci.fechaHoraInicio asc"
             );
 
-            //Sustituimos
-            stmCitas.setInt(1, medico.getAmbulatorio());
-            stmCitas.setString(2, medico.getDNI());
+            //Obtenemos string del ambulatorio
+            String ambulatorioBusq = ambulatorio == null ? "%%" : "%" + ambulatorio + "%";
 
+            //Sustituimos
+            stmCitas.setString(1, ambulatorioBusq);
+            stmCitas.setString(2, medico.getDNI());
+            //Comprobamos si se consultan horas
+            if (!lineaHoras.isEmpty()) {
+                stmCitas.setTimestamp(3, inicioTS);
+                stmCitas.setTimestamp(4, finTS);
+            }
             //Obtenemos resultado
             rsCitas = stmCitas.executeQuery();
 

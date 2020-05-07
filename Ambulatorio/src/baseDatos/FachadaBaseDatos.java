@@ -138,8 +138,8 @@ public class FachadaBaseDatos {
     }
 
     //Consulta las citas pendientes de un medico
-    public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
-        return daoCitas.citasMedico(medico);
+    public ArrayList<Cita> citasMedico(PersonalSanitario medico, String ambulatorio, Date inicio, Date fin) {
+        return daoCitas.citasMedico(medico, ambulatorio, inicio, fin);
     }
 
     //Consulta la lista tipos de cita buscando por especialidad

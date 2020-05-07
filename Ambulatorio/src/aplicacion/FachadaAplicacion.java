@@ -145,8 +145,8 @@ public class FachadaAplicacion {
     }
 
     //Lista de citas pendientes de todas las consultas donde el medico trabaja
-    public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
-        return gcit.citasMedico(medico);
+    public ArrayList<Cita> citasMedico(PersonalSanitario medico, String ambulatorio, Date inicio, Date fin) {
+        return gcit.citasMedico(medico, ambulatorio, inicio, fin);
     }
 
     //Consulta la lista tipos de cita buscando por especialidad

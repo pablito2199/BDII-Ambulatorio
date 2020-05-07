@@ -90,7 +90,7 @@ public class ModeloTablaCitas extends AbstractTableModel {
         switch (col) {
             //Permite recuperar la fecha y hora de inicio
             case 0:
-                resultado = citas.get(row).getFechaHoraInicio().toLocalDateTime().toString();
+                resultado = citas.get(row).getFechaHoraInicio().toString();
                 break;
             //Permite recuperar el ambulatorio
             case 1:
@@ -102,7 +102,7 @@ public class ModeloTablaCitas extends AbstractTableModel {
                 break;
             //Permite recuperar el tipo
             case 3:
-                resultado = citas.get(row).getTipo();
+                resultado = citas.get(row).getTipo() + "-" + citas.get(row).getEspecialidad();
         }
         //Devolvemos el valor recuperado
         return resultado;

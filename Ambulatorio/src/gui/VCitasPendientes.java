@@ -324,7 +324,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
             if (padre instanceof VPacientes) {
                 tc.setFilas(fa.citasPaciente(pa, txtAmbulatorio.getText(), consulta, inicio, fin));
             } else {
-                tc.setFilas(fa.citasMedico(ps, txtAmbulatorio.getText(), consulta, inicio, fin));
+                tc.setFilas(fa.citasMedico(ps, txtAmbulatorio.getText(), inicio, fin));
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

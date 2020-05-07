@@ -70,8 +70,8 @@ public class GestionCitas {
     }
 
     //Consulta las citas pendientes de atender de un médico
-    public ArrayList<Cita> citasMedico(PersonalSanitario medico) {
-        return fbd.citasMedico(medico);
+    public ArrayList<Cita> citasMedico(PersonalSanitario medico, String ambulatorio, Date inicio, Date fin) {
+        return fbd.citasMedico(medico, ambulatorio, inicio, fin);
     }
 
     //Consulta la lista tipos de cita buscando por especialidad
