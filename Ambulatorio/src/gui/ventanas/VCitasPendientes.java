@@ -2,7 +2,6 @@ package gui.ventanas;
 
 import gui.Modelos.ModeloTablaCitas;
 import aplicacion.FachadaAplicacion;
-import aplicacion.clases.Cita;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
 import java.sql.Date;

@@ -1,9 +1,9 @@
 package aplicacion;
 
 import aplicacion.clases.*;
-import gui.VCitasPendientes;
-import gui.VPacientes;
-import gui.VPersonal;
+import gui.ventanas.VCitasPendientes;
+import gui.ventanas.VPacientes;
+import gui.ventanas.VPersonal;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
