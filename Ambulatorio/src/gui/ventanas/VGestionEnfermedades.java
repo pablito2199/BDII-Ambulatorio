@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloListaStrings;
+import gui.modelos.ModeloListaStrings;
 
 public class VGestionEnfermedades extends javax.swing.JDialog {
 

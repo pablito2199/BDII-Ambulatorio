@@ -1,7 +1,7 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaPersonal;
-import gui.Modelos.ModeloTablaPacientes;
+import gui.modelos.ModeloTablaPersonal;
+import gui.modelos.ModeloTablaPacientes;
 import aplicacion.clases.PersonalSanitario;
 
 public class VPersonal extends javax.swing.JDialog {

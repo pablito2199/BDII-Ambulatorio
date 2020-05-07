@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaCitas;
+import gui.modelos.ModeloTablaCitas;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
@@ -363,10 +363,6 @@ public class VCitasPendientes extends javax.swing.JDialog {
                 //Quitamos cita y mostramos feedback
                 tc.quitarCita(index);
                 fa.muestraMensaje("Cita finalizada correctamente.");
-            } else {
-            
-                //Mostramos fallo
-                fa.muestraExcepcion("Error al terminar la cita.");
             }
         }
     }//GEN-LAST:event_btnTerminarCitaActionPerformed

@@ -1,15 +1,15 @@
-package gui.Modelos;
+package gui.modelos;
 
-import aplicacion.clases.Urgencia;
+import aplicacion.clases.Cita;
 import javax.swing.table.*;
 
-public class ModeloTablaUrgencias extends AbstractTableModel {
+public class ModeloTablaCitas extends AbstractTableModel {
 
-    private java.util.List<Urgencia> urgencias;   //Listado de usuarios de la tabla
+    private java.util.List<Cita> citas;   //Listado de usuarios de la tabla
 
     //Constructor
-    public ModeloTablaUrgencias() {
-        this.urgencias = new java.util.ArrayList<Urgencia>();
+    public ModeloTablaCitas() {
+        this.citas = new java.util.ArrayList<>();
     }
 
     //Permite recuperar el número de columnas
@@ -21,7 +21,7 @@ public class ModeloTablaUrgencias extends AbstractTableModel {
     //Permite recuperar el número de filas
     @Override
     public int getRowCount() {
-        return urgencias.size();
+        return citas.size();
     }
 
     //Permite recuperar el nombre de las columnas
@@ -29,21 +29,21 @@ public class ModeloTablaUrgencias extends AbstractTableModel {
     public String getColumnName(int col) {
         String nombre = "";
         switch (col) {
-            //Prioridad general
+            //Timestamp de la cita
             case 0:
-                nombre = "Prioridad";
+                nombre = "Fecha y Hora";
                 break;
-            //Nombre del paciente
+            //Ambulatorio de la cita
             case 1:
-                nombre = "Nombre";
+                nombre = "Ambulatorio";
                 break;
-            //Gravedad del paciente
+            //Consulta de la cita
             case 2:
-                nombre = "Gravedad";
+                nombre = "Consulta";
                 break;
-            //Soborno aplicado
+            //Tipo de la cita
             case 3:
-                nombre = "Soborno";
+                nombre = "Tipo";
                 break;
         }
         //Devolvemos el nombre de la columna
@@ -55,21 +55,21 @@ public class ModeloTablaUrgencias extends AbstractTableModel {
     public Class getColumnClass(int col) {
         Class clase = null;
         switch (col) {
-            //Prioridad es un Integer
+            //Fecha y Hora lo mostramos como un String
             case 0:
-                clase = java.lang.Integer.class;
-                break;
-            //Nombre es un String
-            case 1:
                 clase = java.lang.String.class;
                 break;
-            //Gravedad es un Integer
+            //Ambulatorio es un Integer
+            case 1:
+                clase = java.lang.Integer.class;
+                break;
+            //Consulta es un Integer
             case 2:
                 clase = java.lang.Integer.class;
                 break;
-            //Soborno es un Float
+            //Tipo es un string
             case 3:
-                clase = java.lang.Float.class;
+                clase = java.lang.String.class;
                 break;
         }
         //Devolvemos el tipo especificado
@@ -88,44 +88,48 @@ public class ModeloTablaUrgencias extends AbstractTableModel {
     public Object getValueAt(int row, int col) {
         Object resultado = null;
         switch (col) {
-            //Permite recuperar la prioridad
+            //Permite recuperar la fecha y hora de inicio
             case 0:
-                resultado = urgencias.get(row).getPrioridad();
+                resultado = citas.get(row).getFechaHoraInicio().toString();
                 break;
-            //Permite recuperar el nombre
+            //Permite recuperar el ambulatorio
             case 1:
-                resultado = urgencias.get(row).getNombre();
+                resultado = citas.get(row).getAmbulatorio();
                 break;
-            //Permite recuperar la gravedad
+            //Permite recuperar la consulta
             case 2:
-                resultado = urgencias.get(row).getGravedad();
+                resultado = citas.get(row).getConsulta();
                 break;
-            //Permite recuperar el soborno
+            //Permite recuperar el tipo
             case 3:
-                resultado = urgencias.get(row).getSoborno();
+                resultado = citas.get(row).getTipo() + "-" + citas.get(row).getEspecialidad();
         }
         //Devolvemos el valor recuperado
         return resultado;
     }
 
     //Permite sobreescribir las filas de la tabla
-    public void setFilas(java.util.List<Urgencia> urgencias) {
-        this.urgencias = urgencias;
+    public void setFilas(java.util.List<Cita> citas) {
+        this.citas = citas;
         //Notifica a los listeners del cambio
         fireTableDataChanged();
     }
 
-    //Permite recuperar la primera urgencia
-    public Urgencia obtenerUrgencia() {
+    //Permite recuperar la cita
+    public Cita obtenerCita(int i) {
 
-        //Obtenemos urgencia
-        Urgencia u = this.urgencias.get(0);
+        //Obtenemos cita
+        Cita c = this.citas.get(i);
 
-        //Eliminamos urgencia y actualizamos
-        this.urgencias.remove(u);
-        fireTableDataChanged();
-
-        return u;
+        return c;
     }
 
+    //Permite recuperar la cita
+    public void quitarCita(int i) {
+
+        //Eliminamos cita
+        this.citas.remove(i);
+        //Notifica a los listeners del cambio
+        fireTableDataChanged();
+    }
 }

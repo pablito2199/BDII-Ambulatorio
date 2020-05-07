@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaHospitales;
+import gui.modelos.ModeloTablaHospitales;
 import aplicacion.clases.Cita;
 import aplicacion.clases.Hospital;
 import java.util.ArrayList;
@@ -210,10 +210,6 @@ public class VDerivarHospital extends javax.swing.JDialog {
                 //Cerramos
                 this.dispose();
                 
-            } else {
-
-                //Mostramos fallo
-                fa.muestraExcepcion("Error al derivar cita a hospital");
             }
         }
 

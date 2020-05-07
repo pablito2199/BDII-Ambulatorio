@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaAmbulatorios;
+import gui.modelos.ModeloTablaAmbulatorios;
 import aplicacion.clases.Ambulatorio;
 
 public class VPrincipal extends javax.swing.JFrame {

@@ -1,4 +1,4 @@
-package gui.Modelos;
+package gui.modelos;
 
 public class ModeloListaIntegers extends javax.swing.AbstractListModel {
 

@@ -1,15 +1,15 @@
-package gui.Modelos;
+package gui.modelos;
 
-import aplicacion.clases.Cita;
+import aplicacion.clases.Receta;
 import javax.swing.table.*;
 
-public class ModeloTablaHistorialMedico extends AbstractTableModel {
+public class ModeloTablaHistorialRecetas extends AbstractTableModel {
 
-    private java.util.List<Cita> citas;   //Listado de pacientes de la tabla
+    private java.util.List<Receta> recetas;   //Listado de pacientes de la tabla
 
     //Constructor
-    public ModeloTablaHistorialMedico() {
-        this.citas = new java.util.ArrayList<Cita>();
+    public ModeloTablaHistorialRecetas() {
+        this.recetas = new java.util.ArrayList<Receta>();
     }
 
     //Permite recuperar el número de columnas
@@ -21,7 +21,7 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
     //Permite recuperar el número de filas
     @Override
     public int getRowCount() {
-        return citas.size();
+        return recetas.size();
     }
 
     //Permite recuperar el nombre de las columnas
@@ -37,17 +37,17 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
             case 1:
                 nombre = "Fecha Fin";
                 break;
-            //La tercera el código del ambulatorio
+            //La tercera el número de la receta
             case 2:
-                nombre = "Ambulatorio";
+                nombre = "Número receta";
                 break;
-            //La cuarta el código de la consulta
+            //La cuarta el medicamento
             case 3:
-                nombre = "Consulta";
+                nombre = "Medicamento";
                 break;
-            //La quinta es el tipo de cita
+            //La quinta es la cantidad
             case 4:
-                nombre = "Tipo de cita";
+                nombre = "Cantidad";
                 break;
         }
         //Devolvemos el nombre de la columna
@@ -61,11 +61,11 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
         switch (col) {
             //Fecha Inicio es una fecha
             case 0:
-                clase = java.lang.String.class;
+                clase = java.sql.Date.class;
                 break;
             //Fecha Fin es una fecha
             case 1:
-                clase =  java.lang.String.class;
+                clase = java.sql.Date.class;
                 break;
             //Número receta es un Integer
             case 2:
@@ -98,23 +98,23 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
         switch (col) {
             //Permite recuperar fecha inicio
             case 0:
-                resultado = citas.get(row).getFechaHoraInicio().toString();
+                resultado = recetas.get(row).getFechaInicio();
                 break;
             //Permite recuperar fecha fin
             case 1:
-                resultado = citas.get(row).getFechaHoraFin().toString();
+                resultado = recetas.get(row).getFechaFin();
                 break;
-            //Permite recuperar el código del ambulatorio
+            //Permite recuperar número (código) receta
             case 2:
-                resultado = citas.get(row).getAmbulatorio();
+                resultado = recetas.get(row).getCodigo();
                 break;
-            //Permite recuperar el código de la consulta
+            //Permite recuperar el nombre del medicamento recetado
             case 3:
-                resultado = citas.get(row).getConsulta();
+                resultado = recetas.get(row).getMedicamento();
                 break;
-            //Permite recuperar el tipo de cita
+            //Permite recuperar la cantidad del medicamento
             case 4:
-                resultado = citas.get(row).getTipo() + " - " + citas.get(row).getEspecialidad();
+                resultado = recetas.get(row).getCantidad();
                 break;
         }
         //Devolvemos el valor recuperado
@@ -122,15 +122,15 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
     }
 
     //Permite sobreescribir las filas de la tabla
-    public void setFilas(java.util.List<Cita> citas) {
-        this.citas = citas;
+    public void setFilas(java.util.List<Receta> recetas) {
+        this.recetas = recetas;
         //Notifica a los listeners del cambio
         fireTableDataChanged();
     }
 
     //Permite recuperar un usuario determinado
-    public Cita obtenerPaciente(int i) {
-        return this.citas.get(i);
+    public Receta obtenerPaciente(int i) {
+        return this.recetas.get(i);
     }
 
 }

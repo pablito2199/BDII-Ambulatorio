@@ -238,7 +238,7 @@ create table cita (
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     tipo varchar(30) NOT NULL,
     especialidad varchar(20) NOT NULL,
-	unique(fechaHoraInicio, consulta, ambulatorio),
+	CONSTRAINT horaUnica UNIQUE(fechaHoraInicio, consulta, ambulatorio),
     primary key(fechaHoraInicio, paciente, consulta, ambulatorio),
     foreign key (paciente) references paciente(cip) on delete restrict on update cascade,
     foreign key (consulta, ambulatorio) references consulta(identificador, ambulatorio) on delete restrict on update cascade,

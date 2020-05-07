@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaPacientes;
+import gui.modelos.ModeloTablaPacientes;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.GrupoSanguineo;
 import java.sql.Date;

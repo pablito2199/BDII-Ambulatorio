@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaHistorialMedico;
+import gui.modelos.ModeloTablaHistorialMedico;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.TipoCita;
 
@@ -133,7 +133,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
 
         etiquetaTotalResultados1.setText("Total resultados:");
 
-        tablaHistorialMedico.setModel(new gui.Modelos.ModeloTablaHistorialMedico());
+        tablaHistorialMedico.setModel(new gui.modelos.ModeloTablaHistorialMedico());
         tablaHistorialMedico.setAutoscrolls(false);
         tablaHistorialMedico.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaHistorialMedico);
