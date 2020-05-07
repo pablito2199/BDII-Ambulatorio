@@ -33,7 +33,7 @@ public class Ambulatorio {
         this.antiguedad = antiguedad;
         this.ingresos = 0.0;
     }
-    
+
     public Ambulatorio(String nombre, String direccion, String anoConstruccion, String provincia, String telefono, String antiguedad) {
         this.nombre = nombre;
         this.direccion = direccion;
@@ -42,7 +42,7 @@ public class Ambulatorio {
         this.telefono = telefono;
         this.antiguedad = antiguedad;
     }
-    
+
     public Ambulatorio(String nombre, String provincia) {
         this.nombre = nombre;
         this.provincia = provincia;

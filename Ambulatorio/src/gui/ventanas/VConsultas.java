@@ -11,7 +11,7 @@ public class VConsultas extends javax.swing.JDialog {
     private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
     private java.util.List<Consulta> consultas;              //Lista de consultas
     private Integer ambulatorio;                             //Ambulatorio actual
-    
+
     /**
      *
      * @param parent
@@ -45,7 +45,7 @@ public class VConsultas extends javax.swing.JDialog {
             //desactiva el botón de Eliminar
             btnEliminarConsultas.setEnabled(false);
         }
-        
+
         //Eliminamos especialidades anteriores del comboBox
         seleccionEspecialidades.removeAllItems();
         //Introducimos especialidades en el comboBox
@@ -361,7 +361,7 @@ public class VConsultas extends javax.swing.JDialog {
         lstConsultas.setModel(m);
         Integer id = null;
         //buscamos las consultas existentes
-        if(!textoNumeroConsulta.getText().equals("")) {
+        if (!textoNumeroConsulta.getText().equals("")) {
             id = Integer.parseInt(textoNumeroConsulta.getText());
         }
         consultas = fa.consultarConsultas(id, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());

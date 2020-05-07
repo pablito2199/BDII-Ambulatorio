@@ -449,10 +449,8 @@ public class VPrincipal extends javax.swing.JFrame {
             if (fa.consultarAmbulatorioActual(textoNombre.getText(), textoProvincia.getText()) != null) {
                 a.setCodigo(Integer.parseInt(textoCodigo.getText()));
                 fa.modificarAmbulatorio(a);
-                fa.muestraMensaje("Ambulatorio modificado correctamente.");
             } else {
                 fa.insertarAmbulatorio(a);
-                fa.muestraMensaje("Ambulatorio añadido correctamente.");
             }
             //habilitamos los botones
             btnActualizar.setEnabled(true);

@@ -37,7 +37,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         } else {
             btnDerecha.setEnabled(false);
         }
-        
+
         enfermedadesP = fa.obtenerEnfermedadesPadecidas(cipPaciente, "");
         //crea la lista de enfermedades registradas del paciente
         ModeloListaStrings mListaE = new ModeloListaStrings();

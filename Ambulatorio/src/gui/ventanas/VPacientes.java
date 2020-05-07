@@ -508,7 +508,7 @@ public class VPacientes extends javax.swing.JDialog {
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Actualizamos la base de datos
             fa.modificarPaciente(u);
-        //De no existir se crea uno nuevo
+            //De no existir se crea uno nuevo
         } else {
             //LA EDAD NO SE TIENE EN CUENTA PUESTO QUE ES UN CALCULADO
             //Instanciamos el usuario
@@ -560,7 +560,7 @@ public class VPacientes extends javax.swing.JDialog {
 
         //Comprobamos que se selecciona a un paciente
         int index = tablaPacientes.getSelectedRow();
-        if(index >= 0){
+        if (index >= 0) {
             fa.nuevaVUrgencias(this, tp.obtenerPaciente(index));
         }
         rebuscarPacientes();

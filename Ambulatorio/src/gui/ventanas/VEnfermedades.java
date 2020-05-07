@@ -252,7 +252,7 @@ public class VEnfermedades extends javax.swing.JDialog {
             Enfermedad e = new Enfermedad(textoNombre.getText(), textoDescripcion.getText());
             //si existe la enfermedad modifica, si no, añade
             if (fa.consultarEnfermedadActual(textoNombre.getText()) != null) { //no se va poder modificar nombre de la enfermedad
-                fa.modificarEnfermedad(e); 
+                fa.modificarEnfermedad(e);
             } else {
                 fa.anadirEnfermedad(e);
             }

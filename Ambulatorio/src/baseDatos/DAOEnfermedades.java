@@ -235,24 +235,24 @@ public class DAOEnfermedades extends AbstractDAO {
         if (!enfermedades.isEmpty()) {
             nom = parametros;
         }
-                
+
         //Establecemos conexión
         con = this.getConexion();
 
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-                //Selecionamos el la descripción
-                //que tengan el nombre dado
-                String consulta = "select nombre "
-                        + "from enfermedad "
-                        + "where nombre like ? "
-                        + nom
-                        + "order by nombre ASC";
+            //Selecionamos el la descripción
+            //que tengan el nombre dado
+            String consulta = "select nombre "
+                    + "from enfermedad "
+                    + "where nombre like ? "
+                    + nom
+                    + "order by nombre ASC";
 
-                //Preparamos la consulta
-                stmEnfermedades = con.prepareStatement(consulta);
-                stmEnfermedades.setString(1, "%" + enfermedad + "%"); //Nombre
+            //Preparamos la consulta
+            stmEnfermedades = con.prepareStatement(consulta);
+            stmEnfermedades.setString(1, "%" + enfermedad + "%"); //Nombre
             for (int i = 1; i <= enfermedades.size(); i++) {
                 //Sustituimos
                 stmEnfermedades.setString(i + 1, enfermedades.get(i - 1)); //Enfermedades

@@ -260,16 +260,16 @@ public class DAOConsultas extends AbstractDAO {
                     + "                  where me2.cuenta < me.cuenta)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
-            
+
             //Sustituimos
             stmConsultas.setString(1, especialidad); //Especialidad 1
             stmConsultas.setInt(2, ambulatorio);     //Ambulatorio 1
             stmConsultas.setString(3, especialidad); //Especialidad 2
             stmConsultas.setInt(4, ambulatorio);     //Ambulatorio 2
-            
+
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
-            
+
             //Cogemos la primera coincidencia
             if (rsConsultas.next()) {
                 //Se crea una instancia de consulta con los datos de la consulta con el menor número de pacientes de la base de datos
@@ -293,7 +293,7 @@ public class DAOConsultas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        
+
         return menorNumero;
     }
 }

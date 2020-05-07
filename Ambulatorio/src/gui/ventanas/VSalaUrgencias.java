@@ -184,7 +184,7 @@ public class VSalaUrgencias extends javax.swing.JDialog {
                 //Feedback
                 fa.muestraMensaje("Urgencia atendida correctamente.");
             }
-            
+
             tu.setFilas(fa.urgenciasPendientes(ambulatorio));
 
         }

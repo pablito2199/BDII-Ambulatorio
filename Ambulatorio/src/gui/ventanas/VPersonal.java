@@ -387,9 +387,10 @@ public class VPersonal extends javax.swing.JDialog {
     private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
 
         int index = tablaPersonal.getSelectedRow();
-        if (index >= 0)
+        if (index >= 0) {
             fa.nuevaVCitasPendientes(this, ((ModeloTablaPersonal) tablaPersonal.getModel()).obtenerPersonal(index));
-        
+        }
+
     }//GEN-LAST:event_btnCitasActionPerformed
 
     /**

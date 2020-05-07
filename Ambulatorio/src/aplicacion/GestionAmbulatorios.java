@@ -33,7 +33,7 @@ public class GestionAmbulatorios {
     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String provincia) {
         return fbd.consultarAmbulatorios(nombre, codigo, provincia);
     }
-    
+
     //Permite recuperar los datos del ambulatorio con el nombre y provincia correspondientes
     public Ambulatorio consultarAmbulatorioActual(String nombre, String provincia) {
         return fbd.consultarAmbulatorioActual(nombre, provincia);

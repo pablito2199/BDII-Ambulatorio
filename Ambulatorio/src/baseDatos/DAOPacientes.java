@@ -549,7 +549,7 @@ public class DAOPacientes extends AbstractDAO {
                 stmInsercion.setString(2, cip);
                 stmInsercion.executeUpdate();
             }
-        this.getFachadaAplicacion().muestraMensaje("Enfermedades del pacientes actualizadas correctamente.");
+            this.getFachadaAplicacion().muestraMensaje("Enfermedades del pacientes actualizadas correctamente.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());

@@ -6,7 +6,7 @@ import aplicacion.clases.Hospital;
 import java.util.ArrayList;
 
 public class VDerivarHospital extends javax.swing.JDialog {
-    
+
     private VPrincipal padre;                                //Enlace a la ventana padre 
     private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
     private Cita cita;                                       //Cita
@@ -209,7 +209,7 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
                 //Cerramos
                 this.dispose();
-                
+
             }
         }
 
@@ -217,7 +217,7 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
     //botón de Regresar, vuelve a la ventana anterior
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        
+
         this.dispose();
 
     }//GEN-LAST:event_btnRegresarActionPerformed
@@ -249,7 +249,6 @@ public class VDerivarHospital extends javax.swing.JDialog {
                 distancia));
 
     }//GEN-LAST:event_btnBuscarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

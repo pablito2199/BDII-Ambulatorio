@@ -24,7 +24,6 @@ public class GestionPersonal {
         this.fgui = fgui;
         this.fbd = fbd;
 
-        
     }
 
     //Permite comprobar si el administrador que intenta acceder al programa tiene los credenciales necesarios
