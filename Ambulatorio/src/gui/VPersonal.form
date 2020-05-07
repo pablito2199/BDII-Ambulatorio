@@ -142,6 +142,7 @@
         <Component class="javax.swing.JButton" name="btnCitas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Citas"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCitasActionPerformed"/>
@@ -314,8 +315,8 @@
                       <Component id="etiquetaClase" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textoClase" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="etiquetaContrasena" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textoContrasena" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="textoContrasena" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -406,11 +407,6 @@
             <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textoContrasena">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JToggleButton" name="btnAdmin">
           <Properties>
             <Property name="text" type="java.lang.String" value="Admin"/>
@@ -420,6 +416,10 @@
         <Component class="javax.swing.JToggleButton" name="btnSanitario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sanitario"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="textoContrasena">
+          <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
