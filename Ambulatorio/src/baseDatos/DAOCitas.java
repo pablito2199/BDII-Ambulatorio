@@ -290,12 +290,10 @@ public class DAOCitas extends AbstractDAO {
     }
 
     //Pone el timestamp de finalizacion de la cita al actual del sistema gestor
-    public Boolean atenderCita(Cita cita) {
+    public void atenderCita(Cita cita) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmCita = null;
-
-        Boolean resultado = true;
 
         //Establecemos conexión
         con = super.getConexion();
@@ -321,6 +319,9 @@ public class DAOCitas extends AbstractDAO {
             //Actualizamos
             stmCita.executeUpdate();
 
+            //Feedback
+            this.getFachadaAplicacion().muestraMensaje("Paciente atendido correctamente.");
+
             //En caso de error se captura la excepción
         } catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
@@ -330,8 +331,6 @@ public class DAOCitas extends AbstractDAO {
             } else {
                 mensaje = e.getMessage();
             }
-
-            resultado = false;
 
             System.out.println(mensaje);
             this.getFachadaAplicacion().muestraExcepcion(mensaje);
@@ -345,18 +344,14 @@ public class DAOCitas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-
-        return resultado;
     }
 
     //Permite insertar una relacion derivarHospital en la base de datos e
     //inserta un timestamp de finalizacion en la cita relacionada
-    public Boolean derivarHospital(Hospital hospital, Cita cita) {
+    public void derivarHospital(Hospital hospital, Cita cita) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmDerivarHospital = null;
-
-        Boolean resultado = true;
 
         //Establecemos conexión
         con = super.getConexion();
@@ -410,12 +405,14 @@ public class DAOCitas extends AbstractDAO {
 
             //Hacemos commit
             con.commit();
+            
+            //Feedback
+            this.getFachadaAplicacion().muestraMensaje("Paciente derivado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
 
             String mensajeExcepcion = e.getMessage();
-            resultado = false;
 
             try {
                 //Hacemos rollback
@@ -450,8 +447,6 @@ public class DAOCitas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-
-        return resultado;
     }
 
     //Permite consultar las citas ocupadas entre dos fechas en una consulta
@@ -880,6 +875,9 @@ public class DAOCitas extends AbstractDAO {
 
             //Borramos
             stmCita.executeUpdate();
+            
+            //Feedback
+            this.getFachadaAplicacion().muestraMensaje("Cita cancelada correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {

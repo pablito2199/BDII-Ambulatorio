@@ -4,7 +4,9 @@ import gui.modelos.ModeloTablaCitas;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
+
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class VCitasPendientes extends javax.swing.JDialog {
 
@@ -272,10 +274,13 @@ public class VCitasPendientes extends javax.swing.JDialog {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
 
+        //Limpiamos campos de texto y tabla
         txtDesde.setText("aaaa-mm-dd");
         txtHasta.setText("aaaa-mm-dd");
         txtConsulta.setText(null);
         txtAmbulatorio.setText(null);
+        ((ModeloTablaCitas) tablaCitas.getModel()).setFilas(new ArrayList<>());
+        
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -287,46 +292,8 @@ public class VCitasPendientes extends javax.swing.JDialog {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
 
-        if (fechasValidas()) {
-
-            Date inicio, fin;
-
-            //Solo puede ser un rango valido o si no las dos fechas son nulas
-            try {
-                inicio = Date.valueOf(txtDesde.getText());
-                fin = Date.valueOf(txtHasta.getText());
-
-                //Vemos si inicio es igual o mayor a fin
-                if (inicio.after(fin)) {
-
-                    fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
-                    return; //Cancelamos en caso de que lo sea
-                }
-
-            } catch (Exception e) {
-                inicio = null;
-                fin = null;
-            }
-
-            //Obtenemos tabla
-            ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
-
-            //Obtenemos consulta
-            Integer consulta;
-            try {
-                consulta = Integer.parseInt(txtConsulta.getText());
-
-            } catch (NumberFormatException e) {
-                consulta = null;
-            }
-
-            //Usamos consulta adecuada
-            if (padre instanceof VPacientes) {
-                tc.setFilas(fa.citasPaciente(pa, txtAmbulatorio.getText(), consulta, inicio, fin));
-            } else {
-                tc.setFilas(fa.citasMedico(ps, txtAmbulatorio.getText(), inicio, fin));
-            }
-        }
+        buscarCitas();
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCitaActionPerformed
@@ -341,9 +308,8 @@ public class VCitasPendientes extends javax.swing.JDialog {
             //Borramos cita
             fa.borrarCita(tc.obtenerCita(index));
 
-            //La quitamos del array de citas y mostramos feedback
+            //Quitamos cita
             tc.quitarCita(index);
-            fa.muestraMensaje("Cita cancelada correctamente.");
         }
 
     }//GEN-LAST:event_btnCancelarCitaActionPerformed
@@ -358,12 +324,10 @@ public class VCitasPendientes extends javax.swing.JDialog {
         if (index >= 0) {
 
             //Atendemos cita cita
-            if (fa.atenderCita(tc.obtenerCita(index))) {
+            fa.atenderCita(tc.obtenerCita(index));
 
-                //Quitamos cita y mostramos feedback
-                tc.quitarCita(index);
-                fa.muestraMensaje("Cita finalizada correctamente.");
-            }
+            //Rebuscamos citas para comprobar si se atendio correctamente
+            buscarCitas();
         }
     }//GEN-LAST:event_btnTerminarCitaActionPerformed
 
@@ -428,5 +392,49 @@ public class VCitasPendientes extends javax.swing.JDialog {
             return false;
         }
         return true;
+    }
+    
+    private void buscarCitas(){
+        
+        if (fechasValidas()) {
+
+            Date inicio, fin;
+
+            //Solo puede ser un rango valido o si no las dos fechas son nulas
+            try {
+                inicio = Date.valueOf(txtDesde.getText());
+                fin = Date.valueOf(txtHasta.getText());
+
+                //Vemos si inicio es igual o mayor a fin
+                if (inicio.after(fin)) {
+
+                    fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+                    return; //Cancelamos en caso de que lo sea
+                }
+
+            } catch (Exception e) {
+                inicio = null;
+                fin = null;
+            }
+
+            //Obtenemos tabla
+            ModeloTablaCitas tc = ((ModeloTablaCitas) tablaCitas.getModel());
+
+            //Obtenemos consulta
+            Integer consulta;
+            try {
+                consulta = Integer.parseInt(txtConsulta.getText());
+
+            } catch (NumberFormatException e) {
+                consulta = null;
+            }
+
+            //Usamos consulta adecuada
+            if (padre instanceof VPacientes) {
+                tc.setFilas(fa.citasPaciente(pa, txtAmbulatorio.getText(), consulta, inicio, fin));
+            } else {
+                tc.setFilas(fa.citasMedico(ps, txtAmbulatorio.getText(), inicio, fin));
+            }
+        }
     }
 }

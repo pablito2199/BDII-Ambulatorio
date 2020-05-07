@@ -6,7 +6,7 @@ import aplicacion.clases.Hospital;
 import java.util.ArrayList;
 
 public class VDerivarHospital extends javax.swing.JDialog {
-    
+
     private VPrincipal padre;                                //Enlace a la ventana padre 
     private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
     private Cita cita;                                       //Cita
@@ -202,22 +202,17 @@ public class VDerivarHospital extends javax.swing.JDialog {
             ModeloTablaHospitales th = (ModeloTablaHospitales) tablaHospitales.getModel();
 
             //Derivamos
-            if (fa.derivarHospital(th.obtenerHospital(index), cita)) {
+            fa.derivarHospital(th.obtenerHospital(index), cita);
 
-                //Feedback
-                fa.muestraMensaje("Paciente derivado correctamente.");
-
-                //Cerramos
-                this.dispose();
-                
-            }
+            //Cerramos
+            this.dispose();
         }
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     //botón de Regresar, vuelve a la ventana anterior
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        
+
         this.dispose();
 
     }//GEN-LAST:event_btnRegresarActionPerformed

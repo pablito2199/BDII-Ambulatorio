@@ -127,13 +127,13 @@ public class FachadaAplicacion {
     }
 
     //Atiende una cita o una urgencia
-    public Boolean atenderCita(Cita cita) {
-        return gcit.atenderCita(cita);
+    public void atenderCita(Cita cita) {
+        gcit.atenderCita(cita);
     }
 
     //Deriva una cita o urgencia a un hospital
-    public Boolean derivarHospital(Hospital hospital, Cita cita) {
-        return gcit.derivarHospital(hospital, cita);
+    public void derivarHospital(Hospital hospital, Cita cita) {
+        gcit.derivarHospital(hospital, cita);
     }
 
     //Devuelve una lista de horas de las citas que el paciente no puede reservar

@@ -41,13 +41,13 @@ public class GestionCitas {
     }
 
     //Atiende una cita o una urgencia
-    public Boolean atenderCita(Cita cita) {
-        return fbd.atenderCita(cita);
+    public void atenderCita(Cita cita) {
+        fbd.atenderCita(cita);
     }
 
     //Deriva una cita o urgencia a un hospital
-    public Boolean derivarHospital(Hospital hospital, Cita cita) {
-        return fbd.derivarHospital(hospital, cita);
+    public void derivarHospital(Hospital hospital, Cita cita) {
+        fbd.derivarHospital(hospital, cita);
     }
 
     //Devuelve una lista de horas de las citas que el paciente no puede reservar
