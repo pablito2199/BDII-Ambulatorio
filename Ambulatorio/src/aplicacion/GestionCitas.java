@@ -65,8 +65,8 @@ public class GestionCitas {
     }
 
     //Consulta las citas pendientes de un paciente
-    public ArrayList<Cita> citasPaciente(Paciente paciente) {
-        return fbd.citasPaciente(paciente);
+    public ArrayList<Cita> citasPaciente(Paciente paciente, String ambulatorio, Integer consulta, Date inicio, Date fin) {
+        return fbd.citasPaciente(paciente, ambulatorio, consulta, inicio, fin);
     }
 
     //Consulta las citas pendientes de atender de un médico
@@ -77,11 +77,6 @@ public class GestionCitas {
     //Consulta la lista tipos de cita buscando por especialidad
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
         return fbd.obtenerTiposDeCita(especialidad);
-    }
-
-    //Consulta la lista citas pendientes del paciente filtrada
-    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin) {
-        return fbd.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
 
     //Consulta la lista citas pendientes del paciente filtrada
@@ -113,7 +108,7 @@ public class GestionCitas {
     public void nuevaVCitasPendientes(VPersonal vper, PersonalSanitario personal) {
         fgui.nuevaVCitasPendientes(vper, personal);
     }
-    
+
     //Permite generar una ventana para consultar las citas pendientes de un paciente
     public void nuevaVCitasPendientes(VPacientes vpac, Paciente paciente) {
         fgui.nuevaVCitasPendientes(vpac, paciente);

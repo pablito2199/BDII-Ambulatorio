@@ -133,8 +133,8 @@ public class FachadaBaseDatos {
     }
 
     //Consulta las citas pendientes de un paciente
-    public ArrayList<Cita> citasPaciente(Paciente paciente) {
-        return daoCitas.citasPaciente(paciente);
+    public ArrayList<Cita> citasPaciente(Paciente paciente, String ambulatorio, Integer consulta, Date inicio, Date fin) {
+        return daoCitas.citasPaciente(paciente, ambulatorio, consulta, inicio, fin);
     }
 
     //Consulta las citas pendientes de un medico
@@ -145,11 +145,6 @@ public class FachadaBaseDatos {
     //Consulta la lista tipos de cita buscando por especialidad
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
         return daoCitas.obtenerTiposDeCita(especialidad);
-    }
-
-    //Consulta la lista citas pendientes del paciente filtrada
-    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin) {
-        return daoCitas.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
 
     //Consulta la lista citas pendientes del paciente filtrada

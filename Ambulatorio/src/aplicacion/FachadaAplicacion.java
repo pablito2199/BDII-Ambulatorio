@@ -49,7 +49,7 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e) {
         fgui.muestraExcepcion(e);
     }
-    
+
     //Llamada para mostrar un mensaje
     public void muestraMensaje(String e) {
         fgui.muestraMensaje(e);
@@ -105,7 +105,7 @@ public class FachadaAplicacion {
     public java.util.List<Ambulatorio> obtenerAmbulatorios(String nombre, Integer codigo, String Provincia) {
         return gamb.consultarAmbulatorios(nombre, codigo, Provincia);
     }
-    
+
     //Permite recuperar los datos del ambulatorio con el nombre y provincia correspondientes
     public Ambulatorio consultarAmbulatorioActual(String nombre, String provincia) {
         return gamb.consultarAmbulatorioActual(nombre, provincia);
@@ -145,8 +145,8 @@ public class FachadaAplicacion {
     }
 
     //Lista de citas pendientes de un paciente
-    public ArrayList<Cita> citasPaciente(Paciente paciente) {
-        return gcit.citasPaciente(paciente);
+    public ArrayList<Cita> citasPaciente(Paciente paciente, String ambulatorio, Integer consulta, Date inicio, Date fin) {
+        return gcit.citasPaciente(paciente, ambulatorio, consulta, inicio, fin);
     }
 
     //Lista de citas pendientes de todas las consultas donde el medico trabaja
@@ -157,11 +157,6 @@ public class FachadaAplicacion {
     //Consulta la lista tipos de cita buscando por especialidad
     public ArrayList<TipoCita> obtenerTiposDeCita(String especialidad) {
         return gcit.obtenerTiposDeCita(especialidad);
-    }
-
-    //Consulta la lista citas pendientes del paciente filtrada
-    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin) {
-        return gcit.obtenerCitas(ambulatorio, consulta, inicio, fin);
     }
 
     //Consulta la lista citas pendientes del paciente filtrada
@@ -193,7 +188,7 @@ public class FachadaAplicacion {
     public void nuevaVCitasPendientes(VPersonal vper, PersonalSanitario personal) {
         gcit.nuevaVCitasPendientes(vper, personal);
     }
-    
+
     //Permite generar una ventana para consultar las citas pendientes de un paciente
     public void nuevaVCitasPendientes(VPacientes vpac, Paciente paciente) {
         gcit.nuevaVCitasPendientes(vpac, paciente);
@@ -341,7 +336,7 @@ public class FachadaAplicacion {
         }
         gcon.nuevaVConsultas(ambulatorio, restoConsultas);
     }
-    
+
 ////////////////////
 //DAOESPECIALIDADES
 //////////////////// 
