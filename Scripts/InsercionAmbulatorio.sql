@@ -23,7 +23,7 @@ insert into paciente (cip, dni, numSeguridadSocial, nombre, fechaNacimiento, sex
 	('cip765', '54856833P', 2134, 'Carlos Treviño', '2000-05-27', 'Masculino', 'B+', 'Española', 'Santiago de Compostela, A Coruña', '666666689'),
 	('cip321', '12312123L', 6547, 'Adrian Vispalia', '2000-03-22', 'Masculino', 'A-', 'Española', 'Vigo, A Coruña', '656666666'),
 	('cip098', '25814736M', 8654, 'Miguel Torres', '2000-08-20', 'Masculino', '0-', 'Española', 'Ourense, A Coruña', '666665566'),
-	('cip879', '85274196I', 3333, 'Paquita Chocolatera', '2000-01-01', 'Femenino', '0-', 'Española', 'Viveiro, A Coruña', '666333666');
+	('cip879', '85274196I', 3333, 'Paquita Chocolatera', '1964-01-01', 'Femenino', '0-', 'Española', 'Viveiro, A Coruña', '666333666');
 
 --TENER ENFERMEDAD
 insert into tenerEnfermedad (enfermedad, paciente)
