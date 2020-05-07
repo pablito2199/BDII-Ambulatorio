@@ -38,6 +38,7 @@ public class DAOEnfermedades extends AbstractDAO {
 
             //Actualizamos
             stmEnfermedad.executeUpdate();
+            this.getFachadaAplicacion().muestraMensaje("Enfermedad añadida correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -72,6 +73,7 @@ public class DAOEnfermedades extends AbstractDAO {
             stmEnfermedad.setString(1, nombre);  //nombre del paciente
             //Actualizamos
             stmEnfermedad.executeUpdate();
+        this.getFachadaAplicacion().muestraMensaje("Enfermedad eliminada correctamente.");
             //En caso de error se captura la excepción
         } catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
@@ -111,6 +113,7 @@ public class DAOEnfermedades extends AbstractDAO {
 
             //Actualizamos
             stmEnfermedad.executeUpdate();
+            this.getFachadaAplicacion().muestraMensaje("Enfermedad modificada correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -233,24 +236,24 @@ public class DAOEnfermedades extends AbstractDAO {
         if (!enfermedades.isEmpty()) {
             nom = parametros;
         }
-                
+
         //Establecemos conexión
         con = this.getConexion();
 
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-                //Selecionamos el la descripción
-                //que tengan el nombre dado
-                String consulta = "select nombre "
-                        + "from enfermedad "
-                        + "where nombre like ? "
-                        + nom
-                        + "order by nombre ASC";
+            //Selecionamos el la descripción
+            //que tengan el nombre dado
+            String consulta = "select nombre "
+                    + "from enfermedad "
+                    + "where nombre like ? "
+                    + nom
+                    + "order by nombre ASC";
 
-                //Preparamos la consulta
-                stmEnfermedades = con.prepareStatement(consulta);
-                stmEnfermedades.setString(1, "%" + enfermedad + "%"); //Nombre
+            //Preparamos la consulta
+            stmEnfermedades = con.prepareStatement(consulta);
+            stmEnfermedades.setString(1, "%" + enfermedad + "%"); //Nombre
             for (int i = 1; i <= enfermedades.size(); i++) {
                 //Sustituimos
                 stmEnfermedades.setString(i + 1, enfermedades.get(i - 1)); //Enfermedades

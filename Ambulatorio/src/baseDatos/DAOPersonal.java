@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * @author Pablo Tarrío Otero
  */
 public class DAOPersonal extends AbstractDAO {
@@ -64,7 +64,7 @@ public class DAOPersonal extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        
+
         return resultado != null;
     }
 
@@ -139,8 +139,8 @@ public class DAOPersonal extends AbstractDAO {
                     + "CAST ( EXTRACT(YEAR FROM age(current_date, fechaIncorporacion)) as varchar(4)) as antiguedad "
                     + "from personalSanitario "
                     + "where nombre like ? "
-                    +       "and dni like ? "
-                    +       "and ambulatorio = ? "
+                    + "and dni like ? "
+                    + "and ambulatorio = ? "
                     + "order by nombre ASC";
 
             //Preparamos la consulta
@@ -155,8 +155,8 @@ public class DAOPersonal extends AbstractDAO {
             while (rsPersonal.next()) {
                 //Se crea una instancia de personal sanitario con los datos recuperados de la base de datos
                 personalActual = new PersonalSanitario(
-                        rsPersonal.getInt("ambulatorio"), 
-                        rsPersonal.getString("dni"), 
+                        rsPersonal.getInt("ambulatorio"),
+                        rsPersonal.getString("dni"),
                         rsPersonal.getString("nombre"),
                         rsPersonal.getDate("fechaIncorporacion"),
                         rsPersonal.getString("telefono"),

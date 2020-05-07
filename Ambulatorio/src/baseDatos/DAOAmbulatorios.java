@@ -41,6 +41,7 @@ public class DAOAmbulatorios extends AbstractDAO {
 
             //Actualizamos
             stmAmbulatorio.executeUpdate();
+            this.getFachadaAplicacion().muestraMensaje("Ambulatorio añadido correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -75,6 +76,7 @@ public class DAOAmbulatorios extends AbstractDAO {
             stmAmbulatorio.setInt(1, ambulatorio);  //CIP del ambulatorio
             //Actualizamos
             stmAmbulatorio.executeUpdate();
+        this.getFachadaAplicacion().muestraMensaje("Ambulatorio eliminado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -122,6 +124,7 @@ public class DAOAmbulatorios extends AbstractDAO {
 
             //Actualizamos
             stmAmbulatorio.executeUpdate();
+            this.getFachadaAplicacion().muestraMensaje("Ambulatorio modificado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -315,16 +318,10 @@ public class DAOAmbulatorios extends AbstractDAO {
         //Se devuelve el resultado (lista de ambulatorios)
         return resultado;
     }
-    
-    
-    
-    
-    
 
     /* 
     * @author Pablo Tarrío Otero
-    */
-    
+     */
     //Permite recuperar los datos del ambulatorio con el nombre y provincia correspondientes
     public Ambulatorio consultarAmbulatorioActual(String nombre, String provincia) {
         //Declaramos variables

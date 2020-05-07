@@ -65,7 +65,7 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
                 break;
             //Fecha Fin es una fecha
             case 1:
-                clase =  java.lang.String.class;
+                clase = java.lang.String.class;
                 break;
             //Número receta es un Integer
             case 2:

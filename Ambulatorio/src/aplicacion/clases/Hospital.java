@@ -67,7 +67,6 @@ public class Hospital {
     public void setDistancia(Float distancia) {
         this.distancia = distancia;
     }
-    
 
     @Override
     public boolean equals(Object obj) {

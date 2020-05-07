@@ -18,7 +18,7 @@ public class GestionEspecialidades {
         this.fgui = fgui;
         this.fbd = fbd;
     }
-    
+
     //Permite consultar las consultas existentes en la base de datos
     public java.util.List<Especialidad> consultarEspecialidades() {
         return fbd.consultarEspecialidades();

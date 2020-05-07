@@ -11,7 +11,7 @@ public class VConsultas extends javax.swing.JDialog {
     private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
     private java.util.List<Consulta> consultas;              //Lista de consultas
     private Integer ambulatorio;                             //Ambulatorio actual
-    
+
     /**
      *
      * @param parent
@@ -45,7 +45,7 @@ public class VConsultas extends javax.swing.JDialog {
             //desactiva el botón de Eliminar
             btnEliminarConsultas.setEnabled(false);
         }
-        
+
         //Eliminamos especialidades anteriores del comboBox
         seleccionEspecialidades.removeAllItems();
         //Introducimos especialidades en el comboBox
@@ -307,7 +307,6 @@ public class VConsultas extends javax.swing.JDialog {
         if (!textoNumeroConsulta.getText().isEmpty()) {
             Consulta c = new Consulta(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
             fa.anadirConsulta(c);
-            fa.muestraMensaje("Consulta añadida correctamente.");
         } else {
             fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
         }
@@ -324,7 +323,6 @@ public class VConsultas extends javax.swing.JDialog {
         //Intentamos borrar la consulta
         if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()) > 1) {
             fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
-            fa.muestraMensaje("Consulta eliminada correctamente.");
         } else {
             fa.muestraExcepcion("¡¡No puedes eliminar esta consulta, es la única de la especialidad!!");
         }
@@ -362,7 +360,7 @@ public class VConsultas extends javax.swing.JDialog {
         lstConsultas.setModel(m);
         Integer id = null;
         //buscamos las consultas existentes
-        if(!textoNumeroConsulta.getText().equals("")) {
+        if (!textoNumeroConsulta.getText().equals("")) {
             id = Integer.parseInt(textoNumeroConsulta.getText());
         }
         consultas = fa.consultarConsultas(id, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());

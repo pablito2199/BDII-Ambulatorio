@@ -72,7 +72,7 @@ public class FachadaGui {
         //Hacemos visible la ventana
         vCP.setVisible(true);
     }
-    
+
     //Permite generar una ventana para consultar las citas pendientes de un paciente
     public void nuevaVCitasPendientes(VPacientes vpac, Paciente paciente) {
         //Declaramos variables
@@ -206,7 +206,7 @@ public class FachadaGui {
         va  = new VAviso(vp, true, txtExcepcion);
         va.setVisible(true);
     }
-    
+
     //Abre una ventana que muestra un mensaje en pantalla
     public void muestraMensaje(String txtMensaje) {
         VMensaje va;

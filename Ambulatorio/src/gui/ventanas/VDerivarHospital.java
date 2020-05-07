@@ -245,7 +245,6 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnConfirmar;

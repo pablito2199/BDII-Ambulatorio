@@ -104,7 +104,7 @@ public class DAORecetas extends AbstractDAO {
             stmHistorial.setString(1, paciente.getCIP());
             stmHistorial.setInt(2, codigoReceta);
             stmHistorial.setString(3, medicamento);
-             if (fechaInicio != null) {
+            if (fechaInicio != null) {
                 stmHistorial.setDate(4, fechaFin);
             }
             if (fechaFin != null) {
@@ -114,7 +114,7 @@ public class DAORecetas extends AbstractDAO {
                 stmHistorial.setDate(6, fechaInicio);
                 stmHistorial.setDate(7, fechaFin);
             }
-            
+
             //Ejecutamos
             rsHistorial = stmHistorial.executeQuery();
             //Mientras haya coincidencias
