@@ -270,8 +270,10 @@ public class VConsultas extends javax.swing.JDialog {
     //cuando seleccionas un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
     private void lstConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstConsultasMouseClicked
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
-        textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
-        seleccionEspecialidades.setSelectedItem(fa.consultarConsultas(m.getElementAt(lstConsultas.getSelectedIndex()), ambulatorio, null).get(0).getEspecialidad());
+        if (m.getSize() > 0) {
+            textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
+            seleccionEspecialidades.setSelectedItem(fa.consultarConsultas(m.getElementAt(lstConsultas.getSelectedIndex()), ambulatorio, null).get(0).getEspecialidad());
+        }
     }//GEN-LAST:event_lstConsultasMouseClicked
 
     //botón de Regresar, vuelve a la ventana principal
