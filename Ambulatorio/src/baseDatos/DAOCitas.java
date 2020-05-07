@@ -418,20 +418,20 @@ public class DAOCitas extends AbstractDAO {
         try {
             //Preparamos la sentencia para recoger las citas
             stmCitas = con.prepareStatement(
-                    "select fechaHoraInicio"
+                    "select ci.fechaHoraInicio "
                     + "from cita as ci "
                     + "where ci.fechaHoraInicio > ? "
                     + "and ci.fechaHoraInicio < ? "
                     + "and ci.fechaHoraFin is null "
                     + "and ci.consulta = ? "
                     + "and ci.ambulatorio = ? "
-                    + "and not exists (select u.cita "
-                    + "from urgencia as u "
-                    + "where u.cita = ci.fechaHoraInicio "
-                    + "and ci.consulta = u.consulta "
-                    + "and ci.ambulatorio = u.ambulatorio "
-                    + "and ci.paciente = u.paciente) "
-                    + "order by fechaHoraInicio asc"
+                    + "and not exists (select ur.cita "
+                    + "from urgencia as ur "
+                    + "where ur.cita = ci.fechaHoraInicio "
+                    + "and ci.consulta = ur.consulta "
+                    + "and ci.ambulatorio = ur.ambulatorio "
+                    + "and ci.paciente = ur.paciente) "
+                    + "order by ci.fechaHoraInicio asc"
             );
 
             //Sustituimos
@@ -744,12 +744,18 @@ public class DAOCitas extends AbstractDAO {
         //Establecemos conexión
         con = super.getConexion();
 
-        //Pasamos las fechas a timestamp
-        Timestamp inicioTS = inicio == null ? Timestamp.valueOf(LocalDateTime.now()) : Timestamp.valueOf(inicio.toLocalDate().atStartOfDay());
-        Timestamp finTS = fin == null ? Timestamp.valueOf(LocalDateTime.now().plusYears(1)) : Timestamp.valueOf(fin.toLocalDate().plusDays(1).atStartOfDay());
+        //Comprobamos que las fechas no sean nulas para buscar por ellas
+        String conInFi = "";
+        Timestamp inicioTS = null, finTS = null;
+        if (inicio != null && fin != null) {
+
+            conInFi = "and ci.fechaHoraInicio > ? and ci.fechaHoraInicio < ? ";
+            inicioTS = Timestamp.valueOf(inicio.toLocalDate().atStartOfDay());
+            finTS = Timestamp.valueOf(fin.toLocalDate().plusDays(1).atStartOfDay());
+        }
 
         //Comprobamos si se va a buscar por consulta
-        String busCons = consulta == null ? "" : "and co.identificador = ? ";
+        String conCons = consulta == null ? "" : "and co.identificador = ? ";
 
         //Intentamos la consulta SQL
         try {
@@ -762,9 +768,8 @@ public class DAOCitas extends AbstractDAO {
                     + "and co.ambulatorio = ci.ambulatorio "
                     + "and co.ambulatorio = am.codigoAmbulatorio "
                     + "and am.nombre like ? "
-                    + "and ci.fechaHoraInicio > ? "
-                    + "and ci.fechaHoraInicio < ? "
-                    + busCons
+                    + conInFi
+                    + conCons
             );
 
             //Obtenemos string
@@ -772,10 +777,14 @@ public class DAOCitas extends AbstractDAO {
 
             //Sustituimos
             stmCitas.setString(1, ambulatorio);
-            stmCitas.setTimestamp(2, inicioTS);
-            stmCitas.setTimestamp(3, finTS);
-            if (!busCons.isEmpty()) {
-                stmCitas.setInt(4, consulta);
+            int index = 2;
+            if (!conInFi.isEmpty()) {
+                stmCitas.setTimestamp(2, inicioTS);
+                stmCitas.setTimestamp(3, finTS);
+                index = 4;
+            }
+            if (!conCons.isEmpty()) {
+                stmCitas.setInt(index, consulta);
             }
 
             //Actualizamos

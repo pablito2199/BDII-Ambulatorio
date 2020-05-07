@@ -3,9 +3,7 @@ package gui;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
-import aplicacion.clases.TipoCita;
 import java.sql.Date;
-import java.util.ArrayList;
 
 public class VCitasPendientes extends javax.swing.JDialog {
 
@@ -18,6 +16,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
      * Creates new form VCitasPendientes
      *
      * @param padre
+     * @param modal
      * @param fa
      * @param ps
      */
@@ -291,6 +290,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
             Date inicio, fin;
 
+            //Solo puede ser un rango valido o si no las dos fechas son nulas
             try {
                 inicio = Date.valueOf(txtDesde.getText());
                 fin = Date.valueOf(txtHasta.getText());
@@ -315,7 +315,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
             try {
                 consulta = Integer.parseInt(txtConsulta.getText());
 
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 consulta = null;
             }
 

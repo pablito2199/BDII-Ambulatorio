@@ -59,11 +59,8 @@ public class DAOPersonal extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        if (resultado != null) {
-            return true;
-        } else {
-            return false;
-        }
+        
+        return resultado != null;
     }
 
     //Permite recuperar la especialidad de un personal sanitario

@@ -261,6 +261,9 @@ public class VReservarCita extends javax.swing.JDialog {
                     tipocita.getEspecialidad());
 
             fa.insertarCita(cita, pa);
+            
+            //Feedback
+            fa.muestraMensaje("Cita reservada correctamente.");
 
             //Salimos
             this.dispose();
