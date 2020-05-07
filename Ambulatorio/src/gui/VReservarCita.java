@@ -122,28 +122,26 @@ public class VReservarCita extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelHasta)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtHasta, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTipo)
-                            .addComponent(labelDesde))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelDesde)
+                            .addComponent(labelTipo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDesde)
-                            .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(txtAmbulatorio)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDesde)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(labelHasta)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtHasta))
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnBuscar)))
+                        .addComponent(txtAmbulatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,11 +161,11 @@ public class VReservarCita extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelHasta))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtAmbulatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(92, 92, 92)
                         .addComponent(btnBuscar))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -216,7 +214,7 @@ public class VReservarCita extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -225,10 +223,10 @@ public class VReservarCita extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -239,6 +237,38 @@ public class VReservarCita extends javax.swing.JDialog {
 
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        // TODO add your handling code here:
+
+        //No se ha seleccionado fila
+        int index = tablaHoras.getSelectedRow();
+        if (index >= 0) {
+
+            //Obtenemos modelo
+            ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());
+
+            //Auxiliar
+            Ambulatorio amb = th.obtenerAmbulatorio(index);
+            String[] tipo = ((String) comboTipo.getSelectedItem()).split(",");
+            TipoCita tipocita = new TipoCita(tipo[0], tipo[1], "");
+
+            //Insertamos la cita
+            Cita cita = new Cita(th.obtenerFechaHora(index),
+                    pa.getCIP(), th.obtenerConsulta(amb).getIdentificador(),
+                    amb.getCodigo(),
+                    tipocita.getNombre(),
+                    tipocita.getEspecialidad());
+
+            fa.insertarCita(cita, pa);
+
+            //Salimos
+            this.dispose();
+
+        } else {
+            fa.muestraExcepcion("¡No se ha seleccionado una hora!");
+        }
+    }//GEN-LAST:event_btnReservarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
@@ -259,7 +289,7 @@ public class VReservarCita extends javax.swing.JDialog {
                 if (!inicio.after(fin)) {
 
                     //Comprobamos que la fecha no sea mayor a 3 dias
-                    if (inicio.toLocalDate().plusDays(3).isAfter(fin.toLocalDate())) {
+                    if (fin.toLocalDate().isAfter(inicio.toLocalDate().plusDays(3))) {
                         fin = Date.valueOf(inicio.toLocalDate().plusDays(3));
                     }
 
@@ -278,37 +308,6 @@ public class VReservarCita extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-        // TODO add your handling code here:
-
-        //No se ha seleccionado fila
-        int index = tablaHoras.getSelectedRow();
-        if (index >= 0) {
-
-            //Obtenemos modelo
-            ModeloTablaHoras th = ((ModeloTablaHoras) tablaHoras.getModel());
-
-            //Auxiliar
-            Ambulatorio amb = th.obtenerAmbulatorio(index);
-            TipoCita tipocita = (TipoCita) comboTipo.getSelectedItem();
-
-            //Insertamos la cita
-            Cita cita = new Cita(th.obtenerFechaHora(index),
-                    pa.getCIP(), th.obtenerConsulta(amb).getIdentificador(),
-                    amb.getCodigo(),
-                    tipocita.getNombre(),
-                    tipocita.getEspecialidad());
-
-            fa.insertarCita(cita, pa);
-
-            //Salimos
-            this.dispose();
-
-        } else {
-            fa.muestraExcepcion("¡No se ha seleccionado una hora!");
-        }
-    }//GEN-LAST:event_btnReservarActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
         // TODO add your handling code here:
