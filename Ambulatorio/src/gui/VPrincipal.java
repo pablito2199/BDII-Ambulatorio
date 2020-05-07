@@ -419,6 +419,9 @@ public class VPrincipal extends javax.swing.JFrame {
         textoProvincia.setText(null);
         textoTelefono.setText(null);
         textoFondos.setText(null);
+        btnPersonal.setEnabled(false);
+        btnConsultas.setEnabled(false);
+        btnSalaUrgencias.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Botón Actualizar, crea un nuevo ambulatorio o lo modifica
