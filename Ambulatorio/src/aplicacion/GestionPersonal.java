@@ -1,7 +1,7 @@
 package aplicacion;
 
 import aplicacion.clases.PersonalSanitario;
-import gui.FachadaGui;
+import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 import java.math.BigInteger;
 import java.util.ArrayList;

@@ -14,11 +14,11 @@ import java.sql.Timestamp;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import gui.FachadaGui;
+import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
-import gui.VCitasPendientes;
-import gui.VPacientes;
-import gui.VPersonal;
+import gui.ventanas.VCitasPendientes;
+import gui.ventanas.VPacientes;
+import gui.ventanas.VPersonal;
 
 public class GestionCitas {
 
