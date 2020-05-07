@@ -6,11 +6,10 @@ import aplicacion.clases.Especialidad;
 public class VConsultas extends javax.swing.JDialog {
 
     private VPrincipal padre;                                //Enlace a la ventana padre 
-    private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
+    private aplicacion.FachadaAplicacion fa;           //Enlace a la fachada de aplicación
     private java.util.List<Consulta> consultas;              //Lista de consultas
-    private Integer ambulatorio;                             //Ambulatorio actual
-    private java.util.List<Integer> identificadores;         //Lista de identificadores de las consultas
-    
+    private Integer ambulatorio;                           //Ambulatorio actual
+
     /**
      *
      * @param parent
@@ -41,7 +40,7 @@ public class VConsultas extends javax.swing.JDialog {
         } else {
             btnEliminarConsultas.setEnabled(false);
         }
-        
+
         //Introducimos especialidades
         seleccionEspecialidades.removeAllItems();
         for (Especialidad especialidad : fa.consultarEspecialidades()) {
@@ -272,6 +271,7 @@ public class VConsultas extends javax.swing.JDialog {
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
         seleccionEspecialidades.setSelectedItem(fa.consultarConsultas(m.getElementAt(lstConsultas.getSelectedIndex()), ambulatorio, null).get(0).getEspecialidad());
+
     }//GEN-LAST:event_lstConsultasMouseClicked
 
     //botón de Regresar, vuelve a la ventana principal
@@ -341,7 +341,7 @@ public class VConsultas extends javax.swing.JDialog {
         lstConsultas.setModel(m);
         Integer id = null;
         //buscamos las consultas existentes
-        if(!textoNumeroConsulta.getText().equals("")) {
+        if (!textoNumeroConsulta.getText().equals("")) {
             id = Integer.parseInt(textoNumeroConsulta.getText());
         }
         consultas = fa.consultarConsultas(id, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
