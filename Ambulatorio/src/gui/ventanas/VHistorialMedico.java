@@ -133,7 +133,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
 
         etiquetaTotalResultados1.setText("Total resultados:");
 
-        tablaHistorialMedico.setModel(new gui.ventanas.Modelos.ModeloTablaHistorialMedico());
+        tablaHistorialMedico.setModel(new gui.Modelos.ModeloTablaHistorialMedico());
         tablaHistorialMedico.setAutoscrolls(false);
         tablaHistorialMedico.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaHistorialMedico);
