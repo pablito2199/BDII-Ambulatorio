@@ -5,9 +5,10 @@ import gui.Modelos.ModeloTablaPacientes;
 import aplicacion.clases.PersonalSanitario;
 
 public class VPersonal extends javax.swing.JDialog {
-
+    
     private final VPrincipal padre;                           //Enlace a la ventana padre
-    private final aplicacion.FachadaAplicacion fa;      //Enlace a la fachada de aplicación
+    private final aplicacion.FachadaAplicacion fa;            //Enlace a la fachada de aplicación
+    private final Integer ambulatorio;                        //Ambulatorio
 
     /**
      * Creates new form VPersonal
@@ -17,12 +18,13 @@ public class VPersonal extends javax.swing.JDialog {
      * @param fa
      */
     //Constructor de la ventana
-    public VPersonal(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
+    public VPersonal(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Integer ambulatorio) {
         super(parent, modal);
         this.fa = fa;
         initComponents();
         padre = (VPrincipal) parent;
-
+        this.ambulatorio = ambulatorio;
+        
         btnCitas.setEnabled(false);
     }
 
@@ -142,7 +144,7 @@ public class VPersonal extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        tablaPersonal.setModel(new ModeloTablaPacientes());
+        tablaPersonal.setModel(new ModeloTablaPersonal());
         tablaPersonal.setAutoscrolls(false);
         tablaPersonal.getTableHeader().setReorderingAllowed(false);
         tablaPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,8 +352,7 @@ public class VPersonal extends javax.swing.JDialog {
         textoDNI.setText(null);
         textoTelefono.setText(null);
         textoSueldo.setText(null);
-        btnAdmin.setEnabled(false);
-        btnSanitario.setEnabled(false);
+        //Deshabilitamos el botón de Citas
         btnCitas.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -362,20 +363,17 @@ public class VPersonal extends javax.swing.JDialog {
 
     //Función que permite recoger los datos de un trabajador con un click en la tabla de personal
     private void tablaPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPersonalMouseClicked
-
-        //Obtenemos tabla
-        ModeloTablaPersonal tp = ((ModeloTablaPersonal) tablaPersonal.getModel());
-
-        int index = tablaPersonal.getSelectedRow();
-        if (index >= 0) {
-
-            //Comprobamos si es personal sanitario
-            if (tp.obtenerPersonal(index) instanceof PersonalSanitario) {
-
-                //Permitimos acceder a las citas
-                btnCitas.setEnabled(true);
-            }
-        }
+        //Creamos el modelo de tabla personal
+        ModeloTablaPersonal m = (ModeloTablaPersonal) tablaPersonal.getModel();
+        //Obtenemos todos los datos del trabajador (fila) en el que se hizo click y los metemos en los campos
+        textoDNI.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getDNI());
+        textoNombre.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getNombre());
+        textoAntiguedad.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getAntiguedad());
+        textoClase.setText(tablaPersonal.getValueAt(tablaPersonal.getSelectedRow(), 3).toString());
+        textoFechaIncorporacion.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getFechaIncorporacion().toString());
+        textoTelefono.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getTelefono());
+        textoSueldo.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getSueldo().toString());
+        btnCitas.setEnabled(true);
     }//GEN-LAST:event_tablaPersonalMouseClicked
 
     //Botón Citas, abre la ventana de citas del médico
@@ -418,20 +416,20 @@ public class VPersonal extends javax.swing.JDialog {
     private javax.swing.JTextField textoSueldo;
     private javax.swing.JTextField textoTelefono;
     // End of variables declaration//GEN-END:variables
-    
+
     //Función que permite buscar un trabajador en la base de datos
     public void buscarPersonal() {
         //Creamos el modelo de tabla personal
-        ModeloTablaPersonal  m = (ModeloTablaPersonal) tablaPersonal.getModel();
-        m.setFilas(fa.consultarPersonal(textoDNI.getText(), textoNombre.getText()));
+        ModeloTablaPersonal m = (ModeloTablaPersonal) tablaPersonal.getModel();
+        m.setFilas(fa.consultarPersonal(textoDNI.getText(), textoNombre.getText(), ambulatorio));
         //Si hay coincidencias
         if (m.getRowCount() > 0) {
             //Seleccionamos la primera
             tablaPersonal.setRowSelectionInterval(0, 0);
-            //Obtenemos todos los datos del trabajador (fila) en el que se hizo click y los metemos en los campos
+            //Autocompletamos con los datos seleccionados
             textoDNI.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getDNI());
             textoNombre.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getNombre());
-            textoAntiguedad.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getDNI());
+            textoAntiguedad.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getAntiguedad());
             textoClase.setText(tablaPersonal.getValueAt(tablaPersonal.getSelectedRow(), 3).toString());
             textoFechaIncorporacion.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getFechaIncorporacion().toString());
             textoTelefono.setText(m.obtenerPersonal(tablaPersonal.getSelectedRow()).getTelefono());

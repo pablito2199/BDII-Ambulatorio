@@ -1,9 +1,11 @@
 package aplicacion;
 
 import aplicacion.clases.*;
-import gui.ventanas.VCitasPendientes;
-import gui.ventanas.VPacientes;
-import gui.ventanas.VPersonal;
+import gui.VCitasPendientes;
+import gui.VPacientes;
+import gui.VPersonal;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
@@ -54,6 +56,14 @@ public class FachadaAplicacion {
     public void muestraMensaje(String e) {
         fgui.muestraMensaje(e);
     }
+    
+    //ENCRIPTACION
+    public String encrypt(String plainText, PublicKey publicKey) throws Exception{
+        return gper.encrypt(plainText, publicKey);
+    }
+    public String decrypt(String cipherText, PrivateKey privateKey) throws Exception{
+        return gper.decrypt(cipherText, privateKey);
+    }
 
 /////////////////////////
 //GESTIÓN DE PERSONAL
@@ -69,8 +79,8 @@ public class FachadaAplicacion {
     }
 
     //Permite buscar personal sanitario por su dni y nombre
-    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre) {
-        return gper.consultarPersonal(dni, nombre);
+    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre, Integer ambulatorio) {
+        return gper.consultarPersonal(dni, nombre, ambulatorio);
     }
 
     //Permite abrir una nueva ventana de usuarios para autentificarse
@@ -79,8 +89,8 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal() {
-        gper.nuevaVPersonal();
+    public void nuevaVPersonal(Integer ambulatorio) {
+        gper.nuevaVPersonal(ambulatorio);
     }
 
 /////////////////////////

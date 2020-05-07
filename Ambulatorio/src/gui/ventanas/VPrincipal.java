@@ -481,7 +481,9 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Botoón Personal, abre una nueva ventana de personal
     private void btnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalActionPerformed
-        fa.nuevaVPersonal();
+        //Obtenemos el ambulatorio deseado de la tabla
+        ModeloTablaAmbulatorios ma = (ModeloTablaAmbulatorios) tablaAmbulatorios.getModel();
+        fa.nuevaVPersonal(ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo());
     }//GEN-LAST:event_btnPersonalActionPerformed
 
     //Al pulsar sobre un ambulatorio de la tabla, se colocan todos sus datos en los campos de texto 

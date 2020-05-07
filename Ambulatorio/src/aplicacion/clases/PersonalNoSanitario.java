@@ -7,8 +7,8 @@ public class PersonalNoSanitario extends Personal {
     private String clase;
 
     //Constructor
-    public PersonalNoSanitario(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo, String clase) {
-        super(ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo);
+    public PersonalNoSanitario(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo, String antiguedad, String clase) {
+        super(ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo, antiguedad);
         this.clase = clase;
     }
 
