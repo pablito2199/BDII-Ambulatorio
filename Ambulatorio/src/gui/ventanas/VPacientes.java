@@ -441,7 +441,6 @@ public class VPacientes extends javax.swing.JDialog {
         Paciente paciente = new Paciente(varCIP.getText());
         //Llamamos al borrado de pacientes
         fa.borrarPaciente(paciente);
-        fa.muestraMensaje("Paciente eliminado correctamente.");
         //Ponemos todos los campos a NULL
         varCIP.setText(null);
         varNSS.setText(null);

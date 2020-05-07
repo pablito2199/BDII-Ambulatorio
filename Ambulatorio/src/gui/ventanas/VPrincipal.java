@@ -405,7 +405,6 @@ public class VPrincipal extends javax.swing.JFrame {
         Integer codigoAmbulatorio = ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo();
         //Eliminamos el ambulatorio
         fa.borrarAmbulatorio(codigoAmbulatorio);
-        fa.muestraMensaje("Ambulatorio eliminado correctamente.");
         //Ponemos todos los campos de texto en blanco
         textoAnoConstruccion.setText(null);
         textoAntiguedad.setText(null);

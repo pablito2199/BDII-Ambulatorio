@@ -86,6 +86,7 @@ public class DAOPacientes extends AbstractDAO {
             stmPaciente.setString(1, paciente.getCIP());  //CIP del paciente
             //Actualizamos
             stmPaciente.executeUpdate();
+        this.getFachadaAplicacion().muestraMensaje("Paciente eliminado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {

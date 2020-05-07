@@ -80,6 +80,7 @@ public class DAOConsultas extends AbstractDAO {
             }
             //Actualizamos
             stmConsulta.executeUpdate();
+            this.getFachadaAplicacion().muestraMensaje("Consulta eliminada correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {

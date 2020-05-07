@@ -76,6 +76,7 @@ public class DAOAmbulatorios extends AbstractDAO {
             stmAmbulatorio.setInt(1, ambulatorio);  //CIP del ambulatorio
             //Actualizamos
             stmAmbulatorio.executeUpdate();
+        this.getFachadaAplicacion().muestraMensaje("Ambulatorio eliminado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {

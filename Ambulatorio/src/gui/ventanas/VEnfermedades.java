@@ -271,7 +271,6 @@ public class VEnfermedades extends javax.swing.JDialog {
         String nombre = mListaE.getElementAt(lstEnfermedades.getSelectedIndex());
         //borramos la enfermedad seleccionada
         fa.borrarEnfermedad(nombre);
-        fa.muestraMensaje("Enfermedad eliminada correctamente.");
         textoNombre.setText(null);
         textoDescripcion.setText(null);
         //actualizamos la lista de enfermedades

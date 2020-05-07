@@ -323,7 +323,6 @@ public class VConsultas extends javax.swing.JDialog {
         //Intentamos borrar la consulta
         if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()) > 1) {
             fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
-            fa.muestraMensaje("Consulta eliminada correctamente.");
         } else {
             fa.muestraExcepcion("¡¡No puedes eliminar esta consulta, es la única de la especialidad!!");
         }
