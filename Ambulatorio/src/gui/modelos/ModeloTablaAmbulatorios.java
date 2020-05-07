@@ -1,4 +1,4 @@
-package gui.Modelos;
+package gui.modelos;
 
 import aplicacion.clases.Ambulatorio;
 import javax.swing.table.*;

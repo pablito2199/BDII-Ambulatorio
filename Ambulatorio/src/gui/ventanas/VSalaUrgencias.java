@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaUrgencias;
+import gui.modelos.ModeloTablaUrgencias;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Urgencia;
@@ -184,13 +184,9 @@ public class VSalaUrgencias extends javax.swing.JDialog {
                 //Feedback
                 fa.muestraMensaje("Urgencia atendida correctamente.");
             }
-            else {
-               
-                //Mostramos fallo y rebuscamos urgencias
-                fa.muestraExcepcion("Error al atedender la urgencia.");
-                tu.setFilas(fa.urgenciasPendientes(ambulatorio));
+            
+            tu.setFilas(fa.urgenciasPendientes(ambulatorio));
 
-            }
         }
     }//GEN-LAST:event_btnAtenderActionPerformed
 

@@ -1,7 +1,7 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloListaIntegers;
-import gui.Modelos.ModeloListaStrings;
+import gui.modelos.ModeloListaIntegers;
+import gui.modelos.ModeloListaStrings;
 import aplicacion.clases.Consulta;
 import aplicacion.clases.Especialidad;
 

@@ -1,4 +1,4 @@
-package gui.Modelos;
+package gui.modelos;
 
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
@@ -144,7 +144,7 @@ public class ModeloTablaHoras extends AbstractTableModel {
 
             //Comprobamos si la consulta devuelve resultado (tiene el tipo de cita especificado)
             Consulta co = fa.menorNumeroPacientes(ambulatorio.getCodigo(), tipocita.getEspecialidad());
-            if (co.getIdentificador() != null) {
+            if (co != null && co.getIdentificador() != null) {
 
                 //Obtenemos citas no posibles para el paciente
                 consultas.put(ambulatorio, co);

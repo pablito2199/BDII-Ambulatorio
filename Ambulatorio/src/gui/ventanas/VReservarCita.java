@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaHoras;
+import gui.modelos.ModeloTablaHoras;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Cita;
@@ -287,8 +287,8 @@ public class VReservarCita extends javax.swing.JDialog {
             inicio = Date.valueOf(txtDesde.getText());
             fin = Date.valueOf(txtHasta.getText());
 
-            //Comprobamos que se busque a partir del dia de hoy
-            if (!LocalDate.now().isAfter(inicio.toLocalDate())) //Vemos si inicio es igual o mayor a la actual
+            //Comprobamos que se busque a partir del dia posterior
+            if (!LocalDate.now().plusDays(1).isAfter(inicio.toLocalDate())) //Vemos si inicio es igual o mayor al posterior
             {
                 if (!inicio.after(fin)) {
 
@@ -308,7 +308,7 @@ public class VReservarCita extends javax.swing.JDialog {
                     fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
                 }
             } else {
-                fa.muestraExcepcion("¡La fecha de inicio es anterior a la actual!");
+                fa.muestraExcepcion("¡La fecha de inicio no puede ser menor al día posterior!");
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

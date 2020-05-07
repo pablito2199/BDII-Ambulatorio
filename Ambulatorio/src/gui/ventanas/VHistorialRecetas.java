@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaHistorialRecetas;
+import gui.modelos.ModeloTablaHistorialRecetas;
 import aplicacion.clases.Paciente;
 import java.sql.Date;
 import java.sql.Timestamp;

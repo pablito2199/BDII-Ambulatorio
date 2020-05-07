@@ -101,7 +101,6 @@ public class Cita {
     public boolean equals(Object obj) {
         if (obj instanceof Cita) {
             return ((Cita) obj).getFechaHoraInicio().equals(this.fechaHoraInicio)
-                    && ((Cita) obj).getPaciente().equals(this.paciente)
                     && ((Cita) obj).getAmbulatorio().equals(this.ambulatorio)
                     && ((Cita) obj).getConsulta().equals(this.consulta);
         }

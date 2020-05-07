@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaAmbulatoriosUrgencias;
+import gui.modelos.ModeloTablaAmbulatoriosUrgencias;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Paciente;

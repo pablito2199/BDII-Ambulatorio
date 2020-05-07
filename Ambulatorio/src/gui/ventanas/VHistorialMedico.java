@@ -1,6 +1,6 @@
 package gui.ventanas;
 
-import gui.Modelos.ModeloTablaHistorialMedico;
+import gui.modelos.ModeloTablaHistorialMedico;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.TipoCita;
 
@@ -103,7 +103,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(2, 2, 2))
                     .addComponent(btnRegresar, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -138,7 +138,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
 
         comboTipo.setToolTipText("Tipo de cita");
 
-        tablaHistorialMedico.setModel(new gui.Modelos.ModeloTablaHistorialMedico());
+        tablaHistorialMedico.setModel(new gui.modelos.ModeloTablaHistorialMedico());
         tablaHistorialMedico.setToolTipText("Tabla de citas");
         tablaHistorialMedico.setAutoscrolls(false);
         tablaHistorialMedico.getTableHeader().setReorderingAllowed(false);

@@ -1,27 +1,27 @@
-package gui.Modelos;
+package gui.modelos;
 
-import aplicacion.clases.PersonalSanitario;
+import aplicacion.clases.Urgencia;
 import javax.swing.table.*;
 
-public class ModeloTablaPersonal extends AbstractTableModel {
+public class ModeloTablaUrgencias extends AbstractTableModel {
 
-    private java.util.List<PersonalSanitario> personal;   //Listado del personal de la tabla
+    private java.util.List<Urgencia> urgencias;   //Listado de usuarios de la tabla
 
     //Constructor
-    public ModeloTablaPersonal() {
-        this.personal = new java.util.ArrayList<>();
+    public ModeloTablaUrgencias() {
+        this.urgencias = new java.util.ArrayList<Urgencia>();
     }
 
     //Permite recuperar el número de columnas
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
 
     //Permite recuperar el número de filas
     @Override
     public int getRowCount() {
-        return personal.size();
+        return urgencias.size();
     }
 
     //Permite recuperar el nombre de las columnas
@@ -29,25 +29,21 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     public String getColumnName(int col) {
         String nombre = "";
         switch (col) {
-            //La primera columna es el DNI  del trabajador
+            //Prioridad general
             case 0:
-                nombre = "DNI";
+                nombre = "Prioridad";
                 break;
-            //La segunda el nombre
+            //Nombre del paciente
             case 1:
                 nombre = "Nombre";
                 break;
-            //La tercera el tipo
+            //Gravedad del paciente
             case 2:
-                nombre = "Tipo";
+                nombre = "Gravedad";
                 break;
-            //La cuarta la clase
+            //Soborno aplicado
             case 3:
-                nombre = "Clase";
-                break;
-            //La quinta es el teléfono
-            case 4:
-                nombre = "Teléfono";
+                nombre = "Soborno";
                 break;
         }
         //Devolvemos el nombre de la columna
@@ -59,25 +55,21 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     public Class getColumnClass(int col) {
         Class clase = null;
         switch (col) {
-            //El DNI es un String
+            //Prioridad es un Integer
             case 0:
-                clase = java.lang.String.class;
+                clase = java.lang.Integer.class;
                 break;
-            //El nombre es un String
+            //Nombre es un String
             case 1:
                 clase = java.lang.String.class;
                 break;
-            //El tipo es un String
+            //Gravedad es un Integer
             case 2:
-                clase = java.lang.String.class;
+                clase = java.lang.Integer.class;
                 break;
-            //La clase es un String
+            //Soborno es un Float
             case 3:
-                clase = java.lang.String.class;
-                break;
-            //El teléfono es un String
-            case 4:
-                clase = java.lang.String.class;
+                clase = java.lang.Float.class;
                 break;
         }
         //Devolvemos el tipo especificado
@@ -95,43 +87,45 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int col) {
         Object resultado = null;
-
         switch (col) {
-            //Permite recuperar el ID del usuario
+            //Permite recuperar la prioridad
             case 0:
-                resultado = personal.get(row).getDNI();
+                resultado = urgencias.get(row).getPrioridad();
                 break;
             //Permite recuperar el nombre
             case 1:
-                resultado = personal.get(row).getNombre();
+                resultado = urgencias.get(row).getNombre();
                 break;
-            //Permite recuperar el tipo
+            //Permite recuperar la gravedad
             case 2:
-                resultado = "Sanitario";
+                resultado = urgencias.get(row).getGravedad();
                 break;
-            //Permite recuperar la clase del trabajador
+            //Permite recuperar el soborno
             case 3:
-                resultado = "Sanitario";
-                break;
-            //Permite recuperar el telefono
-            case 4:
-                resultado = personal.get(row).getTelefono();
-                break;
+                resultado = urgencias.get(row).getSoborno();
         }
         //Devolvemos el valor recuperado
         return resultado;
     }
 
     //Permite sobreescribir las filas de la tabla
-    public void setFilas(java.util.List<PersonalSanitario> personal) {
-        this.personal = personal;
+    public void setFilas(java.util.List<Urgencia> urgencias) {
+        this.urgencias = urgencias;
         //Notifica a los listeners del cambio
         fireTableDataChanged();
     }
 
-    //Permite recuperar un usuario determinado
-    public PersonalSanitario obtenerPersonal(int i) {
-        return this.personal.get(i);
+    //Permite recuperar la primera urgencia
+    public Urgencia obtenerUrgencia() {
+
+        //Obtenemos urgencia
+        Urgencia u = this.urgencias.get(0);
+
+        //Eliminamos urgencia y actualizamos
+        this.urgencias.remove(u);
+        fireTableDataChanged();
+
+        return u;
     }
 
 }
