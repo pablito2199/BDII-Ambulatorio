@@ -210,6 +210,9 @@ public class VUrgencias extends javax.swing.JDialog {
 
             fa.insertarUrgencia(u);
 
+            //Feedback
+            fa.muestraMensaje("Urgencia añadida correctamente.");
+
             //Añadimos urgencia al ambulatorio
             this.dispose();
 
