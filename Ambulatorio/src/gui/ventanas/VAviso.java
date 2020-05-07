@@ -40,6 +40,7 @@ public class VAviso extends javax.swing.JDialog {
         setTitle("Mensaje de error");
 
         btnCerrar.setText("Cerrar");
+        btnCerrar.setToolTipText("Cierra la ventana para continuar con las operaciones");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);

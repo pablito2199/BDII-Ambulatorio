@@ -65,6 +65,7 @@ public class VRecetar extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRecetar.setText("Recetar");
+        btnRecetar.setToolTipText("Receta lo indicado");
         btnRecetar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecetarActionPerformed(evt);
@@ -72,6 +73,7 @@ public class VRecetar extends javax.swing.JDialog {
         });
 
         btnSalir.setText("Regresar");
+        btnSalir.setToolTipText("Vuelve a la ventana anterior");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -103,15 +105,16 @@ public class VRecetar extends javax.swing.JDialog {
 
         labelMedicamento.setText("Medicamento:");
 
-        varMedicamento.setToolTipText("Domicilio");
+        varMedicamento.setToolTipText("Medicamento de la receta");
 
-        varCantidad.setToolTipText("Nombre de usuario");
+        varCantidad.setToolTipText("Fecha fin de la receta");
 
         labelDescripcion.setText("Descripcion:");
 
-        varFechaFin.setToolTipText("Nombre del usuario");
+        varFechaFin.setToolTipText("Cantidad de medicamento");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("Busca medicamentos");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -128,10 +131,12 @@ public class VRecetar extends javax.swing.JDialog {
 
         varDescripcion.setColumns(20);
         varDescripcion.setRows(5);
+        varDescripcion.setToolTipText("Descripción de la receta");
         jScrollPane1.setViewportView(varDescripcion);
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        listaMedicamentos.setToolTipText("Lista de medicamentos");
         jScrollPane3.setViewportView(listaMedicamentos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

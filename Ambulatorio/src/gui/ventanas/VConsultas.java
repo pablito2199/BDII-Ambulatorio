@@ -89,8 +89,10 @@ public class VConsultas extends javax.swing.JDialog {
         etiquetaNumeroConsultasAmbulatorio.setText("Total:");
 
         textoTotalConsultas.setEditable(false);
+        textoTotalConsultas.setToolTipText("Total de consultas del resultado");
 
         lstConsultas.setModel(new ModeloListaStrings());
+        lstConsultas.setToolTipText("Lista de las consultas");
         lstConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstConsultasMouseClicked(evt);
@@ -100,8 +102,10 @@ public class VConsultas extends javax.swing.JDialog {
 
         etiquetaNumeroConsulta.setText("Número Consulta:");
 
+        textoNumeroConsulta.setToolTipText("Número de la consulta");
+
         btnBuscar.setText("Buscar");
-        btnBuscar.setToolTipText("");
+        btnBuscar.setToolTipText("Busca consultas");
         btnBuscar.setActionCommand("Actualizar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +119,8 @@ public class VConsultas extends javax.swing.JDialog {
         btnGestionarMedicos.setEnabled(false);
 
         etiquetaEspecialidad.setText("Especialidad");
+
+        seleccionEspecialidades.setToolTipText("Especialidad de la consulta");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,6 +186,7 @@ public class VConsultas extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -187,6 +194,7 @@ public class VConsultas extends javax.swing.JDialog {
         });
 
         btnLimpiarConsultas.setText("Limpiar");
+        btnLimpiarConsultas.setToolTipText("Pone en blanco los cuadros de texto, así como limpia la lista");
         btnLimpiarConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarConsultasActionPerformed(evt);
@@ -194,6 +202,7 @@ public class VConsultas extends javax.swing.JDialog {
         });
 
         btnAnadirConsultas.setText("Añadir");
+        btnAnadirConsultas.setToolTipText("Añade una consulta");
         btnAnadirConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnadirConsultasActionPerformed(evt);
@@ -201,6 +210,7 @@ public class VConsultas extends javax.swing.JDialog {
         });
 
         btnEliminarConsultas.setText("Eliminar");
+        btnEliminarConsultas.setToolTipText("Elimina una consulta");
         btnEliminarConsultas.setEnabled(false);
         btnEliminarConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

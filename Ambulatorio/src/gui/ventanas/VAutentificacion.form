@@ -90,7 +90,7 @@
     <Component class="javax.swing.JTextField" name="textoID">
       <Properties>
         <Property name="text" type="java.lang.String" value="00000000A"/>
-        <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
+        <Property name="toolTipText" type="java.lang.String" value="DNI del usuario"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="etiquetaConstrasena">
@@ -101,6 +101,7 @@
     <Component class="javax.swing.JButton" name="btnIngresar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingresar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Accede a la aplicaci&#xf3;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarActionPerformed"/>
@@ -109,6 +110,7 @@
     <Component class="javax.swing.JButton" name="btnSalir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
+        <Property name="toolTipText" type="java.lang.String" value="Sale de la aplicaci&#xf3;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
@@ -125,7 +127,7 @@
     <Component class="javax.swing.JPasswordField" name="textoContrasena">
       <Properties>
         <Property name="text" type="java.lang.String" value="a"/>
-        <Property name="toolTipText" type="java.lang.String" value="Contrase&#xf1;a"/>
+        <Property name="toolTipText" type="java.lang.String" value="Contrase&#xf1;a del usuario"/>
       </Properties>
     </Component>
   </SubComponents>

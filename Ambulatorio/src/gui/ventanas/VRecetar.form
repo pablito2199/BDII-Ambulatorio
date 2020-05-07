@@ -86,6 +86,7 @@
         <Component class="javax.swing.JButton" name="btnRecetar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Recetar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Receta lo indicado"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRecetarActionPerformed"/>
@@ -94,6 +95,7 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Vuelve a la ventana anterior"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
@@ -213,12 +215,12 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varMedicamento">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Domicilio"/>
+            <Property name="toolTipText" type="java.lang.String" value="Medicamento de la receta"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varCantidad">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre de usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Fecha fin de la receta"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelDescripcion">
@@ -228,12 +230,13 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varFechaFin">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nombre del usuario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Cantidad de medicamento"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca medicamentos"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
@@ -270,6 +273,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="toolTipText" type="java.lang.String" value="Descripci&#xf3;n de la receta"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -291,6 +295,7 @@
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                   <StringArray count="0"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Lista de medicamentos"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

@@ -71,6 +71,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lstEnfermedades.setModel(new ModeloListaStrings());
+        lstEnfermedades.setToolTipText("Lista de todas las enfermedades");
         lstEnfermedades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstEnfermedadesMouseClicked(evt);
@@ -80,15 +81,18 @@ public class VEnfermedades extends javax.swing.JDialog {
 
         etiquetaNombre.setText("Nombre:");
 
+        textoNombre.setToolTipText("Nombre de la enfermedad");
+
         etiquetaDescripcion.setText("Descripción:");
 
         textoDescripcion.setColumns(20);
         textoDescripcion.setLineWrap(true);
         textoDescripcion.setRows(5);
+        textoDescripcion.setToolTipText("Descripción de la enfermedad");
         jScrollPane1.setViewportView(textoDescripcion);
 
         btnBuscar.setText("Buscar");
-        btnBuscar.setToolTipText("");
+        btnBuscar.setToolTipText("Busca enfermedades");
         btnBuscar.setActionCommand("Actualizar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +145,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -148,6 +153,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         });
 
         btnEliminarEnfermedad.setText("Eliminar");
+        btnEliminarEnfermedad.setToolTipText("Elimina una enfermedad");
         btnEliminarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarEnfermedadActionPerformed(evt);
@@ -155,6 +161,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         });
 
         btnActualizarEnfermedad.setText("Actualizar");
+        btnActualizarEnfermedad.setToolTipText("Añade/Modifica una enfermedad");
         btnActualizarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarEnfermedadActionPerformed(evt);
@@ -162,6 +169,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         });
 
         btnLimpiarEnfermedad.setText("Limpiar");
+        btnLimpiarEnfermedad.setToolTipText("Pone en blanco los cuadros de texto, así como limpia la lista");
         btnLimpiarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarEnfermedadActionPerformed(evt);

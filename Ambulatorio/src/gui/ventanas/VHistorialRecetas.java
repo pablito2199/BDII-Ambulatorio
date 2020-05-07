@@ -63,6 +63,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setToolTipText("Pone en blanco los cuadros de texto, así como limpia la tabla");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -70,6 +71,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -103,9 +105,10 @@ public class VHistorialRecetas extends javax.swing.JDialog {
 
         etiquetaDesde.setText("Desde:");
 
-        varDesde.setToolTipText("Domicilio");
+        varDesde.setToolTipText("Recetas desde la fecha");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("Busca recetas");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -114,24 +117,25 @@ public class VHistorialRecetas extends javax.swing.JDialog {
 
         etiquetaHasta.setText("Hasta:");
 
-        varHasta.setToolTipText("Domicilio");
+        varHasta.setToolTipText("Recetas hasta la fecha");
 
         etiquetaTotalResultados.setText("Total resultados:");
 
         varTotal.setEditable(false);
-        varTotal.setToolTipText("Domicilio");
+        varTotal.setToolTipText("Recetas encontradas");
 
         etiquetaResultados.setText("Resultados");
 
         etiquetaMedicamento.setText("Medicamento:");
 
-        varMedicamentos.setToolTipText("Domicilio");
+        varMedicamentos.setToolTipText("Medicamento de la receta");
 
         etiquetaNumeroDeReceta.setText("Número de receta:");
 
-        varNumeroDeReceta.setToolTipText("Domicilio");
+        varNumeroDeReceta.setToolTipText("Número de la receta");
 
         tablaHistorialRecetas.setModel(new ModeloTablaHistorialRecetas());
+        tablaHistorialRecetas.setToolTipText("Tabla de recetas");
         tablaHistorialRecetas.setAutoscrolls(false);
         tablaHistorialRecetas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaHistorialRecetas);

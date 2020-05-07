@@ -94,6 +94,7 @@
         <Component class="javax.swing.JButton" name="btnLimpiar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pone en blanco los cuadros de texto, as&#xed; como limpia la tabla"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
@@ -102,6 +103,7 @@
         <Component class="javax.swing.JButton" name="btnActualizarPaciente">
           <Properties>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
+            <Property name="toolTipText" type="java.lang.String" value="A&#xf1;ade/Modifica el paciente"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarPacienteActionPerformed"/>
@@ -110,6 +112,7 @@
         <Component class="javax.swing.JButton" name="btnBorrar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Elimina el paciente"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBorrarActionPerformed"/>
@@ -118,6 +121,7 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Vuelve a la ventana anterior"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
@@ -194,6 +198,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new ModeloTablaPacientes()" type="code"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Tabla de pacientes"/>
                 <Property name="autoscrolls" type="boolean" value="false"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
@@ -211,7 +216,7 @@
         <Component class="javax.swing.JButton" name="btnNuevaUrgencia">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nueva Urgencia"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de urgencias"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -221,6 +226,7 @@
         <Component class="javax.swing.JButton" name="btnEnfermedades">
           <Properties>
             <Property name="text" type="java.lang.String" value="Enfermedades"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de enfermerdades"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -230,6 +236,7 @@
         <Component class="javax.swing.JButton" name="btnSolicitarCita">
           <Properties>
             <Property name="text" type="java.lang.String" value="Solicitar Cita"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de reservar citas"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -239,6 +246,7 @@
         <Component class="javax.swing.JButton" name="btnCitasPendientes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Citas Pendientes"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de citas pendientes"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -248,6 +256,7 @@
         <Component class="javax.swing.JButton" name="btnHistorialClinico">
           <Properties>
             <Property name="text" type="java.lang.String" value="Historial M&#xe9;dico"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de historial m&#xe9;dico"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -257,6 +266,7 @@
         <Component class="javax.swing.JButton" name="btnHistorialRecetas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Historial Recetas"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de historial de recetas"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -423,17 +433,17 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varDireccion">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Direcci&#xf3;n Postal"/>
+            <Property name="toolTipText" type="java.lang.String" value="Direcci&#xf3;n Postal del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varDNI">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Documento Nacional de Identidad"/>
+            <Property name="toolTipText" type="java.lang.String" value="Documento Nacional de Identidad del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varNSS">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de la Seguridad Social"/>
+            <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de la Seguridad Social del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelNSS">
@@ -448,12 +458,12 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varSexo">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Sexo"/>
+            <Property name="toolTipText" type="java.lang.String" value="Sexo del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="varGrupoSanguineo">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Grupo Sangu&#xed;neo"/>
+            <Property name="toolTipText" type="java.lang.String" value="Grupo Sangu&#xed;neo del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelGrupoSanguineo">
@@ -473,7 +483,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varCIP">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="C&#xf3;digo de Identificaci&#xf3;n Personal"/>
+            <Property name="toolTipText" type="java.lang.String" value="C&#xf3;digo de Identificaci&#xf3;n Personal del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelNacionalidad">
@@ -483,7 +493,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varNacionalidad">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Nacionalidad"/>
+            <Property name="toolTipText" type="java.lang.String" value="Nacionalidad del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelFechaNacimiento">
@@ -493,7 +503,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varFechaNacimiento">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Fecha de Nacimiento"/>
+            <Property name="toolTipText" type="java.lang.String" value="Fecha de Nacimiento del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelTelefono">
@@ -503,12 +513,13 @@
         </Component>
         <Component class="javax.swing.JTextField" name="varTelefono">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Tel&#xe9;fono"/>
+            <Property name="toolTipText" type="java.lang.String" value="Tel&#xe9;fono del paciente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscarUsuario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca pacientes"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarUsuarioActionPerformed"/>

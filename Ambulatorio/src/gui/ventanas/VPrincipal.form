@@ -13,19 +13,21 @@
         <Menu class="javax.swing.JMenu" name="menuEnfermedades">
           <Properties>
             <Property name="text" type="java.lang.String" value="Enfermedades"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de Enfermedades"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuEnfermedadesMouseReleased"/>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuEnfermedadesMouseClicked"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuEnfermedadesMouseReleased"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuPacientes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pacientes"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de pacientes"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuPacientesMouseReleased"/>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuPacientesMouseClicked"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuPacientesMouseReleased"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuEspecialidades">
@@ -249,6 +251,7 @@
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca ambulatorios"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
@@ -289,7 +292,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textoDireccion">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Direcci&#xf3;n Postal"/>
+            <Property name="toolTipText" type="java.lang.String" value="Direcci&#xf3;n Postal del ambulatorio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="etiquetaProvincia">
@@ -319,29 +322,29 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textoProvincia">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Provincia"/>
+            <Property name="toolTipText" type="java.lang.String" value="Provincia del ambulatorio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoTelefono">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Tel&#xe9;fono"/>
+            <Property name="toolTipText" type="java.lang.String" value="Tel&#xe9;fono del ambulatorio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoAnoConstruccion">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="A&#xf1;o construcci&#xf3;n"/>
+            <Property name="toolTipText" type="java.lang.String" value="A&#xf1;o construcci&#xf3;n del ambulatorio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoAntiguedad">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="toolTipText" type="java.lang.String" value="Antig&#xfc;edad"/>
+            <Property name="toolTipText" type="java.lang.String" value="Antig&#xfc;edad del ambulatorio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoFondos">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="toolTipText" type="java.lang.String" value="Fondos"/>
+            <Property name="toolTipText" type="java.lang.String" value="Fondos del ambulatorio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnIngresos">
@@ -365,6 +368,7 @@
         <Component class="javax.swing.JButton" name="btnSalaUrgencias">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sala Urgencias"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de sala de urgencias"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -374,6 +378,7 @@
         <Component class="javax.swing.JButton" name="btnConsultas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consultas"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de consultas"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -383,6 +388,7 @@
         <Component class="javax.swing.JButton" name="btnPersonal">
           <Properties>
             <Property name="text" type="java.lang.String" value="Personal"/>
+            <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de personal"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -435,6 +441,7 @@
         <Component class="javax.swing.JButton" name="btnLimpiar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pone en blanco los cuadros de texto, as&#xed; como limpia la tabla"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
@@ -443,6 +450,7 @@
         <Component class="javax.swing.JButton" name="btnActualizar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
+            <Property name="toolTipText" type="java.lang.String" value="A&#xf1;ade/Modifica el ambulatorio"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
@@ -451,6 +459,7 @@
         <Component class="javax.swing.JButton" name="btnEliminar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Elimina el ambulatorio"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -460,6 +469,7 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salir"/>
+            <Property name="toolTipText" type="java.lang.String" value="Sale de la aplicaci&#xf3;n"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
