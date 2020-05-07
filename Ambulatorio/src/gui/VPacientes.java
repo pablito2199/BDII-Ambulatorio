@@ -464,6 +464,13 @@ public class VPacientes extends javax.swing.JDialog {
         varFechaNacimiento.setText(null);
         varDireccion.setText(null);
         varTelefono.setText(null);
+        //Desactivamos los botones
+        btnEnfermedades.setEnabled(false);
+        btnNuevaUrgencia.setEnabled(false);
+        btnSolicitarCita.setEnabled(false);
+        btnCitasPendientes.setEnabled(false);
+        btnHistorialClinico.setEnabled(false);
+        btnHistorialRecetas.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Función que permite guardar el usuario en la base de datos
