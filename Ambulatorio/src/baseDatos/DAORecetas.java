@@ -61,7 +61,7 @@ public class DAORecetas extends AbstractDAO {
         }
     }
 
-    //Permite consultar el historial clínico de un paciente
+    //Permite consultar el historial de recetas de un paciente
     public java.util.List<Receta> consultarHistorialReceta(Paciente paciente, java.sql.Date fechaInicio, java.sql.Date fechaFin, Integer codigoReceta, String medicamento) {
         //Declaramos variables
         java.util.List<Receta> resultado = new java.util.ArrayList<Receta>();
@@ -170,7 +170,7 @@ public class DAORecetas extends AbstractDAO {
         return resultado;
     }
 
-    //Permite consultar el historial clínico de un paciente
+    //Permite consultar medicamentos en la base de datos
     public java.util.List<String> consultarMedicamentos(String nombre) {
         //Declaramos variables
         java.util.List<String> resultado = new java.util.ArrayList<String>();
