@@ -534,7 +534,7 @@ public class DAOCitas extends AbstractDAO {
     }
 
     //Permite consultar la lista de citas pendientes de atender de un paciente
-    public ArrayList<Cita> citasPaciente(Paciente paciente) {
+    public ArrayList<Cita> citasPaciente(Paciente paciente, String ambulatorio, Integer consulta, Date inicio, Date fin) {
 
         //Declaramos variables
         Connection con;
@@ -545,27 +545,56 @@ public class DAOCitas extends AbstractDAO {
         //Establecemos conexión
         con = super.getConexion();
 
+        //Ajustamos las lineas de la consulta para ajustarnos a los argumentos
+        String lineaHoras = "";
+        Timestamp inicioTS = null;
+        Timestamp finTS = null;
+        //Horas
+        if (inicio != null && fin != null) {
+            lineaHoras = "and ci.fechaHoraInicio > ? and ci.fechaHoraInicio < ? ";
+
+            //Establecemos timestamps
+            inicioTS = Timestamp.valueOf(inicio.toLocalDate().atStartOfDay());
+            finTS = Timestamp.valueOf(fin.toLocalDate().plusDays(1).atStartOfDay());
+        }
+        //Consulta
+
+        String lineaConsulta = consulta == null ? "" : "and ci.consulta = ? ";
+
         //Intentamos la consulta SQL
         try {
             //Preparamos la sentencia para obtener las citas pendientes
             //Nos aseguramos que las citas no sean urgencias
             stmCitas = con.prepareStatement(
-                    "select c.* "
-                    + "from cita as c "
-                    + "where c.fechaHoraFin is null "
-                    + "c.paciente = ? "
-                    + "and not exists "
-                    + "(select c.fechaHoraInicio "
-                    + "from urgencia as u "
-                    + "where c.fechaHoraInicio = u.cita "
-                    + "and c.ambulatorio = u.ambulatorio "
-                    + "and c.consulta = u.consulta "
-                    + "and c.paciente = u.paciente) "
-                    + "order by c.fechaHoraInicio asc"
+                    "select ci.* "
+                    + "from cita as ci, ambulatorio as am "
+                    + "where paciente = ? "
+                    + "and fechaHoraFin is null "
+                    + "and ci.tipo not in (select ti.nombre"
+                    + "                    from tipocita as ti "
+                    + "                    where ti.especialidad = 'General') "
+                    + "and am.codigoAmbulatorio = ci.ambulatorio "
+                    + "and am.nombre like ? "
+                    + lineaHoras
+                    + lineaConsulta
+                    + "order by ci.fechaHoraInicio asc"
             );
+            //Obtenemos string del ambulatorio
+            String ambulatorioBusq = ambulatorio == null ? "%%" : "%" + ambulatorio + "%";
 
             //Sustituimos
             stmCitas.setString(1, paciente.getCIP());
+            stmCitas.setString(2, ambulatorioBusq);
+            //Comprobamos si se consultan horas
+            int index = 3; //Indice del string de consulta
+            if (!lineaHoras.isEmpty()) {
+                stmCitas.setTimestamp(3, inicioTS);
+                stmCitas.setTimestamp(4, finTS);
+                index += 2; //Ajustamos indices
+            } //Compribamos si se consultan las consultas
+            if (!lineaConsulta.isEmpty()) {
+                stmCitas.setInt(index, consulta);
+            }
 
             //Obtenemos resultado
             rsCitas = stmCitas.executeQuery();
@@ -723,95 +752,6 @@ public class DAOCitas extends AbstractDAO {
             //Finalmente intentamos cerrar cursores
             try {
                 stmTipo.close();
-            } catch (SQLException e) {
-                //En caso de no poder se notifica de ello
-                System.out.println("Imposible cerrar cursores");
-            }
-        }
-
-        return resultado;
-    }
-
-    //Permite consultar la lista citas pendientes del paciente filtrada
-    public ArrayList<Cita> obtenerCitas(String ambulatorio, Integer consulta, Date inicio, Date fin) {
-
-        //Declaramos variables
-        Connection con;
-        PreparedStatement stmCitas = null;
-        ResultSet rsCitas = null;
-        ArrayList<Cita> resultado = new ArrayList<>();
-
-        //Establecemos conexión
-        con = super.getConexion();
-
-        //Comprobamos que las fechas no sean nulas para buscar por ellas
-        String conInFi = "";
-        Timestamp inicioTS = null, finTS = null;
-        if (inicio != null && fin != null) {
-
-            conInFi = "and ci.fechaHoraInicio > ? and ci.fechaHoraInicio < ? ";
-            inicioTS = Timestamp.valueOf(inicio.toLocalDate().atStartOfDay());
-            finTS = Timestamp.valueOf(fin.toLocalDate().plusDays(1).atStartOfDay());
-        }
-
-        //Comprobamos si se va a buscar por consulta
-        String conCons = consulta == null ? "" : "and co.identificador = ? ";
-
-        //Intentamos la consulta SQL
-        try {
-            //Preparamos la sentencia para obtener las citas pendientes de
-            //todas las consultas donde trabaja un medico
-            stmCitas = con.prepareStatement(
-                    "select ci.* "
-                    + "from cita as ci, consulta as co, ambulatorio as am "
-                    + "where ci.consulta = co.identificador "
-                    + "and co.ambulatorio = ci.ambulatorio "
-                    + "and co.ambulatorio = am.codigoAmbulatorio "
-                    + "and am.nombre like ? "
-                    + conInFi
-                    + conCons
-            );
-
-            //Obtenemos string
-            String amb = ambulatorio == null ? "%%" : "%" + ambulatorio + "%";
-
-            //Sustituimos
-            stmCitas.setString(1, ambulatorio);
-            int index = 2;
-            if (!conInFi.isEmpty()) {
-                stmCitas.setTimestamp(2, inicioTS);
-                stmCitas.setTimestamp(3, finTS);
-                index = 4;
-            }
-            if (!conCons.isEmpty()) {
-                stmCitas.setInt(index, consulta);
-            }
-
-            //Actualizamos
-            rsCitas = stmCitas.executeQuery();
-
-            //Recogemos valores de resultado
-            while (rsCitas.next()) {
-
-                resultado.add(new Cita(
-                        rsCitas.getTimestamp("fechaHoraIicio"),
-                        rsCitas.getString("paciente"),
-                        rsCitas.getInt("consulta"),
-                        rsCitas.getInt("ambulatorio"),
-                        rsCitas.getString("tipo"),
-                        rsCitas.getString("especialidad")
-                ));
-            }
-
-            //En caso de error se captura la excepción
-        } catch (SQLException e) {
-            //Se imprime el mensaje y se genera la ventana que muestra el mensaje
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        } finally {
-            //Finalmente intentamos cerrar cursores
-            try {
-                stmCitas.close();
             } catch (SQLException e) {
                 //En caso de no poder se notifica de ello
                 System.out.println("Imposible cerrar cursores");

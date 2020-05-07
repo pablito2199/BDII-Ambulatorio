@@ -55,9 +55,9 @@ public class ModeloTablaCitas extends AbstractTableModel {
     public Class getColumnClass(int col) {
         Class clase = null;
         switch (col) {
-            //Fecha y Hora es un Timestamp
+            //Fecha y Hora lo mostramos como un String
             case 0:
-                clase = java.sql.Timestamp.class;
+                clase = java.lang.String.class;
                 break;
             //Ambulatorio es un Integer
             case 1:
@@ -90,7 +90,7 @@ public class ModeloTablaCitas extends AbstractTableModel {
         switch (col) {
             //Permite recuperar la fecha y hora de inicio
             case 0:
-                resultado = citas.get(row).getFechaHoraInicio();
+                resultado = citas.get(row).getFechaHoraInicio().toLocalDateTime().toString();
                 break;
             //Permite recuperar el ambulatorio
             case 1:
@@ -118,10 +118,18 @@ public class ModeloTablaCitas extends AbstractTableModel {
     //Permite recuperar la cita
     public Cita obtenerCita(int i) {
 
-        //Obtenemos urgencia
+        //Obtenemos cita
         Cita c = this.citas.get(i);
 
         return c;
     }
 
+    //Permite recuperar la cita
+    public void quitarCita(int i) {
+
+        //Eliminamos cita
+        this.citas.remove(i);
+        //Notifica a los listeners del cambio
+        fireTableDataChanged();
+    }
 }
