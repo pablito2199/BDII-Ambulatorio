@@ -1,6 +1,7 @@
 package gui;
 
 import aplicacion.FachadaAplicacion;
+import aplicacion.clases.Cita;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.PersonalSanitario;
 import java.sql.Date;
@@ -319,8 +320,12 @@ public class VCitasPendientes extends javax.swing.JDialog {
                 consulta = null;
             }
 
-            tc.setFilas(fa.obtenerCitas(txtAmbulatorio.getText(), consulta, inicio, fin));
-
+            //Usamos consulta adecuada
+            if (padre instanceof VPacientes) {
+                tc.setFilas(fa.citasPaciente(pa, txtAmbulatorio.getText(), consulta, inicio, fin));
+            } else {
+                tc.setFilas(fa.citasMedico(ps, txtAmbulatorio.getText(), consulta, inicio, fin));
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -335,6 +340,10 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
             //Borramos cita
             fa.borrarCita(tc.obtenerCita(index));
+
+            //La quitamos del array de citas y mostramos feedback
+            tc.quitarCita(index);
+            fa.muestraMensaje("Cita cancelada correctamente.");
         }
 
     }//GEN-LAST:event_btnCancelarCitaActionPerformed
@@ -350,6 +359,10 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
             //Atendemos cita cita
             fa.atenderCita(tc.obtenerCita(index));
+
+            //Quitamos cita y mostramos feedback
+            tc.quitarCita(index);
+            fa.muestraMensaje("Cita finalizada correctamente.");
         }
     }//GEN-LAST:event_btnTerminarCitaActionPerformed
 
