@@ -130,7 +130,8 @@ public class VAutentificacion extends javax.swing.JDialog {
         if (fa.comprobarAutentificacion(textoID.getText(), textoContrasena.getText())) //En caso de tener acceso a la misma (ser administrador) borramos la ventana JFrame
         {
             this.dispose();
-        } //De no tener los credenciales necesarios hacemos visible la etiqueta de fallo y negamos el 
+        } 
+        //De no tener los credenciales necesarios hacemos visible la etiqueta de fallo y negamos el 
         //acceso (seguimos en la misma ventana)
         else {
             etiquetaFallo.setVisible(true);

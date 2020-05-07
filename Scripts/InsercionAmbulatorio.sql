@@ -5,6 +5,11 @@ insert into enfermedad (nombre, descripcion)
 	('Gripe Clase A', 'Lo habitual.'),
 	('Minero', 'No hay una descripción disponible. Habrá que seguir investigando.'),
 	('CoD-02', 'Los videojuegos son el problema de la sociedad.');
+	('CoGym-19', 'Pocho.');
+	('Fortnite', '');
+	('Videojueguitis', 'El vicio es malo.');
+	('Antonitis', 'Irresitibilidades a personas con el nombre de Antonio.');
+	('SQLero', 'No puede parar de escribir en SQL.');
 
 --PACIENTE
 insert into paciente (cip, dni, numSeguridadSocial, nombre, fechaNacimiento, sexo, grupoSanguineo, nacionalidad, direccion, telefono)
@@ -12,13 +17,26 @@ insert into paciente (cip, dni, numSeguridadSocial, nombre, fechaNacimiento, sex
 	('cip123', '56655665S', 5648, 'Martin Suarez', '2000-12-11', 'Masculino', '0+', 'Española', 'Pontevedra, Vigo', '655214698'),
 	('cip124', '56562262F', 5649, 'Ainhoa Vivel', '2000-03-07', 'Femenino', '0+', 'Española', 'Ciudad Falsa, Calle Falsa', '986252525'),
 	('cip125', '35383321F', 5650, 'Pablo Tarrio', '2000-12-27', 'Masculino', 'AB+', 'Española', 'Lugo, Lugo', '665541416');
+	('cip481', '54862165T', 5782, 'Sergio Rodriguez', '2000-06-29', 'Masculino', '0-', 'Española', 'Santiago de Compostela, A Coruña', '654987321');
+	('cip000', '54862165O', 1493, 'Clara Suarez', '2000-01-22', 'Femenino', 'A+', 'Española', 'Santiago de Compostela, A Coruña', '666666666');
+	('cip901', '54862165T', 9825, 'Daniel Chenel', '2000-01-21', 'Masculino', 'B-', 'Española', 'Bertamirans, A Coruña', '666666669');
+	('cip765', '54856833P', 2134, 'Carlos Treviño', '2000-05-27', 'Masculino', 'B+', 'Española', 'Santiago de Compostela, A Coruña', '666666689');
+	('cip321', '12312123L', 6547, 'Adrian Vispalia', '2000-03-22', 'Masculino', 'A-', 'Española', 'Vigo, A Coruña', '656666666');
+	('cip098', '25814736M', 8654, 'Miguel Torres', '2000-08-20', 'Masculino', '0-', 'Española', 'Ourense, A Coruña', '666665566');
+	('cip879', '85274196I', 3333, 'Paquita Chocolatera', '2000-01-01', 'Femenino', '0-', 'Española', 'Viveiro, A Coruña', '666333666');
 
 --TENER ENFERMEDAD
 insert into tenerEnfermedad (enfermedad, paciente)
 	values 
 	('Minero', 'cip124'),
 	('Gripe Clase A', 'cip123'),
-	('CoD-02', 'cip125');
+	('SQLero', 'cip125');
+	('Antonitis', 'cip321');
+	('Fortnite', 'cip765');
+	('CoGym-19', 'cip901');
+	('SQLero', 'cip765');
+	('CoD-02', 'cip879');
+	('CoD-02', 'cip124');
 
 --ESPECIALIDAD
 insert into especialidad (nombre, descripcion) 
@@ -27,13 +45,23 @@ insert into especialidad (nombre, descripcion)
 	('Cirujia', 'Dedicado a abrir gente.'), 
 	('Oftalmologia', 'Dedicado a la mirar los ojos.'),
 	('Odontologia', '¿Tienes caries?');
+	('Alergologia', 'Ni te acerques o te estornudo.');
+	('Genetica', '¿Seremos familia?');
+	('Neumologia', '¿Estas seguro de tener neumonia?');
+	('Psiquiatria', 'Estas loco.');
 
 --TIPO CITA
 insert into tipoCita (nombre, especialidad, descripcion)
 	values
 	('Urgencia', 'General', 'No te mueras aún!'),
 	('Consulta', 'Cirujia', 'Cita diaria.'),
-	('Consulta', 'Oftalmologia', 'No ve nada.');
+	('Ojoloco', 'Oftalmologia', 'No ve nada.');
+	('SimDientes', 'Odontologia', 'Se me caen los dientes.');
+	('Genetica', 'Genetica', 'Julio Iglesias es mi padre.');
+	('Revisión', 'Oftalmologia', 'Consulta anual.');
+	('Alergias', 'Alergologia', '¿Tienes alergia a la gente?');
+	('Psicologia', 'Psiquiatria', 'Necesitas hablar.');
+	('Urgencia', 'General', 'Me desangro.');
 	
 --MEDICAMENTO
 insert into medicamento (nombre, prospecto)
@@ -97,6 +125,12 @@ insert into consulta (identificador, especialidad)
 	(101, 'Cirujia'),
 	(203, 'Oftalmologia'),
 	(005, 'General');
+	(006, 'General');
+	(008, 'General');
+	(301, 'Psiquiatria');
+	(405, 'Alergologia');
+	(285, 'Odontologia');
+	(286, 'Odontologia');
 
 insert into pertenecer (personal, consulta) 
 	values
@@ -171,6 +205,18 @@ insert into consulta (identificador, especialidad)
 	(203, 'Cirujia'),
 	(102, 'Oftalmologia'),
 	(305, 'General');
+	(602, 'Psiquiatria'),
+	(301, 'Odontologia'),
+	(002, 'Alergologia');
+	(021, 'Genetica'),
+	(456, 'Neumologia'),
+	(555, 'General');
+	(200, 'Cirujia'),
+	(666, 'Oftalmologia'),
+	(308, 'General');
+	(259, 'Cirujia'),
+	(564, 'Oftalmologia'),
+	(309, 'General');
 
 insert into pertenecer (personal, consulta) 
 	values
@@ -185,3 +231,9 @@ insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion
 	values ('2019-10-12 12:21:23', 'cip123', 305, 'Acetaminofeno', 3, 'Drogarse cada 6 horas.', '2003-06-24', '2009-01-02');
 insert into derivarHospital (cita, paciente, consulta)
 	values ('2019-10-12 12:21:23', 'cip123', 305);
+
+
+insert into ambulatorio (nombre, direccionPostal, anoConstruccion, provincia, telefono)
+	values('Alguno', 'Rua de Algo, 3, 15715 Ourense', '2019', 'Ourense', '987334311');
+insert into ambulatorio (nombre, direccionPostal, anoConstruccion, provincia, telefono)
+	values('Este', 'Rua de Brujula, 22, 15704 Pontevedra', '2000', 'Pontevedra', '933654311');

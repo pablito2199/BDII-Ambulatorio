@@ -9,6 +9,7 @@ public class VConsultas extends javax.swing.JDialog {
     private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
     private java.util.List<Consulta> consultas;              //Lista de consultas
     private Integer ambulatorio;                             //Ambulatorio actual
+    private java.util.List<Integer> identificadores;         //Lista de identificadores de las consultas
     
     /**
      *
@@ -256,6 +257,7 @@ public class VConsultas extends javax.swing.JDialog {
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
         m.setElementos(new java.util.ArrayList<>());
         textoNumeroConsulta.setText(null);
+        textoTotalConsultas.setText(null);
     }//GEN-LAST:event_btnLimpiarConsultasActionPerformed
 
     //botón de Buscar, busca las consultas y las muestra en la lista
