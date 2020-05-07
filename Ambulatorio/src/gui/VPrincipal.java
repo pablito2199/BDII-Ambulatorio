@@ -394,6 +394,7 @@ public class VPrincipal extends javax.swing.JFrame {
         Integer codigoAmbulatorio = ma.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getCodigo();
         //Eliminamos el ambulatorio
         fa.borrarAmbulatorio(codigoAmbulatorio);
+        fa.muestraMensaje("Ambulatorio eliminado correctamente.");
         //Ponemos todos los campos de texto en blanco
         textoAnoConstruccion.setText(null);
         textoAntiguedad.setText(null);
@@ -437,8 +438,10 @@ public class VPrincipal extends javax.swing.JFrame {
             if (fa.consultarAmbulatorioActual(textoNombre.getText(), textoProvincia.getText()) != null) {
                 a.setCodigo(Integer.parseInt(textoCodigo.getText()));
                 fa.modificarAmbulatorio(a);
+                fa.muestraMensaje("Ambulatorio modificado correctamente.");
             } else {
                 fa.insertarAmbulatorio(a);
+                fa.muestraMensaje("Ambulatorio añadido correctamente.");
             }
             //habilitamos los botones
             btnActualizar.setEnabled(true);

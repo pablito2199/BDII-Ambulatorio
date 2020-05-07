@@ -243,8 +243,10 @@ public class VEnfermedades extends javax.swing.JDialog {
             //si existe la enfermedad modifica, si no, añade
             if (fa.consultarEnfermedadActual(textoNombre.getText()) != null) {
                 fa.modificarEnfermedad(e);//no se va poder modificar nombre de la enfermedad
+                fa.muestraMensaje("Enfermedad modificada correctamente.");
             } else {
                 fa.anadirEnfermedad(e);
+                fa.muestraMensaje("Enfermedad añadida correctamente.");
             }
         } else {
             fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
@@ -261,6 +263,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         String nombre = mListaE.getElementAt(lstEnfermedades.getSelectedIndex());
         //borramos la enfermedad seleccionada
         fa.borrarEnfermedad(nombre);
+        fa.muestraMensaje("Enfermedad eliminada correctamente.");
         textoNombre.setText(null);
         textoDescripcion.setText(null);
         //actualizamos la lista de enfermedades

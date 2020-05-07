@@ -37,7 +37,7 @@ public class VMensaje extends javax.swing.JDialog {
         textoExcepcion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Mensaje de error");
+        setTitle("Mensaje");
 
         btnCerrar.setText("Cerrar");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
