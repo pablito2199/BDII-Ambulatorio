@@ -239,13 +239,13 @@ public class DAOConsultas extends AbstractDAO {
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
             String consulta
-                    = "with total as (select count(*) as total, co.identificador, co.ambulatorio, co.especialidad "
+                    = "with menor as (select count(*) as total, co.identificador, co.ambulatorio, co.especialidad "
                     + "from consulta as co, cita as ci "
                     + "where co.especialidad = ? "
-                    + "and co.ambulatorio = ? "
-                    + "and co.identificador = ci.consulta "
-                    + "and co.ambulatorio = ci.ambulatorio "
-                    + "and ci.fechaHoraFin is null "
+                    +       "and co.ambulatorio = ? "
+                    +       "and co.identificador = ci.consulta "
+                    +       "and co.ambulatorio = ci.ambulatorio "
+                    +       "and ci.fechaHoraFin is null "
                     + "group by co.identificador, co.ambulatorio, co.especialidad "
                     + "UNION "
                     + "select 0 as total, co.identificador, co.ambulatorio, co.especialidad "
@@ -260,9 +260,11 @@ public class DAOConsultas extends AbstractDAO {
                     + "				and co2.ambulatorio = ci2.ambulatorio "
                     + "				and ci2.fechaHoraFin is null "
                     + "			    and co2.identificador = co.identificador)) "
-                    + "select tot.identificador, tot.ambulatorio, tot.especialidad "
-                    + "from total as tot "
-                    + "where not exists (select * from total as tot2 where tot2.total < tot.total)";
+                    + "select me.identificador, me.ambulatorio, me.especialidad "
+                    + "from menor as me "
+                    + "where not exists (select me2.* "
+                    + "                  from menor as me2 "
+                    + "                  where me2.total < me.total)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
             //Sustituimos
