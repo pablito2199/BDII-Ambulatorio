@@ -144,6 +144,7 @@
         <Component class="javax.swing.JTextField" name="textoTotalConsultas">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="toolTipText" type="java.lang.String" value="Total de consultas del resultado"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -158,6 +159,7 @@
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new ModeloListaStrings()" type="code"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Lista de las consultas"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lstConsultasMouseClicked"/>
@@ -171,11 +173,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoNumeroConsulta">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de la consulta"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca consultas"/>
             <Property name="actionCommand" type="java.lang.String" value="Actualizar"/>
           </Properties>
           <Events>
@@ -200,6 +205,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Especialidad de la consulta"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -251,6 +257,7 @@
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Vuelve a la ventana anterior"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
@@ -259,6 +266,7 @@
         <Component class="javax.swing.JButton" name="btnLimpiarConsultas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pone en blanco los cuadros de texto, as&#xed; como limpia la lista"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarConsultasActionPerformed"/>
@@ -267,6 +275,7 @@
         <Component class="javax.swing.JButton" name="btnAnadirConsultas">
           <Properties>
             <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
+            <Property name="toolTipText" type="java.lang.String" value="A&#xf1;ade una consulta"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnadirConsultasActionPerformed"/>
@@ -275,6 +284,7 @@
         <Component class="javax.swing.JButton" name="btnEliminarConsultas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Elimina una consulta"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>

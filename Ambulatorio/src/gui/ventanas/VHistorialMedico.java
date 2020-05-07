@@ -68,6 +68,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setToolTipText("Pone en blanco los cuadros de texto, así como limpia la tabla");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -75,6 +76,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
         });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -111,6 +113,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
         varDesde.setToolTipText("Citas desde la fecha");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("Busca las citas");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -133,7 +136,10 @@ public class VHistorialMedico extends javax.swing.JDialog {
 
         etiquetaTotalResultados1.setText("Total resultados:");
 
+        comboTipo.setToolTipText("Tipo de cita");
+
         tablaHistorialMedico.setModel(new gui.Modelos.ModeloTablaHistorialMedico());
+        tablaHistorialMedico.setToolTipText("Tabla de citas");
         tablaHistorialMedico.setAutoscrolls(false);
         tablaHistorialMedico.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaHistorialMedico);

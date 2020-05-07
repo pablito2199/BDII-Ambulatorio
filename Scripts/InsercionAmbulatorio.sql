@@ -19,7 +19,7 @@ insert into paciente (cip, dni, numSeguridadSocial, nombre, fechaNacimiento, sex
 	('cip125', '35383321F', 5650, 'Pablo Tarrio', '2000-12-27', 'Masculino', 'AB+', 'Española', 'Lugo, Lugo', '665541416'),
 	('cip481', '54862165T', 5782, 'Sergio Rodriguez', '2000-06-29', 'Masculino', '0-', 'Española', 'Santiago de Compostela, A Coruña', '654987321'),
 	('cip000', '54862165O', 1493, 'Clara Suarez', '2000-01-22', 'Femenino', 'A+', 'Española', 'Santiago de Compostela, A Coruña', '666666666'),
-	('cip901', '54863335T', 9825, 'Daniel Chenel', '2000-01-21', 'Masculino', 'B-', 'Española', 'Bertamirans, A Coruña', '666666669'),
+	('cip901', '54863335T', 9825, 'Daniel Chenel', '1998-01-23', 'Masculino', '0+', 'Española', 'Bertamirans, A Coruña', '666666669'),
 	('cip765', '54856833P', 2134, 'Carlos Treviño', '2000-05-27', 'Masculino', 'B+', 'Española', 'Santiago de Compostela, A Coruña', '666666689'),
 	('cip321', '12312123L', 6547, 'Adrian Vispalia', '2000-03-22', 'Masculino', 'A-', 'Española', 'Vigo, A Coruña', '656666666'),
 	('cip098', '25814736M', 8654, 'Miguel Torres', '2000-08-20', 'Masculino', '0-', 'Española', 'Ourense, A Coruña', '666665566'),

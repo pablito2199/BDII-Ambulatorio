@@ -84,12 +84,15 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lstEnfermedadesPadecidas.setModel(new ModeloListaStrings());
+        lstEnfermedadesPadecidas.setToolTipText("Lista de enfermedades padecidas");
         jScrollPane3.setViewportView(lstEnfermedadesPadecidas);
 
         lstRestoEnfermedades.setModel(new ModeloListaStrings());
+        lstRestoEnfermedades.setToolTipText("Lista  de enfermedades no padecidas");
         jScrollPane2.setViewportView(lstRestoEnfermedades);
 
         btnDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ventanas/flechaD.jpg"))); // NOI18N
+        btnDerecha.setToolTipText("Asigna enfermedad al paciente");
         btnDerecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDerechaActionPerformed(evt);
@@ -97,6 +100,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         });
 
         btnIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/ventanas/flechaI.jpg"))); // NOI18N
+        btnIzquierda.setToolTipText("Desasigna enfermedad al paciente");
         btnIzquierda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIzquierdaActionPerformed(evt);
@@ -109,9 +113,10 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
 
         etiquetaNombre.setText("Nombre:");
 
-        textoNombre.setToolTipText("Nombre de usuario");
+        textoNombre.setToolTipText("Nombre de la enfermedad");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("Busca enfermedades");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -175,6 +180,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -182,6 +188,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setToolTipText("Pone en blanco los cuadros de texto");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -189,6 +196,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.setToolTipText("Actualiza las enfermedades de los pacientes");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);

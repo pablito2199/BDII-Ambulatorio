@@ -51,11 +51,12 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaID.setText("ID:");
 
         textoID.setText("00000000A");
-        textoID.setToolTipText("Nombre de usuario");
+        textoID.setToolTipText("DNI del usuario");
 
         etiquetaConstrasena.setText("Contraseña:");
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.setToolTipText("Accede a la aplicación");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -63,6 +64,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.setToolTipText("Sale de la aplicación");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -73,7 +75,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaFallo.setText("Usuario o Contraseña incorrecto/a");
 
         textoContrasena.setText("a");
-        textoContrasena.setToolTipText("Contraseña");
+        textoContrasena.setToolTipText("Contraseña del usuario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

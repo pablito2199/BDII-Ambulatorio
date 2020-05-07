@@ -138,6 +138,7 @@
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new ModeloListaStrings()" type="code"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Lista de todas las enfermedades"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lstEnfermedadesMouseClicked"/>
@@ -151,6 +152,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textoNombre">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Nombre de la enfermedad"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="etiquetaDescripcion">
           <Properties>
@@ -169,6 +173,7 @@
                 <Property name="columns" type="int" value="20"/>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="toolTipText" type="java.lang.String" value="Descripci&#xf3;n de la enfermedad"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -176,7 +181,7 @@
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca enfermedades"/>
             <Property name="actionCommand" type="java.lang.String" value="Actualizar"/>
           </Properties>
           <Events>
@@ -231,6 +236,7 @@
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Vuelve a la ventana anterior"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
@@ -239,6 +245,7 @@
         <Component class="javax.swing.JButton" name="btnEliminarEnfermedad">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Elimina una enfermedad"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarEnfermedadActionPerformed"/>
@@ -247,6 +254,7 @@
         <Component class="javax.swing.JButton" name="btnActualizarEnfermedad">
           <Properties>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
+            <Property name="toolTipText" type="java.lang.String" value="A&#xf1;ade/Modifica una enfermedad"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarEnfermedadActionPerformed"/>
@@ -255,6 +263,7 @@
         <Component class="javax.swing.JButton" name="btnLimpiarEnfermedad">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pone en blanco los cuadros de texto, as&#xed; como limpia la lista"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarEnfermedadActionPerformed"/>

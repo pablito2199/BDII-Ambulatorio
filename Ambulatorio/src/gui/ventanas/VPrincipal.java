@@ -81,6 +81,7 @@ public class VPrincipal extends javax.swing.JFrame {
         etiquetaDireccion.setText("Dirección Postal:");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("Busca ambulatorios");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -100,7 +101,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         etiquetaTitulo.setText("Nombre:");
 
-        textoDireccion.setToolTipText("Dirección Postal");
+        textoDireccion.setToolTipText("Dirección Postal del ambulatorio");
 
         etiquetaProvincia.setText("Provincia:");
 
@@ -112,17 +113,17 @@ public class VPrincipal extends javax.swing.JFrame {
 
         etiquetaTelefono.setText("Teléfono:");
 
-        textoProvincia.setToolTipText("Provincia");
+        textoProvincia.setToolTipText("Provincia del ambulatorio");
 
-        textoTelefono.setToolTipText("Teléfono");
+        textoTelefono.setToolTipText("Teléfono del ambulatorio");
 
-        textoAnoConstruccion.setToolTipText("Año construcción");
+        textoAnoConstruccion.setToolTipText("Año construcción del ambulatorio");
 
         textoAntiguedad.setEditable(false);
-        textoAntiguedad.setToolTipText("Antigüedad");
+        textoAntiguedad.setToolTipText("Antigüedad del ambulatorio");
 
         textoFondos.setEditable(false);
-        textoFondos.setToolTipText("Fondos");
+        textoFondos.setToolTipText("Fondos del ambulatorio");
 
         btnIngresos.setText("Ingresos");
         btnIngresos.setEnabled(false);
@@ -134,6 +135,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnAsociados.setEnabled(false);
 
         btnSalaUrgencias.setText("Sala Urgencias");
+        btnSalaUrgencias.setToolTipText("Abre la ventana de sala de urgencias");
         btnSalaUrgencias.setEnabled(false);
         btnSalaUrgencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +144,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         btnConsultas.setText("Consultas");
+        btnConsultas.setToolTipText("Abre la ventana de consultas");
         btnConsultas.setEnabled(false);
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +153,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         btnPersonal.setText("Personal");
+        btnPersonal.setToolTipText("Abre la ventana de personal");
         btnPersonal.setEnabled(false);
         btnPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,6 +263,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setToolTipText("Pone en blanco los cuadros de texto, así como limpia la tabla");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -266,6 +271,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.setToolTipText("Añade/Modifica el ambulatorio");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
@@ -273,6 +279,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setToolTipText("Elimina el ambulatorio");
         btnEliminar.setEnabled(false);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,6 +288,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.setToolTipText("Sale de la aplicación");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -319,23 +327,25 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenuBar3.add(menuMedicamentos);
 
         menuEnfermedades.setText("Enfermedades");
+        menuEnfermedades.setToolTipText("Abre la ventana de Enfermedades");
         menuEnfermedades.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                menuEnfermedadesMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuEnfermedadesMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                menuEnfermedadesMouseReleased(evt);
             }
         });
         jMenuBar3.add(menuEnfermedades);
 
         menuPacientes.setText("Pacientes");
+        menuPacientes.setToolTipText("Abre la ventana de pacientes");
         menuPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                menuPacientesMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuPacientesMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                menuPacientesMouseReleased(evt);
             }
         });
         jMenuBar3.add(menuPacientes);

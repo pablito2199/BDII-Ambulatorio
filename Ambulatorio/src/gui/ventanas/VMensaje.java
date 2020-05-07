@@ -40,6 +40,7 @@ public class VMensaje extends javax.swing.JDialog {
         setTitle("Mensaje");
 
         btnCerrar.setText("Cerrar");
+        btnCerrar.setToolTipText("Cierra la ventana para continuar con las operaciones");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);

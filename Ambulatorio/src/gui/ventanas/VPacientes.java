@@ -82,6 +82,7 @@ public class VPacientes extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setToolTipText("Pone en blanco los cuadros de texto, así como limpia la tabla");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -89,6 +90,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnActualizarPaciente.setText("Actualizar");
+        btnActualizarPaciente.setToolTipText("Añade/Modifica el paciente");
         btnActualizarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarPacienteActionPerformed(evt);
@@ -96,6 +98,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnBorrar.setText("Eliminar");
+        btnBorrar.setToolTipText("Elimina el paciente");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
@@ -103,6 +106,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnSalir.setText("Regresar");
+        btnSalir.setToolTipText("Vuelve a la ventana anterior");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -139,6 +143,7 @@ public class VPacientes extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tablaPacientes.setModel(new ModeloTablaPacientes());
+        tablaPacientes.setToolTipText("Tabla de pacientes");
         tablaPacientes.setAutoscrolls(false);
         tablaPacientes.getTableHeader().setReorderingAllowed(false);
         tablaPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,7 +154,7 @@ public class VPacientes extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tablaPacientes);
 
         btnNuevaUrgencia.setText("Nueva Urgencia");
-        btnNuevaUrgencia.setToolTipText("");
+        btnNuevaUrgencia.setToolTipText("Abre la ventana de urgencias");
         btnNuevaUrgencia.setEnabled(false);
         btnNuevaUrgencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +163,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnEnfermedades.setText("Enfermedades");
+        btnEnfermedades.setToolTipText("Abre la ventana de enfermerdades");
         btnEnfermedades.setEnabled(false);
         btnEnfermedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +172,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnSolicitarCita.setText("Solicitar Cita");
+        btnSolicitarCita.setToolTipText("Abre la ventana de reservar citas");
         btnSolicitarCita.setEnabled(false);
         btnSolicitarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +181,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnCitasPendientes.setText("Citas Pendientes");
+        btnCitasPendientes.setToolTipText("Abre la ventana de citas pendientes");
         btnCitasPendientes.setEnabled(false);
         btnCitasPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +190,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnHistorialClinico.setText("Historial Médico");
+        btnHistorialClinico.setToolTipText("Abre la ventana de historial médico");
         btnHistorialClinico.setEnabled(false);
         btnHistorialClinico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,6 +199,7 @@ public class VPacientes extends javax.swing.JDialog {
         });
 
         btnHistorialRecetas.setText("Historial Recetas");
+        btnHistorialRecetas.setToolTipText("Abre la ventana de historial de recetas");
         btnHistorialRecetas.setEnabled(false);
         btnHistorialRecetas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,19 +259,19 @@ public class VPacientes extends javax.swing.JDialog {
 
         labelDireccion.setText("Direccion:");
 
-        varDireccion.setToolTipText("Dirección Postal");
+        varDireccion.setToolTipText("Dirección Postal del paciente");
 
-        varDNI.setToolTipText("Documento Nacional de Identidad");
+        varDNI.setToolTipText("Documento Nacional de Identidad del paciente");
 
-        varNSS.setToolTipText("Número de la Seguridad Social");
+        varNSS.setToolTipText("Número de la Seguridad Social del paciente");
 
         labelNSS.setText("NSS:");
 
         labelDNI.setText("DNI:");
 
-        varSexo.setToolTipText("Sexo");
+        varSexo.setToolTipText("Sexo del paciente");
 
-        varGrupoSanguineo.setToolTipText("Grupo Sanguíneo");
+        varGrupoSanguineo.setToolTipText("Grupo Sanguíneo del paciente");
 
         labelGrupoSanguineo.setText("GS:");
 
@@ -269,21 +279,22 @@ public class VPacientes extends javax.swing.JDialog {
 
         varEdad.setToolTipText("Edad del paciente");
 
-        varCIP.setToolTipText("Código de Identificación Personal");
+        varCIP.setToolTipText("Código de Identificación Personal del paciente");
 
         labelNacionalidad.setText("Nacionalidad:");
 
-        varNacionalidad.setToolTipText("Nacionalidad");
+        varNacionalidad.setToolTipText("Nacionalidad del paciente");
 
         labelFechaNacimiento.setText("Fecha Nacimiento:");
 
-        varFechaNacimiento.setToolTipText("Fecha de Nacimiento");
+        varFechaNacimiento.setToolTipText("Fecha de Nacimiento del paciente");
 
         labelTelefono.setText("Telefono:");
 
-        varTelefono.setToolTipText("Teléfono");
+        varTelefono.setToolTipText("Teléfono del paciente");
 
         btnBuscarUsuario.setText("Buscar");
+        btnBuscarUsuario.setToolTipText("Busca pacientes");
         btnBuscarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarUsuarioActionPerformed(evt);

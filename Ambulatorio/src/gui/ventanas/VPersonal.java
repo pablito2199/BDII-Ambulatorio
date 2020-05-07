@@ -75,6 +75,7 @@ public class VPersonal extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setToolTipText("Pone en blanco los cuadros de texto, así como limpia la tabla");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -88,6 +89,7 @@ public class VPersonal extends javax.swing.JDialog {
         btnEliminar.setEnabled(false);
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -98,6 +100,7 @@ public class VPersonal extends javax.swing.JDialog {
         btnEspecialidades.setEnabled(false);
 
         btnCitas.setText("Citas");
+        btnCitas.setToolTipText("Abre la ventana de citas");
         btnCitas.setEnabled(false);
         btnCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +148,7 @@ public class VPersonal extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tablaPersonal.setModel(new ModeloTablaPersonal());
+        tablaPersonal.setToolTipText("Tabla de trabajadores");
         tablaPersonal.setAutoscrolls(false);
         tablaPersonal.getTableHeader().setReorderingAllowed(false);
         tablaPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,19 +179,19 @@ public class VPersonal extends javax.swing.JDialog {
 
         etiquetaNombre.setText("Nombre:");
 
-        textoDNI.setToolTipText("Nombre de usuario");
+        textoDNI.setToolTipText("DNI del trabajador");
 
         etiquetaDNI.setText("DNI:");
 
-        textoFechaIncorporacion.setToolTipText("Correo electrónico");
+        textoFechaIncorporacion.setToolTipText("Fecha de incorporación del trabajador");
 
         etiquetaFechaIncorporacion.setText("Fecha Incorporación:");
 
-        textoNombre.setToolTipText("Nombre de usuario");
+        textoNombre.setToolTipText("Nombre del trabajador");
 
         etiquetaClase.setText("Clase:");
 
-        textoClase.setToolTipText("Nombre de usuario");
+        textoClase.setToolTipText("Clase del trabajador");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -198,23 +202,26 @@ public class VPersonal extends javax.swing.JDialog {
 
         etiquetaTelefono.setText("Tel:");
 
-        textoTelefono.setToolTipText("Nombre de usuario");
+        textoTelefono.setToolTipText("Teléfono del trabajador");
 
         etiquetaAntiguedad.setText("Antigüedad:");
 
-        textoAntiguedad.setToolTipText("Correo electrónico");
+        textoAntiguedad.setToolTipText("Antigüedad en el puesto del trabajador");
 
         etiquetaSueldo.setText("Sueldo:");
 
-        textoSueldo.setToolTipText("Correo electrónico");
+        textoSueldo.setToolTipText("Sueldo del trabajador");
 
         etiquetaContrasena.setText("Contraseña:");
 
         btnAdmin.setText("Admin");
+        btnAdmin.setToolTipText("Indica si el personal es administrador");
         btnAdmin.setEnabled(false);
 
         btnSanitario.setText("Sanitario");
+        btnSanitario.setToolTipText("Indica si el personal es sanitario");
 
+        textoContrasena.setToolTipText("Contraseña del administrador");
         textoContrasena.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
