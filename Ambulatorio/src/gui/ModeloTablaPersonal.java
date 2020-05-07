@@ -15,7 +15,7 @@ public class ModeloTablaPersonal extends AbstractTableModel {
     //Permite recuperar el número de columnas
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     //Permite recuperar el número de filas

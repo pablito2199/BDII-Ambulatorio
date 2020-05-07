@@ -79,8 +79,8 @@ public class FachadaAplicacion {
     }
 
     //Permite buscar personal sanitario por su dni y nombre
-    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre) {
-        return gper.consultarPersonal(dni, nombre);
+    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre, Integer ambulatorio) {
+        return gper.consultarPersonal(dni, nombre, ambulatorio);
     }
 
     //Permite abrir una nueva ventana de usuarios para autentificarse
@@ -89,8 +89,8 @@ public class FachadaAplicacion {
     }
 
     //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal() {
-        gper.nuevaVPersonal();
+    public void nuevaVPersonal(Integer ambulatorio) {
+        gper.nuevaVPersonal(ambulatorio);
     }
 
 /////////////////////////

@@ -115,7 +115,7 @@ public class DAOPersonal extends AbstractDAO {
     }
 
     //Permite buscar personal sanitario por su dni y nombre
-    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre) {
+    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre, Integer ambulatorio) {
         //Declaramos variables
         java.util.List<PersonalSanitario> resultado = new java.util.ArrayList<PersonalSanitario>();
         PersonalSanitario personalActual;
@@ -129,33 +129,36 @@ public class DAOPersonal extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el la descripción
-            //que tengan el nombre dado
+            //Selecionamos todos los datos
+            //que tengan el nombre y dni dado
             String consulta = "select ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo, "
-                    + "CAST ( EXTRACT(YEAR FROM age(current_date, TO_DATE(fechaIncorporacion, 'YYYY'))) as varchar(4)) as antiguedad "
+                    + "CAST ( EXTRACT(YEAR FROM age(current_date, fechaIncorporacion)) as varchar(4)) as antiguedad "
                     + "from personalSanitario "
                     + "where nombre like ? "
                     +       "and dni like ? "
+                    +       "and ambulatorio = ? "
                     + "order by nombre ASC";
 
             //Preparamos la consulta
             stmPersonal = con.prepareStatement(consulta);
             //Sustituimos
             stmPersonal.setString(1, "%" + nombre + "%"); //Nombre
-            stmPersonal.setString(2, "%" + dni + "%"); //Nombre
+            stmPersonal.setString(2, "%" + dni + "%");    //DNI
+            stmPersonal.setInt(3, ambulatorio);           //Ambulatorio
             //Ejecutamos
             rsPersonal = stmPersonal.executeQuery();
             //Mientras haya coincidencias
             while (rsPersonal.next()) {
-                //Se crea una instancia de enfermedad con los datos recuperados de la base de datos
+                //Se crea una instancia de personal sanitario con los datos recuperados de la base de datos
                 personalActual = new PersonalSanitario(
                         rsPersonal.getInt("ambulatorio"), 
                         rsPersonal.getString("dni"), 
                         rsPersonal.getString("nombre"),
                         rsPersonal.getDate("fechaIncorporacion"),
                         rsPersonal.getString("telefono"),
-                        rsPersonal.getFloat("sueldo"));
-                //Y se añade la instancia a la lista de enfermedades
+                        rsPersonal.getFloat("sueldo"),
+                        rsPersonal.getString("antiguedad"));
+                //Y se añade la instancia a la lista de personal sanitario
                 resultado.add(personalActual);
             }
 
@@ -173,7 +176,7 @@ public class DAOPersonal extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        //Se devuelve el resultado (lista de pacientes)
+        //Se devuelve el resultado (lista de personal sanitario)
         return resultado;
     }
 }
