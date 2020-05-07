@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Pablo/Trabajos%20GrEI/Bases%20de%20Datos%20II/Practica_2/Ambulatorio/src/gui/ventanas/VGestionEnfermedades.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/aplicacion/GestionCitas.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/baseDatos/DAOCitas.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/gui/ventanas/VReservarCita.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/baseDatos/FachadaBaseDatos.java</file>
+            <file>file:/home/martin/Escritorio/BDII/BDII-Ambulatorio/Ambulatorio/src/gui/modelos/ModeloTablaHoras.java</file>
         </group>
     </open-files>
 </project-private>
