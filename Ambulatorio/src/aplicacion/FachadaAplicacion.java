@@ -49,6 +49,11 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e) {
         fgui.muestraExcepcion(e);
     }
+    
+    //Llamada para mostrar un mensaje
+    public void muestraMensaje(String e) {
+        fgui.muestraMensaje(e);
+    }
 
 /////////////////////////
 //GESTIÓN DE PERSONAL

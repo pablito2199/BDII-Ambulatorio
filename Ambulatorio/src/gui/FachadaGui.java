@@ -199,11 +199,19 @@ public class FachadaGui {
         va.setVisible(true);
     }
 
-    //abre una ventana que muestra una excepción en pantalla
+    //Abre una ventana que muestra una excepción en pantalla
     public void muestraExcepcion(String txtExcepcion) {
         VAviso va;
 
         va  = new VAviso(vp, true, txtExcepcion);
+        va.setVisible(true);
+    }
+    
+    //Abre una ventana que muestra un mensaje en pantalla
+    public void muestraMensaje(String txtMensaje) {
+        VAviso va;
+
+        va  = new VAviso(vp, true, txtMensaje);
         va.setVisible(true);
     }
 }
