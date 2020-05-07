@@ -249,20 +249,20 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     private void btnDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerechaActionPerformed
         ModeloListaStrings mRE = (ModeloListaStrings) lstRestoEnfermedades.getModel();
         ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();
-        enfermedadesP.add(mRE.getElementAt(lstRestoEnfermedades.getSelectedIndex()));
-        enfermedadesNP.remove(lstRestoEnfermedades.getSelectedIndex());
+        enfermedadesP.add(mRE.getElementAt(lstRestoEnfermedades.getSelectedIndex())); //añadimos el elemento de la lista
+        enfermedadesNP.remove(lstRestoEnfermedades.getSelectedIndex()); //eliminamos el elemento de la lista
         mE.setElementos(enfermedadesP);
         mRE.setElementos(enfermedadesNP);
         if (mRE.getSize() == 0) {
-            btnDerecha.setEnabled(false);
+            btnDerecha.setEnabled(false); //desactivamos flecha derecha si no hay elementos
         } else {
-            lstRestoEnfermedades.setSelectedIndex(0);
+            lstRestoEnfermedades.setSelectedIndex(0); //si hay elementos, seleccionamos el primero
         }
-        lstEnfermedadesPadecidas.setSelectedIndex(mE.getSize() - 1);
-        btnIzquierda.setEnabled(true);
+        lstEnfermedadesPadecidas.setSelectedIndex(mE.getSize() - 1); //seleccionamos el último elemento (el nuevo de la lista)
+        btnIzquierda.setEnabled(true); //activamos flecha izquierda
     }//GEN-LAST:event_btnDerechaActionPerformed
 
-    //Botón Flecha Izquierda, quita una enfermedad al paciente
+    //Botón Flecha Izquierda, quita una enfermedad al paciente, operación inversa del botón Flecha Derecha
     private void btnIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzquierdaActionPerformed
         ModeloListaStrings mRE = (ModeloListaStrings) lstRestoEnfermedades.getModel();
         ModeloListaStrings mE = (ModeloListaStrings) lstEnfermedadesPadecidas.getModel();

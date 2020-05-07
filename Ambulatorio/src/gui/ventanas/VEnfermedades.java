@@ -34,6 +34,7 @@ public class VEnfermedades extends javax.swing.JDialog {
             textoNombre.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getNombre());
             textoDescripcion.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getDescripcion());
         } else {
+            //desactiva el botón Eliminar
             btnEliminarEnfermedad.setEnabled(false);
         }
     }
@@ -242,8 +243,8 @@ public class VEnfermedades extends javax.swing.JDialog {
         if (!textoNombre.getText().isEmpty()) {
             Enfermedad e = new Enfermedad(textoNombre.getText(), textoDescripcion.getText());
             //si existe la enfermedad modifica, si no, añade
-            if (fa.consultarEnfermedadActual(textoNombre.getText()) != null) {
-                fa.modificarEnfermedad(e);//no se va poder modificar nombre de la enfermedad
+            if (fa.consultarEnfermedadActual(textoNombre.getText()) != null) { //no se va poder modificar nombre de la enfermedad
+                fa.modificarEnfermedad(e); 
                 fa.muestraMensaje("Enfermedad modificada correctamente.");
             } else {
                 fa.anadirEnfermedad(e);
@@ -288,6 +289,7 @@ public class VEnfermedades extends javax.swing.JDialog {
     //cuando se selecciona un elemento de la lista, los datos se pasan a la parte derecha para consultarse
     private void lstEnfermedadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstEnfermedadesMouseClicked
         ModeloListaStrings mListaE = (ModeloListaStrings) lstEnfermedades.getModel();
+        //si existe alguna enfermedad
         if (mListaE.getSize() > 0) {
             textoNombre.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getNombre());
             textoDescripcion.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getDescripcion());

@@ -13,14 +13,14 @@ import java.sql.Date;
 
 public class FachadaAplicacion {
 
-    gui.ventanas.FachadaGui fgui;               // Enlace a la fachada de la GUI
+    gui.ventanas.FachadaGui fgui;      // Enlace a la fachada de la GUI
     baseDatos.FachadaBaseDatos fbd;    // Enlace a la fachada de base de datos
     GestionAmbulatorios gamb;          // Enlace a la clase gestión de ambulatorio
     GestionCitas gcit;                 // Enlace a la clase gestión de citas
     GestionPacientes gpac;             // Enlace a la clase gestión de pacientes
     GestionEnfermedades genf;          // Enlace a la clase gestión de enfermedades
     GestionConsultas gcon;             // Enlace a la clase gestión de consultas
-    GestionEspecialidades gesp;          // Enlace a la clase gestión de especialidades
+    GestionEspecialidades gesp;        // Enlace a la clase gestión de especialidades
     GestionRecetas grec;               // Enlace a la clase gestión de recetas
     GestionPersonal gper;              // Enlace a la clase gestión de administradores
     GestionHospitales ghos;            // Enlace a la clase gestión de hospitales

@@ -11,7 +11,6 @@ public class VConsultas extends javax.swing.JDialog {
     private aplicacion.FachadaAplicacion fa;                 //Enlace a la fachada de aplicación
     private java.util.List<Consulta> consultas;              //Lista de consultas
     private Integer ambulatorio;                             //Ambulatorio actual
-    private java.util.List<Integer> identificadores;         //Lista de identificadores de las consultas
     
     /**
      *
@@ -31,8 +30,10 @@ public class VConsultas extends javax.swing.JDialog {
         //obtiene la lista de consultas para mostrarlas por pantalla
         ModeloListaIntegers m = new ModeloListaIntegers();
         consultas = fa.consultarConsultas(null, ambulatorio, null);
+        //guardamos la lista con las consultas obtenidas
         lstConsultas.setModel(m);
         m.setElementos(restoConsultas);
+        //si existen consultas
         if (m.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstConsultas.setSelectedIndex(0);
@@ -41,11 +42,13 @@ public class VConsultas extends javax.swing.JDialog {
             //activa el botón de Eliminar
             btnEliminarConsultas.setEnabled(true);
         } else {
+            //desactiva el botón de Eliminar
             btnEliminarConsultas.setEnabled(false);
         }
         
-        //Introducimos especialidades
+        //Eliminamos especialidades anteriores del comboBox
         seleccionEspecialidades.removeAllItems();
+        //Introducimos especialidades en el comboBox
         for (Especialidad especialidad : fa.consultarEspecialidades()) {
             seleccionEspecialidades.addItem(especialidad.getNombre());
         }
@@ -259,6 +262,7 @@ public class VConsultas extends javax.swing.JDialog {
     //botón de Limpiar, pone en blanco cada uno de los huecos de texto para poder añadir nuevas consultas, y actualiza la lista
     private void btnLimpiarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarConsultasActionPerformed
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
+        //ponemos las filas de la tabla vacías
         m.setElementos(new java.util.ArrayList<>());
         textoNumeroConsulta.setText(null);
         textoTotalConsultas.setText(null);
@@ -272,6 +276,7 @@ public class VConsultas extends javax.swing.JDialog {
     //cuando seleccionas un elemento de la tabla, los datos se pasan a la parte derecha para consultarse
     private void lstConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstConsultasMouseClicked
         ModeloListaIntegers m = (ModeloListaIntegers) lstConsultas.getModel();
+        //si hay alguna consulta, se rellenan los huecos
         if (m.getSize() > 0) {
             textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
             seleccionEspecialidades.setSelectedItem(fa.consultarConsultas(m.getElementAt(lstConsultas.getSelectedIndex()), ambulatorio, null).get(0).getEspecialidad());
@@ -288,9 +293,9 @@ public class VConsultas extends javax.swing.JDialog {
 
     //botón de Añadir, añade una consulta nueva
     private void btnAnadirConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirConsultasActionPerformed
+        //si el campo del número de la consulta no está vacío se añade una consulta
         if (!textoNumeroConsulta.getText().isEmpty()) {
             Consulta c = new Consulta(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
-            //si la fila está seleccionada, modifica, en caso contrario, añade la enfermedad
             fa.anadirConsulta(c);
             fa.muestraMensaje("Consulta añadida correctamente.");
         } else {

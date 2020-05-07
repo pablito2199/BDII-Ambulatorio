@@ -430,6 +430,7 @@ public class VPacientes extends javax.swing.JDialog {
         Paciente paciente = new Paciente(varCIP.getText());
         //Llamamos al borrado de pacientes
         fa.borrarPaciente(paciente);
+        fa.muestraMensaje("Paciente eliminado correctamente.");
         //Ponemos todos los campos a NULL
         varCIP.setText(null);
         varNSS.setText(null);
@@ -496,7 +497,8 @@ public class VPacientes extends javax.swing.JDialog {
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Actualizamos la base de datos
             fa.modificarPaciente(u);
-            //De no existir se crea uno nuevo
+            fa.muestraMensaje("Paciente modificado correctamente.");
+        //De no existir se crea uno nuevo
         } else {
             //LA EDAD NO SE TIENE EN CUENTA PUESTO QUE ES UN CALCULADO
             //Instanciamos el usuario
@@ -505,6 +507,7 @@ public class VPacientes extends javax.swing.JDialog {
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Lo insertamos en la base de datos
             fa.insertarPaciente(p);
+            fa.muestraMensaje("Paciente añadido correctamente.");
         }
         //Finalmente buscamos otra vez pacientes
         rebuscarPacientes();
