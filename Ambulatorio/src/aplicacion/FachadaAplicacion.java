@@ -1,9 +1,9 @@
 package aplicacion;
 
 import aplicacion.clases.*;
-import gui.VCitasPendientes;
-import gui.VPacientes;
-import gui.VPersonal;
+import gui.ventanas.VCitasPendientes;
+import gui.ventanas.VPacientes;
+import gui.ventanas.VPersonal;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
@@ -11,7 +11,7 @@ import java.sql.Date;
 
 public class FachadaAplicacion {
 
-    gui.FachadaGui fgui;               // Enlace a la fachada de la GUI
+    gui.ventanas.FachadaGui fgui;               // Enlace a la fachada de la GUI
     baseDatos.FachadaBaseDatos fbd;    // Enlace a la fachada de base de datos
     GestionAmbulatorios gamb;          // Enlace a la clase gestión de ambulatorio
     GestionCitas gcit;                 // Enlace a la clase gestión de citas
@@ -25,7 +25,7 @@ public class FachadaAplicacion {
 
     //Constructor
     public FachadaAplicacion() {
-        fgui = new gui.FachadaGui(this);
+        fgui = new gui.ventanas.FachadaGui(this);
         fbd = new baseDatos.FachadaBaseDatos(this);
         gamb = new GestionAmbulatorios(fgui, fbd);
         gcit = new GestionCitas(fgui, fbd);

@@ -2,7 +2,7 @@ package aplicacion;
 
 import aplicacion.clases.Personal;
 import aplicacion.clases.PersonalSanitario;
-import gui.FachadaGui;
+import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 import java.util.ArrayList;
 

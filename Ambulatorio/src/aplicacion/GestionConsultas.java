@@ -2,7 +2,7 @@ package aplicacion;
 
 import aplicacion.clases.Consulta;
 import aplicacion.clases.TipoCita;
-import gui.FachadaGui;
+import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
 public class GestionConsultas {

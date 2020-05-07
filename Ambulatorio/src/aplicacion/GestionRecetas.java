@@ -3,9 +3,9 @@ package aplicacion;
 import aplicacion.clases.Cita;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Receta;
-import gui.FachadaGui;
+import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
-import gui.VCitasPendientes;
+import gui.ventanas.VCitasPendientes;
 
 public class GestionRecetas {
 

@@ -1,7 +1,7 @@
 package aplicacion;
 
 import aplicacion.clases.Enfermedad;
-import gui.FachadaGui;
+import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
 public class GestionEnfermedades {

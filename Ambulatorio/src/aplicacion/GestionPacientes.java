@@ -3,9 +3,9 @@ package aplicacion;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.Cita;
 import aplicacion.clases.TipoCita;
-import gui.FachadaGui;
+import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
-import gui.VPacientes;
+import gui.ventanas.VPacientes;
 
 public class GestionPacientes {
 
