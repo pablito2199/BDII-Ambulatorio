@@ -175,13 +175,21 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         if (tu.getRowCount() > 0) {
 
             //Atendemos la urgencia
-            fa.atenderCita(tu.obtenerUrgencia());
+            if (fa.atenderCita(tu.obtenerUrgencia())) {
 
-            //Contamos urgencias
-            labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
+                //Contamos urgencias
+                labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
 
-            //Feedback
-            fa.muestraMensaje("Urgencia atendida correctamente.");
+                //Feedback
+                fa.muestraMensaje("Urgencia atendida correctamente.");
+            }
+            else {
+               
+                //Mostramos fallo y rebuscamos urgencias
+                fa.muestraExcepcion("Error al atedender la urgencia.");
+                tu.setFilas(fa.urgenciasPendientes(ambulatorio));
+
+            }
         }
     }//GEN-LAST:event_btnAtenderActionPerformed
 

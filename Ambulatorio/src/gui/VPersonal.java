@@ -1,7 +1,7 @@
 package gui;
 
 public class VPersonal extends javax.swing.JDialog {
-    
+
     private final VPrincipal padre;                           //Enlace a la ventana padre
     private final aplicacion.FachadaAplicacion fa;            //Enlace a la fachada de aplicación
     private final Integer ambulatorio;                        //Ambulatorio
@@ -20,7 +20,7 @@ public class VPersonal extends javax.swing.JDialog {
         initComponents();
         padre = (VPrincipal) parent;
         this.ambulatorio = ambulatorio;
-        
+
         btnCitas.setEnabled(false);
     }
 
@@ -375,6 +375,10 @@ public class VPersonal extends javax.swing.JDialog {
     //Botón Citas, abre la ventana de citas del médico
     private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
 
+        int index = tablaPersonal.getSelectedRow();
+        if (index >= 0)
+            fa.nuevaVCitasPendientes(this, ((ModeloTablaPersonal) tablaPersonal.getModel()).obtenerPersonal(index));
+        
     }//GEN-LAST:event_btnCitasActionPerformed
 
     /**

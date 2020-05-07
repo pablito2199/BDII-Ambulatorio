@@ -250,10 +250,12 @@ public class DAOCitas extends AbstractDAO {
     }
 
     //Pone el timestamp de finalizacion de la cita al actual del sistema gestor
-    public void atenderCita(Cita cita) {
+    public Boolean atenderCita(Cita cita) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmCita = null;
+
+        Boolean resultado = true;
 
         //Establecemos conexión
         con = super.getConexion();
@@ -283,6 +285,9 @@ public class DAOCitas extends AbstractDAO {
         } catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
             System.out.println(e.getMessage());
+
+            resultado = false;
+
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             //Finalmente intentamos cerrar cursores
@@ -293,14 +298,18 @@ public class DAOCitas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+
+        return resultado;
     }
 
     //Permite insertar una relacion derivarHospital en la base de datos e
     //inserta un timestamp de finalizacion en la cita relacionada
-    public void derivarHospital(Hospital hospital, Cita cita) {
+    public Boolean derivarHospital(Hospital hospital, Cita cita) {
         //Declaramos variables
         Connection con;
         PreparedStatement stmDerivarHospital = null;
+
+        Boolean resultado = true;
 
         //Establecemos conexión
         con = super.getConexion();
@@ -359,6 +368,7 @@ public class DAOCitas extends AbstractDAO {
         } catch (SQLException e) {
 
             String mensajeExcepcion = e.getMessage();
+            resultado = false;
 
             try {
                 //Hacemos rollback
@@ -386,6 +396,8 @@ public class DAOCitas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        
+        return resultado;
     }
 
     //Permite consultar las citas ocupadas entre dos fechas en una consulta

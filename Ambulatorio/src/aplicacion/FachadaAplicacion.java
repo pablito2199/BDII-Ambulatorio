@@ -56,14 +56,6 @@ public class FachadaAplicacion {
     public void muestraMensaje(String e) {
         fgui.muestraMensaje(e);
     }
-    
-    //ENCRIPTACION
-    public String encrypt(String plainText, PublicKey publicKey) throws Exception{
-        return gper.encrypt(plainText, publicKey);
-    }
-    public String decrypt(String cipherText, PrivateKey privateKey) throws Exception{
-        return gper.decrypt(cipherText, privateKey);
-    }
 
 /////////////////////////
 //GESTIÓN DE PERSONAL
@@ -135,13 +127,13 @@ public class FachadaAplicacion {
     }
 
     //Atiende una cita o una urgencia
-    public void atenderCita(Cita cita) {
-        gcit.atenderCita(cita);
+    public Boolean atenderCita(Cita cita) {
+        return gcit.atenderCita(cita);
     }
 
     //Deriva una cita o urgencia a un hospital
-    public void derivarHospital(Hospital hospital, Cita cita) {
-        gcit.derivarHospital(hospital, cita);
+    public Boolean derivarHospital(Hospital hospital, Cita cita) {
+        return gcit.derivarHospital(hospital, cita);
     }
 
     //Devuelve una lista de horas de las citas que el paciente no puede reservar

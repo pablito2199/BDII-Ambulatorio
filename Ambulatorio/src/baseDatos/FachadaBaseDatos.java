@@ -113,13 +113,13 @@ public class FachadaBaseDatos {
     }
 
     //Atiende una cita o una urgencia
-    public void atenderCita(Cita cita) {
-        daoCitas.atenderCita(cita);
+    public Boolean atenderCita(Cita cita) {
+        return daoCitas.atenderCita(cita);
     }
 
     //Deriva una cita o urgencia a un hospital
-    public void derivarHospital(Hospital hospital, Cita cita) {
-        daoCitas.derivarHospital(hospital, cita);
+    public Boolean derivarHospital(Hospital hospital, Cita cita) {
+        return daoCitas.derivarHospital(hospital, cita);
     }
 
     //Devuelve una lista de las horas de las citas reservadas entre dos fechas

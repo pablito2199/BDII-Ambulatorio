@@ -358,11 +358,16 @@ public class VCitasPendientes extends javax.swing.JDialog {
         if (index >= 0) {
 
             //Atendemos cita cita
-            fa.atenderCita(tc.obtenerCita(index));
+            if (fa.atenderCita(tc.obtenerCita(index))) {
 
-            //Quitamos cita y mostramos feedback
-            tc.quitarCita(index);
-            fa.muestraMensaje("Cita finalizada correctamente.");
+                //Quitamos cita y mostramos feedback
+                tc.quitarCita(index);
+                fa.muestraMensaje("Cita finalizada correctamente.");
+            } else {
+            
+                //Mostramos fallo
+                fa.muestraExcepcion("Error al terminar la cita.");
+            }
         }
     }//GEN-LAST:event_btnTerminarCitaActionPerformed
 
