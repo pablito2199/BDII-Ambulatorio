@@ -288,6 +288,7 @@ public class VGestionEnfermedades extends javax.swing.JDialog {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         //actualizamos las enfermedades que padece el paciente
         fa.actualizarEnfermedadesPaciente(cipPaciente, enfermedadesP);
+        fa.muestraMensaje("Enfermedades del pacientes actualizadas correctamente.");
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     //Botón Regresar, vuelve a la ventana anterior, cerrando la ventana actual

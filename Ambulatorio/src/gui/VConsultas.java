@@ -290,6 +290,7 @@ public class VConsultas extends javax.swing.JDialog {
             Consulta c = new Consulta(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
             //si la fila está seleccionada, modifica, en caso contrario, añade la enfermedad
             fa.anadirConsulta(c);
+            fa.muestraMensaje("Consulta añadida correctamente.");
         } else {
             fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
         }
@@ -306,6 +307,7 @@ public class VConsultas extends javax.swing.JDialog {
         //Intentamos borrar la consulta
         if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()) > 1) {
             fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
+            fa.muestraMensaje("Consulta eliminada correctamente.");
         } else {
             fa.muestraExcepcion("¡¡No puedes eliminar esta consulta, es la única de la especialidad!!");
         }
