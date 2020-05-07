@@ -145,7 +145,7 @@ public class DAOCitas extends AbstractDAO {
 
                 //Activamos de nuevo autocommit
                 con.setAutoCommit(true);
-                
+
                 stmCita.close();
             } catch (SQLException e) {
                 //De no poder se notifica de ello
@@ -240,7 +240,7 @@ public class DAOCitas extends AbstractDAO {
 
                 //Activamos de nuevo autocommit
                 con.setAutoCommit(true);
-                
+
                 stmUrgencia.close();
             } catch (SQLException e) {
                 //De no poder se notifica de ello
@@ -376,10 +376,10 @@ public class DAOCitas extends AbstractDAO {
         } finally {
             //Finalmente intentamos cerrar cursores
             try {
-                
+
                 //Activamos de nuevo autocommit
                 con.setAutoCommit(true);
-                
+
                 stmDerivarHospital.close();
             } catch (SQLException e) {
                 //En caso de no poder se notifica de ello
