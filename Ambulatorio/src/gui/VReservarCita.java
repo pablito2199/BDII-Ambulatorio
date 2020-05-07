@@ -250,7 +250,7 @@ public class VReservarCita extends javax.swing.JDialog {
 
             //Auxiliar
             Ambulatorio amb = th.obtenerAmbulatorio(index);
-            String[] tipo = ((String) comboTipo.getSelectedItem()).split(",");
+            String[] tipo = ((String) comboTipo.getSelectedItem()).split("-");
             TipoCita tipocita = new TipoCita(tipo[0], tipo[1], "");
 
             //Insertamos la cita

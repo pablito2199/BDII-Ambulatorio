@@ -225,30 +225,22 @@ public class DAOConsultas extends AbstractDAO {
         //Establecemos conexión
         con = this.getConexion();
 
-        //Impedimos que la confirmación sea automática
-        try {
-            con.setAutoCommit(false);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }
-
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
             //Selecionamos el identificador, ambulatorio y especialdiad
             //que tengan el ambulatorio dado
             String consulta
-                    = "with menor as (select count(*) as total, co.identificador, co.ambulatorio, co.especialidad "
+                    = "with menor as (select count(*) as cuenta, co.identificador, co.ambulatorio, co.especialidad "
                     + "from consulta as co, cita as ci "
                     + "where co.especialidad = ? "
-                    +       "and co.ambulatorio = ? "
-                    +       "and co.identificador = ci.consulta "
-                    +       "and co.ambulatorio = ci.ambulatorio "
-                    +       "and ci.fechaHoraFin is null "
+                    + "and co.ambulatorio = ? "
+                    + "and co.identificador = ci.consulta "
+                    + "and co.ambulatorio = ci.ambulatorio "
+                    + "and ci.fechaHoraFin is null "
                     + "group by co.identificador, co.ambulatorio, co.especialidad "
                     + "UNION "
-                    + "select 0 as total, co.identificador, co.ambulatorio, co.especialidad "
+                    + "select 0 as cuenta, co.identificador, co.ambulatorio, co.especialidad "
                     + "from consulta as co "
                     + "where co.especialidad = ? "
                     + "and co.ambulatorio = ? "
@@ -264,18 +256,21 @@ public class DAOConsultas extends AbstractDAO {
                     + "from menor as me "
                     + "where not exists (select me2.* "
                     + "                  from menor as me2 "
-                    + "                  where me2.total < me.total)";
+                    + "                  where me2.cuenta < me.cuenta)";
             //Preparamos la consulta
             stmConsultas = con.prepareStatement(consulta);
+            
             //Sustituimos
             stmConsultas.setString(1, especialidad); //Especialidad 1
             stmConsultas.setInt(2, ambulatorio);     //Ambulatorio 1
             stmConsultas.setString(3, especialidad); //Especialidad 2
             stmConsultas.setInt(4, ambulatorio);     //Ambulatorio 2
+            
             //Ejecutamos
             rsConsultas = stmConsultas.executeQuery();
-            //Mientras haya coincidencias
-            while (rsConsultas.next()) {
+            
+            //Cogemos la primera coincidencia
+            if (rsConsultas.next()) {
                 //Se crea una instancia de consulta con los datos de la consulta con el menor número de pacientes de la base de datos
                 menorNumero = new Consulta(
                         rsConsultas.getInt("identificador"),
@@ -287,13 +282,7 @@ public class DAOConsultas extends AbstractDAO {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-            try {
-                //Como ha fallado deshacemos
-                con.rollback();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-            }
+
         } finally {
             //Finalmente se intentan cerrar cursores
             try {
@@ -303,20 +292,7 @@ public class DAOConsultas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        try {
-            con.commit();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-        }
-        //Pedimos que vuelva a hacer los commits automáticamente
-        try {
-            //Impedimos que se la confirmación sea automática
-            con.setAutoCommit(true);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
-        }
+        
         return menorNumero;
     }
 }
