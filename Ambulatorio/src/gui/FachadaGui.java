@@ -209,9 +209,9 @@ public class FachadaGui {
     
     //Abre una ventana que muestra un mensaje en pantalla
     public void muestraMensaje(String txtMensaje) {
-        VAviso va;
+        VMensaje va;
 
-        va  = new VAviso(vp, true, txtMensaje);
+        va  = new VMensaje(vp, true, txtMensaje);
         va.setVisible(true);
     }
 }
