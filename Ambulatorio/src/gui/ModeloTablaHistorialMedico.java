@@ -61,11 +61,11 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
         switch (col) {
             //Fecha Inicio es una fecha
             case 0:
-                clase = java.sql.Timestamp.class;
+                clase = java.lang.String.class;
                 break;
             //Fecha Fin es una fecha
             case 1:
-                clase = java.sql.Timestamp.class;
+                clase =  java.lang.String.class;
                 break;
             //Número receta es un Integer
             case 2:
@@ -98,11 +98,11 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
         switch (col) {
             //Permite recuperar fecha inicio
             case 0:
-                resultado = citas.get(row).getFechaHoraInicio();
+                resultado = citas.get(row).getFechaHoraInicio().toString();
                 break;
             //Permite recuperar fecha fin
             case 1:
-                resultado = citas.get(row).getFechaHoraFin();
+                resultado = citas.get(row).getFechaHoraFin().toString();
                 break;
             //Permite recuperar el código del ambulatorio
             case 2:
