@@ -4,6 +4,8 @@ import aplicacion.clases.*;
 import gui.VCitasPendientes;
 import gui.VPacientes;
 import gui.VPersonal;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
@@ -53,6 +55,14 @@ public class FachadaAplicacion {
     //Llamada para mostrar un mensaje
     public void muestraMensaje(String e) {
         fgui.muestraMensaje(e);
+    }
+    
+    //ENCRIPTACION
+    public String encrypt(String plainText, PublicKey publicKey) throws Exception{
+        return gper.encrypt(plainText, publicKey);
+    }
+    public String decrypt(String cipherText, PrivateKey privateKey) throws Exception{
+        return gper.decrypt(cipherText, privateKey);
     }
 
 /////////////////////////
