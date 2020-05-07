@@ -10,15 +10,17 @@ public abstract class Personal {
     private Date fechaIncorporacion;
     private String telefono;
     private Float sueldo;
+    private String antiguedad;
 
     //Constructores
-    public Personal(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo) {
+    public Personal(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo, String antiguedad) {
         this.ambulatorio = ambulatorio;
         this.DNI = dni;
         this.nombre = nombre;
         this.fechaIncorporacion = fechaIncorporacion;
         this.telefono = telefono;
         this.sueldo = sueldo;
+        this.antiguedad = antiguedad;
     }
 
     public Personal(Integer ambulatorio, String DNI) {
@@ -73,6 +75,14 @@ public abstract class Personal {
 
     public void setSueldo(Float sueldo) {
         this.sueldo = sueldo;
+    }
+
+    public String getAntiguedad() {
+        return antiguedad;
+    }
+
+    public void setAntiguedad(String antiguedad) {
+        this.antiguedad = antiguedad;
     }
 
     @Override

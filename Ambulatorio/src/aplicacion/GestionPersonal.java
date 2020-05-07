@@ -1,6 +1,5 @@
 package aplicacion;
 
-import aplicacion.clases.Personal;
 import aplicacion.clases.PersonalSanitario;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
@@ -34,13 +33,13 @@ public class GestionPersonal {
     }
 
     //Permite buscar personal sanitario por su dni y nombre
-    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre) {
-        return fbd.consultarPersonal(dni, nombre);
+    public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre, Integer ambulatorio) {
+        return fbd.consultarPersonal(dni, nombre, ambulatorio);
     }
 
     //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal() {
-        fgui.nuevaVPersonal();
+    public void nuevaVPersonal(Integer ambulatorio) {
+        fgui.nuevaVPersonal(ambulatorio);
     }
 
     //FUNCIONES DE ENCRIPTACION Y DESENCRIPTACION DE LA CONTRASEÑA MEDIANTE RSA

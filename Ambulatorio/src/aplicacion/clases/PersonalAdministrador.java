@@ -7,8 +7,8 @@ public class PersonalAdministrador extends PersonalNoSanitario {
     private String contrasena;
 
     //Constructor
-    public PersonalAdministrador(String contrasena, Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo, String clase) {
-        super(ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo, clase);
+    public PersonalAdministrador(String contrasena, Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo, String antiguedad, String clase) {
+        super(ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo, antiguedad, clase);
         this.contrasena = contrasena;
     }
 

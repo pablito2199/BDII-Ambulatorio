@@ -31,11 +31,11 @@ public class FachadaGui {
     }
 
     //Permite generar una ventana para visualizar información de un trabajador
-    public void nuevaVPersonal() {
+    public void nuevaVPersonal(Integer ambulatorio) {
         //Declaramos variables
         VPersonal vP;
         //Generamos la ventana
-        vP = new VPersonal(vp, true, fa);
+        vP = new VPersonal(vp, true, fa, ambulatorio);
         //Hacemos visible la ventana
         vP.setVisible(true);
     }
