@@ -508,7 +508,6 @@ public class VPacientes extends javax.swing.JDialog {
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Actualizamos la base de datos
             fa.modificarPaciente(u);
-            fa.muestraMensaje("Paciente modificado correctamente.");
         //De no existir se crea uno nuevo
         } else {
             //LA EDAD NO SE TIENE EN CUENTA PUESTO QUE ES UN CALCULADO
@@ -518,7 +517,6 @@ public class VPacientes extends javax.swing.JDialog {
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
             //Lo insertamos en la base de datos
             fa.insertarPaciente(p);
-            fa.muestraMensaje("Paciente añadido correctamente.");
         }
         //Finalmente buscamos otra vez pacientes
         rebuscarPacientes();

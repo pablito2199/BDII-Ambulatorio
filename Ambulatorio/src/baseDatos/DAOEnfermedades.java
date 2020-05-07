@@ -38,6 +38,7 @@ public class DAOEnfermedades extends AbstractDAO {
 
             //Actualizamos
             stmEnfermedad.executeUpdate();
+            this.getFachadaAplicacion().muestraMensaje("Enfermedad añadida correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -111,6 +112,7 @@ public class DAOEnfermedades extends AbstractDAO {
 
             //Actualizamos
             stmEnfermedad.executeUpdate();
+            this.getFachadaAplicacion().muestraMensaje("Enfermedad modificada correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {

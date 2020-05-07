@@ -307,7 +307,6 @@ public class VConsultas extends javax.swing.JDialog {
         if (!textoNumeroConsulta.getText().isEmpty()) {
             Consulta c = new Consulta(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
             fa.anadirConsulta(c);
-            fa.muestraMensaje("Consulta añadida correctamente.");
         } else {
             fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
         }
