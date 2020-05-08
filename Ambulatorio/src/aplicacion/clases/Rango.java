@@ -3,7 +3,7 @@ package aplicacion.clases;
 public enum Rango {
     BASE("base"), PREMIUM("premiun"), DELUXE("deluxe");
 
-    private String tipo;
+    private final String tipo;
 
     private Rango(String tipo) {
         this.tipo = tipo;

@@ -59,6 +59,7 @@ public class DAORecetas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        this.getFachadaAplicacion().muestraMensaje("Se ha recetado el medicamento al paciente con éxito"); 
     }
 
     //Permite consultar el historial de recetas de un paciente

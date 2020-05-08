@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
-import gui.ventanas.VCitasPendientes;
 import gui.ventanas.VPacientes;
 import gui.ventanas.VPersonal;
 

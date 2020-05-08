@@ -2,9 +2,7 @@ package gui.ventanas;
 
 import gui.modelos.ModeloTablaHistorialRecetas;
 import aplicacion.clases.Paciente;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 
 public class VHistorialRecetas extends javax.swing.JDialog {
 

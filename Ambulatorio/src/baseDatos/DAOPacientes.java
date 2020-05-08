@@ -51,8 +51,7 @@ public class DAOPacientes extends AbstractDAO {
 
             //Actualizamos
             stmPaciente.executeUpdate();
-            this.getFachadaAplicacion().muestraMensaje("Paciente añadido correctamente.");
-
+           
             //En caso de error se captura la excepción
         } catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
@@ -67,6 +66,7 @@ public class DAOPacientes extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        this.getFachadaAplicacion().muestraMensaje("Se ha introducido el nuevo paciente en la base de datos");
     }
 
     //Permite eliminar un paciente de la base de datos
@@ -86,7 +86,6 @@ public class DAOPacientes extends AbstractDAO {
             stmPaciente.setString(1, paciente.getCIP());  //CIP del paciente
             //Actualizamos
             stmPaciente.executeUpdate();
-        this.getFachadaAplicacion().muestraMensaje("Paciente eliminado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -102,6 +101,7 @@ public class DAOPacientes extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        this.getFachadaAplicacion().muestraMensaje("Se ha introducido eliminado al paciente en la base de datos");
     }
 
     //Permite modificar los datos de un paciente de la base de datos
@@ -141,7 +141,6 @@ public class DAOPacientes extends AbstractDAO {
 
             //Actualizamos
             stmPaciente.executeUpdate();
-            this.getFachadaAplicacion().muestraMensaje("Paciente modificado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -157,6 +156,7 @@ public class DAOPacientes extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        this.getFachadaAplicacion().muestraMensaje("Los datos del paciente se han modificado con éxito");
     }
 
     //Permite buscar pacientes por su id y/o nombre de paciente
