@@ -1,5 +1,6 @@
 package baseDatos;
 
+import aplicacion.clases.PasswordUtils;
 import aplicacion.clases.PersonalAdministrador;
 import aplicacion.clases.PersonalSanitario;
 import java.sql.*;
@@ -35,11 +36,10 @@ public class DAOPersonal extends AbstractDAO {
             stmAdministrador = con.prepareStatement(
                     "select * "
                     + "from personaladministrador "
-                    + "where personal = ? "
-                    + "and contrasena = ?");
+                    + "where personal = ?");
             //Sustituimos
             stmAdministrador.setString(1, dni);             //Id del usuario (nombre de usuario)
-            stmAdministrador.setString(2, contrasena);      //Clave (contraseña)
+
             //Ejecutamos
             rsAdministrador = stmAdministrador.executeQuery();
             //Si existe algún resultado (que debe ser único)
@@ -65,7 +65,11 @@ public class DAOPersonal extends AbstractDAO {
             }
         }
 
-        return resultado != null;
+        if (resultado == null) {
+            this.getFachadaAplicacion().muestraExcepcion("Error al intentar obtener la contraseña.");
+            return false;
+        }
+        return PasswordUtils.verificarClave(contrasena, resultado.getContrasena());
     }
 
     //Permite recuperar la especialidad de un personal sanitario

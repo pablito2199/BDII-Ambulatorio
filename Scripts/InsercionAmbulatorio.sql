@@ -98,14 +98,14 @@ insert into asociado (hospital, distancia)
 	((select codigoHospital from hospital where nombre like 'Hospital Universitario de Lucus Augusti' and provincia like 'Lugo'), 15.3); 
 
 insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
-	values ('52134865S', 'Clara Suarez', '2020-01-15', '687452133', 1674.23, 'Secretario');
+	values ('52134865S', 'Clara Suarez', '2020-01-15', '687452133', 1674.23, 'Administrador');
 insert into personalAdministrador (personal, contrasena)
-	values ('52134865S', 'sualci');
+	values ('52134865S', '+o8vKPRnf7u/O078bZWjECbhylw+IesOZFkb8XN3xHg=');--CONTRASEÑA: sualci
 	
 insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
-	values ('00000000A', 'a', '2000-01-01', '999999999', 0.01, 'Administrador');
+	values ('00000000A', 'Elba Ginon', '2000-01-01', '999999999', 0.01, 'Administrador');
 insert into personalAdministrador (personal, contrasena)
-	values ('00000000A', 'a');
+	values ('00000000A', 'R+WWCrkv8DaFS830NUGaGma0goHgoF8Bd/cDkwMgz+s=');--CONTRASEÑA: a
 
 insert into personalSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo)
 	values ('84125961A', 'Adrian Vispalia', '2005-11-03', '981250503', 2000.01);
@@ -178,13 +178,13 @@ insert into asociado (hospital, distancia)
 insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
 	values ('76589765T', 'Pablo Augusto', '2019-05-30', '678543226', 1674.23, 'Secretario');
 
-insert into personalAdministrador (personal,contrasena)
-	values ('76589765T','char');
+insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
+	values ('10000000A', 'Evaristo Garcia', '2000-01-01', '999999999', 0.01, 'Limpieza');
 
 insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
-	values ('10000000A', 'p', '2000-01-01', '999999999', 0.01, 'Administrador');
+	values ('12345678F', 'Benito Camela', '2000-01-01', '999999999', 0.01, 'Administrador');
 insert into personalAdministrador (personal, contrasena)
-	values ('10000000A', 'p');
+	values ('12345678F', 'BOrZlS2zX8MGyXAVY4k8WgdE6RAl7Pji3+BgEkjYVWU=');--CONTRASEÑA: 1234
 
 insert into personalSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo)
 	values ('83325741B', 'Marcos Henandez', '2001-12-23', '611280593', 20100.31);
@@ -231,9 +231,10 @@ insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion
 insert into derivarHospital (cita, paciente, consulta)
 	values ('2019-10-12 12:21:23', 'cip123', 305);
 
-
+--AMBULATORIO 3
 insert into ambulatorio (nombre, direccionPostal, anoConstruccion, provincia, telefono)
 	values('Alguno', 'Rua de Algo, 3, 15715 Ourense', '2019', 'Ourense', '987334311');
 
+--AMBULATORIO 4
 insert into ambulatorio (nombre, direccionPostal, anoConstruccion, provincia, telefono)
 	values('Este', 'Rua de Brujula, 22, 15704 Pontevedra', '2000', 'Pontevedra', '933654311');

@@ -130,7 +130,7 @@ create table especialidad (
 
 create table personalNoSanitario (
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
-    dni char(9) NOT NULL,
+    dni char(9) NOT NULL UNIQUE,
     nombre varchar(50) NOT NULL,
     fechaIncorporacion date NOT NULL,
     telefono char(9) NOT NULL,
@@ -143,13 +143,13 @@ create table personalNoSanitario (
 create table personalAdministrador (
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     personal char(9) NOT NULL,
-    contrasena varchar(30) NOT NULL,
-    primary key(ambulatorio, personal, contrasena),
+    contrasena varchar(200) NOT NULL,
+    primary key(ambulatorio, personal),
     foreign key(ambulatorio, personal) references personalNoSanitario(ambulatorio, dni) on delete restrict on update cascade
 );
 
 create table personalSanitario (
-    dni char(9) NOT NULL,
+    dni char(9) NOT NULL UNIQUE,
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     nombre varchar(50) NOT NULL,
     fechaIncorporacion date NOT NULL,

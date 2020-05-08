@@ -4,8 +4,6 @@ import aplicacion.clases.*;
 import gui.ventanas.VCitasPendientes;
 import gui.ventanas.VPacientes;
 import gui.ventanas.VPersonal;
-import java.security.PrivateKey;
-import java.security.PublicKey;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
@@ -42,6 +40,7 @@ public class FachadaAplicacion {
 
     //Main
     public static void main(String args[]) {
+        
         FachadaAplicacion fa;               //Declaramos la variable fachada
         fa = new FachadaAplicacion();       //La inicializamos
         fa.iniciaInterfazUsuario();         //Llamamos a la interfaz de usuario

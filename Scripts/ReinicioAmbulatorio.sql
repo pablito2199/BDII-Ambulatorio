@@ -37,7 +37,6 @@ drop table enfermedad;
  * SCRIPT DE CREACION
  *
  */
-
 create sequence secIngresos as int start with 1 increment by 1 minvalue 1;
 
 create sequence secAmbulatorios as int start with 1 increment by 1 minvalue 1;
@@ -170,7 +169,7 @@ create table especialidad (
 
 create table personalNoSanitario (
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
-    dni char(9) NOT NULL,
+    dni char(9) NOT NULL UNIQUE,
     nombre varchar(50) NOT NULL,
     fechaIncorporacion date NOT NULL,
     telefono char(9) NOT NULL,
@@ -183,13 +182,13 @@ create table personalNoSanitario (
 create table personalAdministrador (
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     personal char(9) NOT NULL,
-    contrasena varchar(30) NOT NULL,
-    primary key(ambulatorio, personal, contrasena),
+    contrasena varchar(200) NOT NULL,
+    primary key(ambulatorio, personal),
     foreign key(ambulatorio, personal) references personalNoSanitario(ambulatorio, dni) on delete restrict on update cascade
 );
 
 create table personalSanitario (
-    dni char(9) NOT NULL,
+    dni char(9) NOT NULL UNIQUE,
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     nombre varchar(50) NOT NULL,
     fechaIncorporacion date NOT NULL,
@@ -411,7 +410,7 @@ insert into paciente (cip, dni, numSeguridadSocial, nombre, fechaNacimiento, sex
 	('cip125', '35383321F', 5650, 'Pablo Tarrio', '2000-12-27', 'Masculino', 'AB+', 'Española', 'Lugo, Lugo', '665541416'),
 	('cip481', '54862165T', 5782, 'Sergio Rodriguez', '2000-06-29', 'Masculino', '0-', 'Española', 'Santiago de Compostela, A Coruña', '654987321'),
 	('cip000', '54862165O', 1493, 'Clara Suarez', '2000-01-22', 'Femenino', 'A+', 'Española', 'Santiago de Compostela, A Coruña', '666666666'),
-	('cip901', '54863335T', 9825, 'Daniel Chenel', '2000-01-21', 'Masculino', 'B-', 'Española', 'Bertamirans, A Coruña', '666666669'),
+	('cip901', '54863335T', 9825, 'Daniel Chenel', '1998-01-23', 'Masculino', '0+', 'Española', 'Bertamirans, A Coruña', '666666669'),
 	('cip765', '54856833P', 2134, 'Carlos Treviño', '2000-05-27', 'Masculino', 'B+', 'Española', 'Santiago de Compostela, A Coruña', '666666689'),
 	('cip321', '12312123L', 6547, 'Adrian Vispalia', '2000-03-22', 'Masculino', 'A-', 'Española', 'Vigo, A Coruña', '656666666'),
 	('cip098', '25814736M', 8654, 'Miguel Torres', '2000-08-20', 'Masculino', '0-', 'Española', 'Ourense, A Coruña', '666665566'),
@@ -490,31 +489,26 @@ insert into asociado (hospital, distancia)
 	((select codigoHospital from hospital where nombre like 'Hospital Universitario de Lucus Augusti' and provincia like 'Lugo'), 15.3); 
 
 insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
-	values ('52134865S', 'Clara Suarez', '2020-01-15', '687452133', 1674.23, 'Secretario');
+	values ('52134865S', 'Clara Suarez', '2020-01-15', '687452133', 1674.23, 'Administrador');
 insert into personalAdministrador (personal, contrasena)
-	values ('52134865S', 'sualci');
+	values ('52134865S', '+o8vKPRnf7u/O078bZWjECbhylw+IesOZFkb8XN3xHg=');--CONTRASEÑA: sualci
 	
 insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
-	values ('00000000A', 'a', '2000-01-01', '999999999', 0.01, 'Administrador');
+	values ('00000000A', 'Elba Ginon', '2000-01-01', '999999999', 0.01, 'Administrador');
 insert into personalAdministrador (personal, contrasena)
-	values ('00000000A', 'a');
+	values ('00000000A', 'R+WWCrkv8DaFS830NUGaGma0goHgoF8Bd/cDkwMgz+s=');--CONTRASEÑA: a
 
 insert into personalSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo)
 	values ('84125961A', 'Adrian Vispalia', '2005-11-03', '981250503', 2000.01);
 insert into especializacionPersonal (especialidad, personal)
 	values
 	('Cirujia', '84125961A'),
-	('Oftalmologia', '84125961A'),
-	('Psiquiatria', '84125961A'),
-	('Odontologia', '84125961A');
+	('Oftalmologia', '84125961A');
 	
 insert into personalSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo)
 	values ('52145961A', 'Miguel Torres', '2010-11-03', '985202020', 600.01);
 insert into especializacionPersonal (especialidad, personal)
-	values
-	('General', '52145961A'),
-	('Alergologia', '52145961A'),
-	('Oftalmologia', '52145961A');
+	values ('General', '52145961A');
 
 insert into consulta (identificador, especialidad)
 	values
@@ -575,13 +569,13 @@ insert into asociado (hospital, distancia)
 insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
 	values ('76589765T', 'Pablo Augusto', '2019-05-30', '678543226', 1674.23, 'Secretario');
 
-insert into personalAdministrador (personal,contrasena)
-	values ('76589765T','char');
+insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
+	values ('10000000A', 'Evaristo Garcia', '2000-01-01', '999999999', 0.01, 'Limpieza');
 
 insert into personalNoSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo, clase)
-	values ('10000000A', 'p', '2000-01-01', '999999999', 0.01, 'Administrador');
+	values ('12345678F', 'Benito Camela', '2000-01-01', '999999999', 0.01, 'Administrador');
 insert into personalAdministrador (personal, contrasena)
-	values ('10000000A', 'p');
+	values ('12345678F', 'BOrZlS2zX8MGyXAVY4k8WgdE6RAl7Pji3+BgEkjYVWU=');--CONTRASEÑA: 1234
 
 insert into personalSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo)
 	values ('83325741B', 'Marcos Henandez', '2001-12-23', '611280593', 20100.31);
@@ -628,9 +622,10 @@ insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion
 insert into derivarHospital (cita, paciente, consulta)
 	values ('2019-10-12 12:21:23', 'cip123', 305);
 
-
+--AMBULATORIO 3
 insert into ambulatorio (nombre, direccionPostal, anoConstruccion, provincia, telefono)
 	values('Alguno', 'Rua de Algo, 3, 15715 Ourense', '2019', 'Ourense', '987334311');
 
+--AMBULATORIO 4
 insert into ambulatorio (nombre, direccionPostal, anoConstruccion, provincia, telefono)
 	values('Este', 'Rua de Brujula, 22, 15704 Pontevedra', '2000', 'Pontevedra', '933654311');
