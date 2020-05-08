@@ -16,7 +16,7 @@ create table ambulatorio (
     provincia varchar(40) NOT NULL,
     telefono char(9) NOT NULL,
     primary key (codigoAmbulatorio),
-    unique(nombre, provincia)
+    CONSTRAINT nombreProvincia UNIQUE(nombre, provincia)
 );
 
 create table material (
