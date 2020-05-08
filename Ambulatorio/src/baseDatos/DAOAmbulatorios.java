@@ -57,6 +57,7 @@ public class DAOAmbulatorios extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        this.getFachadaAplicacion().muestraMensaje("Se ha registrado con éxito el ambulatorio en la red");
     }
 
     //Permite eliminar un ambulatorio de la base de datos
@@ -92,6 +93,7 @@ public class DAOAmbulatorios extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        this.getFachadaAplicacion().muestraMensaje("Se ha eliminado con éxito el ambulatorio de la red");
     }
 
     //Permite modificar los datos de un ambulatorio de la base de datos
@@ -140,6 +142,7 @@ public class DAOAmbulatorios extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+        this.getFachadaAplicacion().muestraMensaje("Se han actualizado los datos del ambulatorio con éxito");
     }
 
     //Permite buscar ambulatorios por su codigo, provincia y/o nombre de ambulatorio
