@@ -51,8 +51,7 @@ public class DAOPacientes extends AbstractDAO {
 
             //Actualizamos
             stmPaciente.executeUpdate();
-            this.getFachadaAplicacion().muestraMensaje("Paciente añadido correctamente.");
-
+           
             //En caso de error se captura la excepción
         } catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje
@@ -87,7 +86,6 @@ public class DAOPacientes extends AbstractDAO {
             stmPaciente.setString(1, paciente.getCIP());  //CIP del paciente
             //Actualizamos
             stmPaciente.executeUpdate();
-        this.getFachadaAplicacion().muestraMensaje("Paciente eliminado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -143,7 +141,6 @@ public class DAOPacientes extends AbstractDAO {
 
             //Actualizamos
             stmPaciente.executeUpdate();
-            this.getFachadaAplicacion().muestraMensaje("Paciente modificado correctamente.");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
