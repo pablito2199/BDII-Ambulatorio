@@ -3,16 +3,7 @@ package aplicacion;
 import aplicacion.clases.PersonalSanitario;
 import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
-import java.math.BigInteger;
 import java.util.ArrayList;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-import java.security.KeyFactory;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.Base64;
-import javax.crypto.Cipher;
 
 public class GestionPersonal {
 

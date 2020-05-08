@@ -1,7 +1,6 @@
 package aplicacion;
 
 import aplicacion.clases.Consulta;
-import aplicacion.clases.TipoCita;
 import gui.ventanas.FachadaGui;
 import baseDatos.FachadaBaseDatos;
 
