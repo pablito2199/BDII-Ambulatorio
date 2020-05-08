@@ -182,7 +182,7 @@ create table personalNoSanitario (
 create table personalAdministrador (
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     personal char(9) NOT NULL,
-    contrasena varchar(200) NOT NULL,
+    contrasena varchar(350) NOT NULL,
     primary key(ambulatorio, personal),
     foreign key(ambulatorio, personal) references personalNoSanitario(ambulatorio, dni) on delete restrict on update cascade
 );
