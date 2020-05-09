@@ -118,6 +118,7 @@ public class VReservarCita extends javax.swing.JDialog {
         jLabel1.setText("Ambulatorio:");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("Busca los horarios disponibles");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -192,6 +193,7 @@ public class VReservarCita extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -199,6 +201,7 @@ public class VReservarCita extends javax.swing.JDialog {
         });
 
         btnReservar.setText("Reservar");
+        btnReservar.setToolTipText("Reserva la cita");
         btnReservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReservarActionPerformed(evt);

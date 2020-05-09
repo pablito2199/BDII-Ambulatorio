@@ -94,6 +94,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -101,6 +102,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setToolTipText("Pone en blanco los cuadros de texto, así como limpia la lista");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -149,6 +151,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         txtAmbulatorio.setToolTipText("Nombre del ambulatorio");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("Busca las citas pendientes");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -164,6 +167,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tablaCitas);
 
         btnRecetar.setText("Recetar");
+        btnRecetar.setToolTipText("Abre la ventana de Recetar");
         btnRecetar.setEnabled(false);
         btnRecetar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,6 +176,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnDerivar.setText("Derivar al Hospital");
+        btnDerivar.setToolTipText("Abre la ventana de Derivar al hospital");
         btnDerivar.setEnabled(false);
         btnDerivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +185,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnTerminarCita.setText("Terminar Cita");
+        btnTerminarCita.setToolTipText("Termina la cita");
         btnTerminarCita.setEnabled(false);
         btnTerminarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +194,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnCancelarCita.setText("Cancelar Cita");
+        btnCancelarCita.setToolTipText("Cancela la cita");
         btnCancelarCita.setEnabled(false);
         btnCancelarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

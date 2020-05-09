@@ -91,7 +91,6 @@ public class VPacientes extends javax.swing.JDialog {
 
         btnActualizarPaciente.setText("Actualizar");
         btnActualizarPaciente.setToolTipText("Añade/Modifica el paciente");
-        btnActualizarPaciente.setEnabled(false);
         btnActualizarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarPacienteActionPerformed(evt);
@@ -485,6 +484,7 @@ public class VPacientes extends javax.swing.JDialog {
         btnCitasPendientes.setEnabled(false);
         btnHistorialClinico.setEnabled(false);
         btnHistorialRecetas.setEnabled(false);
+        btnBorrar.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Función que permite guardar el usuario en la base de datos
@@ -676,7 +676,6 @@ public class VPacientes extends javax.swing.JDialog {
             btnCitasPendientes.setEnabled(true);
             btnHistorialClinico.setEnabled(true);
             btnHistorialRecetas.setEnabled(true);
-            btnActualizarPaciente.setEnabled(true);
             btnBorrar.setEnabled(true);
         } else {
             //De no haberlas, deshabilitamos los botones
@@ -686,7 +685,6 @@ public class VPacientes extends javax.swing.JDialog {
             btnCitasPendientes.setEnabled(false);
             btnHistorialClinico.setEnabled(false);
             btnHistorialRecetas.setEnabled(false);
-            btnActualizarPaciente.setEnabled(false);
             btnBorrar.setEnabled(false);
         }
     }

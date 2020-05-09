@@ -434,6 +434,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnPersonal.setEnabled(false);
         btnConsultas.setEnabled(false);
         btnSalaUrgencias.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Botón Actualizar, crea un nuevo ambulatorio o lo modifica
