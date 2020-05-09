@@ -61,11 +61,13 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         labelPrincipal.setText("Pacientes esperando en la sala de urgencias");
 
         tablaUrgencias.setModel(new ModeloTablaUrgencias());
+        tablaUrgencias.setToolTipText("Tabla de pacientes en la sala de urgencias");
         jScrollPane1.setViewportView(tablaUrgencias);
 
         labelCantidad.setText("Cantidad:");
 
         labelNumUrgencias.setText("0");
+        labelNumUrgencias.setToolTipText("Cantidad de pacientes en la sala de urgencias");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,6 +105,7 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -110,6 +113,8 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         });
 
         btnAtender.setText("Atender");
+        btnAtender.setToolTipText("Atiende a un paciente de la sala de urgencias");
+        btnAtender.setEnabled(false);
         btnAtender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtenderActionPerformed(evt);
@@ -117,6 +122,8 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         });
 
         btnDerivar.setText("Derivar al hospital");
+        btnDerivar.setToolTipText("Abre la ventana de derivar al hospital");
+        btnDerivar.setEnabled(false);
         btnDerivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDerivarActionPerformed(evt);
