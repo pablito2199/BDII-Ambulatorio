@@ -39,13 +39,11 @@ public class VConsultas extends javax.swing.JDialog {
             lstConsultas.setSelectedIndex(0);
             textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
             textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, null, null).toString());
-            //activa el botón de Eliminar y Añadir
+            //activa el botón de Eliminar
             btnEliminarConsultas.setEnabled(true);
-            btnAnadirConsultas.setEnabled(true);
         } else {
-            //desactiva el botón de Eliminar y Añadir
+            //desactiva el botón de Eliminar
             btnEliminarConsultas.setEnabled(false);
-            btnAnadirConsultas.setEnabled(false);
         }
 
         //Eliminamos especialidades anteriores del comboBox
@@ -206,7 +204,6 @@ public class VConsultas extends javax.swing.JDialog {
 
         btnAnadirConsultas.setText("Añadir");
         btnAnadirConsultas.setToolTipText("Añade una consulta");
-        btnAnadirConsultas.setEnabled(false);
         btnAnadirConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnadirConsultasActionPerformed(evt);
@@ -309,14 +306,17 @@ public class VConsultas extends javax.swing.JDialog {
     private void btnAnadirConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirConsultasActionPerformed
         //si el campo del número de la consulta no está vacío se añade una consulta
         if (!textoNumeroConsulta.getText().isEmpty()) {
-            Consulta c = new Consulta(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
-            fa.anadirConsulta(c);
+            if (!seleccionEspecialidades.getSelectedItem().toString().equals("Cualquier especialidad")) {
+                Consulta c = new Consulta(Integer.parseInt(textoNumeroConsulta.getText()), ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
+                fa.anadirConsulta(c);
+            } else {
+                fa.muestraExcepcion("¡¡Debes elegir una especialidad válida!!");
+            }
         } else {
             fa.muestraExcepcion("¡¡Debes rellenar todos los campos obligatorios!!");
         }
         //actualizamos la lista de consultas
         buscarConsultas();
-        textoNumeroConsulta.setText(null);
     }//GEN-LAST:event_btnAnadirConsultasActionPerformed
 
     //botón de Eliminar, elimina una consulta
@@ -333,6 +333,7 @@ public class VConsultas extends javax.swing.JDialog {
 
         //actualizamos la lista de consultas
         textoNumeroConsulta.setText(null);
+        seleccionEspecialidades.setSelectedItem("Cualquier especialidad");
         buscarConsultas();
     }//GEN-LAST:event_btnEliminarConsultasActionPerformed
 
@@ -382,11 +383,9 @@ public class VConsultas extends javax.swing.JDialog {
             lstConsultas.setSelectedIndex(0);
             //activa el botón de Eliminar y Añadir
             btnEliminarConsultas.setEnabled(true);
-            btnAnadirConsultas.setEnabled(true);
         } else {
             //desactiva el botón de Eliminar y Añadir
             btnEliminarConsultas.setEnabled(false);
-            btnAnadirConsultas.setEnabled(false);
         }
         if (seleccionEspecialidades.getSelectedItem().toString().equals("Cualquier especialidad")) {
             textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, null, id).toString());
