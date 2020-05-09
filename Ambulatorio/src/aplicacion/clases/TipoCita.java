@@ -2,10 +2,13 @@ package aplicacion.clases;
 
 public class TipoCita {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private String nombre;
     private String especialidad;
     private String descripcion;
 
+    //////////////////////////////////////////////////
     //Constructor
     public TipoCita(String nombre, String especialidad, String descripcion) {
         this.nombre = nombre;
@@ -13,6 +16,7 @@ public class TipoCita {
         this.descripcion = descripcion;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public String getNombre() {
 
@@ -39,6 +43,8 @@ public class TipoCita {
         this.descripcion = descripcion;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TipoCita) {

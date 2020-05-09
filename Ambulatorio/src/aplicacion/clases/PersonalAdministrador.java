@@ -4,8 +4,11 @@ import java.sql.Date;
 
 public class PersonalAdministrador extends PersonalNoSanitario {
 
+    //////////////////////////////////////////////////
+    //Atributo
     private String contrasena;
 
+    //////////////////////////////////////////////////
     //Constructor
     public PersonalAdministrador(String contrasena, Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo, String antiguedad, String clase) {
         super(ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo, antiguedad, clase);
@@ -17,6 +20,7 @@ public class PersonalAdministrador extends PersonalNoSanitario {
         this.contrasena = contrasena;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public String getContrasena() {
         return contrasena;

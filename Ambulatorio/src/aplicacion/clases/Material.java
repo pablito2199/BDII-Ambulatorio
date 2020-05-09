@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class Material {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Integer codigo;
     private String tipo;
     private Integer ambulatorio;
@@ -11,6 +13,7 @@ public class Material {
     private Float coste;
     private Date fechaCompra;
 
+    //////////////////////////////////////////////////
     //Constructor
     public Material(Integer codigo, String tipo, Integer ambulatorio, String descripcion, Float coste, Date fechaCompra) {
         this.codigo = codigo;
@@ -21,6 +24,7 @@ public class Material {
         this.fechaCompra = fechaCompra;
     }
 
+    //////////////////////////////////////////////////
     //Setters y Getters
     public Integer getCodigo() {
         return codigo;
@@ -70,6 +74,8 @@ public class Material {
         this.fechaCompra = fechaCompra;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Material) {

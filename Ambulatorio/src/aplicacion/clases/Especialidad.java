@@ -2,14 +2,20 @@ package aplicacion.clases;
 
 public class Especialidad {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private String nombre;
     private String descripcion;
 
+    //////////////////////////////////////////////////
+    //Constructor
     public Especialidad(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
+    //////////////////////////////////////////////////
+    //Setters y getters
     public String getNombre() {
         return nombre;
     }
@@ -26,6 +32,8 @@ public class Especialidad {
         this.descripcion = descripcion;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Especialidad) {

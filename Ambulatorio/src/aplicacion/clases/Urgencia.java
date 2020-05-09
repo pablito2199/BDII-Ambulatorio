@@ -4,12 +4,15 @@ import java.sql.Timestamp;
 
 public class Urgencia extends Cita {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Float soborno;
     private Integer gravedad;
     private Integer prioridad;
     private String nombre;
 
-    //Constructor
+    //////////////////////////////////////////////////
+    //Constructores
     public Urgencia(Float soborno, Integer gravedad, Integer prioridad, String nombrePaciente, Timestamp fechaHoraInicio, String paciente, Integer consulta, Integer ambulatorio) {
         super(fechaHoraInicio, paciente, consulta, ambulatorio, "Urgencia", "General");
         this.soborno = soborno;
@@ -31,6 +34,7 @@ public class Urgencia extends Cita {
         this.gravedad = gravedad;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public Float getSoborno() {
         return soborno;

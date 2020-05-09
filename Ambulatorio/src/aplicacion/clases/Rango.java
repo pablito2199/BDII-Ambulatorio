@@ -1,10 +1,16 @@
 package aplicacion.clases;
 
 public enum Rango {
+    //////////////////////////////////////////////////
+    //Valores de la enumeración
     BASE("base"), PREMIUM("premiun"), DELUXE("deluxe");
 
+    //////////////////////////////////////////////////
+    //Atributo
     private final String tipo;
 
+    //////////////////////////////////////////////////
+    //Métodos
     private Rango(String tipo) {
         this.tipo = tipo;
     }

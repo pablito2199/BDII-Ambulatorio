@@ -4,12 +4,15 @@ import java.sql.Date;
 
 public class Donativo {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Integer codigo;
     private Integer ambulatorio;
     private Date fecha;
     private Float cantidad;
     private String donante;
 
+    //////////////////////////////////////////////////
     //Constructor
     public Donativo(Integer codigo, Integer ambulatorio, Date fecha, Float cantidad, String motivo) {
         this.codigo = codigo;
@@ -19,6 +22,7 @@ public class Donativo {
         this.donante = motivo;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public Integer getCodigo() {
         return codigo;
@@ -60,6 +64,8 @@ public class Donativo {
         this.donante = donante;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Donativo) {

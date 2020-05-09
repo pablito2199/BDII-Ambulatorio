@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 public class Cita {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Timestamp fechaHoraInicio;
     private Timestamp fechaHoraFin;
     private String paciente;
@@ -12,7 +14,8 @@ public class Cita {
     private String tipo;
     private String especialidad;
 
-    //Constructor
+    //////////////////////////////////////////////////
+    //Constructores
     public Cita(Timestamp fechaHoraInicio, String paciente, Integer consulta, Integer ambulatorio, String tipo, String especialidad) {
         this.fechaHoraInicio = fechaHoraInicio;
         this.paciente = paciente;
@@ -40,6 +43,7 @@ public class Cita {
         this.ambulatorio = ambulatorio;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public Timestamp getFechaHoraInicio() {
         return fechaHoraInicio;
@@ -97,6 +101,8 @@ public class Cita {
         this.especialidad = especialidad;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Cita) {

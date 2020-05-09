@@ -4,8 +4,11 @@ import java.sql.Date;
 
 public class PersonalNoSanitario extends Personal {
 
+    //////////////////////////////////////////////////
+    //Atrinbutos
     private String clase;
 
+    //////////////////////////////////////////////////
     //Constructor
     public PersonalNoSanitario(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo, String antiguedad, String clase) {
         super(ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo, antiguedad);
@@ -16,6 +19,7 @@ public class PersonalNoSanitario extends Personal {
         super(ambulatorio, DNI);
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public String getClase() {
         return clase;

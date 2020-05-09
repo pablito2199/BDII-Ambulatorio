@@ -2,11 +2,14 @@ package aplicacion.clases;
 
 public class Consulta {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Integer identificador;
     private Integer ambulatorio;
     private String especialidad;
 
-    //Constructor
+    //////////////////////////////////////////////////
+    //Constructores
     public Consulta() {
         this.identificador = null;
         this.ambulatorio = null;
@@ -19,6 +22,7 @@ public class Consulta {
         this.especialidad = especialidad;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public Integer getIdentificador() {
         return identificador;
@@ -44,6 +48,8 @@ public class Consulta {
         this.especialidad = especialidad;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Consulta) {

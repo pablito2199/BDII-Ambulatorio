@@ -11,18 +11,21 @@ import java.sql.Date;
 
 public class FachadaAplicacion {
 
-    gui.ventanas.FachadaGui fgui;      // Enlace a la fachada de la GUI
+    //////////////////////////////////////////////////
+    //Atributos
+    gui.ventanas.FachadaGui fgui;          // Enlace a la fachada de la GUI
     baseDatos.FachadaBaseDatos fbd;    // Enlace a la fachada de base de datos
-    GestionAmbulatorios gamb;          // Enlace a la clase gestión de ambulatorio
-    GestionCitas gcit;                 // Enlace a la clase gestión de citas
-    GestionPacientes gpac;             // Enlace a la clase gestión de pacientes
-    GestionEnfermedades genf;          // Enlace a la clase gestión de enfermedades
-    GestionConsultas gcon;             // Enlace a la clase gestión de consultas
-    GestionEspecialidades gesp;        // Enlace a la clase gestión de especialidades
-    GestionRecetas grec;               // Enlace a la clase gestión de recetas
-    GestionPersonal gper;              // Enlace a la clase gestión de administradores
-    GestionHospitales ghos;            // Enlace a la clase gestión de hospitales
+    GestionAmbulatorios gamb;              // Enlace a la clase gestión de ambulatorio
+    GestionCitas gcit;                           // Enlace a la clase gestión de citas
+    GestionPacientes gpac;                   // Enlace a la clase gestión de pacientes
+    GestionEnfermedades genf;              // Enlace a la clase gestión de enfermedades
+    GestionConsultas gcon;                   // Enlace a la clase gestión de consultas
+    GestionEspecialidades gesp;             // Enlace a la clase gestión de especialidades
+    GestionRecetas grec;                      // Enlace a la clase gestión de recetas
+    GestionPersonal gper;                     // Enlace a la clase gestión de administradores
+    GestionHospitales ghos;                  // Enlace a la clase gestión de hospitales
 
+    //////////////////////////////////////////////////
     //Constructor
     public FachadaAplicacion() {
         fgui = new gui.ventanas.FachadaGui(this);
@@ -38,27 +41,31 @@ public class FachadaAplicacion {
         ghos = new GestionHospitales(fgui, fbd);
     }
 
+    //////////////////////////////////////////////////
     //Main
     public static void main(String args[]) {
         
-        FachadaAplicacion fa;               //Declaramos la variable fachada
-        fa = new FachadaAplicacion();       //La inicializamos
-        fa.iniciaInterfazUsuario();         //Llamamos a la interfaz de usuario
+        FachadaAplicacion fa;                //Declaramos la variable fachada
+        fa = new FachadaAplicacion();    //La inicializamos
+        fa.iniciaInterfazUsuario();           //Llamamos a la interfaz de usuario
     }
 
-    //Llamada para mostrar una excepción
+////////////////////////////
+//MENSAJES AL USUARIO
+////////////////////////////
+    //Llamada para mostrar un mensaje de error (una excepción)
     public void muestraExcepcion(String e) {
         fgui.muestraExcepcion(e);
     }
 
-    //Llamada para mostrar un mensaje
+    //Llamada para mostrar un mensaje de confirmación (feedback)
     public void muestraMensaje(String e) {
         fgui.muestraMensaje(e);
     }
 
-/////////////////////////
+/////////////////////////////
 //GESTIÓN DE PERSONAL
-/////////////////////////
+/////////////////////////////
     //Comprueba si la autentificación es correcta
     public Boolean comprobarAutentificacion(String dni, String constrasena) {
         return gper.comprobarAutentificacion(dni, constrasena);
@@ -69,7 +76,7 @@ public class FachadaAplicacion {
         return gper.obtenerEspecialidades(dni, ambulatorio);
     }
 
-    //Permite buscar personal sanitario por su dni y nombre
+    //Permite buscar personal sanitario de un ambulatorio por su dni y nombre
     public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre, Integer ambulatorio) {
         return gper.consultarPersonal(dni, nombre, ambulatorio);
     }
@@ -84,10 +91,10 @@ public class FachadaAplicacion {
         gper.nuevaVPersonal(ambulatorio);
     }
 
-/////////////////////////
+//////////////////////////////////
 //GESTIÓN DE AMBULATORIOS
-/////////////////////////
-    //Permite insertar un nuevo usuario en la base de datos
+//////////////////////////////////
+    //Permite insertar un nuevo ambulatorio en la base de datos
     public void insertarAmbulatorio(Ambulatorio ambulatorio) {
         gamb.insertarAmbulatorio(ambulatorio);
     }

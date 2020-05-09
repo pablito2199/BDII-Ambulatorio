@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class Paciente {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private String CIP;
     private String DNI;
     private Integer NSS;
@@ -17,12 +19,13 @@ public class Paciente {
     private Integer edad;
     private Rango rango;
 
-    //Constructor solo para borrado
+    //////////////////////////////////////////////////
+    //Constructores
+    //Solo para borrado
     public Paciente(String CIP) {
         this.CIP = CIP;
     }
 
-    //Constructores
     public Paciente(String CIP, String DNI, Integer NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono) {
         this.CIP = CIP;
         this.DNI = DNI;
@@ -36,7 +39,6 @@ public class Paciente {
         this.telefono = telefono;
     }
 
-    //Constructor por si le quieres meter la edad
     public Paciente(String CIP, String DNI, Integer NSS, String nombre, Date fechaNacimiento, String sexo, GrupoSanguineo grupo, String nacionalidad, String direccion, String telefono, Integer edad, Rango rango) {
         this.CIP = CIP;
         this.DNI = DNI;
@@ -52,6 +54,7 @@ public class Paciente {
         this.rango = rango;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public String getCIP() {
         return CIP;
@@ -149,6 +152,8 @@ public class Paciente {
         this.rango = rango;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Paciente) {

@@ -2,14 +2,20 @@ package aplicacion.clases;
 
 public enum GrupoSanguineo {
 
+    //////////////////////////////////////////////////
+    //Valores
     NZERO("0-"), PZERO("0+"), NA("A-"), PA("A+"), NB("B-"), PB("B+"), NAB("AB-"), PAB("AB+");
 
+    //////////////////////////////////////////////////
+    //Atributos
     private final String tipo;
 
+    //////////////////////////////////////////////////
+    //Métodos
     private GrupoSanguineo(String tipo) {
         this.tipo = tipo;
     }
-
+    
     public String getTipo() {
         return tipo;
     }
