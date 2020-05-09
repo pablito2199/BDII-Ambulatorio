@@ -91,6 +91,7 @@ public class VPacientes extends javax.swing.JDialog {
 
         btnActualizarPaciente.setText("Actualizar");
         btnActualizarPaciente.setToolTipText("Añade/Modifica el paciente");
+        btnActualizarPaciente.setEnabled(false);
         btnActualizarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarPacienteActionPerformed(evt);
@@ -99,6 +100,7 @@ public class VPacientes extends javax.swing.JDialog {
 
         btnBorrar.setText("Eliminar");
         btnBorrar.setToolTipText("Elimina el paciente");
+        btnBorrar.setEnabled(false);
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
@@ -655,8 +657,6 @@ public class VPacientes extends javax.swing.JDialog {
         if (m.getRowCount() > 0) {
             //Seleccionamos la primera
             tablaPacientes.setRowSelectionInterval(0, 0);
-            //Habilitamos el borrado
-            btnBorrar.setEnabled(true);
             //Obtenemos todos los datos del usuario (fila) en el que se hizo click y los metemos en los campos
             varCIP.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
             varNSS.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNSS().toString());
@@ -676,15 +676,18 @@ public class VPacientes extends javax.swing.JDialog {
             btnCitasPendientes.setEnabled(true);
             btnHistorialClinico.setEnabled(true);
             btnHistorialRecetas.setEnabled(true);
+            btnActualizarPaciente.setEnabled(true);
+            btnBorrar.setEnabled(true);
         } else {
             //De no haberlas, deshabilitamos los botones
-            btnBorrar.setEnabled(false);
             btnEnfermedades.setEnabled(false);
             btnNuevaUrgencia.setEnabled(false);
             btnSolicitarCita.setEnabled(false);
             btnCitasPendientes.setEnabled(false);
             btnHistorialClinico.setEnabled(false);
             btnHistorialRecetas.setEnabled(false);
+            btnActualizarPaciente.setEnabled(false);
+            btnBorrar.setEnabled(false);
         }
     }
 

@@ -38,17 +38,20 @@ public class VConsultas extends javax.swing.JDialog {
             //selecciona el primer elemento de la lista automáticamente
             lstConsultas.setSelectedIndex(0);
             textoNumeroConsulta.setText(m.getElementAt(lstConsultas.getSelectedIndex()).toString());
-            textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, null).toString());
-            //activa el botón de Eliminar
+            textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, null, null).toString());
+            //activa el botón de Eliminar y Añadir
             btnEliminarConsultas.setEnabled(true);
+            btnAnadirConsultas.setEnabled(true);
         } else {
-            //desactiva el botón de Eliminar
+            //desactiva el botón de Eliminar y Añadir
             btnEliminarConsultas.setEnabled(false);
+            btnAnadirConsultas.setEnabled(false);
         }
 
         //Eliminamos especialidades anteriores del comboBox
         seleccionEspecialidades.removeAllItems();
         //Introducimos especialidades en el comboBox
+        seleccionEspecialidades.addItem("Cualquier especialidad");
         for (Especialidad especialidad : fa.consultarEspecialidades()) {
             seleccionEspecialidades.addItem(especialidad.getNombre());
         }
@@ -203,6 +206,7 @@ public class VConsultas extends javax.swing.JDialog {
 
         btnAnadirConsultas.setText("Añadir");
         btnAnadirConsultas.setToolTipText("Añade una consulta");
+        btnAnadirConsultas.setEnabled(false);
         btnAnadirConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnadirConsultasActionPerformed(evt);
@@ -321,7 +325,7 @@ public class VConsultas extends javax.swing.JDialog {
         Integer numero = m.getElementAt(lstConsultas.getSelectedIndex());
 
         //Intentamos borrar la consulta
-        if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()) > 1) {
+        if (fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString(), null) > 1) {
             fa.borrarConsulta(numero, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
         } else {
             fa.muestraExcepcion("¡¡No puedes eliminar esta consulta, es la única de la especialidad!!");
@@ -363,7 +367,11 @@ public class VConsultas extends javax.swing.JDialog {
         if (!textoNumeroConsulta.getText().equals("")) {
             id = Integer.parseInt(textoNumeroConsulta.getText());
         }
-        consultas = fa.consultarConsultas(id, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
+        if (seleccionEspecialidades.getSelectedItem().toString().equals("Cualquier especialidad")) {
+            consultas = fa.consultarConsultas(id, ambulatorio, null);
+        } else {
+            consultas = fa.consultarConsultas(id, ambulatorio, seleccionEspecialidades.getSelectedItem().toString());
+        }
         java.util.ArrayList<Integer> numero = new java.util.ArrayList<>();
         for (int i = 0; i < consultas.size(); i++) {
             numero.add(consultas.get(i).getIdentificador());
@@ -372,11 +380,18 @@ public class VConsultas extends javax.swing.JDialog {
         if (m.getSize() > 0) {
             //selecciona el primer elemento de la lista automáticamente
             lstConsultas.setSelectedIndex(0);
-            //activa el botón de Eliminar
+            //activa el botón de Eliminar y Añadir
             btnEliminarConsultas.setEnabled(true);
+            btnAnadirConsultas.setEnabled(true);
         } else {
+            //desactiva el botón de Eliminar y Añadir
             btnEliminarConsultas.setEnabled(false);
+            btnAnadirConsultas.setEnabled(false);
         }
-        textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString()).toString());
+        if (seleccionEspecialidades.getSelectedItem().toString().equals("Cualquier especialidad")) {
+            textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, null, id).toString());
+        } else {
+            textoTotalConsultas.setText(fa.numeroConsultas(ambulatorio, seleccionEspecialidades.getSelectedItem().toString(), id).toString());
+        }
     }
 }

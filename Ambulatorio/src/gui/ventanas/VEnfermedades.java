@@ -30,12 +30,14 @@ public class VEnfermedades extends javax.swing.JDialog {
             lstEnfermedades.setSelectedIndex(0);
             //activa el botón de Eliminar
             btnEliminarEnfermedad.setEnabled(true);
+            btnActualizarEnfermedad.setEnabled(true);
             //ponemos los datos seleccionados en la parte derecha
             textoNombre.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getNombre());
             textoDescripcion.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getDescripcion());
         } else {
             //desactiva el botón Eliminar
             btnEliminarEnfermedad.setEnabled(false);
+            btnActualizarEnfermedad.setEnabled(false);
         }
     }
 
@@ -154,6 +156,7 @@ public class VEnfermedades extends javax.swing.JDialog {
 
         btnEliminarEnfermedad.setText("Eliminar");
         btnEliminarEnfermedad.setToolTipText("Elimina una enfermedad");
+        btnEliminarEnfermedad.setEnabled(false);
         btnEliminarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarEnfermedadActionPerformed(evt);
@@ -162,6 +165,7 @@ public class VEnfermedades extends javax.swing.JDialog {
 
         btnActualizarEnfermedad.setText("Actualizar");
         btnActualizarEnfermedad.setToolTipText("Añade/Modifica una enfermedad");
+        btnActualizarEnfermedad.setEnabled(false);
         btnActualizarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarEnfermedadActionPerformed(evt);
@@ -338,10 +342,12 @@ public class VEnfermedades extends javax.swing.JDialog {
             lstEnfermedades.setSelectedIndex(0);
             //activa el botón de Eliminar
             btnEliminarEnfermedad.setEnabled(true);
+            btnActualizarEnfermedad.setEnabled(true);
             textoNombre.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getNombre());
             textoDescripcion.setText(fa.consultarEnfermedadActual(mListaE.getElementAt(lstEnfermedades.getSelectedIndex())).getDescripcion());
         } else {
             btnEliminarEnfermedad.setEnabled(false);
+            btnActualizarEnfermedad.setEnabled(false);
         }
     }
 }
