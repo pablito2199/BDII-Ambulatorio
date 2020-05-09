@@ -182,7 +182,7 @@ public class DAOPacientes extends AbstractDAO {
                     //Calculamos el rango
                     + "CASE "
                     + "WHEN SUM(distinct soborno)>500 THEN 'deluxe' "
-                    + "WHEN COUNT(distinct cip)>5 and SUM(distinct soborno)>=50 THEN 'premium' "
+                    + "WHEN COUNT(distinct cip)>=5 and SUM(distinct soborno)>=50 THEN 'premium' "
                     + "ELSE 'base' "
                     + "END as rango "
                     + "from paciente full outer JOIN urgencia ON paciente=cip "
