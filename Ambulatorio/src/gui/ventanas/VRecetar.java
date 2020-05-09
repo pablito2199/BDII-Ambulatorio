@@ -306,7 +306,8 @@ public class VRecetar extends javax.swing.JDialog {
     private void listaMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaMedicamentosMouseClicked
         ModeloListaStrings mListaM = (ModeloListaStrings) listaMedicamentos.getModel();
         //si existe alguna enfermedad
-        medicamento = mListaM.getElementAt(listaMedicamentos.getSelectedIndex());
+        if(mListaM.getSize()>0)
+            medicamento = mListaM.getElementAt(listaMedicamentos.getSelectedIndex());
     }//GEN-LAST:event_listaMedicamentosMouseClicked
 
     //Función que permite buscar un medicamento en la base de datos

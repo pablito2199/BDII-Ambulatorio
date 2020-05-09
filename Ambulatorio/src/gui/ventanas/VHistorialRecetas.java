@@ -238,9 +238,38 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         varMedicamentos.setText(null);
         varNumeroDeReceta.setText(null);
         varTotal.setText(null);
+        buscarHistorial();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscarHistorial();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel etiquetaDesde;
+    private javax.swing.JLabel etiquetaHasta;
+    private javax.swing.JLabel etiquetaMedicamento;
+    private javax.swing.JLabel etiquetaNumeroDeReceta;
+    private javax.swing.JLabel etiquetaResultados;
+    private javax.swing.JLabel etiquetaTotalResultados;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaHistorialRecetas;
+    private javax.swing.JTextField varDesde;
+    private javax.swing.JTextField varHasta;
+    private javax.swing.JTextField varMedicamentos;
+    private javax.swing.JTextField varNumeroDeReceta;
+    private javax.swing.JTextField varTotal;
+    // End of variables declaration//GEN-END:variables
+
+    void buscarHistorial() {
         //Creamos el modelo de tabla préstamos
         ModeloTablaHistorialRecetas m;
         m = (ModeloTablaHistorialRecetas) tablaHistorialRecetas.getModel();
@@ -285,30 +314,5 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         }
         m.setFilas(fa.consultarHistorialReceta(paciente, Inicio, Fin, Num, varMedicamentos.getText()));
         varTotal.setText(String.valueOf(m.getRowCount()));
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel etiquetaDesde;
-    private javax.swing.JLabel etiquetaHasta;
-    private javax.swing.JLabel etiquetaMedicamento;
-    private javax.swing.JLabel etiquetaNumeroDeReceta;
-    private javax.swing.JLabel etiquetaResultados;
-    private javax.swing.JLabel etiquetaTotalResultados;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaHistorialRecetas;
-    private javax.swing.JTextField varDesde;
-    private javax.swing.JTextField varHasta;
-    private javax.swing.JTextField varMedicamentos;
-    private javax.swing.JTextField varNumeroDeReceta;
-    private javax.swing.JTextField varTotal;
-    // End of variables declaration//GEN-END:variables
-
+    }
 }

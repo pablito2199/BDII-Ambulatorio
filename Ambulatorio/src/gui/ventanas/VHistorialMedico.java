@@ -243,10 +243,39 @@ public class VHistorialMedico extends javax.swing.JDialog {
         varHasta.setText(null);
         varTotalResultados.setText(null);
         varCitasNoAsistidas.setText(null);
+        comboTipo.setSelectedIndex(0);
+        buscarHistorial();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         //Creamos el modelo de tabla préstamos
+        buscarHistorial();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> comboTipo;
+    private javax.swing.JLabel etiquetaCitasNoAsistidas;
+    private javax.swing.JLabel etiquetaDesde;
+    private javax.swing.JLabel etiquetaHasta;
+    private javax.swing.JLabel etiquetaResultados;
+    private javax.swing.JLabel etiquetaTotalResultados1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaHistorialMedico;
+    private javax.swing.JTextField varCitasNoAsistidas;
+    private javax.swing.JTextField varDesde;
+    private javax.swing.JTextField varHasta;
+    private javax.swing.JTextField varTotalResultados;
+    // End of variables declaration//GEN-END:variables
+
+    void buscarHistorial() {
         ModeloTablaHistorialMedico m;
         m = (ModeloTablaHistorialMedico) tablaHistorialMedico.getModel();
         java.sql.Date Inicio = null;
@@ -289,29 +318,5 @@ public class VHistorialMedico extends javax.swing.JDialog {
             }
         }
         varCitasNoAsistidas.setText(String.valueOf(noAtendidas));
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> comboTipo;
-    private javax.swing.JLabel etiquetaCitasNoAsistidas;
-    private javax.swing.JLabel etiquetaDesde;
-    private javax.swing.JLabel etiquetaHasta;
-    private javax.swing.JLabel etiquetaResultados;
-    private javax.swing.JLabel etiquetaTotalResultados1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaHistorialMedico;
-    private javax.swing.JTextField varCitasNoAsistidas;
-    private javax.swing.JTextField varDesde;
-    private javax.swing.JTextField varHasta;
-    private javax.swing.JTextField varTotalResultados;
-    // End of variables declaration//GEN-END:variables
-
+    }
 }
