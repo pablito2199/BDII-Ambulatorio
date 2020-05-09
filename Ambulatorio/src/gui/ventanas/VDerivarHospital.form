@@ -179,6 +179,9 @@
                   <Connection code="new ModeloTablaHospitales()" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaHospitalesMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -230,6 +233,7 @@
         <Component class="javax.swing.JButton" name="btnConfirmar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Confirmar"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarActionPerformed"/>

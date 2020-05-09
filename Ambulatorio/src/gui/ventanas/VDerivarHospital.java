@@ -2,8 +2,6 @@ package gui.ventanas;
 
 import gui.modelos.ModeloTablaHospitales;
 import aplicacion.clases.Cita;
-import aplicacion.clases.Hospital;
-import java.util.ArrayList;
 
 public class VDerivarHospital extends javax.swing.JDialog {
 
@@ -75,6 +73,11 @@ public class VDerivarHospital extends javax.swing.JDialog {
         etiquetaCodigo1.setText("Distancia:");
 
         tablaHospitales.setModel(new ModeloTablaHospitales());
+        tablaHospitales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaHospitalesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaHospitales);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -143,6 +146,7 @@ public class VDerivarHospital extends javax.swing.JDialog {
         });
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.setEnabled(false);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
@@ -245,8 +249,24 @@ public class VDerivarHospital extends javax.swing.JDialog {
                 textoProvincia.getText(),
                 codigo,
                 distancia));
-
+        
+        if (th.getRowCount() > 0) {
+            tablaHospitales.setRowSelectionInterval(0, 0);
+            btnConfirmar.setEnabled(true);
+        } else {
+            btnConfirmar.setEnabled(false);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tablaHospitalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHospitalesMouseClicked
+        //Creamos el modelo de tabla hospitales
+        ModeloTablaHospitales m = (ModeloTablaHospitales) tablaHospitales.getModel();
+        //Obtenemos todos los datos del hospital (fila) en el que se hizo click y los metemos en los campos
+        textoNombre.setText(m.obtenerHospital(tablaHospitales.getSelectedRow()).getNombre());
+        textoCodigo.setText(m.obtenerHospital(tablaHospitales.getSelectedRow()).getCodigo().toString());
+        textoDistancia.setText(m.obtenerHospital(tablaHospitales.getSelectedRow()).getDistancia().toString());
+        textoProvincia.setText(m.obtenerHospital(tablaHospitales.getSelectedRow()).getProvincia());
+    }//GEN-LAST:event_tablaHospitalesMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
