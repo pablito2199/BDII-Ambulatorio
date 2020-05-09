@@ -166,14 +166,14 @@ public class DAOConsultas extends AbstractDAO {
     }
 
     //Devuelve el número de consultas de un ambulatorio
-    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad, Integer identificador) {
         //Declaramos variables
         Integer consultas = 0;
         Connection con;
         PreparedStatement stmAmbulatorios = null;
         ResultSet rsAmbulatorios;
-        String esp = especialidad == null ? "" : "and especialidad = ?";
-
+        String esp = especialidad == null ? "" : "and especialidad = ? ";
+        String cons = identificador == null ? "" : "and identificador = ?";
         //Establecemos conexión
         con = this.getConexion();
 
@@ -183,14 +183,20 @@ public class DAOConsultas extends AbstractDAO {
             String consulta = "select COUNT(distinct identificador) as consultas "
                     + "from consulta "
                     + "where ambulatorio = ? "
-                    + esp;
+                    + esp
+                    + cons;
             //Preparamos la consulta
             stmAmbulatorios = con.prepareStatement(consulta);
 
             //Sustituimos
             stmAmbulatorios.setInt(1, ambulatorio);
-            if (especialidad != null) {
+            if (especialidad != null && identificador != null) {
                 stmAmbulatorios.setString(2, especialidad);
+                stmAmbulatorios.setInt(3, identificador);
+            } else if (especialidad != null) {
+                stmAmbulatorios.setString(2, especialidad);
+            } else if (identificador != null) {
+                stmAmbulatorios.setInt(2, identificador);
             }
 
             //Ejecutamos

@@ -252,8 +252,8 @@ public class FachadaBaseDatos {
     }
 
     //Devuelve el número de consultas de un ambulatorio
-    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
-        return daoConsultas.numeroConsultas(ambulatorio, especialidad);
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad, Integer identificador) {
+        return daoConsultas.numeroConsultas(ambulatorio, especialidad, identificador);
     }
 
     //Permite obtener la consulta con menos citas pendientes

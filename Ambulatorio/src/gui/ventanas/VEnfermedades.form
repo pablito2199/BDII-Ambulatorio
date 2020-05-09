@@ -246,6 +246,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
             <Property name="toolTipText" type="java.lang.String" value="Elimina una enfermedad"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarEnfermedadActionPerformed"/>

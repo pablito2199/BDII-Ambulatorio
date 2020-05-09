@@ -154,6 +154,7 @@ public class VEnfermedades extends javax.swing.JDialog {
 
         btnEliminarEnfermedad.setText("Eliminar");
         btnEliminarEnfermedad.setToolTipText("Elimina una enfermedad");
+        btnEliminarEnfermedad.setEnabled(false);
         btnEliminarEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarEnfermedadActionPerformed(evt);
@@ -244,6 +245,7 @@ public class VEnfermedades extends javax.swing.JDialog {
         //campos de texto en blanco
         textoNombre.setText(null);
         textoDescripcion.setText(null);
+        btnEliminarEnfermedad.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarEnfermedadActionPerformed
 
     //botón de Añadir, añade una enfermedad a la base de datos

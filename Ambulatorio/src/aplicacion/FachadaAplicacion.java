@@ -320,8 +320,8 @@ public class FachadaAplicacion {
     }
 
     //Devuelve el número de consultas de un ambulatorio
-    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
-        return gcon.numeroConsultas(ambulatorio, especialidad);
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad, Integer identificador) {
+        return gcon.numeroConsultas(ambulatorio, especialidad, identificador);
     }
 
     //Permite obtener la consulta con menos citas pendientes

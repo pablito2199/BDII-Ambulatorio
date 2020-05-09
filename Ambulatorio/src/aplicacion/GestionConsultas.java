@@ -35,8 +35,8 @@ public class GestionConsultas {
     }
 
     //Devuelve el número de consultas de un ambulatorio
-    public Integer numeroConsultas(Integer ambulatorio, String especialidad) {
-        return fbd.numeroConsultas(ambulatorio, especialidad);
+    public Integer numeroConsultas(Integer ambulatorio, String especialidad, Integer identificador) {
+        return fbd.numeroConsultas(ambulatorio, especialidad, identificador);
     }
 
     //Permite obtener la consulta con menos citas pendientes
