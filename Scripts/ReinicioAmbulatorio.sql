@@ -540,24 +540,24 @@ insert into pertenecer (personal, consulta)
 	
 insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
 	values ('2019-10-12 12:22:23', '2019-10-12 13:05:00', 'cip124', 005, 'Urgencia', 'General');
-insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
-	values ('2019-01-22 16:52:32', 'cip124', 005, 'Urgencia', 'General');
+insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
+	values ('2019-01-22 16:52:32', '2019-01-22 17:00:00', 'cip124', 005, 'Urgencia', 'General');
 insert into urgencia (cita, paciente, consulta, soborno, gravedad)
 	values ('2019-01-22 16:52:32', 'cip124', 005, 0.01, 1);
-insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
-	values ('2019-02-26 20:50:09', 'cip124', 005, 'Urgencia', 'General');
+insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
+	values ('2019-02-26 20:50:09', '2019-02-26 21:15:49', 'cip124', 005, 'Urgencia', 'General');
 insert into urgencia (cita, paciente, consulta, soborno, gravedad)
 	values ('2019-02-26 20:50:09', 'cip124', 005, 46.10, 3);
-insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
-	values ('2019-10-02 6:14:23', 'cip124', 005, 'Urgencia', 'General');
+insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
+	values ('2019-10-02 6:14:23', '2019-10-02 6:47:38', 'cip124', 005, 'Urgencia', 'General');
 insert into urgencia (cita, paciente, consulta, soborno, gravedad)
 	values ('2019-10-02 6:14:23', 'cip124', 005, 6.56, 5);
-insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
-	values ('2019-12-25 10:08:50', 'cip124', 005, 'Urgencia', 'General');
+insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
+	values ('2019-12-25 10:08:50', '2019-12-25 11:00:01', 'cip124', 005, 'Urgencia', 'General');
 insert into urgencia (cita, paciente, consulta, soborno, gravedad)
 	values ('2019-12-25 10:08:50', 'cip124', 005, 15.01, 1);
-insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
-	values ('2020-01-06 00:54:07', 'cip124', 005, 'Urgencia', 'General');
+insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
+	values ('2020-01-06 00:54:07', '2020-01-06 02:10:57', 'cip124', 005, 'Urgencia', 'General');
 insert into urgencia (cita, paciente, consulta, soborno, gravedad)
 	values ('2020-01-06 00:54:07', 'cip124', 005, 20.05, 7);
 insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
