@@ -508,7 +508,11 @@ insert into especializacionPersonal (especialidad, personal)
 insert into personalSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo)
 	values ('52145961A', 'Miguel Torres', '2010-11-03', '985202020', 600.01);
 insert into especializacionPersonal (especialidad, personal)
-	values ('General', '52145961A');
+	values 
+	('General', '52145961A'),
+	('Psiquiatria', '52145961A'),
+	('Odontologia', '52145961A'),
+	('Alergologia', '52145961A');
 
 insert into consulta (identificador, especialidad)
 	values
@@ -526,6 +530,12 @@ insert into pertenecer (personal, consulta)
 	values
 	('84125961A', 101),
 	('84125961A', 203),
+	('52145961A', 301),
+	('52145961A', 405),
+	('52145961A', 285),
+	('52145961A', 286),
+	('52145961A', 008),
+	('52145961A', 006),
 	('52145961A', 005);
 	
 insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
