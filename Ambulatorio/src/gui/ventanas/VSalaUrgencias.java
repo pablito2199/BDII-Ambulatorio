@@ -62,6 +62,7 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
         tablaUrgencias.setModel(new ModeloTablaUrgencias());
         tablaUrgencias.setToolTipText("Tabla de pacientes en la sala de urgencias");
+        tablaUrgencias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tablaUrgencias);
 
         labelCantidad.setText("Cantidad:");

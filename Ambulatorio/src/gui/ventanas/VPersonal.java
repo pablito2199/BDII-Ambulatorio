@@ -150,6 +150,7 @@ public class VPersonal extends javax.swing.JDialog {
         tablaPersonal.setModel(new ModeloTablaPersonal());
         tablaPersonal.setToolTipText("Tabla de trabajadores");
         tablaPersonal.setAutoscrolls(false);
+        tablaPersonal.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaPersonal.getTableHeader().setReorderingAllowed(false);
         tablaPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

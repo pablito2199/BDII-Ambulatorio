@@ -95,6 +95,7 @@ public class VReservarCita extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tablaHoras.setModel(new ModeloTablaHoras(fa, pa));
+        tablaHoras.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaHoras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaHorasMouseClicked(evt);

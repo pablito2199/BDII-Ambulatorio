@@ -143,6 +143,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
         tablaHistorialMedico.setModel(new gui.modelos.ModeloTablaHistorialMedico());
         tablaHistorialMedico.setToolTipText("Tabla de citas");
         tablaHistorialMedico.setAutoscrolls(false);
+        tablaHistorialMedico.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaHistorialMedico.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaHistorialMedico);
 

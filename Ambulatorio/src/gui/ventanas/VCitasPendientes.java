@@ -159,6 +159,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         tablaCitas.setModel(new ModeloTablaCitas());
+        tablaCitas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaCitas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaCitasMouseClicked(evt);
