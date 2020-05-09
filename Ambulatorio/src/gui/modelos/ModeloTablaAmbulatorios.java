@@ -80,8 +80,8 @@ public class ModeloTablaAmbulatorios extends AbstractTableModel {
     //Permite saber si la celda especificada es editable
     @Override
     public boolean isCellEditable(int row, int col) {
-        //En este caso el nombre y el teléfono
-        return col == 1 && col == 3;
+        //En este caso ninguna es editable
+        return false;
     }
 
     //Permite obtener el valor de la celda especificada
@@ -101,7 +101,7 @@ public class ModeloTablaAmbulatorios extends AbstractTableModel {
             case 2:
                 resultado = ambulatorios.get(row).getProvincia();
                 break;
-            //Recuperamos el teleéfono del ambulatorio
+            //Recuperamos el teléfono del ambulatorio
             case 3:
                 resultado = ambulatorios.get(row).getTelefono();
                 break;

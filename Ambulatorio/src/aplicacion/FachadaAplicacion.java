@@ -45,9 +45,9 @@ public class FachadaAplicacion {
     //Main
     public static void main(String args[]) {
         
-        FachadaAplicacion fa;               //Declaramos la variable fachada
-        fa = new FachadaAplicacion();       //La inicializamos
-        fa.iniciaInterfazUsuario();         //Llamamos a la interfaz de usuario
+        FachadaAplicacion fa;                //Declaramos la variable fachada
+        fa = new FachadaAplicacion();    //La inicializamos
+        fa.iniciaInterfazUsuario();           //Llamamos a la interfaz de usuario
     }
 
 ////////////////////////////
@@ -63,9 +63,9 @@ public class FachadaAplicacion {
         fgui.muestraMensaje(e);
     }
 
-/////////////////////////
+/////////////////////////////
 //GESTIÓN DE PERSONAL
-/////////////////////////
+/////////////////////////////
     //Comprueba si la autentificación es correcta
     public Boolean comprobarAutentificacion(String dni, String constrasena) {
         return gper.comprobarAutentificacion(dni, constrasena);
@@ -91,10 +91,10 @@ public class FachadaAplicacion {
         gper.nuevaVPersonal(ambulatorio);
     }
 
-/////////////////////////
+//////////////////////////////////
 //GESTIÓN DE AMBULATORIOS
-/////////////////////////
-    //Permite insertar un nuevo usuario en la base de datos
+//////////////////////////////////
+    //Permite insertar un nuevo ambulatorio en la base de datos
     public void insertarAmbulatorio(Ambulatorio ambulatorio) {
         gamb.insertarAmbulatorio(ambulatorio);
     }

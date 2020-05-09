@@ -150,5 +150,4 @@ public class ModeloTablaPacientes extends AbstractTableModel {
     public Paciente obtenerPaciente(int i) {
         return this.pacientes.get(i);
     }
-
 }
