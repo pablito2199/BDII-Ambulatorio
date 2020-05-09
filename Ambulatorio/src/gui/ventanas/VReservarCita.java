@@ -332,7 +332,7 @@ public class VReservarCita extends javax.swing.JDialog {
                     fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
                 }
             } else {
-                fa.muestraExcepcion("¡No se puede reservar una cita en dias anteriores al de mañana!");
+                fa.muestraExcepcion("¡No se puede reservar una cita en días anteriores al de mañana!");
             }
         }
 
@@ -378,13 +378,13 @@ public class VReservarCita extends javax.swing.JDialog {
         if ((!txtDesde.getText().equals("aaaa-mm-dd")
                 || !txtHasta.getText().equals("aaaa-mm-dd"))) {
 
-            fa.muestraExcepcion("Es necesario introducir un intervalo de fechas para poder buscar.");
+            fa.muestraExcepcion("Es necesario introducir un intervalo de fechas válido para poder buscar.");
             return false;
             
         } else if (!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
                 || !txtHasta.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")) {
 
-            fa.muestraExcepcion("El formato de las fechas no es valido.\nEj.: 2000-11-22.");
+            fa.muestraExcepcion("Es necesario introducir un intervalo de fechas válido para poder buscar.");
             return false;
         }
         return true;
