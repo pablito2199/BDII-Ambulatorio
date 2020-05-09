@@ -1,5 +1,7 @@
 package aplicacion.clases;
 
+import java.util.Objects;
+
 public class Ambulatorio {
 
     private Integer codigo;

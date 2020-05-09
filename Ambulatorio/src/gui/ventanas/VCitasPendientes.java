@@ -433,7 +433,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
                 || !txtHasta.getText().matches("[1-2][0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))"))
                 && (!txtDesde.getText().equals("aaaa-mm-dd")
                 || !txtHasta.getText().equals("aaaa-mm-dd"))) {
-            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000-11-22.");
+            fa.muestraExcepcion("El formato de las fechas no es valido.\nEj.: 2000-11-22.");
             return false;
         }
         return true;
@@ -453,7 +453,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
                 //Vemos si inicio es igual o mayor a fin
                 if (inicio.after(fin)) {
 
-                    fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
+                    fa.muestraExcepcion("La fecha de inicio es mayor a la de fin.");
                     return; //Cancelamos en caso de que lo sea
                 }
 
