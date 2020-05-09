@@ -5,6 +5,8 @@ import java.sql.Date;
 
 public class Receta {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Timestamp cita;
     private String paciente;
     private Integer consulta;
@@ -16,6 +18,8 @@ public class Receta {
     private String medicamento;
     private Integer cantidad;
 
+    //////////////////////////////////////////////////
+    //Constructores
     public Receta(Timestamp cita, String paciente, Integer consulta, Integer ambulatorio, Integer codigo, String descripcion, Date fechaInicio, Date fechaFin, String medicamento, Integer cantidad) {
         this.cita = cita;
         this.paciente = paciente;
@@ -50,6 +54,8 @@ public class Receta {
         this.cantidad = cantidad;
     }
 
+    //////////////////////////////////////////////////
+    //Getters y setters
     public Timestamp getCita() {
         return cita;
     }
@@ -130,6 +136,8 @@ public class Receta {
         this.cantidad = cantidad;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Receta) {

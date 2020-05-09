@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public abstract class Personal {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Integer ambulatorio;
     private String DNI;
     private String nombre;
@@ -12,6 +14,7 @@ public abstract class Personal {
     private Float sueldo;
     private String antiguedad;
 
+    //////////////////////////////////////////////////
     //Constructores
     public Personal(Integer ambulatorio, String dni, String nombre, Date fechaIncorporacion, String telefono, Float sueldo, String antiguedad) {
         this.ambulatorio = ambulatorio;
@@ -28,6 +31,7 @@ public abstract class Personal {
         this.DNI = DNI;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public Integer getAmbulatorio() {
         return ambulatorio;
@@ -85,6 +89,8 @@ public abstract class Personal {
         this.antiguedad = antiguedad;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Personal) {

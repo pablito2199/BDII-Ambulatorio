@@ -2,10 +2,13 @@ package aplicacion.clases;
 
 public class Asociado {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Integer ambulatorio;
     private Integer hospital;
     private Float distancia;
 
+    //////////////////////////////////////////////////
     //Constructor
     public Asociado(Integer ambulatorio, Integer hospital, Float distancia) {
         this.ambulatorio = ambulatorio;
@@ -13,6 +16,7 @@ public class Asociado {
         this.distancia = distancia;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public Integer getAmbulatorio() {
         return ambulatorio;
@@ -38,6 +42,8 @@ public class Asociado {
         this.distancia = distancia;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Asociado) {

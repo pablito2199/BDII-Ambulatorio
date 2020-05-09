@@ -1,7 +1,8 @@
 package aplicacion.clases;
 
 public class Ambulatorio {
-
+    //////////////////////////////////////////////////
+    //Atributos
     private Integer codigo;
     private String nombre;
     private String direccion;
@@ -11,7 +12,8 @@ public class Ambulatorio {
     private String antiguedad;
     private Double ingresos;
 
-    //Constructor
+    //////////////////////////////////////////////////
+    //Constructores
     public Ambulatorio(Integer codigo, String nombre, String direccion, String anoConstruccion, String provincia, String telefono, String antiguedad, Double ingresos) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -48,6 +50,7 @@ public class Ambulatorio {
         this.provincia = provincia;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public Integer getCodigo() {
         return codigo;
@@ -113,6 +116,8 @@ public class Ambulatorio {
         this.ingresos = ingresos;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Ambulatorio) {

@@ -2,9 +2,12 @@ package aplicacion.clases;
 
 public class Medicamento {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private String nombre;
     private String prospecto;
 
+    //////////////////////////////////////////////////
     //Constructor
     public Medicamento(String nombre, String prospecto) {
         this.nombre = nombre;
@@ -17,6 +20,7 @@ public class Medicamento {
         prospecto = "No disponible en estos momentos";
     }
 
+    //////////////////////////////////////////////////
     //Setters y Getters
     public String getNombre() {
         return nombre;
@@ -34,6 +38,8 @@ public class Medicamento {
         this.prospecto = prospecto;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Medicamento) {

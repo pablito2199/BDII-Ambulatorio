@@ -9,11 +9,14 @@ import javax.crypto.spec.PBEKeySpec;
  
 public class PasswordUtils {
     
-
+    //////////////////////////////////////////////////
+    //Atributos
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
-    private static final String salt = "nv3M1mQEfzetQyuyRo3esELNu6KBHI";
+    private static final String SALT = "nv3M1mQEfzetQyuyRo3esELNu6KBHI";
     
+    //////////////////////////////////////////////////
+    //Métodos
     public static byte[] hash(char[] clave, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(clave, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(clave, Character.MIN_VALUE);
@@ -30,7 +33,7 @@ public class PasswordUtils {
     public static String generarClaveSegura(String clave) {
         String returnValue = null;
 
-        byte[] securePassword = hash(clave.toCharArray(), salt.getBytes());
+        byte[] securePassword = hash(clave.toCharArray(), SALT.getBytes());
  
         returnValue = Base64.getEncoder().encodeToString(securePassword);
  

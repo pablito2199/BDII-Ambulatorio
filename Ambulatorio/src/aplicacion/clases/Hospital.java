@@ -2,6 +2,8 @@ package aplicacion.clases;
 
 public class Hospital {
 
+    //////////////////////////////////////////////////
+    //Atributos
     private Integer codigo;
     private String nombre;
     private String direccion;
@@ -9,6 +11,7 @@ public class Hospital {
     private String provincia;
     private Float distancia;
 
+    //////////////////////////////////////////////////
     //Constructor
     public Hospital(Integer codigo, String nombre, String direccion, String telefono, String provincia, Float distancia) {
         this.codigo = codigo;
@@ -19,6 +22,7 @@ public class Hospital {
         this.distancia = distancia;
     }
 
+    //////////////////////////////////////////////////
     //Getters y Setters
     public Integer getCodigo() {
         return codigo;
@@ -68,6 +72,8 @@ public class Hospital {
         this.distancia = distancia;
     }
 
+    //////////////////////////////////////////////////
+    //Sobreescribimos el método "equals"
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Hospital) {
