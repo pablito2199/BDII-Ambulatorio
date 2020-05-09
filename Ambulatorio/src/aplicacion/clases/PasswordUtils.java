@@ -6,15 +6,15 @@ import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
- 
+
 public class PasswordUtils {
-    
+
     //////////////////////////////////////////////////
     //Atributos
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
     private static final String SALT = "nv3M1mQEfzetQyuyRo3esELNu6KBHI";
-    
+
     //////////////////////////////////////////////////
     //Métodos
     public static byte[] hash(char[] clave, byte[] salt) {
@@ -34,17 +34,16 @@ public class PasswordUtils {
         String returnValue = null;
 
         byte[] securePassword = hash(clave.toCharArray(), SALT.getBytes());
- 
+
         returnValue = Base64.getEncoder().encodeToString(securePassword);
- 
+
         return returnValue;
     }
-    
-    public static boolean verificarClave(String clave, String claveSegura)
-    {
+
+    public static boolean verificarClave(String clave, String claveSegura) {
         //Generamos la clave con el salt
         String newSecurePassword = generarClaveSegura(clave);
-        
+
         //Comprobamos si son iguales
         return newSecurePassword.equalsIgnoreCase(claveSegura);
     }

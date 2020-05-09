@@ -4,7 +4,6 @@ import gui.modelos.ModeloListaStrings;
 import aplicacion.clases.Cita;
 import aplicacion.clases.Receta;
 
-
 public class VRecetar extends javax.swing.JDialog {
 
     private final VCitasPendientes padre;                           //Enlace a la ventana padre
@@ -303,8 +302,9 @@ public class VRecetar extends javax.swing.JDialog {
     private void listaMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaMedicamentosMouseClicked
         ModeloListaStrings mListaM = (ModeloListaStrings) listaMedicamentos.getModel();
         //si existe alguna enfermedad
-        if(mListaM.getSize()>0)
+        if (mListaM.getSize() > 0) {
             medicamento = mListaM.getElementAt(listaMedicamentos.getSelectedIndex());
+        }
     }//GEN-LAST:event_listaMedicamentosMouseClicked
 
     //Función que permite buscar un medicamento en la base de datos
@@ -314,13 +314,13 @@ public class VRecetar extends javax.swing.JDialog {
         m = (ModeloListaStrings) listaMedicamentos.getModel();
         m.setElementos(fa.consultarMedicamentos(varMedicamento.getText()));
         //Seleccionamos la primera
-        if(m.getSize()>0){
+        if (m.getSize() > 0) {
             listaMedicamentos.setSelectedIndex(0);
             btnRecetar.setEnabled(true);
-        }
-        else
+        } else {
             btnRecetar.setEnabled(false);
-            
+        }
+
     }
 
     /**

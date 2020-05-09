@@ -73,7 +73,7 @@ public class DAOEnfermedades extends AbstractDAO {
             stmEnfermedad.setString(1, nombre);  //nombre del paciente
             //Actualizamos
             stmEnfermedad.executeUpdate();
-        this.getFachadaAplicacion().muestraMensaje("Enfermedad eliminada correctamente.");
+            this.getFachadaAplicacion().muestraMensaje("Enfermedad eliminada correctamente.");
             //En caso de error se captura la excepción
         } catch (SQLException e) {
             //Se imprime el mensaje y se genera la ventana que muestra el mensaje

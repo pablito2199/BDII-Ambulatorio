@@ -209,10 +209,10 @@ public class VUrgencias extends javax.swing.JDialog {
 
         //Buscamos ambulatorios
         tau.setFilas(fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, null));
-        
-        if(tau.getRowCount() > 0) {
+
+        if (tau.getRowCount() > 0) {
             tablaAmbulatorios.setRowSelectionInterval(0, 0);
-        txtAmbulatorio.setText(tau.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getNombre());
+            txtAmbulatorio.setText(tau.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getNombre());
             btnConfirmar.setEnabled(true);
         } else {
             btnConfirmar.setEnabled(false);

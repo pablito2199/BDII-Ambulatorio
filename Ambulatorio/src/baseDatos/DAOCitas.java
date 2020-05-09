@@ -405,7 +405,7 @@ public class DAOCitas extends AbstractDAO {
 
             //Hacemos commit
             con.commit();
-            
+
             //Feedback
             this.getFachadaAplicacion().muestraMensaje("Paciente derivado correctamente.");
 
@@ -875,7 +875,7 @@ public class DAOCitas extends AbstractDAO {
 
             //Borramos
             stmCita.executeUpdate();
-            
+
             //Feedback
             this.getFachadaAplicacion().muestraMensaje("Cita cancelada correctamente.");
 

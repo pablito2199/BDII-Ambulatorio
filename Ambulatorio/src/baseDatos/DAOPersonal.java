@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Pablo Tarrío Otero y Martín Suárez García
+ * @author Pablo Tarrío Otero
  */
 public class DAOPersonal extends AbstractDAO {
 

@@ -44,7 +44,7 @@ public class FachadaAplicacion {
     //////////////////////////////////////////////////
     //Main
     public static void main(String args[]) {
-        
+
         FachadaAplicacion fa;                //Declaramos la variable fachada
         fa = new FachadaAplicacion();    //La inicializamos
         fa.iniciaInterfazUsuario();           //Llamamos a la interfaz de usuario

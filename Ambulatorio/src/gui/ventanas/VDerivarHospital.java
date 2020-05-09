@@ -261,14 +261,14 @@ public class VDerivarHospital extends javax.swing.JDialog {
                 textoProvincia.getText(),
                 codigo,
                 distancia));
-        
+
         if (th.getRowCount() > 0) {
             tablaHospitales.setRowSelectionInterval(0, 0);
             btnConfirmar.setEnabled(true);
-        textoNombre.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getNombre());
-        textoCodigo.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getCodigo().toString());
-        textoDistancia.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getDistancia().toString());
-        textoProvincia.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getProvincia());
+            textoNombre.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getNombre());
+            textoCodigo.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getCodigo().toString());
+            textoDistancia.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getDistancia().toString());
+            textoProvincia.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getProvincia());
         } else {
             btnConfirmar.setEnabled(false);
         }

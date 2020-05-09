@@ -3,6 +3,7 @@ package aplicacion.clases;
 import java.util.Objects;
 
 public class Ambulatorio {
+
     //////////////////////////////////////////////////
     //Atributos
     private Integer codigo;

@@ -397,8 +397,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
             btnTerminarCita.setEnabled(true);
             btnDerivar.setEnabled(true);
             btnCancelarCita.setEnabled(true);
-        }
-        else {
+        } else {
             btnRecetar.setEnabled(false);
             btnTerminarCita.setEnabled(false);
             btnDerivar.setEnabled(false);
@@ -481,7 +480,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
             } else {
                 tc.setFilas(fa.citasMedico(ps, txtAmbulatorio.getText(), inicio, fin));
             }
-            
+
             if (tc.getRowCount() > 0) {
                 tablaCitas.setRowSelectionInterval(0, 0);
                 btnCancelarCita.setEnabled(true);

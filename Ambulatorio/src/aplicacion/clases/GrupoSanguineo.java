@@ -15,7 +15,7 @@ public enum GrupoSanguineo {
     private GrupoSanguineo(String tipo) {
         this.tipo = tipo;
     }
-    
+
     public String getTipo() {
         return tipo;
     }

@@ -388,8 +388,8 @@ public class VReservarCita extends javax.swing.JDialog {
             fa.muestraExcepcion("Es necesario introducir un intervalo de fechas válido para poder buscar.");
             return false;
 
-        } 
-        
+        }
+
         return true;
     }
 }
