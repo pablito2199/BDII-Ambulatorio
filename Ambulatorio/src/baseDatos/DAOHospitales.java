@@ -8,7 +8,7 @@ import aplicacion.clases.Hospital;
 import java.util.ArrayList;
 
 /* 
- * @author Ainhoa Vivel Couso
+ * @author Martín Suárez García
  */
 public class DAOHospitales extends AbstractDAO {
 

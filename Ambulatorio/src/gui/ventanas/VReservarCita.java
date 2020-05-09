@@ -41,7 +41,7 @@ public class VReservarCita extends javax.swing.JDialog {
                 comboTipo.addItem(tipo.getNombre() + "-" + tipo.getEspecialidad());
             }
         }
-        
+
         //Desabilitamos boton
         btnReservar.setEnabled(false);
     }
@@ -332,22 +332,21 @@ public class VReservarCita extends javax.swing.JDialog {
                     fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
                 }
             } else {
-                fa.muestraExcepcion("¡No se puede reservar una cita en dias anteriores al de mañana!");
+                fa.muestraExcepcion("¡No se puede reservar una cita en días anteriores al de mañana!");
             }
         }
-        
+
         //Desabilitamos boton
         btnReservar.setEnabled(false);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tablaHorasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHorasMouseClicked
         // TODO add your handling code here:
-        
+
         //Habilitamos boton si corresponde
-        if(tablaHoras.getSelectedRow() >= 0){
+        if (tablaHoras.getSelectedRow() >= 0) {
             btnReservar.setEnabled(true);
-        }
-        else{
+        } else {
             btnReservar.setEnabled(false);
         }
     }//GEN-LAST:event_tablaHorasMouseClicked
@@ -376,10 +375,16 @@ public class VReservarCita extends javax.swing.JDialog {
 
     private boolean fechasValidas() {
         //Nos aseguramos que el formato de fecha es correcto
-        if (!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
+        if ((!txtDesde.getText().equals("aaaa-mm-dd")
+                || !txtHasta.getText().equals("aaaa-mm-dd"))) {
+
+            fa.muestraExcepcion("Es necesario introducir un intervalo de fechas válido para poder buscar.");
+            return false;
+            
+        } else if (!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
                 || !txtHasta.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")) {
 
-            fa.muestraExcepcion("¡El formato de las fechas no es valido! Ej.: 2000-11-22.");
+            fa.muestraExcepcion("Es necesario introducir un intervalo de fechas válido para poder buscar.");
             return false;
         }
         return true;

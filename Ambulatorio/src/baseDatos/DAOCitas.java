@@ -449,7 +449,7 @@ public class DAOCitas extends AbstractDAO {
         }
     }
 
-    //Permite consultar las citas ocupadas entre dos fechas en una consulta
+    //Permite consultar las horas ocupadas entre dos fechas en una consulta
     //La fecha minima siempre será el día posterior a la consulta
     public ArrayList<Timestamp> citasOcupadas(Consulta consulta, Date inicio, Date fin) {
 
