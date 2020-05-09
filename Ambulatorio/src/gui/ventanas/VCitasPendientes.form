@@ -132,6 +132,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -157,26 +158,18 @@
                               <Component id="txtConsulta" pref="100" max="32767" attributes="0"/>
                               <Component id="btnBuscar" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="btnRecetar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnCancelarCita" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                  <Component id="btnTerminarCita" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnDerivar" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jScrollPane1" min="-2" pref="466" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="26" max="32767" attributes="0"/>
+                          <Component id="btnRecetar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnCancelarCita" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnTerminarCita" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnDerivar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -221,6 +214,7 @@
         <Component class="javax.swing.JTextField" name="txtDesde">
           <Properties>
             <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+            <Property name="toolTipText" type="java.lang.String" value="Primer d&#xed;a a buscar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelHasta">
@@ -231,6 +225,7 @@
         <Component class="javax.swing.JTextField" name="txtHasta">
           <Properties>
             <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#xda;ltimo d&#xed;a a buscar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelConsulta">
@@ -239,6 +234,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtConsulta">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de consulta"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelAmbulatorio">
           <Properties>
@@ -246,6 +244,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAmbulatorio">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Nombre del ambulatorio"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
@@ -268,12 +269,16 @@
                   <Connection code="new ModeloTablaCitas()" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaCitasMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="btnRecetar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Recetar"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRecetarActionPerformed"/>
@@ -282,6 +287,7 @@
         <Component class="javax.swing.JButton" name="btnDerivar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Derivar al Hospital"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDerivarActionPerformed"/>
@@ -290,6 +296,7 @@
         <Component class="javax.swing.JButton" name="btnTerminarCita">
           <Properties>
             <Property name="text" type="java.lang.String" value="Terminar Cita"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTerminarCitaActionPerformed"/>
@@ -298,6 +305,7 @@
         <Component class="javax.swing.JButton" name="btnCancelarCita">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar Cita"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarCitaActionPerformed"/>

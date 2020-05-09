@@ -96,6 +96,7 @@ public class VReservarCita extends javax.swing.JDialog {
 
         labelTipo.setText("Tipo:");
 
+        comboTipo.setToolTipText("Tipo de cita");
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipoActionPerformed(evt);
@@ -107,8 +108,12 @@ public class VReservarCita extends javax.swing.JDialog {
         labelHasta.setText("Hasta:");
 
         txtDesde.setText("aaaa-mm-dd");
+        txtDesde.setToolTipText("Primer día a buscar");
 
         txtHasta.setText("aaaa-mm-dd");
+        txtHasta.setToolTipText("Último día a buscar");
+
+        txtAmbulatorio.setToolTipText("Nombre del ambulatorio");
 
         jLabel1.setText("Ambulatorio:");
 
@@ -121,6 +126,8 @@ public class VReservarCita extends javax.swing.JDialog {
 
         labelProvincia.setText("Provincia:");
 
+        txtProvincia.setToolTipText("Provincia del ambulatorio");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,10 +137,9 @@ public class VReservarCita extends javax.swing.JDialog {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtAmbulatorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                        .addComponent(btnBuscar)
-                        .addComponent(txtProvincia, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtAmbulatorio)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtProvincia)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

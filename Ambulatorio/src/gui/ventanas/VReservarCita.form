@@ -88,11 +88,9 @@
                   <Component id="jScrollPane2" min="-2" pref="290" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtAmbulatorio" alignment="0" pref="276" max="32767" attributes="0"/>
-                          <Component id="btnBuscar" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtProvincia" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtAmbulatorio" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnBuscar" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtProvincia" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -190,6 +188,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Tipo de cita"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboTipoActionPerformed"/>
@@ -211,14 +210,19 @@
         <Component class="javax.swing.JTextField" name="txtDesde">
           <Properties>
             <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+            <Property name="toolTipText" type="java.lang.String" value="Primer d&#xed;a a buscar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtHasta">
           <Properties>
             <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#xda;ltimo d&#xed;a a buscar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAmbulatorio">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Nombre del ambulatorio"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -239,6 +243,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtProvincia">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Provincia del ambulatorio"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
