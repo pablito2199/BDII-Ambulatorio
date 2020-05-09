@@ -309,7 +309,7 @@ public class VReservarCita extends javax.swing.JDialog {
                     fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
                 }
             } else {
-                fa.muestraExcepcion("¡La fecha de inicio no puede ser menor al día posterior!");
+                fa.muestraExcepcion("¡No se puede reservar una cita en dias anteriores al de mañana!");
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

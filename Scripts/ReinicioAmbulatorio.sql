@@ -289,7 +289,7 @@ create table urgencia (
     paciente varchar(14) NOT NULL,
     consulta int NOT NULL,
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
-    soborno decimal(6, 2) DEFAULT 0,
+    soborno decimal(20, 2) DEFAULT 0,
     gravedad int NOT NULL DEFAULT 1 CHECK(
         gravedad BETWEEN 1
         AND 10
