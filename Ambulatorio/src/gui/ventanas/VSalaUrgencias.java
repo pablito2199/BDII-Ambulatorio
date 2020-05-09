@@ -22,6 +22,12 @@ public class VSalaUrgencias extends javax.swing.JDialog {
         ModeloTablaUrgencias tu = (ModeloTablaUrgencias) tablaUrgencias.getModel();
         tu.setFilas(fa.urgenciasPendientes(ambulatorio));
 
+        //Desactivamos si ho hay pacientes
+        if (tu.getRowCount() == 0) {
+            btnAtender.setEnabled(false);
+            btnDerivar.setEnabled(false);
+        }
+
         //Contamos urgencias
         labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
     }
@@ -181,6 +187,12 @@ public class VSalaUrgencias extends javax.swing.JDialog {
             labelNumUrgencias.setText(String.valueOf(tu.getRowCount()));
 
         }
+
+        //Desactivamos si nos quedamos sin pacientes
+        if (tu.getRowCount() == 0) {
+            btnAtender.setEnabled(false);
+            btnDerivar.setEnabled(false);
+        }
     }//GEN-LAST:event_btnAtenderActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -211,6 +223,12 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
             //Recuperamos urgencias en caso de que se cancelase la operacion
             tu.setFilas(fa.urgenciasPendientes(ambulatorio));
+        }
+
+        //Desactivamos si nos quedamos sin pacientes
+        if (tu.getRowCount() == 0) {
+            btnAtender.setEnabled(false);
+            btnDerivar.setEnabled(false);
         }
     }//GEN-LAST:event_btnDerivarActionPerformed
 
