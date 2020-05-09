@@ -31,19 +31,21 @@ public class DAORecetas extends AbstractDAO {
         try {
             //Preparamos la consulta SQL para insertar en la tabla de pacientes un nuevo paciente con el id de paciente, nombre
             //clave, dirección, email y tipo de paciente especificados
-            stmReceta = con.prepareStatement("insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion, fechaInicio, fechaFin) "
-                    + "values (?, ?, ?, ?, ?, ?, current_date, ?)");
+            stmReceta = con.prepareStatement("insert into receta (cita, paciente, consulta, ambulatorio, medicamento, cantidad, descripcion, fechaInicio, fechaFin) "
+                    + "values (?, ?, ?, ?, ?, ?, ?, current_date, ?)");
             //Sustituimos
             stmReceta.setTimestamp(1, receta.getCita());
             stmReceta.setString(2, receta.getPaciente());
             stmReceta.setInt(3, receta.getConsulta());
-            stmReceta.setString(4, receta.getMedicamento());
-            stmReceta.setInt(5, receta.getCantidad());
-            stmReceta.setString(6, receta.getDescripcion());
-            stmReceta.setDate(7, receta.getFechaFin());
+            stmReceta.setInt(4, receta.getAmbulatorio());
+            stmReceta.setString(5, receta.getMedicamento());
+            stmReceta.setInt(6, receta.getCantidad());
+            stmReceta.setString(7, receta.getDescripcion());
+            stmReceta.setDate(8, receta.getFechaFin());
 
             //Actualizamos
             stmReceta.executeUpdate();
+            this.getFachadaAplicacion().muestraMensaje("Se ha recetado el medicamento al paciente con éxito");
 
             //En caso de error se captura la excepción
         } catch (SQLException e) {
@@ -59,7 +61,6 @@ public class DAORecetas extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        this.getFachadaAplicacion().muestraMensaje("Se ha recetado el medicamento al paciente con éxito"); 
     }
 
     //Permite consultar el historial de recetas de un paciente
@@ -86,9 +87,10 @@ public class DAORecetas extends AbstractDAO {
             //Construimos la consulta
             String consulta = "select cita, fechaHoraInicio, fechaHoraFin, paciente, codigoReceta, medicamento, cantidad "
                     + "from receta natural join cita where paciente = ? "
-                    + "and codigoReceta = ? "
-                    + "and medicamento = ? "
-                    + "and fechaHoraFin>=fechaHoraInicio ";
+                    + "and medicamento like ? ";
+            if (codigoReceta != null) {
+                consulta += "and codigoReceta = ? ";
+            }
             if (fechaInicio != null) {
                 consulta += "and fechaHoraFin <= CAST(? AS TIMESTAMP) ";
             }
@@ -103,17 +105,30 @@ public class DAORecetas extends AbstractDAO {
             stmHistorial = con.prepareStatement(consulta);
             //Sustituimos
             stmHistorial.setString(1, paciente.getCIP());
-            stmHistorial.setInt(2, codigoReceta);
-            stmHistorial.setString(3, medicamento);
-            if (fechaInicio != null) {
-                stmHistorial.setDate(4, fechaFin);
-            }
-            if (fechaFin != null) {
-                stmHistorial.setDate(5, fechaInicio);
-            }
-            if (fechaFin != null && fechaInicio != null) {
-                stmHistorial.setDate(6, fechaInicio);
-                stmHistorial.setDate(7, fechaFin);
+            stmHistorial.setString(2, "%" + medicamento + "%");
+            if (codigoReceta != null) {
+                stmHistorial.setInt(3, codigoReceta);
+                if (fechaInicio != null) {
+                    stmHistorial.setDate(4, fechaFin);
+                }
+                if (fechaFin != null) {
+                    stmHistorial.setDate(5, fechaInicio);
+                }
+                if (fechaFin != null && fechaInicio != null) {
+                    stmHistorial.setDate(6, fechaInicio);
+                    stmHistorial.setDate(7, fechaFin);
+                }
+            } else {
+                if (fechaInicio != null) {
+                    stmHistorial.setDate(3, fechaFin);
+                }
+                if (fechaFin != null) {
+                    stmHistorial.setDate(4, fechaInicio);
+                }
+                if (fechaFin != null && fechaInicio != null) {
+                    stmHistorial.setDate(5, fechaInicio);
+                    stmHistorial.setDate(6, fechaFin);
+                }
             }
 
             //Ejecutamos

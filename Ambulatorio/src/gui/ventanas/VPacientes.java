@@ -562,7 +562,7 @@ public class VPacientes extends javax.swing.JDialog {
         if (index >= 0) {
             fa.nuevaVUrgencias(this, tp.obtenerPaciente(index));
         }
-        rebuscarPacientes();
+        buscarPacientes();
     }//GEN-LAST:event_btnNuevaUrgenciaActionPerformed
 
     private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
@@ -581,8 +581,7 @@ public class VPacientes extends javax.swing.JDialog {
 
             fa.nuevaVReservarCita(this, tp.obtenerPaciente(index));
         }
-
-        rebuscarPacientes();
+        buscarPacientes();
     }//GEN-LAST:event_btnSolicitarCitaActionPerformed
 
     private void btnCitasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasPendientesActionPerformed
@@ -595,22 +594,21 @@ public class VPacientes extends javax.swing.JDialog {
 
             fa.nuevaVCitasPendientes(this, tp.obtenerPaciente(index));
         }
-
-        rebuscarPacientes();
+        buscarPacientes();
     }//GEN-LAST:event_btnCitasPendientesActionPerformed
 
     private void btnHistorialClinicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialClinicoActionPerformed
         ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
         Paciente p = new Paciente(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
         fa.nuevaVHistorialMedico(this, p);
-        rebuscarPacientes();
+        buscarPacientes();
     }//GEN-LAST:event_btnHistorialClinicoActionPerformed
 
     private void btnHistorialRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialRecetasActionPerformed
         ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
         Paciente p = new Paciente(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
         fa.nuevaVHistorialRecetas(this, p);
-        rebuscarPacientes();
+        buscarPacientes();
     }//GEN-LAST:event_btnHistorialRecetasActionPerformed
 
     //Función que permite buscar un usuario en la base de datos
@@ -619,7 +617,7 @@ public class VPacientes extends javax.swing.JDialog {
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
 
-        Integer NSS = 0, edad = 0;
+        Integer NSS = null, edad = null;
         //Setteamos las filas con el resultado de la búsqueda
         if (!varNSS.getText().isEmpty()) {
             //Intentamos convertir el NSS a entero
@@ -635,8 +633,6 @@ public class VPacientes extends javax.swing.JDialog {
                 fa.muestraExcepcion("El valor introducido para el NSS (Número de la Seguridad Social) no es válido.");
                 return;
             }
-        } else {
-            NSS = null;
         }
         if (!varEdad.getText().isEmpty()) {
             //Intentamos convertirla a entero
@@ -652,8 +648,6 @@ public class VPacientes extends javax.swing.JDialog {
                 fa.muestraExcepcion("El valor introducido para la edad no es válido.");
                 return;
             }
-        } else {
-            edad = null;
         }
         m.setFilas(fa.consultarPacientes(varCIP.getText(), varDNI.getText(), varNombre.getText(),
                 edad, varSexo.getText(), NSS, varGrupoSanguineo.getText()));

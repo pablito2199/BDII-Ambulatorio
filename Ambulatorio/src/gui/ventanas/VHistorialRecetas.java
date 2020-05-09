@@ -3,7 +3,6 @@ package gui.ventanas;
 import gui.modelos.ModeloTablaHistorialRecetas;
 import aplicacion.clases.Paciente;
 
-
 public class VHistorialRecetas extends javax.swing.JDialog {
 
     private final VPacientes padre;                     //Enlace a la ventana padre
@@ -16,6 +15,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param fa
+     * @param paciente
      */
     //Constructor de la ventana
     public VHistorialRecetas(java.awt.Dialog parent, boolean modal, aplicacion.FachadaAplicacion fa, Paciente paciente) {
@@ -244,14 +244,14 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         //Creamos el modelo de tabla préstamos
         ModeloTablaHistorialRecetas m;
         m = (ModeloTablaHistorialRecetas) tablaHistorialRecetas.getModel();
-        Integer Num = 0;
+        Integer Num = null;
         if (!varNumeroDeReceta.getText().isEmpty()) {
             //Intentamos convertir el numero de la receta a entero
             try {
                 Num = Integer.parseInt(varNumeroDeReceta.getText());
                 //Si al hacerlo es negativo imprimimos el error
-                if (Num < 0) {
-                    fa.muestraExcepcion("No se puede introducir un número de receta negativo.");
+                if (Num < 1) {
+                    fa.muestraExcepcion("Número de receeta no válido.");
                     return;
                 }
                 //De no poder convertir a entero se imprime la excepción
@@ -260,9 +260,9 @@ public class VHistorialRecetas extends javax.swing.JDialog {
                 return;
             }
         }
+        //Fecha de fin de la receta
         java.sql.Date Inicio = null;
         java.sql.Date Fin = null;
-        //Fecha de fin de la receta
         if (!varHasta.getText().isEmpty()) {
             //Intentamos convertirla a Date
             try {

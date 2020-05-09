@@ -28,10 +28,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jPanel4" max="32767" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
+                  <Component id="jPanel4" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,7 +42,7 @@
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,7 +117,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="labelReceta" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -127,7 +127,7 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="labelFechaInicio" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="varCantidad" min="-2" pref="199" max="-2" attributes="0"/>
+                                          <Component id="varFechaFin" min="-2" pref="199" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                           <Component id="labelDescripcion" min="-2" max="-2" attributes="0"/>
@@ -136,7 +136,7 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="labelFechaFin" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="varFechaFin" min="-2" pref="199" max="-2" attributes="0"/>
+                                          <Component id="varCantidad" min="-2" pref="199" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -146,7 +146,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="labelMEDICAMENTO" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="270" max="-2" attributes="1"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -157,7 +157,7 @@
                           <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -170,33 +170,34 @@
                       <Component id="varMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="labelReceta" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelMEDICAMENTO" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="varCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="varFechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="labelFechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="varFechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="varCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="labelFechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="labelDescripcion" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jScrollPane1" min="-2" pref="192" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" min="-2" pref="304" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane2" max="32767" attributes="1"/>
                               </Group>
                           </Group>
                       </Group>
@@ -218,7 +219,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Medicamento de la receta"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="varCantidad">
+        <Component class="javax.swing.JTextField" name="varFechaFin">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Fecha fin de la receta"/>
           </Properties>
@@ -228,7 +229,7 @@
             <Property name="text" type="java.lang.String" value="Descripcion:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="varFechaFin">
+        <Component class="javax.swing.JTextField" name="varCantidad">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Cantidad de medicamento"/>
           </Properties>
@@ -283,7 +284,7 @@
             <Property name="orientation" type="int" value="1"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -292,14 +293,14 @@
           <SubComponents>
             <Component class="javax.swing.JList" name="listaMedicamentos">
               <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="0"/>
+                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new ModeloListaStrings()" type="code"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Lista de medicamentos"/>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listaMedicamentosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
