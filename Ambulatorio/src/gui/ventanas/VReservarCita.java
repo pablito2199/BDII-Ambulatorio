@@ -375,18 +375,20 @@ public class VReservarCita extends javax.swing.JDialog {
 
     private boolean fechasValidas() {
         //Nos aseguramos que el formato de fecha es correcto
-        if ((!txtDesde.getText().equals("aaaa-mm-dd")
-                || !txtHasta.getText().equals("aaaa-mm-dd"))) {
+        if ((txtDesde.getText().equals("aaaa-mm-dd")
+                && txtHasta.getText().equals("aaaa-mm-dd"))) {
 
-            fa.muestraExcepcion("Es necesario introducir un intervalo de fechas válido para poder buscar.");
+            fa.muestraExcepcion("Es necesario introducir una fecha de inicio y otra de fin.");
             return false;
-            
+
         } else if (!txtDesde.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")
                 || !txtHasta.getText().matches("2[0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))")) {
 
             fa.muestraExcepcion("Es necesario introducir un intervalo de fechas válido para poder buscar.");
             return false;
-        }
+
+        } 
+        
         return true;
     }
 }
