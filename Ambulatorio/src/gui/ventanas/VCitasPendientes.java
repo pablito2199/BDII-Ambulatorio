@@ -150,9 +150,15 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         tablaCitas.setModel(new ModeloTablaCitas());
+        tablaCitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaCitasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaCitas);
 
         btnRecetar.setText("Recetar");
+        btnRecetar.setEnabled(false);
         btnRecetar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecetarActionPerformed(evt);
@@ -160,6 +166,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnDerivar.setText("Derivar al Hospital");
+        btnDerivar.setEnabled(false);
         btnDerivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDerivarActionPerformed(evt);
@@ -167,6 +174,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnTerminarCita.setText("Terminar Cita");
+        btnTerminarCita.setEnabled(false);
         btnTerminarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTerminarCitaActionPerformed(evt);
@@ -174,6 +182,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         });
 
         btnCancelarCita.setText("Cancelar Cita");
+        btnCancelarCita.setEnabled(false);
         btnCancelarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarCitaActionPerformed(evt);
@@ -187,6 +196,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -207,22 +217,16 @@ public class VCitasPendientes extends javax.swing.JDialog {
                                 .addGap(14, 14, 14)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(btnRecetar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCancelarCita)
-                                .addGap(12, 12, 12)
-                                .addComponent(btnTerminarCita)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDerivar))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(26, Short.MAX_VALUE))))
+                        .addComponent(btnRecetar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelarCita)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTerminarCita)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDerivar)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,7 +288,13 @@ public class VCitasPendientes extends javax.swing.JDialog {
         txtConsulta.setText(null);
         txtAmbulatorio.setText(null);
         ((ModeloTablaCitas) tablaCitas.getModel()).setFilas(new ArrayList<>());
-        
+
+        //Desactivamos botones
+        btnRecetar.setEnabled(false);
+        btnTerminarCita.setEnabled(false);
+        btnDerivar.setEnabled(false);
+        btnCancelarCita.setEnabled(false);
+
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -297,7 +307,7 @@ public class VCitasPendientes extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         buscarCitas();
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCitaActionPerformed
@@ -364,6 +374,18 @@ public class VCitasPendientes extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnRecetarActionPerformed
 
+    private void tablaCitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCitasMouseClicked
+        // TODO add your handling code here:
+
+        //Activamos botones si selecciona una cita
+        if (tablaCitas.getSelectedRow() >= 0) {
+            btnRecetar.setEnabled(true);
+            btnTerminarCita.setEnabled(true);
+            btnDerivar.setEnabled(true);
+            btnCancelarCita.setEnabled(true);
+        }
+    }//GEN-LAST:event_tablaCitasMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelarCita;
@@ -397,9 +419,9 @@ public class VCitasPendientes extends javax.swing.JDialog {
         }
         return true;
     }
-    
-    private void buscarCitas(){
-        
+
+    private void buscarCitas() {
+
         if (fechasValidas()) {
 
             Date inicio, fin;
