@@ -21,8 +21,7 @@ import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Consulta;
 import aplicacion.clases.PersonalSanitario;
 
-/**
- *
+/*
  * @author Martín Suárez García
  */
 public class DAOCitas extends AbstractDAO {
@@ -194,7 +193,7 @@ public class DAOCitas extends AbstractDAO {
         }
     }
 
-//Permite insertar una nueva urgencia en la base de datos
+    //Permite insertar una nueva urgencia en la base de datos
     public void insertarUrgencia(Urgencia urgencia) {
         //Declaramos variables
         Connection con;

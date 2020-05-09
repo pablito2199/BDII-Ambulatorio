@@ -12,7 +12,6 @@ import java.sql.SQLException;
  */
 public class DAORecetas extends AbstractDAO {
     //Contructor
-
     public DAORecetas(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);

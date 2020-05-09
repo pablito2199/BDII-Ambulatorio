@@ -321,7 +321,7 @@ public class DAOAmbulatorios extends AbstractDAO {
 
     /* 
     * @author Pablo Tarrío Otero
-     */
+    */
     //Permite recuperar los datos del ambulatorio con el nombre y provincia correspondientes
     public Ambulatorio consultarAmbulatorioActual(String nombre, String provincia) {
         //Declaramos variables

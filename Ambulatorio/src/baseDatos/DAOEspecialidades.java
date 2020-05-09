@@ -6,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import aplicacion.clases.Especialidad;
 
-/**
- *
+/*
  * @author Pablo Tarrío Otero
  */
 public class DAOEspecialidades extends AbstractDAO {

@@ -384,7 +384,10 @@ public class DAOPacientes extends AbstractDAO {
     }
 
     //////////////////////////////////////////////////////////////
-    //Autor de los siguientes métodos: Pablo Tarrío Otero
+    //Los siguientes métodos fueron hechos por Pablo Tarrío Otero
+    /*
+    * @author Pablo Tarrío Otero
+     */
     //Permite recuperar las enfermedades no padecidas por el paciente
     public java.util.List<String> obtenerEnfermedadesNoPadecidas(String cip, String enfermedad) {
         java.util.List<String> resultado = new java.util.ArrayList<>();

@@ -6,8 +6,7 @@ import aplicacion.clases.PersonalSanitario;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- *
+/*
  * @author Pablo Tarrío Otero
  */
 public class DAOPersonal extends AbstractDAO {

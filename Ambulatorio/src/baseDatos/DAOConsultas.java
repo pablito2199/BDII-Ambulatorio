@@ -6,8 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
+/*
  * @author Pablo Tarrío Otero
  */
 public class DAOConsultas extends AbstractDAO {
