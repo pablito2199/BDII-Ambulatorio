@@ -677,8 +677,14 @@ public class VPacientes extends javax.swing.JDialog {
             btnHistorialClinico.setEnabled(true);
             btnHistorialRecetas.setEnabled(true);
         } else {
-            //De no haberlas, deshabilitamos el borrado
+            //De no haberlas, deshabilitamos los botones
             btnBorrar.setEnabled(false);
+            btnEnfermedades.setEnabled(false);
+            btnNuevaUrgencia.setEnabled(false);
+            btnSolicitarCita.setEnabled(false);
+            btnCitasPendientes.setEnabled(false);
+            btnHistorialClinico.setEnabled(false);
+            btnHistorialRecetas.setEnabled(false);
         }
     }
 
@@ -715,8 +721,14 @@ public class VPacientes extends javax.swing.JDialog {
             btnHistorialClinico.setEnabled(true);
             btnHistorialRecetas.setEnabled(true);
         } else {
-            //De no haberlas, deshabilitamos el borrado
+            //De no haberlas, deshabilitamos los botones
             btnBorrar.setEnabled(false);
+            btnEnfermedades.setEnabled(false);
+            btnNuevaUrgencia.setEnabled(false);
+            btnSolicitarCita.setEnabled(false);
+            btnCitasPendientes.setEnabled(false);
+            btnHistorialClinico.setEnabled(false);
+            btnHistorialRecetas.setEnabled(false);
         }
     }
 
