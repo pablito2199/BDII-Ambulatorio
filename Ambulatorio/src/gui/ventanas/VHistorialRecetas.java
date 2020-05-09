@@ -24,6 +24,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         initComponents();
         padre = (VPacientes) parent;
         this.paciente = paciente;
+        buscarHistorial();
     }
 
     /**
@@ -269,7 +270,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
     private javax.swing.JTextField varTotal;
     // End of variables declaration//GEN-END:variables
 
-    void buscarHistorial() {
+    final void buscarHistorial() {
         //Creamos el modelo de tabla préstamos
         ModeloTablaHistorialRecetas m;
         m = (ModeloTablaHistorialRecetas) tablaHistorialRecetas.getModel();

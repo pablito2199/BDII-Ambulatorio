@@ -3,8 +3,7 @@ package gui.ventanas;
 import gui.modelos.ModeloListaStrings;
 import aplicacion.clases.Cita;
 import aplicacion.clases.Receta;
-import java.time.Instant;
-import java.util.Date;
+
 
 public class VRecetar extends javax.swing.JDialog {
 

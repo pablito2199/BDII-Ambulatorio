@@ -32,6 +32,8 @@ public class VHistorialMedico extends javax.swing.JDialog {
         for (TipoCita tipo : fa.obtenerTiposDeCita(null)) {
             comboTipo.addItem(tipo.getNombre() + "-" + tipo.getEspecialidad());
         }
+        buscarHistorial();
+
     }
 
     /**
@@ -275,7 +277,7 @@ public class VHistorialMedico extends javax.swing.JDialog {
     private javax.swing.JTextField varTotalResultados;
     // End of variables declaration//GEN-END:variables
 
-    void buscarHistorial() {
+    final void buscarHistorial() {
         ModeloTablaHistorialMedico m;
         m = (ModeloTablaHistorialMedico) tablaHistorialMedico.getModel();
         java.sql.Date Inicio = null;
