@@ -136,6 +136,7 @@ public class VHistorialRecetas extends javax.swing.JDialog {
         tablaHistorialRecetas.setModel(new ModeloTablaHistorialRecetas());
         tablaHistorialRecetas.setToolTipText("Tabla de recetas");
         tablaHistorialRecetas.setAutoscrolls(false);
+        tablaHistorialRecetas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaHistorialRecetas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaHistorialRecetas);
 

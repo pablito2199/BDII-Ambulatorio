@@ -73,6 +73,7 @@ public class VUrgencias extends javax.swing.JDialog {
 
         tablaAmbulatorios.setModel(new ModeloTablaAmbulatoriosUrgencias(fa));
         tablaAmbulatorios.setToolTipText("Tabla de ambulatorios");
+        tablaAmbulatorios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaAmbulatorios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaAmbulatoriosMouseClicked(evt);

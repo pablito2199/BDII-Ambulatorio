@@ -82,6 +82,7 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
         tablaHospitales.setModel(new ModeloTablaHospitales());
         tablaHospitales.setToolTipText("Tabla de hospitales");
+        tablaHospitales.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaHospitales.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaHospitalesMouseClicked(evt);
