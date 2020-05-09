@@ -21,7 +21,7 @@ create table ambulatorio (
 
 create table material (
     codigoMaterial int NOT NULL,
-    tipo varchar(20) NOT NULL,
+    tipo varchar(30) NOT NULL,
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
     descripcion varchar(200),
     coste decimal(22, 2) NOT NULL,
