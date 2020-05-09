@@ -114,7 +114,6 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
         btnAtender.setText("Atender");
         btnAtender.setToolTipText("Atiende a un paciente de la sala de urgencias");
-        btnAtender.setEnabled(false);
         btnAtender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtenderActionPerformed(evt);
@@ -123,7 +122,6 @@ public class VSalaUrgencias extends javax.swing.JDialog {
 
         btnDerivar.setText("Derivar al hospital");
         btnDerivar.setToolTipText("Abre la ventana de derivar al hospital");
-        btnDerivar.setEnabled(false);
         btnDerivar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDerivarActionPerformed(evt);

@@ -57,8 +57,10 @@ public class VDerivarHospital extends javax.swing.JDialog {
 
         etiquetaCodigo.setText("Código:");
 
+        textoCodigo.setToolTipText("Código del hospital");
+
         btnBuscar.setText("Buscar");
-        btnBuscar.setToolTipText("");
+        btnBuscar.setToolTipText("Busca los hospitales");
         btnBuscar.setActionCommand("Actualizar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,13 +68,20 @@ public class VDerivarHospital extends javax.swing.JDialog {
             }
         });
 
+        textoProvincia.setToolTipText("Provincia del hospital");
+
         etiquetaProvincia.setText("Provincia:");
 
         etiquetaNombre.setText("Nombre:");
 
+        textoNombre.setToolTipText("Nombre del hospital");
+
         etiquetaCodigo1.setText("Distancia:");
 
+        textoDistancia.setToolTipText("Distancia al hospital");
+
         tablaHospitales.setModel(new ModeloTablaHospitales());
+        tablaHospitales.setToolTipText("Tabla de hospitales");
         tablaHospitales.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaHospitalesMouseClicked(evt);
@@ -139,6 +148,7 @@ public class VDerivarHospital extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -146,6 +156,7 @@ public class VDerivarHospital extends javax.swing.JDialog {
         });
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.setToolTipText("Confirma derivar el paciente al hospital");
         btnConfirmar.setEnabled(false);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,6 +264,10 @@ public class VDerivarHospital extends javax.swing.JDialog {
         if (th.getRowCount() > 0) {
             tablaHospitales.setRowSelectionInterval(0, 0);
             btnConfirmar.setEnabled(true);
+        textoNombre.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getNombre());
+        textoCodigo.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getCodigo().toString());
+        textoDistancia.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getDistancia().toString());
+        textoProvincia.setText(th.obtenerHospital(tablaHospitales.getSelectedRow()).getProvincia());
         } else {
             btnConfirmar.setEnabled(false);
         }

@@ -189,7 +189,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Atender"/>
             <Property name="toolTipText" type="java.lang.String" value="Atiende a un paciente de la sala de urgencias"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtenderActionPerformed"/>
@@ -199,7 +198,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Derivar al hospital"/>
             <Property name="toolTipText" type="java.lang.String" value="Abre la ventana de derivar al hospital"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDerivarActionPerformed"/>
