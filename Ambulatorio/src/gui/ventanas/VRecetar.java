@@ -292,8 +292,6 @@ public class VRecetar extends javax.swing.JDialog {
         Receta r = new Receta(cita.getFechaHoraInicio(), cita.getPaciente(), cita.getConsulta(), cita.getAmbulatorio(),
                 varDescripcion.getText(), Fin, medicamento, cantidad);
         fa.insertarReceta(r);
-        //Finalmente regresamos a citas
-        this.dispose();
     }//GEN-LAST:event_btnRecetarActionPerformed
 
     //Función que permite buscar el/los usuario(s) una vez hecho click en el botón buscar
