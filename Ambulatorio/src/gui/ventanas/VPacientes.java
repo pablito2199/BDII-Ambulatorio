@@ -145,7 +145,7 @@ public class VPacientes extends javax.swing.JDialog {
 
         tablaPacientes.setModel(new ModeloTablaPacientes());
         tablaPacientes.setToolTipText("Tabla de pacientes");
-        tablaPacientes.setAutoscrolls(false);
+        tablaPacientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaPacientes.getTableHeader().setReorderingAllowed(false);
         tablaPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
