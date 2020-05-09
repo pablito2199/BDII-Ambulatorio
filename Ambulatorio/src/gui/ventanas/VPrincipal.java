@@ -89,6 +89,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         tablaAmbulatorios.setModel(new ModeloTablaAmbulatorios());
+        tablaAmbulatorios.setToolTipText("Tabla de ambulatorios");
         tablaAmbulatorios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaAmbulatorios.getTableHeader().setReorderingAllowed(false);
         tablaAmbulatorios.addMouseListener(new java.awt.event.MouseAdapter() {

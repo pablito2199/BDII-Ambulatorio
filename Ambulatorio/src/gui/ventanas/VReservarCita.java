@@ -66,6 +66,8 @@ public class VReservarCita extends javax.swing.JDialog {
         txtAmbulatorio = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
+        labelProvincia = new javax.swing.JLabel();
+        txtProvincia = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
         btnReservar = new javax.swing.JButton();
@@ -117,6 +119,8 @@ public class VReservarCita extends javax.swing.JDialog {
             }
         });
 
+        labelProvincia.setText("Provincia:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,9 +130,10 @@ public class VReservarCita extends javax.swing.JDialog {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtAmbulatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtAmbulatorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                        .addComponent(btnBuscar)
+                        .addComponent(txtProvincia, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -141,15 +146,19 @@ public class VReservarCita extends javax.swing.JDialog {
                                 .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDesde))))
+                            .addComponent(txtDesde)))
+                    .addComponent(labelProvincia))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelTipo)
                             .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,12 +174,13 @@ public class VReservarCita extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAmbulatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelProvincia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(btnBuscar)
-                        .addGap(71, 71, 71))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                        .addGap(13, 13, 13))))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -278,7 +288,7 @@ public class VReservarCita extends javax.swing.JDialog {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
 
-        ArrayList<Ambulatorio> amb = (ArrayList<Ambulatorio>) fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, null);
+        ArrayList<Ambulatorio> amb = (ArrayList<Ambulatorio>) fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, txtProvincia.getText());
 
         //Comprobamos que las fechas sean validas
         if (fechasValidas()) {
@@ -309,7 +319,7 @@ public class VReservarCita extends javax.swing.JDialog {
                     fa.muestraExcepcion("¡La fecha de inicio es mayor a la de fin!");
                 }
             } else {
-                fa.muestraExcepcion("¡La fecha de inicio no puede ser menor al día posterior!");
+                fa.muestraExcepcion("¡No se puede reservar una cita en dias anteriores al de mañana!");
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -331,11 +341,13 @@ public class VReservarCita extends javax.swing.JDialog {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelDesde;
     private javax.swing.JLabel labelHasta;
+    private javax.swing.JLabel labelProvincia;
     private javax.swing.JLabel labelTipo;
     private javax.swing.JTable tablaHoras;
     private javax.swing.JTextField txtAmbulatorio;
     private javax.swing.JTextField txtDesde;
     private javax.swing.JTextField txtHasta;
+    private javax.swing.JTextField txtProvincia;
     // End of variables declaration//GEN-END:variables
 
     private boolean fechasValidas() {

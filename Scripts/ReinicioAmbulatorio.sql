@@ -55,7 +55,7 @@ create table ambulatorio (
     provincia varchar(40) NOT NULL,
     telefono char(9) NOT NULL,
     primary key (codigoAmbulatorio),
-    unique(nombre, provincia)
+    CONSTRAINT nombreProvincia UNIQUE(nombre, provincia)
 );
 
 create table material (
@@ -289,7 +289,7 @@ create table urgencia (
     paciente varchar(14) NOT NULL,
     consulta int NOT NULL,
     ambulatorio int NOT NULL DEFAULT currval('secAmbulatorios'),
-    soborno decimal(6, 2) DEFAULT 0,
+    soborno decimal(20, 2) DEFAULT 0,
     gravedad int NOT NULL DEFAULT 1 CHECK(
         gravedad BETWEEN 1
         AND 10
@@ -508,7 +508,11 @@ insert into especializacionPersonal (especialidad, personal)
 insert into personalSanitario (dni, nombre, fechaIncorporacion, telefono, sueldo)
 	values ('52145961A', 'Miguel Torres', '2010-11-03', '985202020', 600.01);
 insert into especializacionPersonal (especialidad, personal)
-	values ('General', '52145961A');
+	values 
+	('General', '52145961A'),
+	('Psiquiatria', '52145961A'),
+	('Odontologia', '52145961A'),
+	('Alergologia', '52145961A');
 
 insert into consulta (identificador, especialidad)
 	values
@@ -526,6 +530,12 @@ insert into pertenecer (personal, consulta)
 	values
 	('84125961A', 101),
 	('84125961A', 203),
+	('52145961A', 301),
+	('52145961A', 405),
+	('52145961A', 285),
+	('52145961A', 286),
+	('52145961A', 008),
+	('52145961A', 006),
 	('52145961A', 005);
 	
 insert into cita (fechaHoraInicio, fechaHoraFin, paciente, consulta, tipo, especialidad)
@@ -538,6 +548,8 @@ insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
 	values ('2019-04-07 09:42:21', 'cip123', 005, 'Urgencia', 'General');
 insert into urgencia (cita, paciente, consulta, soborno, gravedad)
 	values ('2019-04-07 09:42:21', 'cip123', 005, 150.00, 3);
+insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
+	values ('2019-08-12 09:30:00', 'cip123', 301, 'Psicologia', 'Psiquiatria');
 
 insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion, fechaInicio, fechaFin)
 	values ('2019-10-12 12:22:23', 'cip124', 005, 'Acetaminofeno', 3, 'Drogarse cada 6 horas.', '2003-06-24', '2009-01-02');
