@@ -61,7 +61,10 @@ public class VUrgencias extends javax.swing.JDialog {
 
         labelAmbulatorio.setText("Ambulatorio:");
 
+        txtAmbulatorio.setToolTipText("Nombre del ambulatorio");
+
         btnBuscar.setText("Buscar");
+        btnBuscar.setToolTipText("Busca ambulatorios");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -69,11 +72,21 @@ public class VUrgencias extends javax.swing.JDialog {
         });
 
         tablaAmbulatorios.setModel(new ModeloTablaAmbulatoriosUrgencias(fa));
+        tablaAmbulatorios.setToolTipText("Tabla de ambulatorios");
+        tablaAmbulatorios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAmbulatoriosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaAmbulatorios);
 
         labelSoborno.setText("Soborno:");
 
+        txtSoborno.setToolTipText("Soborno de la urgencia");
+
         jLabel1.setText("Gravedad:");
+
+        txtGravedad.setToolTipText("Gravedad de la urgencia");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,6 +139,7 @@ public class VUrgencias extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.setToolTipText("Vuelve a la ventana anterior");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -133,6 +147,8 @@ public class VUrgencias extends javax.swing.JDialog {
         });
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.setToolTipText("Confirma la urgencia");
+        btnConfirmar.setEnabled(false);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
@@ -192,6 +208,14 @@ public class VUrgencias extends javax.swing.JDialog {
 
         //Buscamos ambulatorios
         tau.setFilas(fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, null));
+        
+        if(tau.getRowCount() > 0) {
+            tablaAmbulatorios.setRowSelectionInterval(0, 0);
+        txtAmbulatorio.setText(tau.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getNombre());
+            btnConfirmar.setEnabled(true);
+        } else {
+            btnConfirmar.setEnabled(false);
+        }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -232,6 +256,11 @@ public class VUrgencias extends javax.swing.JDialog {
         this.dispose();
 
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void tablaAmbulatoriosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAmbulatoriosMouseClicked
+        ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
+        txtAmbulatorio.setText(tau.obtenerAmbulatorio(tablaAmbulatorios.getSelectedRow()).getNombre());
+    }//GEN-LAST:event_tablaAmbulatoriosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

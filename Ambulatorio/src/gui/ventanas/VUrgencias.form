@@ -123,10 +123,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAmbulatorio">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Nombre del ambulatorio"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca ambulatorios"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
@@ -144,6 +148,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new ModeloTablaAmbulatoriosUrgencias(fa)" type="code"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Tabla de ambulatorios"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
@@ -151,6 +156,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaAmbulatoriosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -160,6 +168,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSoborno">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Soborno de la urgencia"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -167,6 +178,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtGravedad">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Gravedad de la urgencia"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -208,6 +222,7 @@
         <Component class="javax.swing.JToggleButton" name="btnRegresar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Vuelve a la ventana anterior"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
@@ -216,6 +231,8 @@
         <Component class="javax.swing.JButton" name="btnConfirmar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Confirmar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Confirma la urgencia"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarActionPerformed"/>
