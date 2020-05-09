@@ -133,14 +133,20 @@ public class VCitasPendientes extends javax.swing.JDialog {
         labelDesde.setText("Desde:");
 
         txtDesde.setText("aaaa-mm-dd");
+        txtDesde.setToolTipText("Primer día a buscar");
 
         labelHasta.setText("Hasta:");
 
         txtHasta.setText("aaaa-mm-dd");
+        txtHasta.setToolTipText("Último día a buscar");
 
         labelConsulta.setText("Consulta:");
 
+        txtConsulta.setToolTipText("Número de consulta");
+
         labelAmbulatorio.setText("Ambulatorio:");
+
+        txtAmbulatorio.setToolTipText("Nombre del ambulatorio");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {

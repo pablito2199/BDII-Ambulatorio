@@ -61,6 +61,8 @@ public class VUrgencias extends javax.swing.JDialog {
 
         labelAmbulatorio.setText("Ambulatorio:");
 
+        txtAmbulatorio.setToolTipText("Nombre del ambulatorio");
+
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +75,11 @@ public class VUrgencias extends javax.swing.JDialog {
 
         labelSoborno.setText("Soborno:");
 
+        txtSoborno.setToolTipText("Soborno ofrecido");
+
         jLabel1.setText("Gravedad:");
+
+        txtGravedad.setToolTipText("Gravedad del paciente");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,7 +99,7 @@ public class VUrgencias extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 12, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(labelSoborno)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

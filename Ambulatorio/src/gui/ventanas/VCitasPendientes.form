@@ -214,6 +214,7 @@
         <Component class="javax.swing.JTextField" name="txtDesde">
           <Properties>
             <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+            <Property name="toolTipText" type="java.lang.String" value="Primer d&#xed;a a buscar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelHasta">
@@ -224,6 +225,7 @@
         <Component class="javax.swing.JTextField" name="txtHasta">
           <Properties>
             <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+            <Property name="toolTipText" type="java.lang.String" value="&#xda;ltimo d&#xed;a a buscar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelConsulta">
@@ -232,6 +234,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtConsulta">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de consulta"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelAmbulatorio">
           <Properties>
@@ -239,6 +244,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtAmbulatorio">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Nombre del ambulatorio"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
