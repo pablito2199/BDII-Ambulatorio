@@ -390,6 +390,12 @@ public class VCitasPendientes extends javax.swing.JDialog {
             btnDerivar.setEnabled(true);
             btnCancelarCita.setEnabled(true);
         }
+        else {
+            btnRecetar.setEnabled(false);
+            btnTerminarCita.setEnabled(false);
+            btnDerivar.setEnabled(false);
+            btnCancelarCita.setEnabled(false);
+        }
     }//GEN-LAST:event_tablaCitasMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
