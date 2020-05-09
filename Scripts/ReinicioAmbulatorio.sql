@@ -548,6 +548,8 @@ insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
 	values ('2019-04-07 09:42:21', 'cip123', 005, 'Urgencia', 'General');
 insert into urgencia (cita, paciente, consulta, soborno, gravedad)
 	values ('2019-04-07 09:42:21', 'cip123', 005, 150.00, 3);
+insert into cita (fechaHoraInicio, paciente, consulta, tipo, especialidad)
+	values ('2019-08-12 09:30:00', 'cip123', 301, 'Psicologia', 'Psiquiatria');
 
 insert into receta (cita, paciente, consulta, medicamento, cantidad, descripcion, fechaInicio, fechaFin)
 	values ('2019-10-12 12:22:23', 'cip124', 005, 'Acetaminofeno', 3, 'Drogarse cada 6 horas.', '2003-06-24', '2009-01-02');
