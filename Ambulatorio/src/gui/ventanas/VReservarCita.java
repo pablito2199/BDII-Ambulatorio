@@ -41,6 +41,9 @@ public class VReservarCita extends javax.swing.JDialog {
                 comboTipo.addItem(tipo.getNombre() + "-" + tipo.getEspecialidad());
             }
         }
+        
+        //Desabilitamos boton
+        btnReservar.setEnabled(false);
     }
 
     /**
@@ -92,16 +95,17 @@ public class VReservarCita extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tablaHoras.setModel(new ModeloTablaHoras(fa, pa));
+        tablaHoras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaHorasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaHoras);
 
         labelTipo.setText("Tipo:");
 
         comboTipo.setToolTipText("Tipo de cita");
-        comboTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTipoActionPerformed(evt);
-            }
-        });
+        comboTipo.setActionCommand("");
 
         labelDesde.setText("Desde:");
 
@@ -331,11 +335,22 @@ public class VReservarCita extends javax.swing.JDialog {
                 fa.muestraExcepcion("¡No se puede reservar una cita en dias anteriores al de mañana!");
             }
         }
+        
+        //Desabilitamos boton
+        btnReservar.setEnabled(false);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+    private void tablaHorasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHorasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboTipoActionPerformed
+        
+        //Habilitamos boton si corresponde
+        if(tablaHoras.getSelectedRow() >= 0){
+            btnReservar.setEnabled(true);
+        }
+        else{
+            btnReservar.setEnabled(false);
+        }
+    }//GEN-LAST:event_tablaHorasMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
