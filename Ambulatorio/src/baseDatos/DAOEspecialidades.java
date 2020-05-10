@@ -32,8 +32,7 @@ public class DAOEspecialidades extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el la descripción
-            //que tengan el nombre dado
+            //Selecionamos el nombre y la descripción
             String consulta = "select nombre, descripcion "
                     + "from especialidad "
                     + "order by nombre ASC";

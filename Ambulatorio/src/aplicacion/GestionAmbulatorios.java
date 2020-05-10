@@ -29,7 +29,7 @@ public class GestionAmbulatorios {
         fbd.borrarAmbulatorio(ambulatorio);
     }
 
-    //Permite buscar ambulatorios por su id y/o nombre de ambulatorio
+    //Permite buscar ambulatorios por su nombre, código y/o provincia
     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String provincia) {
         return fbd.consultarAmbulatorios(nombre, codigo, provincia);
     }

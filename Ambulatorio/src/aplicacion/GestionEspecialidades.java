@@ -19,7 +19,7 @@ public class GestionEspecialidades {
         this.fbd = fbd;
     }
 
-    //Permite consultar las consultas existentes en la base de datos
+    //Permite consultar las especialidades existentes en la base de datos
     public java.util.List<Especialidad> consultarEspecialidades() {
         return fbd.consultarEspecialidades();
     }

@@ -97,7 +97,7 @@ public class ModeloTablaPersonal extends AbstractTableModel {
         Object resultado = null;
 
         switch (col) {
-            //Permite recuperar el ID del usuario
+            //Permite recuperar el DNI
             case 0:
                 resultado = personal.get(row).getDNI();
                 break;
@@ -113,7 +113,7 @@ public class ModeloTablaPersonal extends AbstractTableModel {
             case 3:
                 resultado = "Sanitario";
                 break;
-            //Permite recuperar el telefono
+            //Permite recuperar el teléfono
             case 4:
                 resultado = personal.get(row).getTelefono();
                 break;

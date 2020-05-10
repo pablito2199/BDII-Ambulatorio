@@ -89,7 +89,7 @@ public class FachadaBaseDatos {
         daoAmbulatorios.modificarAmbulatorio(ambulatorio);
     }
 
-    //Permite consultar los ambulatorios de la red
+    //Permite buscar ambulatorios por su nombre, código y/o provincia
     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String provincia) {
         return daoAmbulatorios.consultarAmbulatorios(nombre, codigo, provincia);
     }
@@ -170,7 +170,7 @@ public class FachadaBaseDatos {
         daoPacientes.borrarPaciente(paciente);
     }
 
-    //Permite buscar pacientes por su id y/o nombre de paciente
+    //Permite buscar pacientes por sus atributos
     public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, Integer NSS, String grupo) {
         return daoPacientes.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
     }
@@ -264,7 +264,7 @@ public class FachadaBaseDatos {
 ////////////////////
 //DAOESPECIALIDADES
 //////////////////// 
-    //Permite consultar las consultas existentes en la base de datos
+    //Permite consultar las especialidades existentes en la base de datos
     public java.util.List<Especialidad> consultarEspecialidades() {
         return daoEspecialidades.consultarEspecialidades();
     }
@@ -282,7 +282,7 @@ public class FachadaBaseDatos {
         return daoRecetas.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
     }
 
-    //Permite consultar el historial clínico de un paciente
+    //Permite consultar medicamentos en la base de datos
     public java.util.List<String> consultarMedicamentos(String nombre) {
         return daoRecetas.consultarMedicamentos(nombre);
     }

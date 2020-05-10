@@ -69,7 +69,7 @@ public class DAOConsultas extends AbstractDAO {
 
         //Intentamos la consulta SQL
         try {
-            //Preparamos la sentencia para borrar de la tabla de consultas aquel con el identificador especificado por argumentos
+            //Preparamos la sentencia para borrar de la tabla de consultas aquel con el identificador especificado por argumentos del propio ambulatorio
             stmConsulta = con.prepareStatement("delete from consulta where identificador = ? and ambulatorio = ? " + esp);
             //Sustituimos
             stmConsulta.setInt(1, identificador);  //identificador de la consulta
@@ -235,8 +235,8 @@ public class DAOConsultas extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el identificador, ambulatorio y especialdiad
-            //que tengan el ambulatorio dado
+            //Selecionamos los datos deseamos
+            //Según los argumentos pasados
             String consulta
                     = "with menor as (select count(*) as cuenta, co.identificador, co.ambulatorio, co.especialidad "
                     + "from consulta as co, cita as ci "

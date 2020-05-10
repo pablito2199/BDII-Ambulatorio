@@ -29,7 +29,7 @@ public class ModeloTablaHistorialMedico extends AbstractTableModel {
     public String getColumnName(int col) {
         String nombre = "";
         switch (col) {
-            //La primera columna es la fecha inicio de la receta
+            //La primera columna es la fecha inicio de la cita
             case 0:
                 nombre = "Fecha Inicio";
                 break;

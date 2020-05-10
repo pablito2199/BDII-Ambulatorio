@@ -32,7 +32,7 @@ public class GestionPacientes {
         fbd.borrarPaciente(paciente);
     }
 
-    //Permite buscar pacientes por su id y/o nombre de paciente
+    //Permite buscar pacientes por sus atributos
     public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, Integer NSS, String grupo) {
         return fbd.consultarPacientes(CIP, DNI, nombre, edad, sexo, NSS, grupo);
     }

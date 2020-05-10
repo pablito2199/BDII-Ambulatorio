@@ -37,7 +37,7 @@ public class DAOCitas extends AbstractDAO {
         //Declaramos variables
         Connection con;
         PreparedStatement stmCita = null;
-        ResultSet rsCita;
+        ResultSet rsCita = null;
 
         //Establecemos conexión
         con = super.getConexion();
@@ -455,7 +455,7 @@ public class DAOCitas extends AbstractDAO {
         //Declaramos variables
         Connection con;
         PreparedStatement stmCitas = null;
-        ResultSet rsCitas;
+        ResultSet rsCitas = null;
         ArrayList<Timestamp> resultado = new ArrayList<>();
 
         //Comprobamos la fecha de incio
@@ -599,7 +599,7 @@ public class DAOCitas extends AbstractDAO {
         //Declaramos variables
         Connection con;
         PreparedStatement stmCitas = null;
-        ResultSet rsCitas;
+        ResultSet rsCitas = null;
         ArrayList<Cita> resultado = new ArrayList<>();
 
         //Establecemos conexión
@@ -695,7 +695,7 @@ public class DAOCitas extends AbstractDAO {
         //Declaramos variables
         Connection con;
         PreparedStatement stmCitas = null;
-        ResultSet rsCitas;
+        ResultSet rsCitas = null;
         ArrayList<Cita> resultado = new ArrayList<>();
 
         //Establecemos conexión
@@ -791,7 +791,7 @@ public class DAOCitas extends AbstractDAO {
         //Declaramos variables
         Connection con;
         PreparedStatement stmTipo = null;
-        ResultSet rsTipo;
+        ResultSet rsTipo = null;
         ArrayList<TipoCita> resultado = new ArrayList<>();
 
         //Establecemos conexión

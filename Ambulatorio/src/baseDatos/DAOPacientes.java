@@ -10,9 +10,9 @@ import aplicacion.clases.Rango;
 import aplicacion.clases.Cita;
 import aplicacion.clases.TipoCita;
 
-
-//Las transacciones de este DAO fueron hechas entre varios compañeros
-
+/* 
+ * @author Ainhoa Vivel Couso
+ */
 public class DAOPacientes extends AbstractDAO {
 
     //Contructor
@@ -21,9 +21,6 @@ public class DAOPacientes extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    /* 
-    * @author Ainhoa Vivel Couso
-    */
     //Permite insertar un nuevo paciente en la base de datos
     public void insertarPaciente(Paciente paciente) {
         //Declaramos variables
@@ -162,7 +159,7 @@ public class DAOPacientes extends AbstractDAO {
         }
     }
 
-    //Permite buscar pacientes por su id y/o nombre de paciente
+    //Permite buscar pacientes por sus atributos
     public java.util.List<Paciente> consultarPacientes(String CIP, String DNI, String nombre, Integer edad, String sexo, Integer NSS, String grupo) {
         //Declaramos variables
         java.util.List<Paciente> resultado = new java.util.ArrayList<Paciente>();
@@ -386,9 +383,8 @@ public class DAOPacientes extends AbstractDAO {
         return resultado;
     }
 
-    
     //////////////////////////////////////////////////////////////
-    
+    //Los siguientes métodos fueron hechos por Pablo Tarrío Otero
     /*
     * @author Pablo Tarrío Otero
      */

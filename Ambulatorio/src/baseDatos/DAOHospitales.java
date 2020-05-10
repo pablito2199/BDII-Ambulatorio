@@ -35,8 +35,8 @@ public class DAOHospitales extends AbstractDAO {
 
         //Intentamos la consulta SQL
         try {
-            //Preparamos la consulta SQL para insertar en la tabla de ambulatorios un nuevo ambulatorio con el id de ambulatorio, nombre
-            //clave, dirección, email y tipo de ambulatorio especificados
+            //Preparamos la consulta SQL para consultar en la tabla de hospital
+            //con sus datos correspondientes dados
             stmHospital = con.prepareStatement(
                     "select hos.*, aso.distancia "
                     + "from hospital as hos, asociado as aso "

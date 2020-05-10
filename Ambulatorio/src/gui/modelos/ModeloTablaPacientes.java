@@ -29,7 +29,7 @@ public class ModeloTablaPacientes extends AbstractTableModel {
     public String getColumnName(int col) {
         String nombre = "";
         switch (col) {
-            //La primera columna es el DNI  del usuario
+            //La primera columna es el DNI  del paciente
             case 0:
                 nombre = "DNI";
                 break;
@@ -111,7 +111,7 @@ public class ModeloTablaPacientes extends AbstractTableModel {
     public Object getValueAt(int row, int col) {
         Object resultado = null;
         switch (col) {
-            //Permite recuperar el ID del usuario
+            //Permite recuperar el DNI del paciente
             case 0:
                 resultado = pacientes.get(row).getDNI();
                 break;
@@ -119,18 +119,19 @@ public class ModeloTablaPacientes extends AbstractTableModel {
             case 1:
                 resultado = pacientes.get(row).getNombre();
                 break;
-            //Permite recuperar el email
+            //Permite recuperar el rango
             case 2:
                 resultado = pacientes.get(row).getRango();
                 break;
-            //Permite recuperar el tipo del usuario (Administrador o normal)
+            //Permite recuperar la edad
             case 3:
                 resultado = pacientes.get(row).getEdad();
                 break;
-            //Permite recuperar la edad del usuario
+            //Permite recuperar el sexo
             case 4:
                 resultado = pacientes.get(row).getSexo();
                 break;
+            //Permite recuperar el grupo sanguíneo
             case 5:
                 resultado = pacientes.get(row).getGrupo().getTipo();
                 break;

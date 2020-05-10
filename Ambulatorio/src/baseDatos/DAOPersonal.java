@@ -6,8 +6,9 @@ import aplicacion.clases.PersonalSanitario;
 import java.sql.*;
 import java.util.ArrayList;
 
-//Las transacciones de este DAO fueron implementadas por varios compañeros
-
+/*
+ * @author Pablo Tarrío Otero
+ */
 public class DAOPersonal extends AbstractDAO {
 
     //Contructor
@@ -16,9 +17,6 @@ public class DAOPersonal extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    /*
-    * @author Pablo Tarrío Otero y Martín Suárez García
-    */
     //Permite recuperar un usuario de la base de datos a partir de su dni y contraseña
     public Boolean validarAdministrador(String dni, String contrasena) {
         //Declaramos variables
@@ -32,8 +30,8 @@ public class DAOPersonal extends AbstractDAO {
 
         //Intentamos la consulta SQL
         try {
-            //Preparamos la sentencia donde se selecciona el id, clave, nombre, dirección, email y tipo de usuario
-            //de la tabla de usuarios que tengan como usuario y contraseña los proporcionados por argumentos
+            //Preparamos la sentencia donde se seleccionan todos los campos
+            //de la tabla de personaladministrador que tengan como usuario y contraseña los proporcionados por argumentos
             stmAdministrador = con.prepareStatement(
                     "select * "
                     + "from personaladministrador "
@@ -73,9 +71,6 @@ public class DAOPersonal extends AbstractDAO {
         return PasswordUtils.verificarClave(contrasena, resultado.getContrasena());
     }
 
-    /*
-    * @author Martín Suárez García
-    */
     //Permite recuperar la especialidad de un personal sanitario
     public ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
         //Declaramos variables
@@ -89,8 +84,9 @@ public class DAOPersonal extends AbstractDAO {
 
         //Intentamos la consulta SQL
         try {
-            //Preparamos la sentencia donde se selecciona el id, clave, nombre, dirección, email y tipo de usuario
-            //de la tabla de usuarios que tengan como usuario y contraseña los proporcionados por argumentos
+            //Preparamos la sentencia donde se selecciona la especialidad
+            //de la tabla de especializacionpersonal
+            //donde tengan el dni del personal y el ambulatorio dado
             stmPersonal = con.prepareStatement(
                     "select especialidad "
                     + "from especializacionpersonal "
@@ -105,7 +101,7 @@ public class DAOPersonal extends AbstractDAO {
             //Ejecutamos
             rsPersonal = stmPersonal.executeQuery();
 
-            //Si existe algún resultado
+            //Si existe algún resultado (que debe ser único)
             while (rsPersonal.next()) {
                 resultado.add(rsPersonal.getString("especialidad"));
             }
@@ -126,9 +122,6 @@ public class DAOPersonal extends AbstractDAO {
         return resultado;
     }
 
-    /*
-    * @author Pablo Tarrío Otero
-    */
     //Permite buscar personal sanitario por su dni y nombre
     public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre, Integer ambulatorio) {
         //Declaramos variables
@@ -145,7 +138,7 @@ public class DAOPersonal extends AbstractDAO {
         try {
             //Construimos la consulta
             //Selecionamos todos los datos
-            //que tengan el nombre y dni dado
+            //que tengan el nombre, dni y ambulatorio dados
             String consulta = "select ambulatorio, dni, nombre, fechaIncorporacion, telefono, sueldo, "
                     + "CAST ( EXTRACT(YEAR FROM age(current_date, fechaIncorporacion)) as varchar(4)) as antiguedad "
                     + "from personalSanitario "

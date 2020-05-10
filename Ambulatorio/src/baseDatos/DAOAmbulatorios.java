@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import aplicacion.clases.Ambulatorio;
 
-//Las transacciones de este DAO fueron hechas entre varios compañeros
-
+/* 
+ * @author Ainhoa Vivel Couso
+ */
 public class DAOAmbulatorios extends AbstractDAO {
 
     //Contructor
@@ -16,9 +17,6 @@ public class DAOAmbulatorios extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    /*
-    * @author Ainhoa Vivel Couso
-    */
     //Permite insertar un nuevo ambulatorio en la base de datos
     public void insertarAmbulatorio(Ambulatorio ambulatorio) {
         //Declaramos variables
@@ -144,7 +142,7 @@ public class DAOAmbulatorios extends AbstractDAO {
         }
     }
 
-    //Permite buscar ambulatorios por su codigo, provincia y/o nombre de ambulatorio
+    //Permite buscar ambulatorios por su nombre, código y/o provincia
     public java.util.List<Ambulatorio> consultarAmbulatorios(String nombre, Integer codigo, String provincia) {
         //Declaramos variables
         java.util.List<Ambulatorio> resultado = new java.util.ArrayList<>();
@@ -170,7 +168,26 @@ public class DAOAmbulatorios extends AbstractDAO {
         //Como el resto de consultas se pueden hacer en una única sentencia SQL pero
         //se requiere como mínimo 1 que lo haga en más proceso a dividir esta consulta
         //en 2 aunque no sería estrictamente necesario.
+        //La consulta sin dividir sería
+        /*
         
+         String consulta = "select codigoAmbulatorio, nombre, anoConstruccion, direccionPostal, provincia, telefono, " 
+                    //Calculamos la antiguedad. Como el dato es un varchar necesitamos convertirlo a año para poder calcular
+                    //la diferencia de las fechas. Luego lo reconvertimos de nuevo a varchar.
+                    + "CAST ( EXTRACT(YEAR FROM age(current_date, TO_DATE(anoConstruccion, 'YYYY'))) as varchar(4)) as antiguedad, "
+                    //Calculamos los ingresos que ha tenido ese ambulatorio
+                    + "(select SUM(cantidad) from subvencion full join donativo " 
+                    + "using (codigoIngreso,ambulatorio,fecha,cantidad) " 
+                    //Filtramos por aquellas donaciones realizadas el último año
+                    + "where ambulatorio = ? and and EXTRACT(YEAR FROM age(current_date, fecha))<=1"
+                    + "group by ambulatorio) as ingresos " 
+                    + "from ambulatorio " 
+                    + "where codigoAmbulatorio = ? " 
+                    + "and nombre like ? "
+                    + "and provincia like ? "
+                    //Ordenamos alfabéticamente por nombre
+                    + "order by nombre ASC";
+         */
         //Variable para buscar por codigo
         String codAmb = codigo == null ? "" : "and codigoAmbulatorio = ? ";
 
@@ -302,8 +319,6 @@ public class DAOAmbulatorios extends AbstractDAO {
         return resultado;
     }
 
-    /////////////////////////////////////////////////////////
-    
     /* 
     * @author Pablo Tarrío Otero
     */

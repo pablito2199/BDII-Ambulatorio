@@ -145,7 +145,7 @@ public class DAOEnfermedades extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el la descripción
+            //Selecionamos el nomrbre y la descripción
             //que tengan el nombre dado
             String consulta = "select nombre, descripcion "
                     + "from enfermedad "
@@ -242,8 +242,8 @@ public class DAOEnfermedades extends AbstractDAO {
         //Intentamos la consulta SQL
         try {
             //Construimos la consulta
-            //Selecionamos el la descripción
-            //que tengan el nombre dado
+            //Selecionamos el nombre
+            //que tengan parte del nombre y no esté entre las enfermedades dadas
             String consulta = "select nombre "
                     + "from enfermedad "
                     + "where nombre like ? "

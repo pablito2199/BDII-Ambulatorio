@@ -27,7 +27,7 @@ public class GestionRecetas {
         return fbd.consultarHistorialReceta(paciente, fechaInicio, fechaFin, codigoReceta, medicamento);
     }
 
-    //Permite consultar el historial clínico de un paciente
+    //Permite consultar medicamentos en la base de datos
     public java.util.List<String> consultarMedicamentos(String nombre) {
         return fbd.consultarMedicamentos(nombre);
     }
