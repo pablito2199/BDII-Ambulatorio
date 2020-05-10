@@ -4,7 +4,6 @@ import gui.modelos.ModeloTablaHoras;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
 import aplicacion.clases.Cita;
-import aplicacion.clases.Consulta;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.TipoCita;
 import java.sql.Date;
@@ -16,7 +15,6 @@ public class VReservarCita extends javax.swing.JDialog {
     private FachadaAplicacion fa;
     private VPacientes padre;
     private Paciente pa;
-    private Consulta co;
 
     /**
      * Creates new form VCitas

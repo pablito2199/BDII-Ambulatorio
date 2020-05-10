@@ -3,9 +3,7 @@ package gui.ventanas;
 import gui.modelos.ModeloTablaAmbulatoriosUrgencias;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
-import aplicacion.clases.Consulta;
 import aplicacion.clases.Paciente;
-import aplicacion.clases.TipoCita;
 import aplicacion.clases.Urgencia;
 
 import java.sql.Timestamp;

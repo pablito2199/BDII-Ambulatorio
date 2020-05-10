@@ -1,8 +1,6 @@
 package gui.ventanas;
 
 import gui.modelos.ModeloTablaPersonal;
-import gui.modelos.ModeloTablaPacientes;
-import aplicacion.clases.PersonalSanitario;
 
 public class VPersonal extends javax.swing.JDialog {
 
@@ -338,9 +336,9 @@ public class VPersonal extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Función que permite salir de la ventana de personal
+    //Botón Regresar, permite salir de la ventana de personal
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        //Buscamos ambulatorios
+        //Buscamos personal
         padre.buscarAmbulatorios();
         //Y destruimos esta ventana
         this.dispose();
@@ -386,12 +384,10 @@ public class VPersonal extends javax.swing.JDialog {
 
     //Botón Citas, abre la ventana de citas del médico
     private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
-
         int index = tablaPersonal.getSelectedRow();
         if (index >= 0) {
             fa.nuevaVCitasPendientes(this, ((ModeloTablaPersonal) tablaPersonal.getModel()).obtenerPersonal(index));
         }
-
     }//GEN-LAST:event_btnCitasActionPerformed
 
     /**

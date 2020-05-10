@@ -428,7 +428,7 @@ public class VPacientes extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Función que permite salir de la ventana de usuario
+    //Botón Regresar, vuelve a la ventana anterior
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         padre.setVisible(true);
         //Buscamos ambulatorios
@@ -437,7 +437,7 @@ public class VPacientes extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    //Función que permite borrar un usuario
+    //Botón Borrar, elimina un paciente de la base de datos
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         Paciente paciente = new Paciente(varCIP.getText());
         //Llamamos al borrado de pacientes
@@ -458,9 +458,9 @@ public class VPacientes extends javax.swing.JDialog {
         buscarPacientes();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
-    //Función que permite limpiar los campos y la tabla para prepara la inserción de un nuevo usuario
+    //Botón Limpiar, pone todos los campos de texto en blanco, y limpia la tabla
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        //Creamos el modelo de tabla préstamos
+        //Creamos el modelo de tabla pacientes
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
         //Metemos un array vacío como las filas
@@ -487,7 +487,7 @@ public class VPacientes extends javax.swing.JDialog {
         btnBorrar.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    //Función que permite guardar el usuario en la base de datos
+    //Botón Actualizar, añade o modifica los datos de un paciente
     private void btnActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPacienteActionPerformed
         //Comprobarmos que no haya ningún campo obligatorio sin cubrir
         if (varCIP.getText().isEmpty() || varDNI.getText().isEmpty() || varNSS.getText().isEmpty() || varNombre.getText().isEmpty()
@@ -503,7 +503,7 @@ public class VPacientes extends javax.swing.JDialog {
             return;
         }
         if (fa.existePaciente(varCIP.getText())) {
-            //Instanciamos el usuario con los datos proporcionados
+            //Instanciamos el paciente con los datos proporcionados
             Paciente u = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(),
                     Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.getTipo(varGrupoSanguineo.getText()),
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
@@ -511,8 +511,8 @@ public class VPacientes extends javax.swing.JDialog {
             fa.modificarPaciente(u);
             //De no existir se crea uno nuevo
         } else {
-            //LA EDAD NO SE TIENE EN CUENTA PUESTO QUE ES UN CALCULADO
-            //Instanciamos el usuario
+            //LA EDAD NO SE TIENE EN CUENTA PUESTO QUE ES UN ATRIBUTO CALCULADO
+            //Instanciamos el paciente
             Paciente p = new Paciente(varCIP.getText(), varDNI.getText(), Integer.parseInt(varNSS.getText()), varNombre.getText(),
                     Date.valueOf(varFechaNacimiento.getText()), varSexo.getText(), GrupoSanguineo.getTipo(varGrupoSanguineo.getText()),
                     varNacionalidad.getText(), varDireccion.getText(), varTelefono.getText());
@@ -523,7 +523,7 @@ public class VPacientes extends javax.swing.JDialog {
         rebuscarPacientes();
     }//GEN-LAST:event_btnActualizarPacienteActionPerformed
 
-    //Función que permite buscar el/los usuario(s) una vez hecho click en el botón buscar
+    //Botón Buscar, permite buscar el/los paciente(s) una vez hecho click en el botón buscar
     private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
         //Buscamos
         buscarPacientes();
@@ -531,10 +531,10 @@ public class VPacientes extends javax.swing.JDialog {
 
     //Función que permite resolver un click en la tabla de pacientes
     private void tablaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPacientesMouseClicked
-        //Creamos el modelo de tabla préstamos
+        //Creamos el modelo de tabla pacientes
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
-        //Obtenemos todos los datos del usuario (fila) en el que se hizo click y los metemos en los campos
+        //Obtenemos todos los datos del paciente (fila) en el que se hizo click y los metemos en los campos
         varCIP.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
         varNSS.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNSS().toString());
         varNombre.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNombre());
@@ -555,6 +555,7 @@ public class VPacientes extends javax.swing.JDialog {
         btnHistorialRecetas.setEnabled(true);
     }//GEN-LAST:event_tablaPacientesMouseClicked
 
+    //Botón Nueva Urgencia, abre una ventana de Urgencias del paciente
     private void btnNuevaUrgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaUrgenciaActionPerformed
         //Obtenemos tabla
         ModeloTablaPacientes tp = (ModeloTablaPacientes) tablaPacientes.getModel();
@@ -567,12 +568,14 @@ public class VPacientes extends javax.swing.JDialog {
         buscarPacientes();
     }//GEN-LAST:event_btnNuevaUrgenciaActionPerformed
 
+    //Botón Enfermedades, abre una ventana de gestión de Enfermedades del paciente
     private void btnEnfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnfermedadesActionPerformed
         ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
         fa.nuevaVGestionEnfermedades(this, m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
         buscarPacientes();
     }//GEN-LAST:event_btnEnfermedadesActionPerformed
 
+    //Botón Solicitar Cita, abre una ventana de Solicitar Cita para el paciente
     private void btnSolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCitaActionPerformed
         //Obtenemos tabla
         ModeloTablaPacientes tp = (ModeloTablaPacientes) tablaPacientes.getModel();
@@ -586,6 +589,7 @@ public class VPacientes extends javax.swing.JDialog {
         buscarPacientes();
     }//GEN-LAST:event_btnSolicitarCitaActionPerformed
 
+    //Botón Citas Pendientes, abre una ventana de Citas Pendientes del paciente
     private void btnCitasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasPendientesActionPerformed
         //Obtenemos tabla
         ModeloTablaPacientes tp = (ModeloTablaPacientes) tablaPacientes.getModel();
@@ -599,6 +603,7 @@ public class VPacientes extends javax.swing.JDialog {
         buscarPacientes();
     }//GEN-LAST:event_btnCitasPendientesActionPerformed
 
+    //Botón Historial Médico, abre una ventana de Historial Clínico del paciente
     private void btnHistorialClinicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialClinicoActionPerformed
         ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
         Paciente p = new Paciente(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
@@ -606,6 +611,7 @@ public class VPacientes extends javax.swing.JDialog {
         buscarPacientes();
     }//GEN-LAST:event_btnHistorialClinicoActionPerformed
 
+    //Botón Historial Recetas, abre una ventana de Historial de Recetas del paciente
     private void btnHistorialRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialRecetasActionPerformed
         ModeloTablaPacientes m = (ModeloTablaPacientes) tablaPacientes.getModel();
         Paciente p = new Paciente(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
@@ -613,9 +619,9 @@ public class VPacientes extends javax.swing.JDialog {
         buscarPacientes();
     }//GEN-LAST:event_btnHistorialRecetasActionPerformed
 
-    //Función que permite buscar un usuario en la base de datos
+    //Función que permite buscar un paciente en la base de datos
     public void buscarPacientes() {
-        //Creamos el modelo de tabla préstamos
+        //Creamos el modelo de tabla pacientes
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
 
@@ -657,7 +663,7 @@ public class VPacientes extends javax.swing.JDialog {
         if (m.getRowCount() > 0) {
             //Seleccionamos la primera
             tablaPacientes.setRowSelectionInterval(0, 0);
-            //Obtenemos todos los datos del usuario (fila) en el que se hizo click y los metemos en los campos
+            //Obtenemos todos los datos del paciente (fila) en el que se hizo click y los metemos en los campos
             varCIP.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
             varNSS.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNSS().toString());
             varNombre.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNombre());
@@ -689,9 +695,9 @@ public class VPacientes extends javax.swing.JDialog {
         }
     }
 
-    //Función que permite buscar un usuario en la base de datos
+    //Función que permite buscar un paciente en la base de datos
     public void rebuscarPacientes() {
-        //Creamos el modelo de tabla préstamos
+        //Creamos el modelo de tabla pacientes
         ModeloTablaPacientes m;
         m = (ModeloTablaPacientes) tablaPacientes.getModel();
 
@@ -702,7 +708,7 @@ public class VPacientes extends javax.swing.JDialog {
             tablaPacientes.setRowSelectionInterval(0, 0);
             //Habilitamos el borrado
             btnBorrar.setEnabled(true);
-            //Obtenemos todos los datos del usuario (fila) en el que se hizo click y los metemos en los campos
+            //Obtenemos todos los datos del paciente (fila) en el que se hizo click y los metemos en los campos
             varCIP.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getCIP());
             varNSS.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNSS().toString());
             varNombre.setText(m.obtenerPaciente(tablaPacientes.getSelectedRow()).getNombre());
