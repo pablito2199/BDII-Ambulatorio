@@ -338,7 +338,7 @@ public class VPersonal extends javax.swing.JDialog {
 
     //Botón Regresar, permite salir de la ventana de personal
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        //Buscamos personal
+        //Buscamos ambulatorios
         padre.buscarAmbulatorios();
         //Y destruimos esta ventana
         this.dispose();
