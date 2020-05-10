@@ -6,9 +6,7 @@ import aplicacion.clases.PersonalSanitario;
 import java.sql.*;
 import java.util.ArrayList;
 
-/*
- * @author Pablo Tarrío Otero
- */
+//Los metodos de esta clase fueron hechos por varias personas
 public class DAOPersonal extends AbstractDAO {
 
     //Contructor
@@ -17,6 +15,9 @@ public class DAOPersonal extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
+    /*
+     * @author Pablo Tarrío Otero y Martín Suárez García
+     */
     //Permite recuperar un usuario de la base de datos a partir de su dni y contraseña
     public Boolean validarAdministrador(String dni, String contrasena) {
         //Declaramos variables
@@ -71,6 +72,9 @@ public class DAOPersonal extends AbstractDAO {
         return PasswordUtils.verificarClave(contrasena, resultado.getContrasena());
     }
 
+    /*
+     * @author Martín Suárez García
+     */
     //Permite recuperar la especialidad de un personal sanitario
     public ArrayList<String> obtenerEspecialidades(String dni, Integer ambulatorio) {
         //Declaramos variables
@@ -122,6 +126,9 @@ public class DAOPersonal extends AbstractDAO {
         return resultado;
     }
 
+    /*
+     * @author Pablo Tarrío Otero
+     */
     //Permite buscar personal sanitario por su dni y nombre
     public java.util.List<PersonalSanitario> consultarPersonal(String dni, String nombre, Integer ambulatorio) {
         //Declaramos variables
