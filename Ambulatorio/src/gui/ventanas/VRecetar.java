@@ -242,13 +242,13 @@ public class VRecetar extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Función que permite salir de la ventana de usuario
+    //Botón Regresar, permite salir de la ventana de recetar
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         //Destruimos esta ventana
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    //Función que permite guardar el usuario en la base de datos
+    //Botón Recetar, permite guardar la receta en la base de datos
     private void btnRecetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetarActionPerformed
         //Comprobarmos que no haya ningún campo obligatorio sin cubrir
         if (varCantidad.getText().isEmpty() || varFechaFin.getText().isEmpty()
@@ -293,12 +293,13 @@ public class VRecetar extends javax.swing.JDialog {
         fa.insertarReceta(r);
     }//GEN-LAST:event_btnRecetarActionPerformed
 
-    //Función que permite buscar el/los usuario(s) una vez hecho click en el botón buscar
+    //Botón Buscar, permite buscar el/los medicamento(s) una vez hecho click en el botón buscar
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         //Buscamos
         buscarMedicamentos();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    //Al hacer click en un medicamento, lo selecciona y lo guarda
     private void listaMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaMedicamentosMouseClicked
         ModeloListaStrings mListaM = (ModeloListaStrings) listaMedicamentos.getModel();
         //si existe alguna enfermedad
@@ -309,11 +310,11 @@ public class VRecetar extends javax.swing.JDialog {
 
     //Función que permite buscar un medicamento en la base de datos
     public void buscarMedicamentos() {
-        //Creamos el modelo de tabla préstamos
+        //Creamos el modelo de la lista de medicamentos
         ModeloListaStrings m;
         m = (ModeloListaStrings) listaMedicamentos.getModel();
         m.setElementos(fa.consultarMedicamentos(varMedicamento.getText()));
-        //Seleccionamos la primera
+        //Seleccionamos el primero
         if (m.getSize() > 0) {
             listaMedicamentos.setSelectedIndex(0);
             btnRecetar.setEnabled(true);
