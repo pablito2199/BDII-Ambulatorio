@@ -3,6 +3,7 @@ package gui.ventanas;
 import gui.modelos.ModeloTablaAmbulatoriosUrgencias;
 import aplicacion.FachadaAplicacion;
 import aplicacion.clases.Ambulatorio;
+import aplicacion.clases.Consulta;
 import aplicacion.clases.Paciente;
 import aplicacion.clases.TipoCita;
 import aplicacion.clases.Urgencia;
@@ -208,7 +209,17 @@ public class VUrgencias extends javax.swing.JDialog {
         ModeloTablaAmbulatoriosUrgencias tau = (ModeloTablaAmbulatoriosUrgencias) tablaAmbulatorios.getModel();
 
         //Buscamos ambulatorios
-        tau.setFilas(fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, null));
+        ArrayList<Ambulatorio> ambs = (ArrayList<Ambulatorio>) fa.obtenerAmbulatorios(txtAmbulatorio.getText(), null, null);
+        ArrayList<Ambulatorio> aux = new ArrayList<>();
+        aux.addAll(ambs);
+        
+        //Comprobamos que tienen urgencias
+        for (Ambulatorio a : ambs) {
+            if (fa.consultarConsultas(null, a.getCodigo(), "General").isEmpty()) {
+                aux.remove(a);
+            }
+        }
+        tau.setFilas(aux);
 
         if (tau.getRowCount() > 0) {
             tablaAmbulatorios.setRowSelectionInterval(0, 0);
