@@ -10,9 +10,9 @@ import aplicacion.clases.Rango;
 import aplicacion.clases.Cita;
 import aplicacion.clases.TipoCita;
 
-/* 
- * @author Ainhoa Vivel Couso
- */
+
+//Las transacciones de este DAO fueron hechas entre varios compañeros
+
 public class DAOPacientes extends AbstractDAO {
 
     //Contructor
@@ -21,6 +21,9 @@ public class DAOPacientes extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
+    /* 
+    * @author Ainhoa Vivel Couso
+    */
     //Permite insertar un nuevo paciente en la base de datos
     public void insertarPaciente(Paciente paciente) {
         //Declaramos variables
@@ -383,8 +386,9 @@ public class DAOPacientes extends AbstractDAO {
         return resultado;
     }
 
+    
     //////////////////////////////////////////////////////////////
-    //Los siguientes métodos fueron hechos por Pablo Tarrío Otero
+    
     /*
     * @author Pablo Tarrío Otero
      */
